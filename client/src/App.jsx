@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Header from './components/Layout/Header';
 import Footer from './components/Layout/Footer';
 import Home from './components/Pages/Home';
@@ -19,7 +19,7 @@ import ScrollToTop from './components/utils/ScrollToTop';
 function App() {
     return (
         <CartProvider>
-            <Router>
+            <Router basename="/coits-food-truck">
                 <ScrollToTop />
                 <div className="page-container">
                     <div className="print-header">
@@ -35,6 +35,7 @@ function App() {
                             <Route path="/checkout" element={<Checkout />} />
                             <Route path="/book-event" element={<EventBooking />} />
                             <Route path="/printify-test" element={<PrintifyTest />} />
+                            <Route path="*" element={<Navigate to="/" />} />
                         </Routes>
                     </main>
                     <Footer />

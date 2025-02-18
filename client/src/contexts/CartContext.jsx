@@ -19,7 +19,7 @@ export const CartProvider = ({ children }) => {
     useEffect(() => {
         const preloadProducts = async () => {
             try {
-                const response = await fetch('http://localhost:3001/api/products/all');
+                const response = await fetch(`${process.env.REACT_APP_API_URL}/api/products/all`);
                 const data = await response.json();
                 setProducts(Array.isArray(data) ? data : []);
             } catch (error) {
