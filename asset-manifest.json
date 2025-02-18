@@ -1,16 +1,14 @@
 {
   "files": {
-    "main.css": "/coits-food-truck/static/css/main.4ab245ea.css",
-    "main.js": "/coits-food-truck/static/js/main.c8740ac0.js",
-    "static/js/453.419a5d54.chunk.js": "/coits-food-truck/static/js/453.419a5d54.chunk.js",
-    "static/media/hero-image.jpg": "/coits-food-truck/static/media/hero-image.b62eda08fb52bc98adb9.jpg",
-    "index.html": "/coits-food-truck/index.html",
-    "main.4ab245ea.css.map": "/coits-food-truck/static/css/main.4ab245ea.css.map",
-    "main.c8740ac0.js.map": "/coits-food-truck/static/js/main.c8740ac0.js.map",
-    "453.419a5d54.chunk.js.map": "/coits-food-truck/static/js/453.419a5d54.chunk.js.map"
+    "main.css": "/static/css/main.1f3228d4.css",
+    "main.js": "/static/js/main.b93c7823.js",
+    "static/media/hero-image.jpg": "/static/media/hero-image.b62eda08fb52bc98adb9.jpg",
+    "index.html": "/index.html",
+    "main.1f3228d4.css.map": "/static/css/main.1f3228d4.css.map",
+    "main.b93c7823.js.map": "/static/js/main.b93c7823.js.map"
   },
   "entrypoints": [
-    "static/css/main.4ab245ea.css",
-    "static/js/main.c8740ac0.js"
+    "static/css/main.1f3228d4.css",
+    "static/js/main.b93c7823.js"
   ]
 }
