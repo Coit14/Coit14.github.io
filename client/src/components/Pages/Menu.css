@@ -17,7 +17,7 @@
 }
 
 .menu-note {
-    color: var(--light-gray);
+    color: var(black);
     font-style: italic;
 }
 
@@ -60,7 +60,7 @@
 }
 
 .item-description {
-    color: var(--light-gray);
+    color: var(--text-color);
     padding: 8px 0;
     margin: 0;
 }
@@ -68,11 +68,11 @@
 .add-ons {
     padding: 8px 0;
     margin: 0;
-    color: #333;
+    color: var(--text-color);
 }
 
 .toppings {
-    color: var(--light-gray);
+    color: var(--text-color);
     margin-left: 10px;
 }
 
@@ -172,4 +172,33 @@
         animation: none !important;
         opacity: 1 !important;
     }
+}
+
+/* Update text color for menu items */
+.menu-item-title {
+    color: #000000; /* Changed from the dull color to pure black */
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.menu-item-description {
+    color: #333333; /* Darker gray for better readability */
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+}
+
+.menu-item-price {
+    color: var(--brand-red); /* Keep the brand red for prices */
+    font-weight: 600;
+}
+
+/* Keep all other brand colors the same */
+:root {
+    --brand-red: #814d49;       /* Coit's primary red */
+    --brand-blue: #3C3B6E;      /* Coit's navy blue */
+    --brand-white: #FFFFFF;     /* White */
+    --brand-gray: #F5F5F5;      /* Light gray for backgrounds */
+    --brand-dark: #1A1A1A;      /* Dark gray/almost black */
+    --brand-hover-red: #6a3f3c; /* Darker red for hover states */
+    --brand-hover-blue: #2A2A4D; /* Darker blue for hover states */
 }

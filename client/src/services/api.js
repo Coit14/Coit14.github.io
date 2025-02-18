@@ -121,3 +121,8 @@ export const getVariantId = (product, size, color) => {
   );
   return variant?.id || null;
 };
+
+// If you have any frontend route references, update them from:
+// window.location.href = '/checkout';
+// To:
+// window.location.href = '#/checkout';

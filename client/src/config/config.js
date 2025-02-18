@@ -1,1 +1,1 @@
-export const API_BASE_URL = 'http://localhost:5000/api'; 
+export const API_BASE_URL = 'https://backend-e8seuqp2w-coit14s-projects.vercel.app'; 

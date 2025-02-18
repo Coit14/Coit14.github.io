@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import { faShoppingCart, faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { useCart } from '../../contexts/CartContext';
 import './Header.css';
 
 function Header() {
   const [scrolled, setScrolled] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { setIsCartOpen, getCartCount } = useCart();
+  const menuRef = useRef(null);
   
   const cartItemCount = getCartCount() || 0;
 
@@ -19,9 +21,24 @@ function Header() {
       }
     };
 
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setIsMenuOpen(false);
+      }
+    };
+
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    document.addEventListener('mousedown', handleClickOutside);
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
   }, [scrolled]);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
 
   return (
     <>
@@ -31,8 +48,10 @@ function Header() {
           <span>PLANNING AN EVENT?</span>
           <Link to="/book-event" className="subscribe-button">Book Here</Link>
         </div>
+        
         <div className="header-content">
-          <nav className="main-nav">
+          {/* Desktop Navigation */}
+          <nav className="desktop-nav">
             <div className="nav-section left">
               <Link to="/">HOME</Link>
               <Link to="/menu">MENU</Link>
@@ -57,6 +76,48 @@ function Header() {
               </div>
             </div>
           </nav>
+
+          {/* Mobile Navigation */}
+          <div className="mobile-nav">
+            <Link to="/" className="mobile-logo-container">
+              <img 
+                src="/images/logo.png" 
+                alt="Coit's Food Truck" 
+                className="logo"
+              />
+            </Link>
+
+            <div className="mobile-controls">
+              <button 
+                className="menu-toggle" 
+                onClick={toggleMenu}
+                aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+              >
+                <FontAwesomeIcon icon={isMenuOpen ? faTimes : faBars} />
+              </button>
+            </div>
+
+            {/* Mobile Menu Dropdown */}
+            <div className={`mobile-menu ${isMenuOpen ? 'open' : ''}`} ref={menuRef}>
+              <Link to="/" onClick={() => setIsMenuOpen(false)}>HOME</Link>
+              <Link to="/menu" onClick={() => setIsMenuOpen(false)}>MENU</Link>
+              <Link to="/about" onClick={() => setIsMenuOpen(false)}>ABOUT US</Link>
+              <Link to="/shop" onClick={() => setIsMenuOpen(false)}>SHOP</Link>
+              <div 
+                className="cart-icon mobile-cart" 
+                onClick={() => {
+                  setIsCartOpen(true);
+                  setIsMenuOpen(false);
+                }}
+              >
+                <FontAwesomeIcon icon={faShoppingCart} />
+                {cartItemCount > 0 && (
+                  <span className="cart-count">{cartItemCount}</span>
+                )}
+                <span className="cart-text">CART</span>
+              </div>
+            </div>
+          </div>
         </div>
       </header>
     </>
