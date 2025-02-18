@@ -1,0 +1,135 @@
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+
+.page-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+main {
+    flex: 1;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Add these animation keyframes */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Add these base classes */
+.animate-in {
+    animation: fadeInUp 0.6s ease-out forwards;
+    opacity: 0;
+}
+
+/* Stagger animations for different elements */
+.animate-delay-1 {
+    animation-delay: 0.1s;
+}
+
+.animate-delay-2 {
+    animation-delay: 0.2s;
+}
+
+.animate-delay-3 {
+    animation-delay: 0.3s;
+}
+
+.animate-delay-4 {
+    animation-delay: 0.4s;
+}
+
+.animate-delay-5 {
+    animation-delay: 0.5s;
+}
+
+.animate-delay-6 {
+    animation-delay: 0.6s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .animate-in {
+        animation: none !important;
+        opacity: 1 !important;
+    }
+}
+
+/* Print styles */
+@media print {
+    /* Reset header positioning for print */
+    header {
+        position: static !important;
+        break-after: avoid;
+        page-break-after: avoid;
+    }
+
+    /* Hide header on all pages except first */
+    @page {
+        margin: 0.5in;
+    }
+
+    @page :first {
+        margin-top: 0;
+    }
+
+    /* Ensure header only shows on first page */
+    header {
+        position: running(header);
+    }
+
+    @page :first {
+        @top-center {
+            content: element(header);
+        }
+    }
+
+    /* General print optimizations */
+    body {
+        padding-top: 0 !important; /* Remove header spacing compensation */
+    }
+
+    /* Hide unnecessary elements for print */
+    .nav-toggle,
+    .mobile-menu,
+    header .cta-button {
+        display: none !important;
+    }
+
+    /* Ensure content flows properly */
+    main {
+        margin-top: 0 !important;
+    }
+
+    /* Improve text readability for print */
+    * {
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+    }
+
+    /* Ensure links are readable */
+    a {
+        text-decoration: none !important;
+        color: #000 !important;
+    }
+
+    /* Force background colors and images to print */
+    .header {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+} 

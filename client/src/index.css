@@ -1,0 +1,55 @@
+:root {
+  --max-width: 1200px;
+  --brand-red: #a3342f !important;
+  --text-color: #333333;
+  --primary-black: #000000;
+  --light-gray: #f5f5f5;
+  --gray: #afb0aa;
+  --soft-gray: #afb0ab;
+  --muted-gray: #aeafaa;
+  --dark-gray: #434342;
+  --white: #ffffff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Example usage for brand emphasis */
+.primary-button {
+  background-color: var(--brand-red);
+  color: var(--white);
+  transition: opacity 0.2s ease;
+}
+
+.primary-button:hover {
+  opacity: 0.9;
+}
+
+/* For links or important text */
+.accent-text {
+  color: var(--brand-red);
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 1rem;
+  width: 100%;
+  box-sizing: border-box;
+}

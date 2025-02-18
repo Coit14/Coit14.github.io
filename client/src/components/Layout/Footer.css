@@ -1,0 +1,115 @@
+.footer {
+    background-color: var(--primary-black);
+    color: var(--white);
+    padding: 1.5rem 0 1rem;
+    text-align: center;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.follow-text {
+    font-weight: 700;
+    font-size: 1.05rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.social-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+    color: white;
+}
+
+.social-icon:hover {
+    transform: translateY(-3px);
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.social-icon svg {
+    width: 20px;
+    height: 20px;
+}
+
+.footer-bottom {
+    padding-top: 0.5rem;
+    border-top: 1px solid rgba(245, 245, 243, 0.2);
+    color: rgba(245, 245, 243, 0.8);
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
+@media (max-width: 480px) {
+    .footer {
+        padding: 1rem 0 0.5rem;
+    }
+    
+    .follow-text {
+        font-size: 0.9rem;
+    }
+}
+
+/* Mobile Responsive Design */
+@media (max-width: 768px) {
+    .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 2rem;
+    }
+
+    .footer-section h3::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .social-icons {
+        justify-content: center;
+    }
+
+    .footer-bottom {
+        margin-top: 1.5rem;
+        padding: 1rem 1rem 0;
+    }
+
+    .follow-text {
+        font-size: 0.95rem;
+    }
+}
+
+/* Ensure tap targets are large enough on mobile */
+@media (max-width: 480px) {
+    .footer-links {
+        gap: 1rem;
+        flex-direction: column;
+    }
+}
+
+/* Make sure the footer stays at the bottom */
+#root {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.App {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}

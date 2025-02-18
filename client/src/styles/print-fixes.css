@@ -1,0 +1,28 @@
+/* Chrome/Edge specific fixes */
+@media print and (-webkit-min-device-pixel-ratio:0) {
+    header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+    }
+
+    @page :first {
+        margin-top: auto;
+    }
+}
+
+/* Firefox specific fixes */
+@-moz-document url-prefix() {
+    @page {
+        margin: 0.5in;
+    }
+
+    @page :first {
+        margin-top: 0;
+    }
+
+    header {
+        display: table-header-group;
+    }
+} 

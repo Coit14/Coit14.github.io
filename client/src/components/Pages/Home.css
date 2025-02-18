@@ -1,0 +1,861 @@
+.dev-status-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 5px;
+  text-align: center;
+  font-family: monospace;
+  font-size: 14px;
+  z-index: 9999;
+}
+
+.dev-status-bar.checking {
+  background-color: #ffd700;
+  color: black;
+}
+
+.dev-status-bar.connected {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.dev-status-bar.disconnected {
+  background-color: #f44336;
+  color: white;
+}
+
+.home {
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - var(--header-height));
+    width: 100%;
+    margin-top: var(--header-height); /* Align with bottom of header */
+}
+
+.hero-container {
+    width: 100%;
+    height: 50vh;
+    position: relative;
+    margin: 0; /* Remove any margin */
+    padding: 0; /* Remove any padding */
+}
+
+.hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block; /* Remove any default image spacing */
+    opacity: 0.9;
+}
+
+.content-container {
+    padding: 2rem 2rem; /* Reduced top padding */
+    text-align: center;
+    background-color: white;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.content-container h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--brand-red);
+    margin: 0 0 1rem 0; /* Reduced bottom margin */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.content-container p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: #333;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.status-container {
+    width: 100%;
+    padding: 0.5rem; /* Reduced padding */
+    background-color: #f5f5f5;
+    margin-top: auto;
+}
+
+.backend-status {
+    text-align: center;
+    font-family: monospace;
+    font-size: 14px;
+    color: #333;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .hero-container {
+        height: 40vh;
+    }
+
+    .content-container {
+        padding: 1.5rem 1.5rem; /* Reduced padding for mobile */
+    }
+
+    .content-container h1 {
+        font-size: 2rem;
+        margin-bottom: 0.75rem; /* Reduced spacing for mobile */
+    }
+
+    .content-container p {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-container {
+        height: 35vh;
+    }
+
+    .content-container {
+        padding: 1rem;
+    }
+
+    .content-container h1 {
+        font-size: 1.8rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .content-container p {
+        font-size: 1rem;
+    }
+}
+
+.home-content {
+    width: 100%;
+    max-width: 100%; /* Allow full width */
+    margin: 0;
+    padding: 0; /* Remove padding */
+    box-sizing: border-box;
+}
+
+.content-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* This will help maintain spacing */
+    min-height: 600px;
+    width: 100vw;
+    margin: 0;
+    gap: 40px;
+    padding: 80px max(20px, calc((100vw - 1800px) / 2));
+    position: relative;
+    overflow: hidden;
+}
+
+.content-section.reverse {
+    flex-direction: row-reverse;
+}
+
+.section-content {
+    flex: 0 1 500px; /* Fixed width for content */
+    padding: 40px;
+    position: relative;
+    z-index: 2;
+}
+
+.section-content h2 {
+    font-size: clamp(2rem, 3.5vw, 3.5rem);
+    margin-bottom: clamp(15px, 2vw, 25px);
+    position: relative;
+    color: var(--brand-red);
+}
+
+.section-content h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 80px;
+    height: 4px;
+    background-color: var(--brand-red);
+    transition: width 0.3s ease;
+}
+
+.section-content p {
+    font-size: clamp(1rem, 1.2vw, 1.2rem);
+    line-height: 1.8;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+.section-image {
+    flex: 0 1 500px; /* Fixed width for images */
+    height: 500px; /* Fixed height */
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.section-image:hover {
+    transform: scale(1.02);
+}
+
+.section-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.section-image:hover img {
+    transform: scale(1.1);
+}
+
+/* Cycling Images */
+.cycling-images {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.cycling-images img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.cycling-images img.active {
+    opacity: 1;
+}
+
+/* Facebook Posts */
+.fb-posts {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: #f8f9fa;
+    padding: 20px;
+}
+
+.fb-post {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.fb-post.active {
+    opacity: 1;
+}
+
+.post-date {
+    color: #666;
+    font-size: 0.9rem;
+    margin-top: 10px;
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 15px 30px;
+    background-color: var(--brand-red);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.cta-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    transition: 0.5s;
+}
+
+.cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.cta-button:hover::before {
+    left: 100%;
+}
+
+/* Responsive Design */
+@media (max-width: 1400px) {
+    .content-section {
+        padding: 80px 40px;
+    }
+}
+
+@media (max-width: 968px) {
+    .content-section {
+        flex-direction: column;
+        padding: 60px 20px;
+        gap: 30px;
+    }
+
+    .section-content,
+    .section-image {
+        flex: 0 1 auto;
+        width: 100%;
+        max-width: 500px;
+        height: 400px;
+    }
+
+    .section-content {
+        text-align: center !important;
+        margin: 0 auto;
+    }
+
+    .section-content h2::after {
+        left: 50% !important;
+        transform: translateX(-50%);
+    }
+}
+
+@media (max-width: 480px) {
+    .home-content {
+        padding: 10px;
+    }
+
+    .section-image {
+        height: 300px;
+    }
+
+    .section-content h2 {
+        font-size: 2rem;
+    }
+
+    .section-content p {
+        font-size: 1.1rem;
+    }
+}
+
+/* Shop Section Specific Styles */
+.cycling-images-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 1;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.shop-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.shop-image.active {
+    opacity: 1;
+}
+
+/* Update the quotes section styles */
+.quotes-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: #434342;
+    border-radius: 8px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.quotes-column {
+    flex: 1;
+    position: relative;
+    height: calc(50% - 10px); /* Half height minus half of gap */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.quotes-divider {
+    height: 2px;
+    width: 90%;
+    background-color: rgba(255, 255, 255, 0.2);
+    align-self: center;
+}
+
+.quote-box {
+    position: absolute;
+    width: 90%;
+    background-color: rgba(128, 128, 128, 0.15);
+    border-radius: 8px;
+    padding: 25px;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    text-align: center;
+}
+
+.quote-box.active {
+    opacity: 1;
+}
+
+.quote-mark {
+    font-size: 2.5rem;
+    color: white;
+    opacity: 0.5;
+    margin-bottom: 10px;
+}
+
+.quote-text {
+    color: white;
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    font-style: italic;
+    font-weight: 700;
+}
+
+.quote-date {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.9rem;
+    display: block;
+    font-weight: 400;
+}
+
+/* Update responsive styles */
+@media (max-width: 968px) {
+    .quotes-container {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .quotes-column {
+        height: calc(50% - 8px); /* Adjusted for smaller gap */
+    }
+
+    .quotes-divider {
+        width: 90%;
+        height: 2px;
+    }
+}
+
+@media (max-width: 480px) {
+    .quotes-column {
+        height: 180px;
+    }
+
+    .quote-text {
+        font-size: 1rem;
+    }
+
+    .quote-mark {
+        font-size: 2rem;
+    }
+}
+
+/* Add divider after each section except the last one */
+.content-section:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px; /* Thickness of the line */
+    background-color: #000000;
+}
+
+/* Add these specific styles for the shop section */
+.shop-section {
+    position: relative;
+    overflow: visible;
+    background-color: #f8f8f8;
+}
+
+.shop-section .section-image {
+    transform: translateX(-40px);
+    z-index: 1;
+    margin-right: auto; /* Push image to the left */
+}
+
+.shop-section .section-content {
+    background: linear-gradient(135deg, #f8f8f8 0%, #ffffff 100%);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: -5px 0 30px rgba(0, 0, 0, 0.05);
+    margin-left: -40px;
+    text-align: right;
+    z-index: 2;
+    margin-left: auto; /* Push content to the right */
+}
+
+.cycling-images-container {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cycling-images-container:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+}
+
+/* Update the content-section styles if needed */
+.content-section {
+    display: flex;
+    align-items: center;
+    min-height: 600px;
+    margin: 0;
+    gap: 40px;
+    width: 100%;
+    padding: 80px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Varied section heights */
+.content-section:nth-child(1) {
+    min-height: 80vh;
+    width: 100vw;
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)),
+                url('../../../public/images/hero-image.jpg') center/cover;
+    margin: 0;
+    padding: 120px max(20px, calc((100vw - 1800px) / 2));
+}
+
+.content-section:nth-child(1) .section-content {
+    background: rgba(163, 52, 47, 0.85); /* Semi-transparent --brand-red (#a3342f) */
+    padding: 40px;
+    border-radius: 12px;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.content-section:nth-child(1) h2 {
+    color: var(--white);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    font-size: 3.5rem;
+    margin-bottom: 25px;
+}
+
+.content-section:nth-child(1) p {
+    color: var(--white);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    font-weight: 400;
+    line-height: 1.8;
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+/* Update the CTA button in the hero section */
+.content-section:nth-child(1) .cta-button {
+    background-color: var(--white);
+    color: var(--brand-red);
+    border: 2px solid var(--white);
+    transition: all 0.3s ease;
+}
+
+.content-section:nth-child(1) .cta-button:hover {
+    background-color: transparent;
+    color: var(--white);
+    border-color: var(--white);
+}
+
+.content-section:nth-child(2) {
+    background-color: #f8f8f8;
+    width: 100vw;
+    padding: 80px max(20px, calc((100vw - 1800px) / 2));
+}
+
+.content-section:nth-child(2) .section-content {
+    text-align: right; /* Keep text right-aligned */
+    margin-left: auto; /* Push content to the right */
+    padding-right: 5%; /* Add some padding from the right edge */
+}
+
+.content-section:nth-child(2) .section-content h2::after {
+    right: 0; /* Keep the underline aligned to the right */
+    left: auto;
+}
+
+.content-section:nth-child(3) {
+    width: 100vw;
+    background: linear-gradient(135deg, #fff 0%, #f1f1f1 100%);
+    padding: 80px max(20px, calc((100vw - 1800px) / 2));
+}
+
+.content-section:nth-child(3) .section-content {
+    text-align: left; /* Left align text */
+    margin-left: 5%; /* Add some margin from the left edge */
+}
+
+/* Animation classes */
+.animate-in {
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.animate-delay-1 { animation-delay: 0.2s; }
+.animate-delay-2 { animation-delay: 0.4s; }
+.animate-delay-3 { animation-delay: 0.6s; }
+.animate-delay-4 { animation-delay: 0.8s; }
+
+/* Updated Section Content */
+.section-content {
+    flex: 1;
+    max-width: 45%;
+    position: relative;
+    z-index: 2;
+}
+
+.section-content h2 {
+    font-size: 3.5rem;
+    margin-bottom: 25px;
+    position: relative;
+}
+
+.section-content h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 80px;
+    height: 4px;
+    background-color: var(--brand-red);
+    transition: width 0.3s ease;
+}
+
+/* Updated Image Styles */
+.section-image {
+    flex: 1;
+    min-width: 300px;
+    max-width: 500px;
+    height: auto;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.section-image:hover {
+    transform: scale(1.02);
+}
+
+.section-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.section-image:hover img {
+    transform: scale(1.1);
+}
+
+/* Updated Shop Section */
+.shop-section {
+    position: relative;
+}
+
+.cycling-images-container {
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.shop-image {
+    transform: scale(1);
+    transition: transform 0.5s ease, opacity 0.5s ease-in-out;
+}
+
+.shop-image.active {
+    opacity: 1;
+    animation: scaleIn 0.5s ease forwards;
+}
+
+/* Updated CTA Button */
+.cta-button {
+    display: inline-block;
+    padding: 15px 30px;
+    background-color: var(--brand-red);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.cta-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    transition: 0.5s;
+}
+
+.cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.cta-button:hover::before {
+    left: 100%;
+}
+
+/* Base Animation Keyframes */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 968px) {
+    .shop-section .section-image {
+        transform: translateX(0);
+    }
+    
+    .shop-section .section-content {
+        margin-left: 0;
+        padding: 30px;
+    }
+    
+    .content-section:nth-child(1) .section-content {
+        padding: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .content-section:nth-child(1) {
+        padding: 80px 20px;
+    }
+    
+    .content-section:nth-child(1) .section-content {
+        padding: 25px;
+    }
+}
+
+/* Add this class to your second section in Home.jsx */
+.reverse-layout {
+    flex-direction: row-reverse;
+}
+
+/* Update booking section styles to match shop section */
+.booking-section {
+    background: linear-gradient(135deg, #fff 0%, #f1f1f1 100%);
+    padding: 80px max(20px, calc((100vw - 1800px) / 2));
+}
+
+.booking-section .section-content {
+    background: linear-gradient(135deg, #f8f8f8 0%, #ffffff 100%);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 5px 0 30px rgba(0, 0, 0, 0.05);
+    margin-right: -40px;
+    text-align: left;
+    z-index: 2;
+    margin-right: auto; /* Push content to the left */
+}
+
+.booking-section .section-image {
+    transform: translateX(40px);
+    z-index: 1;
+    margin-left: auto; /* Push image to the right */
+}
+
+.booking-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+/* Ensure consistent spacing between sections */
+.content-section {
+    padding: 80px max(20px, calc((100vw - 1800px) / 2));
+    gap: 40px;
+}
+
+/* Media queries for responsive design */
+@media (max-width: 1200px) {
+    .section-content,
+    .section-image {
+        flex: 0 1 450px; /* Slightly smaller on medium screens */
+        height: 450px;
+    }
+}
+
+@media (max-width: 968px) {
+    .content-section {
+        flex-direction: column;
+        padding: 60px 20px;
+    }
+
+    .section-content,
+    .section-image {
+        flex: 0 1 auto;
+        width: 100%;
+        max-width: 500px;
+        height: 400px;
+    }
+
+    .section-content {
+        text-align: center !important;
+        margin: 0 auto;
+    }
+
+    .section-content h2::after {
+        left: 50% !important;
+        transform: translateX(-50%);
+    }
+} 

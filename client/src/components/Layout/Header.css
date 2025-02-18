@@ -1,0 +1,403 @@
+:root {
+    --header-height: calc(24px + 65px); /* notification bar + header content */
+    --header-height-scrolled: calc(20px + 55px);
+}
+
+/* Header Spacer */
+.header-spacer {
+    height: var(--header-height);
+    width: 100%;
+}
+
+/* Updated Notification Bar Styles */
+.notification-bar {
+    background-color: var(--brand-red);
+    color: var(--white);
+    padding: 3px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    min-height: 24px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    transition: all 0.3s ease-in-out;
+}
+
+.subscribe-button {
+    background-color: #000;
+    color: white;
+    border: 2px solid #000;
+    padding: 4px 15px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 700;
+    transition: all 0.3s ease-in-out;
+    text-transform: uppercase;
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+}
+
+.subscribe-button:hover {
+    background-color: white;
+    color: #000;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.subscribe-button::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: -100%;
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    transition: 0.5s;
+}
+
+.subscribe-button:hover::after {
+    left: 100%;
+}
+
+/* Updated Header Container */
+.header-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: var(--white);
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header-content {
+    padding: 0 30px;
+    height: 65px;
+    position: relative;
+    transition: all 0.3s ease-in-out;
+    background: white;
+}
+
+.main-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    height: 100%;
+}
+
+.nav-section {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    flex: 1;
+    height: 100%;
+}
+
+.nav-section.left {
+    justify-content: flex-end;
+}
+
+.nav-section.right {
+    justify-content: flex-start;
+}
+
+.logo-container {
+    position: relative;
+    padding: 0 40px;
+    display: flex;
+    align-items: flex-start;
+    height: 100%;
+    margin-top: 0;
+    transition: transform 0.3s ease-in-out;
+}
+
+.logo-container:hover {
+    transform: translateY(-3px);
+}
+
+.logo {
+    height: 110px;
+    width: auto;
+    margin-top: 0;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Scrolled State Updates */
+.header-container.scrolled .notification-bar {
+    padding: 2px 20px;
+    min-height: 20px;
+}
+
+.header-container.scrolled .header-spacer {
+    height: var(--header-height-scrolled);
+}
+
+.header-container.scrolled .header-content {
+    height: 55px;
+}
+
+.header-container.scrolled .logo {
+    height: 70px;
+}
+
+/* Enhanced Navigation Links with Animation */
+.nav-section a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.05rem;
+    transition: all 0.3s ease-in-out;
+    position: relative;
+}
+
+/* Underline animation on hover */
+.nav-section a:not(.cart-icon):after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background-color: var(--brand-red);
+    transition: width 0.3s ease-in-out;
+}
+
+.nav-section a:not(.cart-icon):hover:after {
+    width: 100%;
+}
+
+/* Enhanced Logo Container Animation */
+.logo-container {
+    position: relative;
+    padding: 0 40px;
+    display: flex;
+    align-items: flex-start;
+    height: 100%;
+    margin-top: 0;
+    transition: transform 0.3s ease-in-out;
+}
+
+.logo-container:hover {
+    transform: translateY(-3px);
+}
+
+.logo {
+    height: 110px;
+    width: auto;
+    margin-top: 0;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Enhanced Cart Icon Animation */
+.cart-icon {
+    position: relative;
+    cursor: pointer;
+    padding: 8px;
+    transition: transform 0.2s ease;
+    color: var(--text-color);
+}
+
+.cart-icon:hover {
+    transform: translateY(-2px);
+    color: var(--brand-red);
+}
+
+/* Cart Count Enhanced Animation */
+.cart-count {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: var(--brand-red);
+    color: white;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: bold;
+    transition: transform 0.2s ease;
+}
+
+.cart-icon:hover .cart-count {
+    transform: scale(1.1);
+}
+
+/* Responsive Updates */
+@media (max-width: 1024px) {
+    .nav-section {
+        gap: 20px;
+    }
+
+    .logo-container {
+        padding: 0 20px;
+    }
+
+    .logo {
+        height: 80px;
+    }
+
+    .nav-section a {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --header-height: calc(22px + 55px);
+        --header-height-scrolled: calc(20px + 50px);
+    }
+
+    .notification-bar {
+        padding: 2px 15px;
+        font-size: 0.8rem;
+    }
+
+    .subscribe-button {
+        padding: 3px 12px;
+        font-size: 0.8rem;
+    }
+
+    .header-content {
+        height: 55px;
+        padding: 0 15px;
+    }
+
+    .nav-section {
+        gap: 15px;
+    }
+
+    .nav-section a {
+        font-size: 0.95rem;
+    }
+
+    .logo {
+        height: 70px;
+    }
+
+    .header-container.scrolled .logo {
+        height: 60px;
+    }
+
+    .cta-button {
+        margin: 10px 0;
+        text-align: center;
+        display: inline-block;
+    }
+}
+
+@media (max-width: 480px) {
+    :root {
+        --header-height: calc(20px + 50px);
+        --header-height-scrolled: calc(18px + 45px);
+    }
+
+    .notification-bar {
+        padding: 2px 10px;
+        font-size: 0.75rem;
+        gap: 10px;
+    }
+
+    .subscribe-button {
+        padding: 2px 10px;
+        font-size: 0.75rem;
+    }
+
+    .header-content {
+        height: 50px;
+        padding: 0 10px;
+    }
+
+    .nav-section {
+        gap: 10px;
+    }
+
+    .nav-section a {
+        font-size: 0.9rem;
+    }
+
+    .logo {
+        height: 65px;
+    }
+
+    .header-container.scrolled .logo {
+        height: 55px;
+    }
+}
+
+.facebook-link {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1001;
+}
+
+.facebook-link a {
+    background-color: #1877f2;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.facebook-link a:hover {
+    background-color: #166fe5;
+}
+
+.active {
+    color: var(--brand-red);
+}
+
+.social-icons {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1000;
+}
+
+.header-social-link {
+    color: #1877F2;
+    transition: opacity 0.2s ease;
+    display: flex;
+    align-items: center;
+}
+
+.header-social-link:hover {
+    opacity: 0.8;
+}
+
+/* Add or update CTA button styles */
+.cta-button {
+    background-color: var(--brand-red);
+    color: var(--white);
+    padding: 10px 20px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.cta-button:hover {
+    background-color: var(--brand-red);
+    opacity: 0.9;
+    text-decoration: none;
+    color: white;
+}

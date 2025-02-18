@@ -1,0 +1,175 @@
+.menu-container {
+    width: 95%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 20px 20px;
+}
+
+.menu-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.menu-header h1 {
+    color: var(--brand-red);
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.menu-note {
+    color: var(--light-gray);
+    font-style: italic;
+}
+
+.menu-section {
+    margin-bottom: 40px;
+    padding: 25px;
+    border-radius: 8px;
+    background: var(--white);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.menu-section h2 {
+    color: var(--brand-red);
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--brand-red);
+    padding-bottom: 10px;
+}
+
+/* Consistent spacing for all menu items */
+.menu-items li,
+.menu-item,
+.beverage-items p,
+.beverage-prices p {
+    padding: 8px 0;
+    margin: 0;
+    color: var(--text-color);
+}
+
+.menu-items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.price {
+    color: var(--brand-red);
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+
+.item-description {
+    color: var(--light-gray);
+    padding: 8px 0;
+    margin: 0;
+}
+
+.add-ons {
+    padding: 8px 0;
+    margin: 0;
+    color: #333;
+}
+
+.toppings {
+    color: var(--light-gray);
+    margin-left: 10px;
+}
+
+.beverages {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.beverage-items {
+    text-align: left;
+}
+
+.beverage-prices {
+    text-align: right;
+    color: var(--brand-red);
+    font-weight: 600;
+}
+
+.menu-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+}
+
+.menu-item-header h2 {
+    color: var(--brand-red);
+    font-size: 1.8rem;
+    margin: 0;
+}
+
+.menu-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.chips {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #333;
+}
+
+.float {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #333;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .menu-container {
+        padding: 40px 15px 15px;
+    }
+
+    .menu-header h1 {
+        font-size: 2rem;
+    }
+
+    .menu-section h2 {
+        font-size: 1.5rem;
+    }
+}
+
+/* Animation classes (if not already in layout.css) */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-in {
+    animation: fadeInUp 0.6s ease-out forwards;
+    opacity: 0;
+}
+
+.animate-delay-1 { animation-delay: 0.1s; }
+.animate-delay-2 { animation-delay: 0.2s; }
+.animate-delay-3 { animation-delay: 0.3s; }
+.animate-delay-4 { animation-delay: 0.4s; }
+.animate-delay-5 { animation-delay: 0.5s; }
+.animate-delay-6 { animation-delay: 0.6s; }
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .animate-in {
+        animation: none !important;
+        opacity: 1 !important;
+    }
+}
