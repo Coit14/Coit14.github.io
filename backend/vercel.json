@@ -1,0 +1,27 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "api/**/*.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/hello",
+      "dest": "/api/hello.js"
+    },
+    {
+      "src": "/api/printify-test",
+      "dest": "/api/printify-test.js"
+    },
+    {
+      "src": "/api/products",
+      "dest": "/api/products.js"
+    },
+    {
+      "src": "/api/products/(.*)",
+      "dest": "/api/products/[productId].js"
+    }
+  ]
+}

@@ -35,7 +35,7 @@ function App() {
                             <Route path="/shop" element={<Shop />} />
                             <Route path="/checkout" element={<Checkout />} />
                             <Route path="/book-event" element={<EventBooking />} />
-                            <Route path="/printify-test" element={<PrintifyTest />} />
+                            <Route path="/printifycheck" element={<PrintifyTest />} />
                             <Route path="*" element={<NotFound />} />
                         </Routes>
                     </main>

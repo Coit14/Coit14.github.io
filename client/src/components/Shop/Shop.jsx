@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useCart } from '../../contexts/CartContext';
 import ProductModal from './ProductModal';
 import './Shop.css';
+import { printifyService } from '../../services/printifyService';
+import LoadingSpinner from '../common/LoadingSpinner';
 
 const Shop = () => {
-    const { products } = useCart(); // Use products from context
-    const [loading, setLoading] = useState(false);
+    const { products, setProducts, isLoading } = useCart();
     const [error, setError] = useState(null);
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [preloadedModals, setPreloadedModals] = useState({});
@@ -47,6 +48,35 @@ const Shop = () => {
         }
     }, [products]);
 
+    useEffect(() => {
+        const fetchProducts = async () => {
+            try {
+                setError(null);
+                console.log('Fetching products...');
+                const fetchedProducts = await printifyService.getPublishedProducts();
+                console.log('Fetched products:', fetchedProducts);
+                if (Array.isArray(fetchedProducts) && fetchedProducts.length > 0) {
+                    setProducts(fetchedProducts);
+                } else {
+                    console.warn('No products found or invalid data format');
+                }
+            } catch (error) {
+                console.error('Failed to fetch products:', error);
+                setError('Failed to load products. Please try again later.');
+            }
+        };
+
+        // Only fetch if we don't already have products
+        if (!products || products.length === 0) {
+            fetchProducts();
+        }
+    }, [setProducts, products]);
+
+    // Add some debug logging
+    useEffect(() => {
+        console.log('Current products state:', products);
+    }, [products]);
+
     const handleProductClick = (product) => {
         setSelectedProduct(product);
     };
@@ -75,6 +105,12 @@ const Shop = () => {
         return formatPrice(enabledVariants[0].price);
     };
 
+    if (isLoading) return <LoadingSpinner />;
+    if (error) return <div className="error-message">{error}</div>;
+    if (!products || !Array.isArray(products) || products.length === 0) {
+        return <div>No products available.</div>;
+    }
+
     return (
         <div className="shop-container">
             <div className="shop-header">
@@ -82,41 +118,35 @@ const Shop = () => {
                 <p className="shop-subtitle">Support Coit's and look great doing it!</p>
             </div>
 
-            {loading ? (
-                <div className="loading">Loading products...</div>
-            ) : error ? (
-                <div className="error">{error}</div>
-            ) : (
-                <div className="products-grid">
-                    {products.map(product => (
-                        <div key={product.id} className="product-card">
-                            <div className="product-image-container">
-                                {product.images && product.images[0] ? (
-                                    <img
-                                        src={product.images[0].src}
-                                        alt={product.title}
-                                        className="product-image"
-                                    />
-                                ) : (
-                                    <div className="no-image">No image available</div>
-                                )}
-                            </div>
-                            <div className="product-info">
-                                <h3 className="product-title">{product.title}</h3>
-                                <p className="product-price">
-                                    {calculatePrice(product.variants)}
-                                </p>
-                                <button
-                                    className="view-details-button"
-                                    onClick={() => handleProductClick(product)}
-                                >
-                                    View Details
-                                </button>
-                            </div>
+            <div className="products-grid">
+                {products.map(product => (
+                    <div key={product.id} className="product-card">
+                        <div className="product-image-container">
+                            {product.images && product.images[0] ? (
+                                <img
+                                    src={product.images[0].src}
+                                    alt={product.title}
+                                    className="product-image"
+                                />
+                            ) : (
+                                <div className="no-image">No image available</div>
+                            )}
                         </div>
-                    ))}
-                </div>
-            )}
+                        <div className="product-info">
+                            <h3 className="product-title">{product.title}</h3>
+                            <p className="product-price">
+                                {calculatePrice(product.variants)}
+                            </p>
+                            <button
+                                className="view-details-button"
+                                onClick={() => handleProductClick(product)}
+                            >
+                                View Details
+                            </button>
+                        </div>
+                    </div>
+                ))}
+            </div>
 
             {selectedProduct && (
                 <ProductModal

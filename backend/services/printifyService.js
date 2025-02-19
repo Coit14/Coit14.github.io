@@ -1,8 +1,9 @@
 const printifyApi = require('../utils/printifyApi');
 const axios = require('axios');
+const printifyConfig = require('../config/printify');
 
-class PrintifyService {
-    async getShops() {
+const printifyService = {
+    getShops: async () => {
         try {
             console.log('Making request to Printify API...');
             const response = await printifyApi.get('/shops.json');
@@ -16,31 +17,31 @@ class PrintifyService {
                 data: error.response?.data,
                 message: error.message
             });
-            throw this.handleError(error);
+            throw printifyService.handleError(error);
         }
-    }
+    },
 
-    async getProducts(shopId) {
+    getProducts: async (shopId) => {
         try {
             console.log(`Fetching products for shop ${shopId}...`);
             const response = await printifyApi.get(`/shops/${shopId}/products.json`);
             console.log(`Found ${response.data.data.length} products`);
             return response.data;
         } catch (error) {
-            throw this.handleError(error);
+            throw printifyService.handleError(error);
         }
-    }
+    },
 
-    async getProduct(shopId, productId) {
+    getProduct: async (shopId, productId) => {
         try {
             const response = await printifyApi.get(`/shops/${shopId}/products/${productId}.json`);
             return response.data;
         } catch (error) {
-            throw this.handleError(error);
+            throw printifyService.handleError(error);
         }
-    }
+    },
 
-    async deleteProduct(shopId, productId) {
+    deleteProduct: async (shopId, productId) => {
         try {
             console.log(`Deleting product ${productId} from shop ${shopId}...`);
             
@@ -82,9 +83,9 @@ class PrintifyService {
                 status: error.response?.status || 500
             };
         }
-    }
+    },
 
-    async deleteAllProducts(shopId) {
+    deleteAllProducts: async (shopId) => {
         try {
             console.log(`Fetching all products from shop ${shopId}...`);
             
@@ -98,7 +99,7 @@ class PrintifyService {
             const results = await Promise.all(
                 products.map(async (product) => {
                     try {
-                        await this.deleteProduct(shopId, product.id);
+                        await printifyService.deleteProduct(shopId, product.id);
                         return {
                             id: product.id,
                             success: true
@@ -130,9 +131,9 @@ class PrintifyService {
                 status: error.response?.status || 500
             };
         }
-    }
+    },
 
-    async calculateShipping(address, items) {
+    calculateShipping: async (address, items) => {
         try {
             const response = await printifyApi.post('/orders/shipping-rates', {
                 address,
@@ -144,11 +145,11 @@ class PrintifyService {
             });
             return response.data;
         } catch (error) {
-            throw this.handleError(error);
+            throw printifyService.handleError(error);
         }
-    }
+    },
 
-    async calculateTax(address, items) {
+    calculateTax: async (address, items) => {
         try {
             const response = await printifyApi.post('/orders/taxes', {
                 address,
@@ -160,11 +161,11 @@ class PrintifyService {
             });
             return response.data;
         } catch (error) {
-            throw this.handleError(error);
+            throw printifyService.handleError(error);
         }
-    }
+    },
 
-    async createOrder(address, items, shippingMethod) {
+    createOrder: async (address, items, shippingMethod) => {
         try {
             const response = await printifyApi.post('/orders.json', {
                 external_id: `order_${Date.now()}`,
@@ -178,11 +179,11 @@ class PrintifyService {
             });
             return response.data;
         } catch (error) {
-            throw this.handleError(error);
+            throw printifyService.handleError(error);
         }
-    }
+    },
 
-    handleError(error) {
+    handleError: (error) => {
         // Don't transform 404 errors
         if (error.response?.status === 404) {
             return error;
@@ -192,6 +193,6 @@ class PrintifyService {
         console.error('Printify API Error:', errorMessage);
         return new Error(errorMessage);
     }
-}
+};
 
-module.exports = new PrintifyService();
+module.exports = printifyService;

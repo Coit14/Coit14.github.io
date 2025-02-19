@@ -1,1 +1,5 @@
-export const API_BASE_URL = 'https://backend-e8seuqp2w-coit14s-projects.vercel.app'; 
+const API_URL = 'https://coit14-github-io.vercel.app';
+
+export default {
+  API_URL
+}; 

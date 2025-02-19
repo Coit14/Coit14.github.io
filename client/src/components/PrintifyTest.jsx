@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { printifyService } from '../services/printifyService';
+import config from '../config/config';
 
 const formatPrice = (cents) => {
     return `$${(cents / 100).toFixed(2)}`;
@@ -21,11 +23,30 @@ const calculatePriceRange = (variants) => {
 };
 
 const PrintifyTest = () => {
-    const [products, setProducts] = useState([]);
+    const [testResult, setTestResult] = useState(null);
     const [error, setError] = useState(null);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
+    const [products, setProducts] = useState([]);
     const [expandedVariants, setExpandedVariants] = useState({});
     const [selectedColor, setSelectedColor] = useState({});
+
+    useEffect(() => {
+        const testConnection = async () => {
+            try {
+                setLoading(true);
+                const result = await printifyService.testConnection();
+                setTestResult(result);
+                setError(null);
+            } catch (err) {
+                console.error('Printify test error:', err);
+                setError('Failed to connect to Printify');
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        testConnection();
+    }, []);
 
     const toggleVariants = (productId) => {
         setExpandedVariants(prev => ({
@@ -85,7 +106,7 @@ const PrintifyTest = () => {
         setLoading(true);
         setError(null);
         try {
-            const response = await fetch('http://localhost:3001/api/products/all');
+            const response = await fetch(`${config.API_URL}/api/products`);
             const data = await response.json();
             setProducts(Array.isArray(data) ? data : []);
             console.log('Products data:', data);
@@ -109,8 +130,14 @@ const PrintifyTest = () => {
         }
     };
 
+    if (loading) return <div>Testing Printify connection...</div>;
+    if (error) return <div className="error">{error}</div>;
+
     return (
         <div style={{ padding: '20px' }}>
+            <h2>Printify Connection Test</h2>
+            <pre>{JSON.stringify(testResult, null, 2)}</pre>
+
             <h2>Printify Products</h2>
             
             <button 
@@ -132,12 +159,6 @@ const PrintifyTest = () => {
             <button onClick={handleDeleteSpecificProducts}>
                 Delete Specific Products
             </button>
-
-            {error && (
-                <div style={{ color: 'red', margin: '10px 0', padding: '10px', background: '#fee', borderRadius: '4px' }}>
-                    Error: {error}
-                </div>
-            )}
 
             {products.length > 0 ? (
                 <div style={{ marginTop: '20px' }}>

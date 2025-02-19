@@ -1,8 +1,5 @@
-// In development, this will be proxied to http://localhost:3001/api/printify
-// In production, it will use the relative path /api/printify
-const API_BASE_URL = process.env.NODE_ENV === 'development' 
-  ? '/api/printify'  // Development (will be proxied)
-  : '/api/printify'; // Production
+// Update to use the Vercel URL
+const API_BASE_URL = 'https://coit14-github-io.vercel.app/api';
 
 // For debugging
 console.log('API Base URL:', API_BASE_URL);
@@ -17,7 +14,15 @@ export const fetchShopProducts = async () => {
     const url = `${API_BASE_URL}/products`;
     console.log('Fetching products from:', url);
     
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      mode: 'cors'
+    });
+    
     if (!response.ok) {
       const errorData = await response.json();
       throw new Error(errorData.error || `HTTP error! status: ${response.status}`);

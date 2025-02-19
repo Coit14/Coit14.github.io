@@ -1,32 +1,34 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { printifyService } from '../services/printifyService';
 
-export const CartContext = createContext();
-
-export const useCart = () => {
-    const context = useContext(CartContext);
-    if (!context) {
-        throw new Error('useCart must be used within a CartProvider');
-    }
-    return context;
-};
+const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
+    const [products, setProducts] = useState([]);
     const [cartItems, setCartItems] = useState([]);
     const [isCartOpen, setIsCartOpen] = useState(false);
-    const [products, setProducts] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
 
-    // Preload products when the app starts
+    // Debug log when products change
+    useEffect(() => {
+        console.log('CartContext products updated:', products);
+    }, [products]);
+
+    // Preload products immediately when app starts
     useEffect(() => {
         const preloadProducts = async () => {
             try {
-                const response = await fetch(`${process.env.REACT_APP_API_URL}/api/products/all`);
-                const data = await response.json();
-                setProducts(Array.isArray(data) ? data : []);
+                setIsLoading(true);
+                console.log('Preloading products...');
+                const fetchedProducts = await printifyService.getPublishedProducts();
+                console.log('Preloaded products:', fetchedProducts);
+                setProducts(fetchedProducts);
             } catch (error) {
                 console.error('Error preloading products:', error);
+            } finally {
+                setIsLoading(false);
             }
         };
-
         preloadProducts();
     }, []);
 
@@ -100,8 +102,18 @@ export const CartProvider = ({ children }) => {
             getCartTotal,
             getCartCount,
             products,
+            setProducts,
+            isLoading
         }}>
             {children}
         </CartContext.Provider>
     );
+};
+
+export const useCart = () => {
+    const context = useContext(CartContext);
+    if (!context) {
+        throw new Error('useCart must be used within a CartProvider');
+    }
+    return context;
 }; 

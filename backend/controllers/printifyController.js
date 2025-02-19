@@ -6,29 +6,57 @@ const printifyController = {
     // Get all published products
     getPublishedProducts: async (req, res) => {
         try {
-            const shops = await printifyService.getShops();
-            const shopId = shops[0]?.id;
+            console.log('Getting shops...');
+            const response = await axios.get(
+                'https://api.printify.com/v1/shops.json',
+                {
+                    headers: {
+                        'Authorization': `Bearer ${process.env.PRINTIFY_API_KEY}`,
+                        'Content-Type': 'application/json'
+                    }
+                }
+            );
+            
+            console.log('Shops response:', response.data);
+            const shopId = response.data[0]?.id;
             
             if (!shopId) {
+                console.log('No shop found');
                 return res.status(404).json({ error: 'No shop found' });
             }
 
-            const products = await printifyService.getProducts(shopId);
-            const publishedProducts = products.data
-                .filter(product => product.is_published)
+            console.log('Getting products for shop:', shopId);
+            const productsResponse = await axios.get(
+                `https://api.printify.com/v1/shops/${shopId}/products.json`,
+                {
+                    headers: {
+                        'Authorization': `Bearer ${process.env.PRINTIFY_API_KEY}`,
+                        'Content-Type': 'application/json'
+                    }
+                }
+            );
+
+            console.log('Products response:', productsResponse.data);
+            const publishedProducts = productsResponse.data.data
+                .filter(product => product.visible && !product.is_deleted)
                 .map(product => ({
                     id: product.id,
                     title: product.title,
                     description: product.description,
                     images: product.images,
+                    tags: product.tags,
                     variants: product.variants
-                        .filter(v => v.is_enabled && v.is_available)
+                        .filter(v => v.is_enabled)
                 }));
 
-            res.json(publishedProducts);
+            console.log('Filtered products:', publishedProducts);
+            return res.json(publishedProducts);
         } catch (error) {
             console.error('Error fetching products:', error);
-            res.status(500).json({ error: 'Failed to fetch products' });
+            return res.status(500).json({ 
+                error: 'Failed to fetch products',
+                details: error.response?.data || error.message
+            });
         }
     },
 
@@ -36,13 +64,38 @@ const printifyController = {
     getProduct: async (req, res) => {
         try {
             const { productId } = req.params;
-            const response = await axios.get(
-                `${printifyConfig.PRINTIFY_API_BASE_URL}/shops/${printifyConfig.SHOP_ID}/products/${productId}.json`,
-                { headers: printifyConfig.HEADERS }
+            
+            // First get the shop ID
+            const shopResponse = await axios.get(
+                'https://api.printify.com/v1/shops.json',
+                {
+                    headers: {
+                        'Authorization': `Bearer ${process.env.PRINTIFY_API_KEY}`,
+                        'Content-Type': 'application/json'
+                    }
+                }
             );
-            res.json(response.data);
+            
+            const shopId = shopResponse.data[0]?.id;
+            
+            if (!shopId) {
+                return res.status(404).json({ error: 'No shop found' });
+            }
+
+            // Then get the product using the shop ID
+            const response = await axios.get(
+                `https://api.printify.com/v1/shops/${shopId}/products/${productId}.json`,
+                {
+                    headers: {
+                        'Authorization': `Bearer ${process.env.PRINTIFY_API_KEY}`,
+                        'Content-Type': 'application/json'
+                    }
+                }
+            );
+            return res.json(response.data);
         } catch (error) {
-            res.status(500).json({ 
+            console.error('Error fetching product:', error);
+            return res.status(500).json({ 
                 error: 'Failed to fetch product',
                 details: error.response?.data || error.message
             });
@@ -53,20 +106,35 @@ const printifyController = {
     testConnection: async (req, res) => {
         try {
             const response = await axios.get(
-                `${printifyConfig.PRINTIFY_API_BASE_URL}/shops/${printifyConfig.SHOP_ID}.json`,
-                { headers: printifyConfig.HEADERS }
+                'https://api.printify.com/v1/shops.json',
+                {
+                    headers: {
+                        'Authorization': `Bearer ${process.env.PRINTIFY_API_KEY}`,
+                        'Content-Type': 'application/json'
+                    }
+                }
             );
-            res.json({ 
-                success: true, 
-                shop: response.data 
+            
+            return res.json({
+                success: true,
+                message: "Printify connection successful",
+                shopId: process.env.SHOP_ID,
+                shops: response.data
             });
         } catch (error) {
-            res.status(500).json({ 
-                error: 'Failed to connect to Printify',
-                details: error.response?.data || error.message
+            console.error('Printify Error Details:', {
+                message: error.message,
+                config: error.config,
+                response: error.response?.data
+            });
+            
+            return res.status(500).json({
+                success: false,
+                message: "Printify connection failed",
+                error: error.response?.data || error.message
             });
         }
     }
 };
 
-module.exports = printifyController;
+module.exports = { printifyController };
