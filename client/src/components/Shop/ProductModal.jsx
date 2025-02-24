@@ -16,7 +16,7 @@ const calculatePrice = (variants) => {
     return formatPrice(enabledVariants[0].price);
 };
 
-const ProductModal = ({ product, preloadedContent, onClose }) => {
+const ProductModal = ({ product, preloadedContent, onClose, isOpen }) => {
     const { addToCart, setIsCartOpen } = useCart();
     const [selectedColor, setSelectedColor] = useState('');
     const [selectedSize, setSelectedSize] = useState('');
@@ -24,6 +24,7 @@ const ProductModal = ({ product, preloadedContent, onClose }) => {
     const [showSuccess, setShowSuccess] = useState(false);
     const [variantsByColor, setVariantsByColor] = useState({});
     const [modalData, setModalData] = useState(preloadedContent || null);
+    const [selectedVariant, setSelectedVariant] = useState(null);
 
     // Helper function to determine if a string is a size
     const isSize = (str) => sizeOrder.includes(str);
@@ -105,9 +106,8 @@ const ProductModal = ({ product, preloadedContent, onClose }) => {
             
         if (selectedVariant) {
             addToCart(product, selectedVariant);
-            setShowSuccess(true);
-            // Hide success message after 5 seconds if user doesn't interact
-            setTimeout(() => setShowSuccess(false), 5000);
+            onClose();  // Close the modal
+            setIsCartOpen(true);  // Open the cart
         }
     };
 

@@ -5,7 +5,7 @@ const Menu = () => {
     return (
         <div className="menu-container animate-in">
             <div className="menu-header animate-in animate-delay-1">
-                <h1>Coit's Menu</h1>
+                <h1>Coit's Truck Menu</h1>
                 <p className="menu-note">Our Classic Menu Since 1954</p>
             </div>
             
