@@ -37,8 +37,7 @@ const EventBooking = () => {
         setIsSubmitting(true);
         
         try {
-            // Send to your Vercel backend
-            const response = await fetch(`${process.env.REACT_APP_API_URL}/api/sendEmail`, {
+            const response = await fetch('https://coits-food-truck.vercel.app/api/sendEmail', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
