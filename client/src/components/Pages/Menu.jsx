@@ -19,7 +19,7 @@ const Menu = () => {
                     <li>No. 2 - Mustard & Chili</li>
                     <li>No. 3 - Mustard</li>
                     <li>No. 4 - Plain</li>
-                    <li>No. 5 - Chili only</li>
+                    <li>No. 5 - Chili Only</li>
                     <li>No. 6 - Mustard & Onions</li>
                     <li>No. 7 - Chili & Onions</li>
                 </ul>

@@ -71,6 +71,7 @@ const EventBooking = () => {
                     powerSupply: '',
                     waterSupply: ''
                 });
+                window.scrollTo(0, 0);
             } else {
                 throw new Error(data.error || 'Submission failed');
             }
@@ -79,6 +80,7 @@ const EventBooking = () => {
                 type: 'error',
                 message: error.message || 'Failed to submit form. Please try again.'
             });
+            window.scrollTo(0, 0);
         } finally {
             setIsSubmitting(false);
         }

@@ -91,7 +91,7 @@
     display: none;
     background: none;
     border: none;
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     cursor: pointer;
     position: absolute;
     right: 20px;
@@ -99,6 +99,7 @@
     transform: translateY(-50%);
     z-index: 1001;
     color: var(--brand-red);
+    padding: 10px;
 }
 
 .main-nav {

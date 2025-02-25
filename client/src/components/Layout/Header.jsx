@@ -36,7 +36,8 @@ function Header() {
     };
   }, [scrolled]);
 
-  const toggleMenu = () => {
+  const toggleMenu = (e) => {
+    e.stopPropagation(); // Prevent event bubbling
     setIsMenuOpen(!isMenuOpen);
   };
 
