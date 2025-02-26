@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './ProductModal.css';
 import { useCart } from '../../contexts/CartContext';
+import ProductModalMobile from './ProductModalMobile';
 
 const formatPrice = (cents) => {
     return `$${(cents / 100).toFixed(2)}`;
@@ -25,6 +26,7 @@ const ProductModal = ({ product, preloadedContent, onClose, isOpen }) => {
     const [variantsByColor, setVariantsByColor] = useState({});
     const [modalData, setModalData] = useState(preloadedContent || null);
     const [selectedVariant, setSelectedVariant] = useState(null);
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
     // Helper function to determine if a string is a size
     const isSize = (str) => sizeOrder.includes(str);
@@ -120,6 +122,23 @@ const ProductModal = ({ product, preloadedContent, onClose, isOpen }) => {
         setShowSuccess(false);
         onClose();
     };
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    if (isMobile) {
+        return <ProductModalMobile 
+            product={product}
+            preloadedContent={preloadedContent}
+            onClose={onClose}
+        />;
+    }
 
     if (!product) return null;
 
