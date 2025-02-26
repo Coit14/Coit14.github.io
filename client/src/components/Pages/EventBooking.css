@@ -141,13 +141,13 @@
 }
 
 .minimum-sales-note {
-    background: var(--brand-gray);
-    padding: 20px;
-    border-radius: 6px;
-    margin: 30px 0;
-    text-align: center;
-    font-weight: 500;
+    margin: 10px 0;
+    text-align: left;
     color: var(--brand-dark);
+}
+
+.minimum-sales-note p {
+    margin: 0;
 }
 
 .submit-button {
@@ -184,6 +184,21 @@
     background: #f8d7da;
     color: #721c24;
     border: 1px solid #f5c6cb;
+}
+
+.advertising-section {
+    background: var(--brand-gray);
+    padding: 20px;
+    border-radius: 6px;
+    margin: 25px 0;
+}
+
+.advertising-section .form-group {
+    margin-bottom: 0;
+}
+
+.advertising-section .minimum-sales-note {
+    margin-bottom: 20px;
 }
 
 @media (max-width: 768px) {

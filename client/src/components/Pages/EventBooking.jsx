@@ -14,12 +14,7 @@ const EventBooking = () => {
         isPrivateEvent: '',
         canAdvertise: '',
         advertisingDetails: '',
-        arrivalSetupTime: '',
-        tearDownTime: '',
         parkingInfo: '',
-        corporatePayment: '',
-        powerSupply: '',
-        waterSupply: ''
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitStatus, setSubmitStatus] = useState(null);
@@ -64,12 +59,7 @@ const EventBooking = () => {
                     isPrivateEvent: '',
                     canAdvertise: '',
                     advertisingDetails: '',
-                    arrivalSetupTime: '',
-                    tearDownTime: '',
                     parkingInfo: '',
-                    corporatePayment: '',
-                    powerSupply: '',
-                    waterSupply: ''
                 });
                 window.scrollTo(0, 0);
             } else {
@@ -91,7 +81,7 @@ const EventBooking = () => {
             <div className="form-header">
                 <h2>Event Booking Request</h2>
                 <p className="intro-text">
-                    Please fill out the form to request an event booking. We'll review your request and try to respond within a week! 
+                    Please fill out the form and we'll try to respond within a week! 
                     (Please note, we do not operate in the winter and rarely schedule private events November through March due to weather.)
                 </p>
             </div>
@@ -103,154 +93,133 @@ const EventBooking = () => {
             )}
 
             <form onSubmit={handleSubmit} className="event-booking-form">
-                {/* Contact Information Section */}
-                <section className="form-section">
-                    <h3>Contact Information</h3>
-                    <div className="form-group">
-                        <label htmlFor="email">Email Address *</label>
-                        <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            value={formData.email}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="facebookUsername">Facebook Username</label>
-                        <input
-                            type="text"
-                            id="facebookUsername"
-                            name="facebookUsername"
-                            value={formData.facebookUsername}
-                            onChange={handleChange}
-                        />
-                    </div>
-                </section>
-
-                {/* Event Information Section */}
-                <section className="form-section">
-                    <h3>Event Information</h3>
-                    <div className="form-group">
-                        <label htmlFor="eventName">Event Name/Description *</label>
-                        <small>Please include details about other vendors, entertainment, and charitable activities.</small>
-                        <input
-                            type="text"
-                            id="eventName"
-                            name="eventName"
-                            value={formData.eventName}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="eventDate">Event Date *</label>
-                        <input
-                            type="date"
-                            id="eventDate"
-                            name="eventDate"
-                            value={formData.eventDate}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
-                    <div className="form-group time-range">
-                        <label>Event Time *</label>
-                        <div className="time-inputs">
-                            <div className="time-input">
-                                <label htmlFor="eventStartTime">From:</label>
-                                <input
-                                    type="time"
-                                    id="eventStartTime"
-                                    name="eventStartTime"
-                                    value={formData.eventStartTime}
-                                    onChange={handleChange}
-                                    required
-                                />
-                            </div>
-                            <div className="time-input">
-                                <label htmlFor="eventEndTime">To:</label>
-                                <input
-                                    type="time"
-                                    id="eventEndTime"
-                                    name="eventEndTime"
-                                    value={formData.eventEndTime}
-                                    onChange={handleChange}
-                                    required
-                                />
-                            </div>
+                <div className="form-group">
+                    <label htmlFor="email">Email Address *</label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="facebookUsername">Facebook Username</label>
+                    <input
+                        type="text"
+                        id="facebookUsername"
+                        name="facebookUsername"
+                        value={formData.facebookUsername}
+                        onChange={handleChange}
+                    />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="eventName">Event Name/Description *</label>
+                    <input
+                        type="text"
+                        id="eventName"
+                        name="eventName"
+                        value={formData.eventName}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="eventDate">Event Date *</label>
+                    <input
+                        type="date"
+                        id="eventDate"
+                        name="eventDate"
+                        value={formData.eventDate}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
+                <div className="form-group time-range">
+                    <label>Event Time *</label>
+                    <div className="time-inputs">
+                        <div className="time-input">
+                            <label htmlFor="eventStartTime">From:</label>
+                            <input
+                                type="time"
+                                id="eventStartTime"
+                                name="eventStartTime"
+                                value={formData.eventStartTime}
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
+                        <div className="time-input">
+                            <label htmlFor="eventEndTime">To:</label>
+                            <input
+                                type="time"
+                                id="eventEndTime"
+                                name="eventEndTime"
+                                value={formData.eventEndTime}
+                                onChange={handleChange}
+                                required
+                            />
                         </div>
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="eventAddress">Event Address & City *</label>
-                        <input
-                            type="text"
-                            id="eventAddress"
-                            name="eventAddress"
-                            value={formData.eventAddress}
-                            onChange={handleChange}
-                            required
-                        />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="eventAddress">Event Address & City *</label>
+                    <input
+                        type="text"
+                        id="eventAddress"
+                        name="eventAddress"
+                        value={formData.eventAddress}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
+                <div className="form-group">
+                    <label>Expected Number of Guests *</label>
+                    <select
+                        name="eventSize"
+                        value={formData.eventSize}
+                        onChange={handleChange}
+                        required
+                    >
+                        <option value="">Select size</option>
+                        <option value="<150">Less than 150</option>
+                        <option value="150-300">150-300</option>
+                        <option value="300-500">300-500</option>
+                        <option value="500+">500+</option>
+                    </select>
+                </div>
+                <div className="form-group">
+                    <label>Is this a private event? *</label>
+                    <div className="radio-group">
+                        <label>
+                            <input
+                                type="radio"
+                                name="isPrivateEvent"
+                                value="yes"
+                                checked={formData.isPrivateEvent === 'yes'}
+                                onChange={handleChange}
+                            /> Yes
+                        </label>
+                        <label>
+                            <input
+                                type="radio"
+                                name="isPrivateEvent"
+                                value="no"
+                                checked={formData.isPrivateEvent === 'no'}
+                                onChange={handleChange}
+                            /> No
+                        </label>
                     </div>
-                    <div className="form-group">
-                        <label>Expected Event Size *</label>
-                        <select
-                            name="eventSize"
-                            value={formData.eventSize}
-                            onChange={handleChange}
-                            required
-                        >
-                            <option value="">Select size</option>
-                            <option value="<150">Less than 150</option>
-                            <option value="150-300">150-300</option>
-                            <option value="300-500">300-500</option>
-                            <option value="500+">500+</option>
-                        </select>
-                    </div>
-                </section>
+                </div>
 
-                {/* Event Type & Advertising Section */}
-                <section className="form-section">
-                    <h3>Event Type & Advertising</h3>
-                    <div className="form-group">
-                        <label>Is this a private event? *</label>
-                        <div className="radio-group">
-                            <label>
-                                <input
-                                    type="radio"
-                                    name="isPrivateEvent"
-                                    value="yes"
-                                    checked={formData.isPrivateEvent === 'yes'}
-                                    onChange={handleChange}
-                                /> Yes
-                            </label>
-                            <label>
-                                <input
-                                    type="radio"
-                                    name="isPrivateEvent"
-                                    value="no"
-                                    checked={formData.isPrivateEvent === 'no'}
-                                    onChange={handleChange}
-                                /> No
-                            </label>
-                        </div>
-                    </div>
-
-                    <div className="form-group">
-                        <label htmlFor="corporatePayment">Corporate Events Payment Info</label>
-                        <small>For corporate events, does the company pay, or do customers pay?</small>
-                        <input
-                            type="text"
-                            id="corporatePayment"
-                            name="corporatePayment"
-                            value={formData.corporatePayment}
-                            onChange={handleChange}
-                        />
+                <div className="advertising-section">
+                    <div className="minimum-sales-note">
+                        <p>We often require a minimum of $1,000. However, if we are able to advertise to the public then the minimum may be reduced or waived.</p>
                     </div>
 
                     <div className="form-group">
-                        <label>Can we advertise it to the public?</label>
+                        <label>Can we advertise it to the public? *</label>
                         <div className="radio-group">
                             <label>
                                 <input
@@ -259,6 +228,7 @@ const EventBooking = () => {
                                     value="yes"
                                     checked={formData.canAdvertise === 'yes'}
                                     onChange={handleChange}
+                                    required
                                 /> Yes
                             </label>
                             <label>
@@ -268,108 +238,30 @@ const EventBooking = () => {
                                     value="no"
                                     checked={formData.canAdvertise === 'no'}
                                     onChange={handleChange}
+                                    required
                                 /> No
                             </label>
                         </div>
                     </div>
-
-                    <div className="form-group">
-                        <label htmlFor="advertisingDetails">Event Advertising Details</label>
-                        <textarea
-                            id="advertisingDetails"
-                            name="advertisingDetails"
-                            value={formData.advertisingDetails}
-                            onChange={handleChange}
-                            placeholder="Is any advertising planned? (Social media, radio, TV, print). Any vendor fees/space fees? Is there a deadline to respond?"
-                        />
-                    </div>
-                </section>
-
-                {/* Site Details Section */}
-                <section className="form-section">
-                    <h3>Site Details</h3>
-                    <div className="form-group">
-                        <label htmlFor="arrivalSetupTime">Arrival and Setup Timeframe</label>
-                        <input
-                            type="text"
-                            id="arrivalSetupTime"
-                            name="arrivalSetupTime"
-                            value={formData.arrivalSetupTime}
-                            onChange={handleChange}
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="tearDownTime">Earliest Tear Down Time</label>
-                        <input
-                            type="text"
-                            id="tearDownTime"
-                            name="tearDownTime"
-                            value={formData.tearDownTime}
-                            onChange={handleChange}
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="parkingInfo">Parking Tips</label>
-                        <textarea
-                            id="parkingInfo"
-                            name="parkingInfo"
-                            value={formData.parkingInfo}
-                            onChange={handleChange}
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label>Is power available on site? *</label>
-                        <p className="helper-text"><i>If no, we will use our generator</i></p>
-                        <div className="radio-group">
-                            <label>
-                                <input
-                                    type="radio"
-                                    name="powerSupply"
-                                    value="yes"
-                                    checked={formData.powerSupply === 'yes'}
-                                    onChange={handleChange}
-                                /> Yes
-                            </label>
-                            <label>
-                                <input
-                                    type="radio"
-                                    name="powerSupply"
-                                    value="no"
-                                    checked={formData.powerSupply === 'no'}
-                                    onChange={handleChange}
-                                /> No
-                            </label>
-                        </div>
-                    </div>
-                    <div className="form-group">
-                        <label>Is clean water available on site? *</label>
-                        <div className="radio-group">
-                            <label>
-                                <input
-                                    type="radio"
-                                    name="waterSupply"
-                                    value="yes"
-                                    checked={formData.waterSupply === 'yes'}
-                                    onChange={handleChange}
-                                /> Yes
-                            </label>
-                            <label>
-                                <input
-                                    type="radio"
-                                    name="waterSupply"
-                                    value="no"
-                                    checked={formData.waterSupply === 'no'}
-                                    onChange={handleChange}
-                                /> No
-                            </label>
-                        </div>
-                    </div>
-                </section>
-
-                <div className="minimum-sales-note">
-                    <p>We often require a minimum of $1,000. However, if we are able to advertise the event to the public, this minimum may be reduced or waived.</p>
                 </div>
-
+                <div className="form-group">
+                    <label htmlFor="advertisingDetails">Is any advertising planned? (Social media, radio, TV, print). Any vendor fees/space fees? Is there a deadline to respond?</label>
+                    <textarea
+                        id="advertisingDetails"
+                        name="advertisingDetails"
+                        value={formData.advertisingDetails}
+                        onChange={handleChange}
+                    />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="parkingInfo">Arrival and setup timeframe for event; earliest tear down time; parking tips; minimum quantity; contract specifications; for Corporate events: does company pay or do customers pay? Is power or a clean water supply available?</label>
+                    <textarea
+                        id="parkingInfo"
+                        name="parkingInfo"
+                        value={formData.parkingInfo}
+                        onChange={handleChange}
+                    />
+                </div>
                 <button type="submit" className="submit-button">Submit Booking Request</button>
             </form>
         </div>
