@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { Link } from 'react-router-dom';
+import HomeMobile from './HomeMobile';
 import './Home.css';
 
 const Home = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [imagesLoaded, setImagesLoaded] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   
   // Shop images array
   const shopImages = useMemo(() => [
@@ -72,6 +74,20 @@ const Home = () => {
 
     return () => observer.disconnect();
   }, []);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // If mobile, render HomeMobile component
+  if (isMobile) {
+    return <HomeMobile />;
+  }
 
   return (
     <div className="home-content">

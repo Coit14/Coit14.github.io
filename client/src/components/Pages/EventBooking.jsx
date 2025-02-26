@@ -79,10 +79,10 @@ const EventBooking = () => {
     };
 
     return (
-        <div className="event-booking-container">
+        <div className="event-booking-container animate-in">
             <div className="form-header">
-                <h2>Event Booking Request</h2>
-                <p className="intro-text">
+                <h2 className="animate-in animate-delay-1">Event Booking Request</h2>
+                <p className="intro-text animate-in animate-delay-2">
                     Please fill out the form and we'll try to respond within a week! 
                     (Please note, we do not operate in the winter and rarely schedule private events November through March due to weather.)
                 </p>
@@ -94,7 +94,7 @@ const EventBooking = () => {
                 </div>
             )}
 
-            <form onSubmit={handleSubmit} className="event-booking-form">
+            <form onSubmit={handleSubmit} className="event-booking-form animate-in animate-delay-3">
                 <div className="form-group">
                     <label htmlFor="fullName">Full Name *</label>
                     <input
