@@ -7,7 +7,7 @@
 .about-content {
     display: flex;
     flex-direction: column;
-    gap: 60px;
+    gap: 0px;
 }
 
 .history-section {
@@ -26,11 +26,12 @@
     font-size: 1.2rem;
     line-height: 1.8;
     color: #333;
+    margin-bottom: 2rem;
 }
 
 .contact-section {
     background: #f8f9fa;
-    padding: 40px;
+    padding: 10px;
     border-radius: 8px;
 }
 

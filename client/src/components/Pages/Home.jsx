@@ -80,9 +80,8 @@ const Home = () => {
         <div className="section-content left animate-in animate-delay-1">
           <h2>Oklahoma's Favorite Since 1954</h2>
           <p>
-            Coit's Food Truck has been serving Oklahoma since 1954 with the best 
-            root beer and hot dogs. Our commitment to quality and tradition keeps 
-            customers coming back for more.
+          Coit's has been serving Oklahoma since 1954. Our food truck still continues as a family-owned and operated business.
+          We proudly serve our original Schwab's chili and hot dogs alongside our famous handmade root beer.
           </p>
           <Link to="/about" className="cta-button">Learn More</Link>
         </div>

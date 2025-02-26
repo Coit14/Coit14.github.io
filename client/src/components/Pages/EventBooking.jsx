@@ -3,6 +3,7 @@ import './EventBooking.css';
 
 const EventBooking = () => {
     const [formData, setFormData] = useState({
+        fullName: '',
         email: '',
         facebookUsername: '',
         eventName: '',
@@ -48,6 +49,7 @@ const EventBooking = () => {
                     message: 'Event request submitted successfully! Check your email for confirmation.'
                 });
                 setFormData({
+                    fullName: '',
                     email: '',
                     facebookUsername: '',
                     eventName: '',
@@ -93,6 +95,17 @@ const EventBooking = () => {
             )}
 
             <form onSubmit={handleSubmit} className="event-booking-form">
+                <div className="form-group">
+                    <label htmlFor="fullName">Full Name *</label>
+                    <input
+                        type="text"
+                        id="fullName"
+                        name="fullName"
+                        value={formData.fullName}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
                 <div className="form-group">
                     <label htmlFor="email">Email Address *</label>
                     <input
@@ -251,6 +264,7 @@ const EventBooking = () => {
                         name="advertisingDetails"
                         value={formData.advertisingDetails}
                         onChange={handleChange}
+                        maxLength={200}
                     />
                 </div>
                 <div className="form-group">
@@ -260,6 +274,7 @@ const EventBooking = () => {
                         name="parkingInfo"
                         value={formData.parkingInfo}
                         onChange={handleChange}
+                        maxLength={200}
                     />
                 </div>
                 <button type="submit" className="submit-button">Submit Booking Request</button>

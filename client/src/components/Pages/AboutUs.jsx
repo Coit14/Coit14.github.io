@@ -11,11 +11,19 @@ function AboutUs() {
         <section className="history-section animate-in animate-delay-1">
           <h1>About Coit's Food Truck</h1>
           <p className="history-text animate-in animate-delay-2">
-            Coit's Food Truck began as a beloved restaurant in Oklahoma, serving 
-            locals the best root beer and hot dogs since 1954. Over the decades, 
-            we've evolved into a food truck, continuing to bring the same quality 
-            and nostalgia to our community. Our food truck now travels to events 
-            and neighborhoods, delivering a taste of Oklahoma history wherever we go.
+            Coit's began as a beloved restaurant in Oklahoma, serving locals the best root beer and hot dogs since 1954. 
+            Today, our food truck brings a taste of Oklahoma history to events and neighborhoods wherever we go. Find us on facebook!
+          </p>
+
+          <p className="history-text animate-in animate-delay-2">
+            The all-time Coit's fan favorite—the #1—is our hot dog topped with mustard, chili, and onions. 
+            Want to take it up a notch? Add cheese, jalapeños, or any favorite toppings at no extra charge. 
+            Every hot dog is made just the way you like it.
+          </p>
+
+          <p className="history-text animate-in animate-delay-2">
+            Stop by to enjoy our Original Coit's Root Beer or a refreshing Root Beer Float! 
+            And yes, we still use pure cane sugar in our handmade root beer, paired with the very best ice. 
           </p>
         </section>
 
