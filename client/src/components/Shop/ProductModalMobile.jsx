@@ -23,7 +23,7 @@ const ProductModalMobile = ({ product, preloadedContent, onClose }) => {
     const [selectedImage, setSelectedImage] = useState(0);
     const [variantsByColor, setVariantsByColor] = useState({});
     const [modalData, setModalData] = useState(preloadedContent || null);
-
+    
     // Helper function to determine if a string is a size
     const isSize = (str) => sizeOrder.includes(str);
 
@@ -103,10 +103,18 @@ const ProductModalMobile = ({ product, preloadedContent, onClose }) => {
 
     return (
         <div className="mobile-modal-overlay" onClick={onClose}>
-            <div className="mobile-modal-content" onClick={e => e.stopPropagation()}>
-                <button className="mobile-modal-close" onClick={onClose}>&times;</button>
+            <div 
+                className="mobile-modal-content" 
+                onClick={e => e.stopPropagation()}
+            >
+                <button 
+                    className="mobile-modal-close" 
+                    onClick={onClose}
+                >
+                    &times;
+                </button>
                 
-                {/* Updated Image Carousel */}
+                {/* Image Carousel */}
                 <div className="mobile-image-carousel">
                     {currentColorImages.map((image, index) => (
                         <img 

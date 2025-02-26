@@ -10,6 +10,17 @@ const Shop = () => {
     const [error, setError] = useState(null);
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [preloadedModals, setPreloadedModals] = useState({});
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+    // Check for mobile on resize
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     // Preload modals when shop component mounts
     useEffect(() => {
@@ -78,7 +89,21 @@ const Shop = () => {
     }, [products]);
 
     const handleProductClick = (product) => {
-        setSelectedProduct(product);
+        // For mobile devices, scroll to top before opening modal
+        if (isMobile) {
+            window.scrollTo({
+                top: 0,
+                behavior: 'auto' // Use 'auto' for immediate scrolling without animation
+            });
+            
+            // Small timeout to ensure scroll completes before modal opens
+            setTimeout(() => {
+                setSelectedProduct(product);
+            }, 10);
+        } else {
+            // On desktop, just open the modal
+            setSelectedProduct(product);
+        }
     };
 
     // Helper function to get the default image
