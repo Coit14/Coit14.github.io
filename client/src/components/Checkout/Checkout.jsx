@@ -11,6 +11,45 @@ const CheckoutSteps = {
     REVIEW: 'review'
 };
 
+const fetchShippingOptions = async (shippingInfo, cartItems) => {
+    try {
+        const response = await fetch('https://your-vercel-backend-url.vercel.app/api/shipping-rates', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                address: {
+                    first_name: shippingInfo.firstName,
+                    last_name: shippingInfo.lastName,
+                    email: shippingInfo.email,
+                    country: shippingInfo.country,
+                    region: shippingInfo.state,
+                    city: shippingInfo.city,
+                    address1: shippingInfo.address1,
+                    address2: shippingInfo.address2,
+                    zip: shippingInfo.zipCode,
+                },
+                items: cartItems.map(item => ({
+                    id: item.productId,
+                    variantId: item.variantId,
+                    quantity: item.quantity
+                }))
+            })
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to fetch shipping options');
+        }
+
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error fetching shipping options:', error);
+        return [];
+    }
+};
+
 const Checkout = () => {
     const { cartItems, getCartTotal } = useCart();
     const [currentStep, setCurrentStep] = useState(CheckoutSteps.SHIPPING);
@@ -34,9 +73,24 @@ const Checkout = () => {
         total: getCartTotal()
     });
 
-    const handleShippingSubmit = (info) => {
+    const handleShippingSubmit = async (info) => {
         setShippingInfo(info);
-        setCurrentStep(CheckoutSteps.PAYMENT);
+
+        try {
+            const shippingOptions = await fetchShippingOptions(info, cartItems);
+
+            setShippingMethods(
+                shippingOptions.map(option => ({
+                    id: option.id,
+                    name: option.name,
+                    rate: option.cost,
+                    delivery_time: `${option.min_delivery_days}-${option.max_delivery_days} days`
+                }))
+            );
+            setCurrentStep(CheckoutSteps.PAYMENT);
+        } catch (error) {
+            console.error('Error handling shipping:', error);
+        }
     };
 
     const handlePaymentSubmit = async () => {

@@ -47,7 +47,7 @@ export const CartProvider = ({ children }) => {
             }
 
             return [...prevItems, {
-                id: product.id,
+                productId: product.id,
                 variantId: variant.id,
                 title: product.title,
                 variantTitle: variant.title,
