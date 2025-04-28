@@ -23,6 +23,10 @@ function Header() {
 
     const handleClickOutside = (event) => {
       if (menuRef.current && !menuRef.current.contains(event.target)) {
+        if (event.target.closest('.menu-toggle')) {
+          // Click was on the menu toggle button, do nothing
+          return;
+        }
         setIsMenuOpen(false);
       }
     };
