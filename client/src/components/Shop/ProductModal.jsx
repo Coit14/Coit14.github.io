@@ -149,7 +149,7 @@ const ProductModal = ({ product, preloadedContent, onClose, isOpen }) => {
                 
                 <div className="modal-header">
                     <h2>{product.title}</h2>
-                    <p className="product-type">{product.description}</p>
+                    <div className="product-type" dangerouslySetInnerHTML={{ __html: product.description }} />
                     <p className="product-price">{calculatePrice(product.variants)}</p>
                 </div>
 

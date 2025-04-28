@@ -161,6 +161,7 @@ const ProductModalMobile = ({ product, preloadedContent, onClose }) => {
                 {/* Product Info */}
                 <div className="mobile-product-info">
                     <h2>{product.title}</h2>
+                    <div className="product-type" dangerouslySetInnerHTML={{ __html: product.description }} />
                     <p className="mobile-price">{calculatePrice(product.variants)}</p>
                     
                     {/* Color Selection */}
