@@ -13,6 +13,7 @@ const EventBooking = () => {
         eventAddress: '',
         eventSize: '',
         isPrivateEvent: '',
+        otherFoodTrucks: '',
         canAdvertise: '',
         advertisingDetails: '',
         parkingInfo: '',
@@ -59,6 +60,7 @@ const EventBooking = () => {
                     eventAddress: '',
                     eventSize: '',
                     isPrivateEvent: '',
+                    otherFoodTrucks: '',
                     canAdvertise: '',
                     advertisingDetails: '',
                     parkingInfo: '',
@@ -226,9 +228,35 @@ const EventBooking = () => {
                     </div>
                 </div>
 
+                <div className="form-group">
+                    <label>Will there be other food trucks at the event? <span className="required-asterisk">*</span></label>
+                    <div className="radio-group">
+                        <label>
+                            <input
+                                type="radio"
+                                name="otherFoodTrucks"
+                                value="yes"
+                                checked={formData.otherFoodTrucks === 'yes'}
+                                onChange={handleChange}
+                                required
+                            /> Yes
+                        </label>
+                        <label>
+                            <input
+                                type="radio"
+                                name="otherFoodTrucks"
+                                value="no"
+                                checked={formData.otherFoodTrucks === 'no'}
+                                onChange={handleChange}
+                                required
+                            /> No
+                        </label>
+                    </div>
+                </div>
+
                 <div className="advertising-section">
                     <div className="minimum-sales-note">
-                        <p>We often require a minimum of $1,000. However, if we are able to advertise to the public then the minimum may be reduced or waived.</p>
+                        <p>We often require a minimum of $700. However, if we are able to advertise to the public then the minimum may be reduced or waived.</p>
                     </div>
 
                     <div className="form-group">
