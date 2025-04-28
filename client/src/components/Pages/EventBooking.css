@@ -202,7 +202,8 @@
 }
 
 .required-asterisk {
-    color: #ff0000;
+    color: var(--brand-red);
+    font-weight: bold;
 }
 
 @media (max-width: 768px) {
