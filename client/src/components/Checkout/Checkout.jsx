@@ -72,13 +72,13 @@ const Checkout = () => {
         tax: 0,
         total: getCartTotal()
     });
+    const [shippingStage, setShippingStage] = useState('address');
 
-    const handleShippingSubmit = async (info) => {
+    const handleAddressSubmit = async (info) => {
         setShippingInfo(info);
-
+        setSelectedShipping(null);
         try {
             const shippingOptions = await fetchShippingOptions(info, cartItems);
-
             setShippingMethods(
                 shippingOptions.map(option => ({
                     id: option.id,
@@ -87,9 +87,21 @@ const Checkout = () => {
                     delivery_time: `${option.min_delivery_days}-${option.max_delivery_days} days`
                 }))
             );
-            setCurrentStep(CheckoutSteps.PAYMENT);
+            setShippingStage('method');
         } catch (error) {
-            console.error('Error handling shipping:', error);
+            console.error('Error fetching shipping options:', error);
+        }
+    };
+
+    const handleShippingMethodSubmit = () => {
+        if (selectedShipping) {
+            setOrderSummary(prev => ({
+                ...prev,
+                shipping: selectedShipping.rate,
+                total: prev.subtotal + selectedShipping.rate + prev.tax
+            }));
+            setCurrentStep(CheckoutSteps.PAYMENT);
+            setShippingStage('address');
         }
     };
 
@@ -118,23 +130,26 @@ const Checkout = () => {
 
             <div className="checkout-content">
                 {currentStep === CheckoutSteps.SHIPPING && (
-                    <ShippingForm 
-                        onSubmit={handleShippingSubmit}
+                    <ShippingForm
+                        shippingStage={shippingStage}
+                        onAddressSubmit={handleAddressSubmit}
+                        onShippingMethodSubmit={handleShippingMethodSubmit}
                         shippingMethods={shippingMethods}
                         selectedShipping={selectedShipping}
                         onSelectShipping={setSelectedShipping}
+                        shippingInfo={shippingInfo}
                     />
                 )}
 
                 {currentStep === CheckoutSteps.PAYMENT && (
-                    <PaymentForm 
+                    <PaymentForm
                         onSubmit={handlePaymentSubmit}
                         orderSummary={orderSummary}
                     />
                 )}
 
                 {currentStep === CheckoutSteps.REVIEW && (
-                    <OrderReview 
+                    <OrderReview
                         orderSummary={orderSummary}
                         shippingInfo={shippingInfo}
                     />
