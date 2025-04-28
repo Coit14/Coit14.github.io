@@ -96,7 +96,7 @@ const EventBooking = () => {
 
             <form onSubmit={handleSubmit} className="event-booking-form animate-in animate-delay-3">
                 <div className="form-group">
-                    <label htmlFor="fullName">Full Name *</label>
+                    <label htmlFor="fullName">Full Name <span className="required-asterisk">*</span></label>
                     <input
                         type="text"
                         id="fullName"
@@ -107,7 +107,7 @@ const EventBooking = () => {
                     />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="email">Email Address *</label>
+                    <label htmlFor="email">Email Address <span className="required-asterisk">*</span></label>
                     <input
                         type="email"
                         id="email"
@@ -128,7 +128,7 @@ const EventBooking = () => {
                     />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="eventName">Event Name/Description *</label>
+                    <label htmlFor="eventName">Event Name/Description <span className="required-asterisk">*</span></label>
                     <input
                         type="text"
                         id="eventName"
@@ -139,7 +139,7 @@ const EventBooking = () => {
                     />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="eventDate">Event Date *</label>
+                    <label htmlFor="eventDate">Event Date <span className="required-asterisk">*</span></label>
                     <input
                         type="date"
                         id="eventDate"
@@ -150,7 +150,7 @@ const EventBooking = () => {
                     />
                 </div>
                 <div className="form-group time-range">
-                    <label>Event Time *</label>
+                    <label>Event Time <span className="required-asterisk">*</span></label>
                     <div className="time-inputs">
                         <div className="time-input">
                             <label htmlFor="eventStartTime">From:</label>
@@ -177,7 +177,7 @@ const EventBooking = () => {
                     </div>
                 </div>
                 <div className="form-group">
-                    <label htmlFor="eventAddress">Event Address & City *</label>
+                    <label htmlFor="eventAddress">Event Address & City <span className="required-asterisk">*</span></label>
                     <input
                         type="text"
                         id="eventAddress"
@@ -188,7 +188,7 @@ const EventBooking = () => {
                     />
                 </div>
                 <div className="form-group">
-                    <label>Expected Number of Guests *</label>
+                    <label>Expected Number of Guests <span className="required-asterisk">*</span></label>
                     <select
                         name="eventSize"
                         value={formData.eventSize}
@@ -203,7 +203,7 @@ const EventBooking = () => {
                     </select>
                 </div>
                 <div className="form-group">
-                    <label>Is this a private event? *</label>
+                    <label>Is this a private event? <span className="required-asterisk">*</span></label>
                     <div className="radio-group">
                         <label>
                             <input
@@ -232,7 +232,7 @@ const EventBooking = () => {
                     </div>
 
                     <div className="form-group">
-                        <label>Can we advertise it to the public? *</label>
+                        <label>Can we advertise it to the public? <span className="required-asterisk">*</span></label>
                         <div className="radio-group">
                             <label>
                                 <input

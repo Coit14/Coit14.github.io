@@ -201,6 +201,10 @@
     margin-bottom: 20px;
 }
 
+.required-asterisk {
+    color: #ff0000;
+}
+
 @media (max-width: 768px) {
     .event-booking-container {
         padding: 40px 15px;
