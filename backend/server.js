@@ -26,6 +26,7 @@ app.use((req, res, next) => {
 // API Routes
 app.get('/api/products', productsHandler);
 app.post('/api/sendEmail', sendEmailHandler);
+app.post('/api/event-booking', sendEmailHandler);
 app.post('/api/printify-webhook', printifyWebhookHandler);
 app.get('/api/printify-test', printifyTestHandler);
 
