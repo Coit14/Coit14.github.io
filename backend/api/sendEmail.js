@@ -205,34 +205,37 @@ export async function handler(req, res) {
     </html>
     `;
 
-    // Send email to company
-    await transporter.sendMail({
-      from: process.env.EMAIL_USER,
-      to: 'coitsfte@gmail.com',
-      subject: `New Event Booking: ${formData.eventName}`,
-      html: companyEmailHtml,
-      attachments: [{
-        filename: 'logo.png',
-        path: './backend/logo.png',
-        cid: 'logo'
-      }],
-      // Providing plain text version as fallback
-      text: emailContent
-    });
+    // Format plain text version for company email
+    const companyEmailText = `
+Dear Coit's Food Truck Team,
 
-    // Send confirmation email to customer
-    await transporter.sendMail({
-      from: process.env.EMAIL_USER,
-      to: formData.email,
-      subject: 'Event Booking Request Received - Coit\'s Food Truck',
-      html: customerEmailHtml,
-      attachments: [{
-        filename: 'logo.png',
-        path: './backend/logo.png',
-        cid: 'logo'
-      }],
-      // Providing plain text version as fallback
-      text: `${formData.fullName},
+A new event booking request has been received.
+
+Contact Information:
+• Name: ${formData.fullName}
+• Email: ${formData.email}
+• Facebook: ${formData.facebookUsername || 'Not provided'}
+
+Event Details:
+• Name/Description: ${formData.eventName}
+• Date: ${formData.eventDate}
+• Time: ${formatTimeToAMPM(formData.eventStartTime)} to ${formatTimeToAMPM(formData.eventEndTime)}
+• Location: ${formData.eventAddress}
+• Expected Size: ${formData.eventSize}
+• Other Food Trucks at Event: ${formData.otherFoodTrucks === 'yes' ? 'Yes' : 'No'}
+
+Event Type:
+• Private Event: ${formData.isPrivateEvent}
+• Can Advertise: ${formData.canAdvertise}
+• Advertising Details: ${formData.advertisingDetails || 'Not provided'}
+
+Site Details:
+• Additional Info: ${formData.parkingInfo || 'Not provided'}
+`;
+
+    // Format plain text version for customer email
+    const customerEmailText = `
+Hello ${formData.fullName},
 
 Thank you for your event booking request! We're excited about the possibility of being part of your event.
 
@@ -246,7 +249,35 @@ Event Details:
 We will review your request and respond within a week. If you have any immediate questions, please reply to this email.
 
 Best regards,
-The Coit's Food Truck Team`
+The Coit's Food Truck Team
+`;
+
+    // Send email to company
+    await transporter.sendMail({
+      from: process.env.EMAIL_USER,
+      to: 'coitsfte@gmail.com',
+      subject: `New Event Booking: ${formData.eventName}`,
+      html: companyEmailHtml,
+      attachments: [{
+        filename: 'logo.png',
+        path: './backend/logo.png',
+        cid: 'logo'
+      }],
+      text: companyEmailText
+    });
+
+    // Send confirmation email to customer
+    await transporter.sendMail({
+      from: process.env.EMAIL_USER,
+      to: formData.email,
+      subject: 'Event Booking Request Received - Coit\'s Food Truck',
+      html: customerEmailHtml,
+      attachments: [{
+        filename: 'logo.png',
+        path: './backend/logo.png',
+        cid: 'logo'
+      }],
+      text: customerEmailText
     });
 
     res.status(200).json({ message: 'Email sent successfully!' });
