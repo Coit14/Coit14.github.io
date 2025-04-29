@@ -45,6 +45,54 @@ export const printifyService = {
     }
   },
 
+  // Delete a product
+  deleteProduct: async (productId) => {
+    try {
+      const response = await fetch(`${API_URL}/api/printify/products/${productId}`, {
+        method: 'DELETE',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        mode: 'cors'
+      });
+      
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to delete product');
+      }
+      
+      return await response.json();
+    } catch (error) {
+      console.error('Error deleting product:', error);
+      throw error;
+    }
+  },
+
+  // Publish a product
+  publishProduct: async (productId) => {
+    try {
+      const response = await fetch(`${API_URL}/api/printify/products/${productId}/publish`, {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        mode: 'cors'
+      });
+      
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to publish product');
+      }
+      
+      return await response.json();
+    } catch (error) {
+      console.error('Error publishing product:', error);
+      throw error;
+    }
+  },
+
   // Test Printify connection
   testConnection: async () => {
     try {

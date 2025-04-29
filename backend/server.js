@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import fetch from 'node-fetch';
 import { initializeCache, getCachedProducts } from './services/cacheService.js';
+import printifyRoutes from './routes/printifyRoutes.js';
 
 // Import route handlers
 import { handler as productsHandler } from './api/products.js';
@@ -17,6 +18,9 @@ const port = process.env.PORT || 3001;
 // Middleware
 app.use(cors());
 app.use(express.json());
+
+// Use printify routes
+app.use('/api/printify', printifyRoutes);
 
 // Add logging middleware for debugging
 app.use((req, res, next) => {
