@@ -32,9 +32,9 @@
 .menu-section h2 {
     color: var(--brand-red);
     font-size: 1.8rem;
-    margin-bottom: 20px;
+    margin-bottom: 8px;
     border-bottom: 2px solid var(--brand-red);
-    padding-bottom: 10px;
+    padding-bottom: 6px;
 }
 
 /* Consistent spacing for all menu items */
@@ -96,7 +96,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 8px;
     padding-bottom: 10px;
 }
 
