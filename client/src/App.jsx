@@ -44,7 +44,7 @@ function App() {
                     <Footer />
                 </div>
                 <footer>
-                    <a href="/manage-products" style={{ position: 'fixed', bottom: '10px', right: '10px', textDecoration: 'none' }}>
+                    <a href="#/manage-products" style={{ position: 'fixed', bottom: '10px', right: '10px', textDecoration: 'none' }}>
                         🔒
                     </a>
                 </footer>
