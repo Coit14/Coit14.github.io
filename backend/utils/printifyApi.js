@@ -6,24 +6,30 @@ const printifyApi = axios.create({
     headers: PRINTIFY_CONFIG.HEADERS
 });
 
-// Add request logging
+// Add minimal request logging
 printifyApi.interceptors.request.use(request => {
     console.log('Making request to:', request.url);
-    console.log('Request headers:', JSON.stringify(request.headers, null, 2));
     return request;
 });
 
-// Add response logging
+// Add minimal response logging
 printifyApi.interceptors.response.use(response => {
     console.log('Response status:', response.status);
-    console.log('Response headers:', JSON.stringify(response.headers, null, 2));
-    console.log('Response data:', JSON.stringify(response.data, null, 2));
+    
+    // Only log counts for product endpoints
+    if (response.config.url.includes('/products')) {
+        if (Array.isArray(response.data?.data)) {
+            console.log('Response contains:', response.data.data.length, 'items');
+        } else {
+            console.log('Response contains: single item');
+        }
+    }
+    
     return response;
 }, error => {
     console.error('API Error:', {
         message: error.message,
-        status: error.response?.status,
-        data: error.response?.data
+        status: error.response?.status
     });
     return Promise.reject(error);
 });

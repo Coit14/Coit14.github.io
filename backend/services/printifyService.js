@@ -5,16 +5,12 @@ import PRINTIFY_CONFIG from '../config/printify.js';
 const printifyService = {
     getShops: async () => {
         try {
-            console.log('Making request to Printify API...');
             const response = await printifyApi.get('/shops.json');
-            console.log('Response status:', response.status);
-            console.log('Response data:', JSON.stringify(response.data, null, 2));
             return response.data;
         } catch (error) {
             console.error('Printify API Error Details:', {
                 status: error.response?.status,
                 statusText: error.response?.statusText,
-                data: error.response?.data,
                 message: error.message
             });
             throw printifyService.handleError(error);
@@ -23,9 +19,7 @@ const printifyService = {
 
     getProducts: async (shopId) => {
         try {
-            console.log(`Fetching products for shop ${shopId}...`);
             const response = await printifyApi.get(`/shops/${shopId}/products.json`);
-            console.log(`Found ${response.data.data.length} products`);
             return response.data;
         } catch (error) {
             throw printifyService.handleError(error);
@@ -43,8 +37,6 @@ const printifyService = {
 
     deleteProduct: async (shopId, productId) => {
         try {
-            console.log(`Deleting product ${productId} from shop ${shopId}...`);
-            
             // Make the request directly with axios instead of using printifyApi instance
             const response = await axios({
                 method: 'delete',
@@ -72,8 +64,7 @@ const printifyService = {
         } catch (error) {
             console.error('Delete error:', {
                 message: error.message,
-                status: error.response?.status,
-                data: error.response?.data
+                status: error.response?.status
             });
             
             // Return a consistent error format
@@ -87,13 +78,9 @@ const printifyService = {
 
     deleteAllProducts: async (shopId) => {
         try {
-            console.log(`Fetching all products from shop ${shopId}...`);
-            
             // First get all products
             const productsResponse = await printifyApi.get(`/shops/${shopId}/products.json`);
             const products = productsResponse.data.data;
-            
-            console.log(`Found ${products.length} products to delete`);
             
             // Delete each product
             const results = await Promise.all(

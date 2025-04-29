@@ -1,3 +1,5 @@
+import { refreshCache } from '../services/cacheService.js';
+
 // Webhook handler for Printify events
 export async function handler(req, res) {
   // Only allow POST requests
@@ -8,17 +10,20 @@ export async function handler(req, res) {
   }
 
   try {
-    // Log the incoming webhook event
     const webhookEvent = req.body;
-    console.log('Received webhook event from Printify:', webhookEvent);
+    
+    // Only log event type and ID
+    console.log('Received Printify webhook:', {
+      type: webhookEvent.type,
+      id: webhookEvent.id,
+      timestamp: webhookEvent.created_at
+    });
 
-    // Check if it's one of our targeted event types
-    if (webhookEvent.type === 'product:created' || webhookEvent.type === 'product:published') {
-      console.log(`Processing ${webhookEvent.type} event:`, {
-        eventId: webhookEvent.id,
-        timestamp: webhookEvent.created_at,
-        data: webhookEvent.data
-      });
+    // Refresh cache for relevant product events
+    if (['product:created', 'product:updated', 'product:published', 'product:unpublished', 'product:deleted'].includes(webhookEvent.type)) {
+      console.log('Product change detected, refreshing cache...');
+      await refreshCache();
+      console.log('Cache refresh complete');
     }
 
     // Always respond with 200 OK to acknowledge receipt

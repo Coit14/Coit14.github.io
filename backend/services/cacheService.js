@@ -29,8 +29,6 @@ function isValidProduct(product) {
 // Function to fetch and process products from Printify
 async function fetchProductsFromPrintify() {
     try {
-        console.log('Fetching products from Printify API...');
-        
         // Get shops first
         const shops = await printifyService.getShops();
         if (!shops || !shops.length) {
@@ -40,19 +38,28 @@ async function fetchProductsFromPrintify() {
         const shopId = shops[0].id;
         const productsResponse = await printifyService.getProducts(shopId);
         
-        // First, filter and transform products
+        // First, strictly filter products and variants before any logging
         const filteredProducts = productsResponse.data.data
-            // Only consider non-deleted, visible products
             .filter(p => !p.is_deleted && p.visible)
-            // Transform products and filter variants
             .map(product => {
-                // Filter out invalid variants first
-                const activeVariants = product.variants.filter(v => v.is_enabled && v.is_available);
-                
-                // Skip products with no valid variants
+                // Only get variants that are both enabled AND available
+                const activeVariants = product.variants
+                    .filter(v => v.is_enabled === true && v.is_available === true)
+                    .map(variant => ({
+                        id: variant.id,
+                        title: variant.title,
+                        sku: variant.sku,
+                        price: variant.price,
+                        cost: variant.cost,
+                        grams: variant.grams,
+                        options: variant.options,
+                        is_enabled: true,
+                        is_available: true
+                    }));
+
+                // Skip products with no active variants
                 if (activeVariants.length === 0) return null;
-                
-                // Return transformed product with only valid variants
+
                 return {
                     id: product.id,
                     title: product.title,
@@ -62,37 +69,26 @@ async function fetchProductsFromPrintify() {
                         variant_ids: img.variant_ids
                     })),
                     tags: product.tags,
-                    variants: activeVariants.map(variant => ({
-                        id: variant.id,
-                        title: variant.title,
-                        sku: variant.sku,
-                        price: variant.price,
-                        cost: variant.cost,
-                        grams: variant.grams,
-                        options: variant.options,
-                        is_enabled: variant.is_enabled,
-                        is_available: variant.is_available
-                    }))
+                    variants: activeVariants
                 };
             })
-            // Remove any null products (those with no valid variants)
             .filter(p => p !== null);
 
-        // Log summary of valid products
+        // Only log products that made it through filtering
         if (filteredProducts.length > 0) {
             console.log('\n📦 Cache Summary:');
-            console.log(`Found ${filteredProducts.length} valid products:`);
+            console.log(`Found ${filteredProducts.length} products with active variants:`);
             
             filteredProducts.forEach(product => {
                 console.log(`\n✅ ${product.title}:`);
-                console.log(`   ${product.variants.length} active variants:`);
+                console.log(`   ${product.variants.length} variants:`);
                 console.log('   ' + product.variants.map(v => v.title).join(', '));
             });
             
             const totalVariants = filteredProducts.reduce((sum, p) => sum + p.variants.length, 0);
-            console.log(`\nTotal: ${filteredProducts.length} products with ${totalVariants} sellable variants`);
+            console.log(`\nTotal: ${filteredProducts.length} products with ${totalVariants} variants`);
         } else {
-            console.log('No valid products found with active variants');
+            console.log('No products found with active variants');
         }
         
         return filteredProducts;
