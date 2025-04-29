@@ -47,10 +47,18 @@ const ManageProducts = () => {
                     product.id === id ? { ...product, status: 'Published' } : product
                 ));
                 alert('Product and all its variants published successfully');
+            } else {
+                // Handle specific error cases
+                const errorMessage = response.error || 'Failed to publish product';
+                if (response.status === 400) {
+                    alert(`Publishing failed: ${errorMessage}\n\nPlease ensure the product has:\n- A title\n- A description\n- At least one variant`);
+                } else {
+                    alert(`Publishing failed: ${errorMessage}`);
+                }
             }
         } catch (error) {
             console.error('Error publishing product:', error);
-            alert('Failed to publish product and its variants');
+            alert('Failed to publish product: ' + (error.message || 'Unknown error occurred'));
         }
     };
 

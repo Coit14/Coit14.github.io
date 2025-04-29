@@ -1,5 +1,34 @@
 import BASE_URL, { API_URL } from '../config/config';
 
+class PrintifyError extends Error {
+  constructor(message, status, details = null) {
+    super(message);
+    this.name = 'PrintifyError';
+    this.status = status;
+    this.details = details;
+  }
+}
+
+const handleResponse = async (response) => {
+  let errorMessage = 'An unexpected error occurred';
+  let errorDetails = null;
+
+  try {
+    const data = await response.json();
+    if (!response.ok) {
+      errorMessage = data.error || data.message || 'Request failed';
+      errorDetails = data.details || null;
+      throw new PrintifyError(errorMessage, response.status, errorDetails);
+    }
+    return data;
+  } catch (error) {
+    if (error instanceof PrintifyError) {
+      throw error;
+    }
+    throw new PrintifyError(errorMessage, response.status, errorDetails);
+  }
+};
+
 export const printifyService = {
   // Get all published products
   getPublishedProducts: async () => {
@@ -13,15 +42,13 @@ export const printifyService = {
         mode: 'cors'
       });
       
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || 'Failed to fetch products');
-      }
-      
-      const data = await response.json();
-      return data;
+      return await handleResponse(response);
     } catch (error) {
-      console.error('Error in getPublishedProducts:', error);
+      console.error('Error in getPublishedProducts:', {
+        message: error.message,
+        status: error.status,
+        details: error.details
+      });
       throw error;
     }
   },
@@ -37,10 +64,15 @@ export const printifyService = {
         },
         mode: 'cors'
       });
-      if (!response.ok) throw new Error('Failed to fetch product');
-      return await response.json();
+      
+      return await handleResponse(response);
     } catch (error) {
-      console.error('Error:', error);
+      console.error('Error in getProduct:', {
+        productId,
+        message: error.message,
+        status: error.status,
+        details: error.details
+      });
       throw error;
     }
   },
@@ -57,14 +89,14 @@ export const printifyService = {
         mode: 'cors'
       });
       
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || 'Failed to delete product');
-      }
-      
-      return await response.json();
+      return await handleResponse(response);
     } catch (error) {
-      console.error('Error deleting product:', error);
+      console.error('Error in deleteProduct:', {
+        productId,
+        message: error.message,
+        status: error.status,
+        details: error.details
+      });
       throw error;
     }
   },
@@ -81,14 +113,14 @@ export const printifyService = {
         mode: 'cors'
       });
       
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || 'Failed to publish product');
-      }
-      
-      return await response.json();
+      return await handleResponse(response);
     } catch (error) {
-      console.error('Error publishing product:', error);
+      console.error('Error in publishProduct:', {
+        productId,
+        message: error.message,
+        status: error.status,
+        details: error.details
+      });
       throw error;
     }
   },
@@ -104,10 +136,14 @@ export const printifyService = {
         },
         mode: 'cors'
       });
-      if (!response.ok) throw new Error('Failed to test connection');
-      return await response.json();
+      
+      return await handleResponse(response);
     } catch (error) {
-      console.error('Error:', error);
+      console.error('Error in testConnection:', {
+        message: error.message,
+        status: error.status,
+        details: error.details
+      });
       throw error;
     }
   }

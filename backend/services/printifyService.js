@@ -172,31 +172,71 @@ const printifyService = {
 
     publishProduct: async (shopId, productId) => {
         try {
-            const response = await axios({
-                method: 'post',
-                url: `https://api.printify.com/v1/shops/${shopId}/products/${productId}/publish.json`,
+            // First, check if the product exists and is ready to publish
+            const productResponse = await axios({
+                method: 'get',
+                url: `https://api.printify.com/v1/shops/${shopId}/products/${productId}.json`,
                 headers: {
                     'Authorization': `Bearer ${process.env.PRINTIFY_API_KEY}`,
                     'Content-Type': 'application/json'
                 }
             });
 
+            // Check if product has required fields for publishing
+            const product = productResponse.data;
+            if (!product.title || !product.description || !product.variants || product.variants.length === 0) {
+                return {
+                    success: false,
+                    error: 'Product is not ready for publishing. Please ensure it has a title, description, and at least one variant.',
+                    status: 400
+                };
+            }
+
+            // Proceed with publishing
+            const response = await axios({
+                method: 'post',
+                url: `https://api.printify.com/v1/shops/${shopId}/products/${productId}/publish.json`,
+                headers: {
+                    'Authorization': `Bearer ${process.env.PRINTIFY_API_KEY}`,
+                    'Content-Type': 'application/json'
+                },
+                data: {
+                    title: product.title,
+                    description: product.description,
+                    shipping_template: product.shipping_template || 1,
+                    print_provider_id: product.print_provider?.id || product.print_provider_id
+                }
+            });
+
+            console.log('Publish response:', response.data);
+
             return {
                 success: true,
                 message: 'Product published successfully',
                 productId,
-                shopId
+                shopId,
+                data: response.data
             };
         } catch (error) {
             console.error('Publish error:', {
                 message: error.message,
-                status: error.response?.status
+                status: error.response?.status,
+                data: error.response?.data
             });
+
+            // Provide more specific error messages based on the error response
+            let errorMessage = error.response?.data?.message || error.message;
+            if (error.response?.status === 400) {
+                errorMessage = 'Product validation failed. Please ensure all required fields are filled and valid.';
+            } else if (error.response?.status === 404) {
+                errorMessage = 'Product not found. It may have been deleted.';
+            }
 
             return {
                 success: false,
-                error: error.response?.data?.message || error.message,
-                status: error.response?.status || 500
+                error: errorMessage,
+                status: error.response?.status || 500,
+                details: error.response?.data
             };
         }
     },
