@@ -105,6 +105,9 @@ const EventBooking = () => {
         return options;
     };
 
+    // Get today's date in YYYY-MM-DD format for min attribute
+    const todayStr = new Date().toISOString().split('T')[0];
+
     return (
         <div className="event-booking-container animate-in">
             <div className="form-header">
@@ -174,6 +177,7 @@ const EventBooking = () => {
                         value={formData.eventDate}
                         onChange={handleChange}
                         required
+                        min={todayStr}
                     />
                 </div>
                 <div className="form-group time-range">
