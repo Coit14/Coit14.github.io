@@ -40,9 +40,9 @@ const printifyService = {
             // Make the request directly with axios instead of using printifyApi instance
             const response = await axios({
                 method: 'delete',
-                url: `${process.env.PRINTIFY_API_URL}/shops/${shopId}/products/${productId}.json`,
+                url: `https://api.printify.com/v1/shops/${shopId}/products/${productId}.json`,
                 headers: {
-                    'Authorization': `Bearer ${process.env.PRINTIFY_API_TOKEN}`,
+                    'Authorization': `Bearer ${process.env.PRINTIFY_API_KEY}`,
                     'Content-Type': 'application/json'
                 },
                 validateStatus: function (status) {
@@ -174,9 +174,9 @@ const printifyService = {
         try {
             const response = await axios({
                 method: 'post',
-                url: `${process.env.PRINTIFY_API_URL}/shops/${shopId}/products/${productId}/publish.json`,
+                url: `https://api.printify.com/v1/shops/${shopId}/products/${productId}/publish.json`,
                 headers: {
-                    'Authorization': `Bearer ${process.env.PRINTIFY_API_TOKEN}`,
+                    'Authorization': `Bearer ${process.env.PRINTIFY_API_KEY}`,
                     'Content-Type': 'application/json'
                 }
             });
