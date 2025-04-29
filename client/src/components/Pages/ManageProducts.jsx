@@ -8,7 +8,10 @@ const ManageProducts = () => {
     useEffect(() => {
         // Fetch products from the backend
         axios.get('/api/products')
-            .then(response => setProducts(response.data))
+            .then(response => {
+                console.log('Fetched products:', response.data); // Log the response
+                setProducts(response.data);
+            })
             .catch(error => console.error('Error fetching products:', error));
     }, []);
 

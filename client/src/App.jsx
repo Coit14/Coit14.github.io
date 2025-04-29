@@ -1,5 +1,5 @@
 import React from 'react';
-import { HashRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Header from './components/Layout/Header';
 import Footer from './components/Layout/Footer';
 import Home from './components/Pages/Home';
@@ -44,9 +44,9 @@ function App() {
                     <Footer />
                 </div>
                 <footer>
-                    <a href="#/manage-products" style={{ position: 'fixed', bottom: '10px', right: '10px', textDecoration: 'none' }}>
+                    <Link to="/manage-products" style={{ position: 'fixed', bottom: '10px', right: '10px', textDecoration: 'none' }}>
                         🔒
-                    </a>
+                    </Link>
                 </footer>
             </Router>
         </CartProvider>
