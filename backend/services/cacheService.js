@@ -9,20 +9,17 @@ const CACHE_DURATION = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
 function isValidProduct(product) {
     // Check required fields
     if (!product.id || !product.title) {
-        console.warn(`Skipping invalid product: ${product.id || 'unknown'} — missing id or title`);
         return false;
     }
 
     // Check for at least one image
     if (!product.images?.length) {
-        console.warn(`Skipping invalid product: ${product.id} — no images`);
         return false;
     }
 
-    // Check for at least one enabled variant
-    const hasEnabledVariant = product.variants?.some(v => v.is_enabled);
-    if (!hasEnabledVariant) {
-        console.warn(`Skipping invalid product: ${product.id} — no enabled variants`);
+    // Check for at least one truly active variant (both enabled and available)
+    const hasActiveVariant = product.variants?.some(v => v.is_enabled && v.is_available);
+    if (!hasActiveVariant) {
         return false;
     }
 
@@ -45,9 +42,9 @@ async function fetchProductsFromPrintify() {
         
         // Process and filter products with sanitized data
         const products = productsResponse.data.data
-            // First filter out non-visible and deleted products silently
+            // First filter out non-visible and deleted products
             .filter(product => product.visible && !product.is_deleted)
-            // Then validate and map remaining products
+            // Then validate remaining products
             .filter(isValidProduct)
             .map(product => ({
                 id: product.id,
@@ -59,7 +56,8 @@ async function fetchProductsFromPrintify() {
                 })),
                 tags: product.tags,
                 variants: product.variants
-                    .filter(v => v.is_enabled)
+                    // Only include truly active variants
+                    .filter(v => v.is_enabled && v.is_available)
                     .map(variant => ({
                         id: variant.id,
                         title: variant.title,
@@ -73,7 +71,12 @@ async function fetchProductsFromPrintify() {
                     }))
             }));
 
-        console.log(`Successfully cached ${products.length} products with ${products.reduce((sum, p) => sum + p.variants.length, 0)} total variants`);
+        // Only log actually active products
+        const activeVariantCount = products.reduce((sum, p) => sum + p.variants.length, 0);
+        if (products.length > 0) {
+            console.log(`Cached ${products.length} active products with ${activeVariantCount} sellable variants`);
+        }
+        
         return products;
     } catch (error) {
         console.error('Error fetching products:', error.message);
