@@ -136,4 +136,38 @@ router.delete('/products/delete-specific', async (req, res) => {
     }
 });
 
+// Add route to publish a product
+router.post('/products/:id/publish', async (req, res) => {
+    try {
+        const shops = await printifyService.getShops();
+        const shopId = shops[0].id;
+        const productId = req.params.id;
+
+        const result = await printifyService.publishProduct(shopId, productId);
+        res.json(result);
+    } catch (error) {
+        res.status(500).json({
+            error: 'Failed to publish product',
+            details: error.message
+        });
+    }
+});
+
+// Add route to delete a product
+router.delete('/products/:id', async (req, res) => {
+    try {
+        const shops = await printifyService.getShops();
+        const shopId = shops[0].id;
+        const productId = req.params.id;
+
+        const result = await printifyService.deleteProduct(shopId, productId);
+        res.json(result);
+    } catch (error) {
+        res.status(500).json({
+            error: 'Failed to delete product',
+            details: error.message
+        });
+    }
+});
+
 export default router;

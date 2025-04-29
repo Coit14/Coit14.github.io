@@ -170,6 +170,37 @@ const printifyService = {
         }
     },
 
+    publishProduct: async (shopId, productId) => {
+        try {
+            const response = await axios({
+                method: 'post',
+                url: `${process.env.PRINTIFY_API_URL}/shops/${shopId}/products/${productId}/publish.json`,
+                headers: {
+                    'Authorization': `Bearer ${process.env.PRINTIFY_API_TOKEN}`,
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            return {
+                success: true,
+                message: 'Product published successfully',
+                productId,
+                shopId
+            };
+        } catch (error) {
+            console.error('Publish error:', {
+                message: error.message,
+                status: error.response?.status
+            });
+
+            return {
+                success: false,
+                error: error.response?.data?.message || error.message,
+                status: error.response?.status || 500
+            };
+        }
+    },
+
     handleError: (error) => {
         // Don't transform 404 errors
         if (error.response?.status === 404) {

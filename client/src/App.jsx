@@ -16,6 +16,7 @@ import './App.css';
 import './styles/layout.css';
 import './index.css';
 import ScrollToTop from './components/utils/ScrollToTop';
+import ManageProducts from './components/Pages/ManageProducts';
 
 function App() {
     return (
@@ -36,11 +37,17 @@ function App() {
                             <Route path="/checkout" element={<Checkout />} />
                             <Route path="/book-event" element={<EventBooking />} />
                             <Route path="/printifycheck" element={<PrintifyTest />} />
+                            <Route path="/manage-products" element={<ManageProducts />} />
                             <Route path="*" element={<NotFound />} />
                         </Routes>
                     </main>
                     <Footer />
                 </div>
+                <footer>
+                    <a href="/manage-products" style={{ position: 'fixed', bottom: '10px', right: '10px', textDecoration: 'none' }}>
+                        🔒
+                    </a>
+                </footer>
             </Router>
         </CartProvider>
     );
