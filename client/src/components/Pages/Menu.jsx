@@ -1,5 +1,6 @@
 import React from 'react';
 import './Menu.css';
+import schwabsLogo from '../../assets/schwabs-logo.png';
 
 const Menu = () => {
     return (
@@ -13,6 +14,9 @@ const Menu = () => {
                 <div className="menu-item-header">
                     <h2>Hot Dogs</h2>
                     <span className="price">$4.00</span>
+                </div>
+                <div className="schwabs-logo-wrapper">
+                    <img src={schwabsLogo} alt="Schwab's Finest Logo" className="schwabs-logo" />
                 </div>
                 <ul className="menu-items">
                     <li>No. 1 - Mustard, Chili & Onions</li>
