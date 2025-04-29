@@ -3,7 +3,7 @@ import printifyService from '../services/printifyService.js';
 // Cache storage
 let cachedProducts = null;
 let lastCacheTime = null;
-const CACHE_DURATION = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+const CACHE_DURATION = 24 * 60 * 60 * 1000; // 24 hours
 
 // Validate individual product
 function isValidProduct(product) {
@@ -16,30 +16,26 @@ function isValidProduct(product) {
 // Function to fetch and process products from Printify
 async function fetchProductsFromPrintify() {
     try {
-        // Get shops first
         const shops = await printifyService.getShops();
-        if (!shops || !shops.length) throw new Error('No shop found');
+        if (!Array.isArray(shops) || shops.length === 0) throw new Error('No shop found');
 
         const shopId = shops[0].id;
         const productsResponse = await printifyService.getProducts(shopId);
 
-        // ✅ FIX: Directly use the response array
-        const allProducts = productsResponse;
+        // HOTFIX: Handle both API formats gracefully
+        const allProducts = Array.isArray(productsResponse?.data)
+            ? productsResponse.data
+            : Array.isArray(productsResponse)
+                ? productsResponse
+                : null;
+
         if (!Array.isArray(allProducts)) throw new Error('Invalid products response structure');
 
-        // Log the shape of the first product
-        if (allProducts.length > 0) {
-            console.log('\n🔍 DEBUG: PRINTIFY API PRODUCT STRUCTURE:');
-            console.log(JSON.stringify(allProducts[0], null, 2));
-            console.log('🔍 END DEBUG PRODUCT STRUCTURE\n');
-        }
-
-        // Hard filter products and variants BEFORE doing anything else
         const filteredProducts = allProducts
             .filter(p => !p.is_deleted && p.visible)
             .map(product => {
                 const activeVariants = product.variants
-                    .filter(v => v.is_enabled && v.is_available)
+                    .filter(v => v.is_enabled === true && v.is_available === true)
                     .map(variant => ({
                         id: variant.id,
                         title: variant.title,
@@ -68,7 +64,7 @@ async function fetchProductsFromPrintify() {
             })
             .filter(p => p !== null);
 
-        // Log only after final filtering
+        // Logging summary after filtering
         if (filteredProducts.length > 0) {
             console.log('\n📦 Cache Summary:');
             console.log(`Found ${filteredProducts.length} products with active variants:`);
@@ -98,13 +94,11 @@ function scheduleNextRefresh() {
     const next3AM = new Date(now);
     next3AM.setHours(3, 0, 0, 0);
 
-    if (now > next3AM) {
-        next3AM.setDate(next3AM.getDate() + 1);
-    }
+    if (now > next3AM) next3AM.setDate(next3AM.getDate() + 1);
 
     const msUntilNext3AM = next3AM.getTime() - now.getTime();
 
-    console.log(`Next cache refresh scheduled for ${next3AM.toLocaleString('en-US', { 
+    console.log(`Next cache refresh scheduled for ${next3AM.toLocaleString('en-US', {
         timeZone: 'America/Chicago',
         dateStyle: 'short',
         timeStyle: 'short'
@@ -143,7 +137,6 @@ export async function initializeCache() {
                 console.error('Initial cache refresh failed:', error.message);
             }
         }, msUntilNext3AM);
-
     } catch (error) {
         console.error('Cache initialization failed:', error.message);
         throw error;
@@ -156,7 +149,7 @@ export function getCachedProducts() {
     return cachedProducts;
 }
 
-// Force refresh cache
+// Force refresh
 export async function refreshCache() {
     try {
         console.log('Manual cache refresh requested...');
@@ -170,7 +163,7 @@ export async function refreshCache() {
     }
 }
 
-// Get cache status
+// Cache health check
 export function getCacheStatus() {
     return {
         isInitialized: !!cachedProducts,
