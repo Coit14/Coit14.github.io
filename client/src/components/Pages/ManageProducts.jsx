@@ -1,41 +1,108 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from 'react';
+import { printifyService } from '../../services/printifyService';
+import LoadingSpinner from '../common/LoadingSpinner';
 import './ManageProducts.css';
 
 const ManageProducts = () => {
     const [products, setProducts] = useState([]);
+    const [error, setError] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
 
+    // Load products
     useEffect(() => {
-        // Fetch products from the backend
-        axios.get('/api/products')
-            .then(response => {
-                console.log('Fetched products:', response.data); // Log the response
-                setProducts(response.data);
-            })
-            .catch(error => console.error('Error fetching products:', error));
+        const loadProducts = async () => {
+            try {
+                const fetchedProducts = await printifyService.getPublishedProducts();
+                if (fetchedProducts && Array.isArray(fetchedProducts)) {
+                    setProducts(fetchedProducts);
+                    setError(null);
+                } else {
+                    throw new Error('Invalid product data received');
+                }
+            } catch (error) {
+                console.error('Failed to load products:', error.message);
+                setError('Unable to load products. Please try again later.');
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        loadProducts();
     }, []);
 
-    const publishProduct = (id) => {
-        axios.post(`/api/products/${id}/publish`)
-            .then(response => {
-                alert(response.data.message);
-                // Update product status locally
+    const getVariantSummary = (product) => {
+        if (!product.variants?.length) return 'No variants';
+        
+        const colors = new Set(product.variants.map(v => v.options?.color)).size;
+        const sizes = new Set(product.variants.map(v => v.options?.size)).size;
+        
+        return `${colors} colors • ${sizes} sizes • Total ${product.variants.length} variants`;
+    };
+
+    const publishProduct = async (id) => {
+        try {
+            const response = await printifyService.publishProduct(id);
+            if (response.success) {
                 setProducts(products.map(product => 
                     product.id === id ? { ...product, status: 'Published' } : product
                 ));
-            })
-            .catch(error => console.error('Error publishing product:', error));
+                alert('Product and all its variants published successfully');
+            }
+        } catch (error) {
+            console.error('Error publishing product:', error);
+            alert('Failed to publish product and its variants');
+        }
     };
 
-    const deleteProduct = (id) => {
-        axios.delete(`/api/products/${id}`)
-            .then(response => {
-                alert(response.data.message);
-                // Remove product from local state
+    const deleteProduct = async (id) => {
+        if (!confirm('Are you sure you want to delete this product and all its variants?')) {
+            return;
+        }
+        
+        try {
+            const response = await printifyService.deleteProduct(id);
+            if (response.success) {
                 setProducts(products.filter(product => product.id !== id));
-            })
-            .catch(error => console.error('Error deleting product:', error));
+                alert('Product and all its variants deleted successfully');
+            }
+        } catch (error) {
+            console.error('Error deleting product:', error);
+            alert('Failed to delete product and its variants');
+        }
     };
+
+    if (isLoading) {
+        return (
+            <div className="manage-products-loading">
+                <LoadingSpinner />
+                <p>Loading products...</p>
+            </div>
+        );
+    }
+
+    if (error) {
+        return (
+            <div className="manage-products-error">
+                <h2>Oops!</h2>
+                <p>{error}</p>
+                <button 
+                    className="retry-button"
+                    onClick={() => window.location.reload()}
+                >
+                    Retry
+                </button>
+            </div>
+        );
+    }
+
+    if (!products?.length) {
+        return (
+            <div className="manage-products-empty">
+                <h2>No Products Available</h2>
+                <p>No products found in the system.</p>
+            </div>
+        );
+    }
 
     return (
         <div className="manage-products">
@@ -44,7 +111,8 @@ const ManageProducts = () => {
                 <thead>
                     <tr>
                         <th>Image</th>
-                        <th>Title</th>
+                        <th>Product Details</th>
+                        <th>Variants</th>
                         <th>Status</th>
                         <th>Actions</th>
                     </tr>
@@ -52,12 +120,37 @@ const ManageProducts = () => {
                 <tbody>
                     {products.map(product => (
                         <tr key={product.id}>
-                            <td><img src={product.thumbnail} alt={product.title} /></td>
-                            <td>{product.title}</td>
-                            <td>{product.status}</td>
                             <td>
-                                <button onClick={() => publishProduct(product.id)}>Publish</button>
-                                <button onClick={() => deleteProduct(product.id)}>Delete</button>
+                                {product.images?.[0] ? (
+                                    <img 
+                                        src={product.images[0].src} 
+                                        alt={product.title}
+                                        className="product-image"
+                                    />
+                                ) : (
+                                    <div className="no-image">No image</div>
+                                )}
+                            </td>
+                            <td>
+                                <strong>{product.title}</strong><br />
+                                <small>{product.description || 'No description'}</small>
+                            </td>
+                            <td>{getVariantSummary(product)}</td>
+                            <td>{product.status || 'Unpublished'}</td>
+                            <td>
+                                <button 
+                                    onClick={() => publishProduct(product.id)}
+                                    title="Publish all variants"
+                                >
+                                    Publish All
+                                </button>
+                                <button 
+                                    onClick={() => deleteProduct(product.id)}
+                                    title="Delete product and all its variants"
+                                    className="delete-button"
+                                >
+                                    Delete All
+                                </button>
                             </td>
                         </tr>
                     ))}
