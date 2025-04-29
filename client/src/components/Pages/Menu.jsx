@@ -48,8 +48,7 @@ const Menu = () => {
                 <div className="beverages">
                     <div className="beverage-items">
                         <p>• Coit's Root Beer</p>
-                        <p>• Dr. Pepper</p>
-                        <p>• Diet Coke</p>
+                        <p>• Other Soft Drinks (Dr. Pepper, Diet Coke)</p>
                     </div>
                     <div className="beverage-prices">
                         <p>20 oz - $3.00</p>

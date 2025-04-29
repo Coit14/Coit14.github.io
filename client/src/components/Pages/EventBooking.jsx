@@ -9,7 +9,7 @@ const EventBooking = () => {
         eventName: '',
         eventDate: '',
         eventStartTime: '',
-        eventEndTime: '',
+        eventDuration: '',
         eventAddress: '',
         eventSize: '',
         isPrivateEvent: '',
@@ -56,7 +56,7 @@ const EventBooking = () => {
                     eventName: '',
                     eventDate: '',
                     eventStartTime: '',
-                    eventEndTime: '',
+                    eventDuration: '',
                     eventAddress: '',
                     eventSize: '',
                     isPrivateEvent: '',
@@ -155,26 +155,54 @@ const EventBooking = () => {
                     <label>Event Time <span className="required-asterisk">*</span></label>
                     <div className="time-inputs">
                         <div className="time-input">
-                            <label htmlFor="eventStartTime">From:</label>
-                            <input
-                                type="time"
+                            <label htmlFor="eventStartTime">Start:</label>
+                            <select
                                 id="eventStartTime"
                                 name="eventStartTime"
                                 value={formData.eventStartTime}
                                 onChange={handleChange}
                                 required
-                            />
+                            >
+                                <option value="">Select time</option>
+                                {Array.from({ length: 48 }, (_, i) => {
+                                    const hour = Math.floor(i/2);
+                                    const minute = i % 2 === 0 ? '00' : '30';
+                                    const period = hour < 12 ? 'AM' : 'PM';
+                                    const displayHour = hour === 0 ? 12 : hour > 12 ? hour - 12 : hour;
+                                    return (
+                                        <option 
+                                            key={`${hour}:${minute}`} 
+                                            value={`${hour.toString().padStart(2, '0')}:${minute}`}
+                                        >
+                                            {`${displayHour}:${minute} ${period}`}
+                                        </option>
+                                    );
+                                })}
+                            </select>
                         </div>
                         <div className="time-input">
-                            <label htmlFor="eventEndTime">To:</label>
-                            <input
-                                type="time"
-                                id="eventEndTime"
-                                name="eventEndTime"
-                                value={formData.eventEndTime}
+                            <label htmlFor="eventDuration">Duration:</label>
+                            <select
+                                id="eventDuration"
+                                name="eventDuration"
+                                value={formData.eventDuration}
                                 onChange={handleChange}
                                 required
-                            />
+                            >
+                                <option value="">Select duration</option>
+                                {Array.from({ length: 13 }, (_, i) => {
+                                    const hours = 2 + Math.floor(i/2);
+                                    const minutes = i % 2 === 0 ? '00' : '30';
+                                    return (
+                                        <option 
+                                            key={`${hours}:${minutes}`} 
+                                            value={`${hours}:${minutes}`}
+                                        >
+                                            {`${hours}:${minutes} hours`}
+                                        </option>
+                                    );
+                                })}
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -256,7 +284,7 @@ const EventBooking = () => {
 
                 <div className="advertising-section">
                     <div className="minimum-sales-note">
-                        <p>We often require a minimum of $700. However, if we are able to advertise to the public then the minimum may be reduced or waived.</p>
+                        <p>We often require a minimum of $800. However, if we are able to advertise to the public then the minimum may be reduced or waived.</p>
                     </div>
 
                     <div className="form-group">
