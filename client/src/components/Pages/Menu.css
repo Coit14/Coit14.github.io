@@ -88,8 +88,9 @@
 
 .beverage-prices {
     text-align: right;
-    color: var(--brand-red);
+    color: var(--brand-dark);
     font-weight: 600;
+    font-size: 0.95rem;
 }
 
 .menu-item-header {
@@ -237,4 +238,17 @@
     --brand-dark: #1A1A1A;      /* Dark gray/almost black */
     --brand-hover-red: #6a3f3c; /* Darker red for hover states */
     --brand-hover-blue: #2A2A4D; /* Darker blue for hover states */
+}
+
+.beverage-items .indent-prices {
+    height: 28px;  /* Match the line height of other items */
+    margin: 0;
+    visibility: hidden;  /* Hide the bullet point but keep the space */
+}
+
+.beverage-items p,
+.beverage-prices p {
+    padding: 4px 0;  /* Slightly reduce padding to accommodate multiple prices */
+    margin: 0;
+    color: var(--text-color);
 }
