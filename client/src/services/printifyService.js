@@ -1,10 +1,10 @@
-import config from '../config/config.js';
+import BASE_URL, { API_URL } from '../config/config';
 
 export const printifyService = {
   // Get all published products
   getPublishedProducts: async () => {
     try {
-      const response = await fetch(`${config.API_URL}/api/products`, {
+      const response = await fetch(`${API_URL}/api/products`, {
         method: 'GET',
         headers: {
           'Accept': 'application/json',
@@ -29,7 +29,7 @@ export const printifyService = {
   // Get specific product
   getProduct: async (productId) => {
     try {
-      const response = await fetch(`${config.API_URL}/api/products/${productId}`, {
+      const response = await fetch(`${API_URL}/api/products/${productId}`, {
         method: 'GET',
         headers: {
           'Accept': 'application/json',
@@ -48,7 +48,7 @@ export const printifyService = {
   // Test Printify connection
   testConnection: async () => {
     try {
-      const response = await fetch(`${config.API_URL}/api/printify-test`, {
+      const response = await fetch(`${API_URL}/api/printify-test`, {
         method: 'GET',
         headers: {
           'Accept': 'application/json',

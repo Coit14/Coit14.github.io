@@ -1,7 +1,7 @@
-import config from '../config/config';
+import BASE_URL, { API_URL } from '../config/config';
 
-// Use the centralized API URL
-const API_BASE_URL = config.API_URL;
+// Use the centralized API URL with /api prefix
+const API_BASE_URL = `${API_URL}/api`;
 
 // For debugging
 console.log('API Base URL:', API_BASE_URL);

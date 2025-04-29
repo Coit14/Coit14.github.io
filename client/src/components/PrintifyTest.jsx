@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { printifyService } from '../services/printifyService';
-import config from '../config/config';
+import BASE_URL, { API_URL } from '../config/config';
 
 const formatPrice = (cents) => {
     return `$${(cents / 100).toFixed(2)}`;
@@ -106,7 +106,7 @@ const PrintifyTest = () => {
         setLoading(true);
         setError(null);
         try {
-            const response = await fetch(`${config.API_URL}/api/products`);
+            const response = await fetch(`${API_URL}/api/products`);
             const data = await response.json();
             setProducts(Array.isArray(data) ? data : []);
             console.log('Products data:', data);
