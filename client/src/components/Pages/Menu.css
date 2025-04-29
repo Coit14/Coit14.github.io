@@ -93,45 +93,34 @@
     font-size: 0.95rem;
 }
 
-.menu-item-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 8px;
-    padding-bottom: 10px;
-}
-
-.menu-item-header h2 {
-    color: var(--brand-red);
-    font-size: 1.8rem;
-    margin: 0;
-}
-
 .menu-item {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
+    margin-bottom: 20px;
     padding: 8px 0;
-    margin: 0;
 }
 
-.menu-item span {
-    margin: 0;
-    line-height: 1.5;
+.item-name {
+    font-weight: 600;
+    color: var(--brand-dark);
+    font-size: 1.2rem;
+    display: block;
+    margin-bottom: 5px;
 }
 
-.chips {
+.item-prices {
+    font-size: 1rem;
+    color: var(--brand-dark);
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: #333;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
-.float {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: #333;
+.add-ons {
+    margin-top: 8px;
+    color: var(--text-color);
+    font-size: 0.95rem;
 }
 
 /* Responsive adjustments */
@@ -146,6 +135,11 @@
 
     .menu-section h2 {
         font-size: 1.5rem;
+    }
+
+    .item-prices {
+        flex-direction: column;
+        gap: 4px;
     }
 }
 

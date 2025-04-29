@@ -33,45 +33,53 @@ const Menu = () => {
 
             <section className="menu-section animate-in animate-delay-3">
                 <div className="menu-item-header">
-                    <h2>Frito Chili Pie</h2>
-                    <span className="price">$5.00</span>
+                    <h2>Sides</h2>
                 </div>
-                <p className="item-description">Chili & Cheese</p>
-                <p className="add-ons">
-                    Add (No Extra Charge):
-                    <span className="toppings">Cheese • Relish • Ketchup • Jalapeño Peppers • Sour Cream</span>
-                </p>
+                <div className="menu-item">
+                    <span className="item-name">Frito Chili Pie - Chili & Cheese</span>
+                    <div className="item-prices">
+                        <div>$5.00</div>
+                    </div>
+                    <p className="add-ons">
+                        Add (No Extra Charge):
+                        <span className="toppings">Cheese • Relish • Ketchup • Jalapeño Peppers • Sour Cream</span>
+                    </p>
+                </div>
+                <div className="menu-item">
+                    <span className="item-name">Lays Chips - Plain or Barbecue</span>
+                    <div className="item-prices">
+                        <div>$1.00</div>
+                    </div>
+                </div>
             </section>
 
             <section className="menu-section animate-in animate-delay-4">
-                <h2>Beverages</h2>
-                <div className="beverages">
-                    <div className="beverage-items">
-                        <p>• Coit's Root Beer</p>
-                        <p>• Dr. Pepper</p>
-                        <p>• Diet Coke</p>
-                    </div>
-                    <div className="beverage-prices">
-                        <p>20 oz - $3.00</p>
-                        <p>32 oz - $4.00</p>
-                        <p>Gallon - $9.00</p>
+                <div className="menu-item-header">
+                    <h2>Beverages</h2>
+                </div>
+
+                <div className="menu-item">
+                    <span className="item-name">Coit's Root Beer</span>
+                    <div className="item-prices">
+                        <div>20 oz - $3.00</div>
+                        <div>32 oz - $4.00</div>
+                        <div>Gallon - $9.00</div>
                     </div>
                 </div>
-            </section>
 
-            <section className="menu-section animate-in animate-delay-5">
-                <h2>Snacks</h2>
                 <div className="menu-item">
-                    <span>Lays Chips - Plain or Barbecue</span>
-                    <span className="price">$1.00</span>
+                    <span className="item-name">Root Beer Float (20 oz Only)</span>
+                    <div className="item-prices">
+                        <div>20 oz - $6.00</div>
+                    </div>
                 </div>
-            </section>
 
-            <section className="menu-section animate-in animate-delay-6">
-                <h2>Root Beer Floats</h2>
                 <div className="menu-item">
-                    <span>Our Original Handmade Float - 20 oz</span>
-                    <span className="price">$6.00</span>
+                    <span className="item-name">Other Soft Drinks (Dr Pepper, Diet Coke)</span>
+                    <div className="item-prices">
+                        <div>20 oz - $3.00</div>
+                        <div>32 oz - $4.00</div>
+                    </div>
                 </div>
             </section>
         </div>
