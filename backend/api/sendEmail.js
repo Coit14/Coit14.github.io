@@ -17,9 +17,24 @@ module.exports = async (req, res) => {
   try {
     const formData = req.body;
     
-    // Validate required fields
-    if (!formData.canAdvertise) {
-      return res.status(400).json({ error: 'Advertising preference is required' });
+    // Minimal backend validation for required fields
+    const requiredFields = [
+      'fullName',
+      'email',
+      'eventName',
+      'eventDate',
+      'eventStartTime',
+      'eventEndTime',
+      'eventAddress',
+      'eventSize',
+      'isPrivateEvent',
+      'otherFoodTrucks',
+      'canAdvertise'
+    ];
+    for (const field of requiredFields) {
+      if (!formData[field]) {
+        return res.status(400).json({ error: `${field} is required` });
+      }
     }
     
     // Debug log (will appear in Vercel function logs)
@@ -53,6 +68,7 @@ A new event booking request has been received.
 • Time: ${formData.eventStartTime} to ${formData.eventEndTime}
 • Location: ${formData.eventAddress}
 • Expected Size: ${formData.eventSize}
+• Other Food Trucks at Event: ${formData.otherFoodTrucks === 'yes' ? 'Yes' : 'No'}
 
 ━━━━━━━━━━ Event Type ━━━━━━━━━━
 • Private Event: ${formData.isPrivateEvent}
@@ -86,6 +102,7 @@ Thank you for your event booking request! We're excited about the possibility of
 • Date: ${formData.eventDate}
 • Time: ${formData.eventStartTime} to ${formData.eventEndTime}
 • Location: ${formData.eventAddress}
+• Other Food Trucks at Event: ${formData.otherFoodTrucks === 'yes' ? 'Yes' : 'No'}
 
 We will review your request and respond within a week. If you have any immediate questions, please reply to this email.
 
