@@ -1,6 +1,6 @@
 import express from 'express';
 import printifyService from '../utils/printifyApi.js';
-import { getCachedProducts } from '../services/cacheService.js';
+import { getCachedProducts, refreshCache } from '../services/cacheService.js';
 
 const router = express.Router();
 
@@ -139,13 +139,35 @@ router.delete('/products/delete-specific', async (req, res) => {
 // Add route to publish a product
 router.post('/products/:id/publish', async (req, res) => {
     try {
+        console.log('Attempting to publish product:', req.params.id);
+        
         const shops = await printifyService.getShops();
+        if (!shops || !shops.length) {
+            console.error('No shops found');
+            return res.status(500).json({ error: 'No shop found' });
+        }
+        
         const shopId = shops[0].id;
         const productId = req.params.id;
-
+        
+        console.log(`Publishing product ${productId} from shop ${shopId}`);
+        
         const result = await printifyService.publishProduct(shopId, productId);
-        res.json(result);
+        console.log('Publish result:', result);
+        
+        if (result.success) {
+            // Refresh the cache after successful publish
+            await refreshCache();
+            res.json(result);
+        } else {
+            res.status(400).json(result);
+        }
     } catch (error) {
+        console.error('Failed to publish product:', {
+            productId: req.params.id,
+            error: error.message,
+            stack: error.stack
+        });
         res.status(500).json({
             error: 'Failed to publish product',
             details: error.message
@@ -156,13 +178,35 @@ router.post('/products/:id/publish', async (req, res) => {
 // Add route to delete a product
 router.delete('/products/:id', async (req, res) => {
     try {
+        console.log('Attempting to delete product:', req.params.id);
+        
         const shops = await printifyService.getShops();
+        if (!shops || !shops.length) {
+            console.error('No shops found');
+            return res.status(500).json({ error: 'No shop found' });
+        }
+        
         const shopId = shops[0].id;
         const productId = req.params.id;
-
+        
+        console.log(`Deleting product ${productId} from shop ${shopId}`);
+        
         const result = await printifyService.deleteProduct(shopId, productId);
-        res.json(result);
+        console.log('Delete result:', result);
+        
+        if (result.success) {
+            // Refresh the cache after successful deletion
+            await refreshCache();
+            res.json(result);
+        } else {
+            res.status(400).json(result);
+        }
     } catch (error) {
+        console.error('Failed to delete product:', {
+            productId: req.params.id,
+            error: error.message,
+            stack: error.stack
+        });
         res.status(500).json({
             error: 'Failed to delete product',
             details: error.message

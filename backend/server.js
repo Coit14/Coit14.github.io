@@ -19,14 +19,21 @@ const port = process.env.PORT || 3001;
 app.use(cors());
 app.use(express.json());
 
-// Use printify routes
-app.use('/api/printify', printifyRoutes);
-
-// Add logging middleware for debugging
+// Enhanced logging middleware
 app.use((req, res, next) => {
+    console.log('\n=== Incoming Request ===');
     console.log(`${req.method} ${req.path}`);
+    console.log('Headers:', JSON.stringify(req.headers, null, 2));
+    if (req.body && Object.keys(req.body).length > 0) {
+        console.log('Body:', JSON.stringify(req.body, null, 2));
+    }
+    console.log('Query:', JSON.stringify(req.query, null, 2));
+    console.log('======================\n');
     next();
 });
+
+// Use printify routes
+app.use('/api/printify', printifyRoutes);
 
 // Initialize cache before setting up routes
 console.log('Initializing product cache...');
@@ -62,6 +69,10 @@ initializeCache().then(() => {
 
 // Error handling middleware
 app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).json({ error: 'Something broke!' });
+    console.error('Error occurred:', err);
+    console.error('Stack trace:', err.stack);
+    res.status(500).json({ 
+        error: 'Something broke!',
+        message: err.message 
+    });
 });
