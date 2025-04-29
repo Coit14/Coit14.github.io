@@ -260,6 +260,32 @@
     font-weight: bold;
 }
 
+/* Form validation styles */
+.error-input {
+    border-color: #dc3545 !important;
+    background-color: #fff8f8;
+}
+
+.error-input:focus {
+    box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1) !important;
+}
+
+.error-message {
+    color: #dc3545;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    display: block;
+}
+
+/* Style radio buttons with errors */
+.form-group.has-error .radio-group {
+    border: 1px solid #dc3545;
+    padding: 10px;
+    border-radius: 6px;
+    background-color: #fff8f8;
+}
+
+/* Ensure error messages are visible on mobile */
 @media (max-width: 768px) {
     .event-booking-container {
         padding: 40px 15px;
@@ -285,5 +311,10 @@
     .radio-group {
         flex-direction: column;
         gap: 15px;
+    }
+
+    .error-message {
+        font-size: 0.8rem;
+        margin-top: 0.5rem;
     }
 } 

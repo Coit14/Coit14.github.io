@@ -20,17 +20,95 @@ const EventBooking = () => {
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitStatus, setSubmitStatus] = useState(null);
+    const [errors, setErrors] = useState({});
 
     const handleChange = (e) => {
         const { name, value } = e.target;
+        
+        // Special handling for date to prevent past dates
+        if (name === 'eventDate') {
+            const selectedDate = new Date(value);
+            const today = new Date();
+            today.setHours(0, 0, 0, 0); // Reset time to start of day for fair comparison
+            
+            if (selectedDate < today) {
+                // If past date selected, don't update state
+                return;
+            }
+        }
+        
         setFormData(prev => ({
             ...prev,
             [name]: value
         }));
     };
 
+    const validateForm = () => {
+        const newErrors = {};
+        const requiredFields = {
+            fullName: 'Full Name',
+            email: 'Email Address',
+            eventName: 'Event Name/Description',
+            eventDate: 'Event Date',
+            eventStartTime: 'Event Start Time',
+            eventEndTime: 'Event End Time',
+            eventAddress: 'Event Address',
+            eventSize: 'Expected Number of Guests',
+            isPrivateEvent: 'Private Event Status',
+            otherFoodTrucks: 'Other Food Trucks Status',
+            canAdvertise: 'Advertisement Permission'
+        };
+
+        // Check each required field
+        Object.entries(requiredFields).forEach(([field, label]) => {
+            if (!formData[field]) {
+                newErrors[field] = `${label} is required`;
+            }
+        });
+
+        // Additional date validation
+        if (formData.eventDate) {
+            const selectedDate = new Date(formData.eventDate);
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            
+            if (selectedDate < today) {
+                newErrors.eventDate = 'Please select a future date';
+            }
+        }
+
+        // Email format validation
+        if (formData.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+            newErrors.email = 'Please enter a valid email address';
+        }
+
+        setErrors(newErrors);
+
+        // If there are errors, scroll to the first error
+        if (Object.keys(newErrors).length > 0) {
+            const firstErrorField = Object.keys(newErrors)[0];
+            const element = document.getElementById(firstErrorField);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+            return false;
+        }
+
+        return true;
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
+        
+        // Validate form before submission
+        if (!validateForm()) {
+            setSubmitStatus({
+                type: 'error',
+                message: 'Please fill in all required fields'
+            });
+            return;
+        }
+
         setIsSubmitting(true);
         
         try {
@@ -134,7 +212,9 @@ const EventBooking = () => {
                         value={formData.fullName}
                         onChange={handleChange}
                         required
+                        className={errors.fullName ? 'error-input' : ''}
                     />
+                    {errors.fullName && <div className="error-message">{errors.fullName}</div>}
                 </div>
                 <div className="form-group">
                     <label htmlFor="email">Email Address <span className="required-asterisk">*</span></label>
@@ -145,7 +225,9 @@ const EventBooking = () => {
                         value={formData.email}
                         onChange={handleChange}
                         required
+                        className={errors.email ? 'error-input' : ''}
                     />
+                    {errors.email && <div className="error-message">{errors.email}</div>}
                 </div>
                 <div className="form-group">
                     <label htmlFor="facebookUsername">Facebook Username</label>
