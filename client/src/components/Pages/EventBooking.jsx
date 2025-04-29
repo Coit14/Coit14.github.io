@@ -153,7 +153,7 @@ const EventBooking = () => {
                 </div>
                 <div className="form-group time-range">
                     <label>Event Time <span className="required-asterisk">*</span></label>
-                    <div className="time-inputs">
+                    <div className="time-inputs" style={{ flexDirection: 'column', gap: '20px' }}>
                         <div className="time-input">
                             <label htmlFor="eventStartTime">Start:</label>
                             <select

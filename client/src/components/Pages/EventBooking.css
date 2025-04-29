@@ -101,6 +101,25 @@
     flex-wrap: wrap;
 }
 
+/* Column layout for event time section */
+.time-range .time-inputs {
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Try to encourage dropdowns to open downward (best effort, not guaranteed) */
+.time-input select {
+    /* These properties help, but do not guarantee, downward opening */
+    position: relative;
+    z-index: 1;
+    /* Add enough margin below to encourage space */
+    margin-bottom: 24px;
+    /* Remove margin for last child */
+}
+.time-input:last-child select {
+    margin-bottom: 0;
+}
+
 .time-input {
     flex: 1;
     min-width: 200px;
