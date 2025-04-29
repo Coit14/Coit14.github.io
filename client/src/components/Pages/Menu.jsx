@@ -13,7 +13,7 @@ const Menu = () => {
             <section className="menu-section animate-in animate-delay-2">
                 <div className="menu-item-header">
                     <h2>Hot Dogs</h2>
-                    <span className="price">$4.00</span>
+                    <span className="price">$5.00</span>
                 </div>
                 <div className="hotdogs-content">
                     <ul className="menu-items">
@@ -34,7 +34,7 @@ const Menu = () => {
             <section className="menu-section animate-in animate-delay-3">
                 <div className="menu-item-header">
                     <h2>Frito Chili Pie</h2>
-                    <span className="price">$4.00</span>
+                    <span className="price">$5.00</span>
                 </div>
                 <p className="item-description">Chili & Cheese</p>
                 <p className="add-ons">
@@ -52,9 +52,9 @@ const Menu = () => {
                         <p>• Diet Coke</p>
                     </div>
                     <div className="beverage-prices">
-                        <p>20 oz - $2.00</p>
-                        <p>32 oz - $3.00</p>
-                        <p>Gallon - $8.00</p>
+                        <p>20 oz - $3.00</p>
+                        <p>32 oz - $4.00</p>
+                        <p>Gallon - $9.00</p>
                     </div>
                 </div>
             </section>
@@ -71,7 +71,7 @@ const Menu = () => {
                 <h2>Root Beer Floats</h2>
                 <div className="menu-item">
                     <span>Our Original Handmade Float - 20 oz</span>
-                    <span className="price">$4.00</span>
+                    <span className="price">$6.00</span>
                 </div>
             </section>
         </div>
