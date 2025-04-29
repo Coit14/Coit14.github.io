@@ -48,19 +48,13 @@ const Menu = () => {
                 <div className="beverages">
                     <div className="beverage-items">
                         <p>• Coit's Root Beer</p>
-                        <p className="indent-prices"></p>
-                        <p className="indent-prices"></p>
-                        <p>• Root Beer Float</p>
                         <p>• Dr. Pepper</p>
                         <p>• Diet Coke</p>
                     </div>
                     <div className="beverage-prices">
                         <p>20 oz - $2.00</p>
-                        <p>32 oz - $4.00</p>
-                        <p>Gallon - $9.00</p>
-                        <p>20 oz - $4.00</p>
-                        <p>20 oz - $2.00</p>
-                        <p>20 oz - $2.00</p>
+                        <p>32 oz - $3.00</p>
+                        <p>Gallon - $8.00</p>
                     </div>
                 </div>
             </section>
@@ -70,6 +64,14 @@ const Menu = () => {
                 <div className="menu-item">
                     <span>Lays Chips - Plain or Barbecue</span>
                     <span className="price">$1.00</span>
+                </div>
+            </section>
+
+            <section className="menu-section animate-in animate-delay-6">
+                <h2>Root Beer Floats</h2>
+                <div className="menu-item">
+                    <span>Our Original Handmade Float - 20 oz</span>
+                    <span className="price">$4.00</span>
                 </div>
             </section>
         </div>
