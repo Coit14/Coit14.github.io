@@ -1,73 +1,19 @@
 import express from 'express';
 import printifyService from '../utils/printifyApi.js';
+import { getCachedProducts } from '../services/cacheService.js';
 
 const router = express.Router();
 
 // Get all products
 router.get('/products', async (req, res) => {
     try {
-        // First get shops
-        const shops = await printifyService.getShops();
-        
-        if (!shops || !shops.length) {
-            return res.status(404).json({ error: 'No shop found' });
-        }
-
-        const shopId = shops[0].id;
-        console.log('Using shop ID:', shopId);
-
-        // Get products for the shop
-        const productsResponse = await printifyService.getShopProducts(shopId);
-        
-        // Debug log to see exactly what we're getting
-        console.log('Raw products response:', JSON.stringify(productsResponse, null, 2));
-
-        // Safely access the products array
-        const productsData = productsResponse?.data?.data || [];
-        
-        if (!Array.isArray(productsData)) {
-            console.error('Products data is not an array:', productsData);
-            return res.status(500).json({ error: 'Invalid products data format' });
-        }
-
-        const products = productsData
-            .filter(product => product.visible && !product.is_deleted)
-            .map(product => {
-                // Filter variants first
-                const activeVariants = (product.variants || [])
-                    .filter(v => v.is_enabled && v.is_available)
-                    .map(v => ({
-                        id: v.id,
-                        title: v.title,
-                        sku: v.sku,
-                        price: v.price,
-                        options: v.options,
-                        is_enabled: v.is_enabled,
-                        is_available: v.is_available
-                    }));
-
-                // Skip products with no active variants
-                if (activeVariants.length === 0) return null;
-
-                return {
-                    id: product.id,
-                    title: product.title,
-                    description: product.description,
-                    images: product.images,
-                    variants: activeVariants
-                };
-            })
-            .filter(p => p !== null);
-
-        console.log(`Found ${products.length} products with active variants`);
+        // Get products directly from cache
+        const products = getCachedProducts();
+        console.log(`Serving ${products.length} products from cache`);
         res.json(products);
-        
     } catch (error) {
-        console.error('Full error:', error);
-        console.error('Error in /products route:', {
-            message: error.message,
-            status: error.response?.status,
-            data: error.response?.data
+        console.error('Error serving products from cache:', {
+            message: error.message
         });
         res.status(500).json({ 
             error: 'Failed to fetch products',
@@ -92,17 +38,18 @@ router.get('/catalog/blueprints', async (req, res) => {
 // Get specific product
 router.get('/products/:id', async (req, res) => {
     try {
-        const shops = await printifyService.getShops();
-        if (!shops || !shops.length) {
-            return res.status(404).json({ error: 'No shop found' });
+        const products = getCachedProducts();
+        const product = products.find(p => p.id === req.params.id);
+        
+        if (!product) {
+            return res.status(404).json({ error: 'Product not found' });
         }
-
-        const product = await printifyService.getProduct(shops[0].id, req.params.id);
+        
         res.json(product);
     } catch (error) {
         res.status(500).json({
             error: 'Failed to fetch product',
-            details: error.response?.data || error.message
+            details: error.message
         });
     }
 });
@@ -139,15 +86,14 @@ router.post('/create-order', async (req, res) => {
     }
 });
 
-// Add this new route
+// Delete specific products - this needs direct API access
 router.delete('/products/delete-specific', async (req, res) => {
     try {
         const shops = await printifyService.getShops();
         const shopId = shops[0].id;
         
-        // Get all products
-        const productsResponse = await printifyService.getProducts(shopId);
-        const products = productsResponse.data;
+        // Get products from cache for comparison
+        const products = getCachedProducts();
         
         // Find products to delete
         const productsToDelete = products.filter(product => 

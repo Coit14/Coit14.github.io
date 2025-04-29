@@ -1,78 +1,22 @@
 import axios from 'axios';
 import PRINTIFY_CONFIG from '../config/printify.js';
 import printifyService from '../services/printifyService.js';
+import { getCachedProducts } from '../services/cacheService.js';
 
 export const printifyController = {
     // Get all published products
     getPublishedProducts: async (req, res) => {
         try {
-            console.log('Getting shops...');
-            const response = await axios.get(
-                'https://api.printify.com/v1/shops.json',
-                {
-                    headers: {
-                        'Authorization': `Bearer ${process.env.PRINTIFY_API_KEY}`,
-                        'Content-Type': 'application/json'
-                    }
-                }
-            );
+            // Get products from cache instead of API
+            const products = getCachedProducts();
             
-            const shopId = response.data[0]?.id;
-            
-            if (!shopId) {
-                console.log('No shop found');
-                return res.status(404).json({ error: 'No shop found' });
-            }
-
-            console.log('Getting products for shop:', shopId);
-            const productsResponse = await axios.get(
-                `https://api.printify.com/v1/shops/${shopId}/products.json`,
-                {
-                    headers: {
-                        'Authorization': `Bearer ${process.env.PRINTIFY_API_KEY}`,
-                        'Content-Type': 'application/json'
-                    }
-                }
-            );
-
-            const publishedProducts = productsResponse.data.data
-                .filter(product => product.visible && !product.is_deleted)
-                .map(product => {
-                    // Filter variants first
-                    const activeVariants = product.variants
-                        .filter(v => v.is_enabled && v.is_available)
-                        .map(v => ({
-                            id: v.id,
-                            title: v.title,
-                            sku: v.sku,
-                            price: v.price,
-                            cost: v.cost,
-                            grams: v.grams,
-                            options: v.options,
-                            is_enabled: v.is_enabled,
-                            is_available: v.is_available
-                        }));
-
-                    // Skip products with no active variants
-                    if (activeVariants.length === 0) return null;
-
-                    return {
-                        id: product.id,
-                        title: product.title,
-                        description: product.description,
-                        images: product.images,
-                        tags: product.tags,
-                        variants: activeVariants
-                    };
-                })
-                .filter(p => p !== null);
-
-            return res.json(publishedProducts);
+            // No additional filtering needed - cache is already filtered
+            return res.json(products);
         } catch (error) {
-            console.error('Error fetching products:', error);
+            console.error('Error fetching products from cache:', error);
             return res.status(500).json({ 
                 error: 'Failed to fetch products',
-                details: error.response?.data || error.message
+                details: error.message
             });
         }
     },
@@ -82,39 +26,20 @@ export const printifyController = {
         try {
             const { productId } = req.params;
             
-            // First get the shop ID
-            const shopResponse = await axios.get(
-                'https://api.printify.com/v1/shops.json',
-                {
-                    headers: {
-                        'Authorization': `Bearer ${process.env.PRINTIFY_API_KEY}`,
-                        'Content-Type': 'application/json'
-                    }
-                }
-            );
+            // Get from cache and find specific product
+            const products = getCachedProducts();
+            const product = products.find(p => p.id === productId);
             
-            const shopId = shopResponse.data[0]?.id;
-            
-            if (!shopId) {
-                return res.status(404).json({ error: 'No shop found' });
+            if (!product) {
+                return res.status(404).json({ error: 'Product not found' });
             }
 
-            // Then get the product using the shop ID
-            const response = await axios.get(
-                `https://api.printify.com/v1/shops/${shopId}/products/${productId}.json`,
-                {
-                    headers: {
-                        'Authorization': `Bearer ${process.env.PRINTIFY_API_KEY}`,
-                        'Content-Type': 'application/json'
-                    }
-                }
-            );
-            return res.json(response.data);
+            return res.json(product);
         } catch (error) {
-            console.error('Error fetching product:', error);
+            console.error('Error fetching product from cache:', error);
             return res.status(500).json({ 
                 error: 'Failed to fetch product',
-                details: error.response?.data || error.message
+                details: error.message
             });
         }
     },
