@@ -1,5 +1,5 @@
 import express from 'express';
-import printifyService from '../utils/printifyApi.js';
+import printifyService from '../services/printifyService.js';
 import { getCachedProducts, refreshCache } from '../services/cacheService.js';
 
 const router = express.Router();
