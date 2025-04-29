@@ -1,29 +1,35 @@
 import express from 'express';
 import cors from 'cors';
-import dotenv from 'dotenv';
 import fetch from 'node-fetch';
 
-// Import the products handler
-const productsHandler = require('./api/products');
-
-dotenv.config();
+// Import route handlers
+import { handler as productsHandler } from './api/products.js';
+import { handler as sendEmailHandler } from './api/sendEmail.js';
+import { handler as printifyWebhookHandler } from './api/printify-webhook.js';
+import { handler as printifyTestHandler } from './api/printify-test.js';
 
 console.log('API Key:', process.env.PRINTIFY_API_KEY ? 'exists' : 'missing');
-console.log('Shop ID:', process.env.SHOP_ID ? 'exists' : 'missing');
 
 const app = express();
 const port = process.env.PORT || 3001;
 
+// Middleware
 app.use(cors());
 app.use(express.json());
 
-// Add the new products route while keeping the existing one
-app.get('/api/products', (req, res) => {
-    // Call the products handler with req and res
-    return productsHandler(req, res);
+// Add logging middleware for debugging
+app.use((req, res, next) => {
+    console.log(`${req.method} ${req.path}`);
+    next();
 });
 
-// Existing route preserved
+// API Routes
+app.get('/api/products', productsHandler);
+app.post('/api/sendEmail', sendEmailHandler);
+app.post('/api/printify-webhook', printifyWebhookHandler);
+app.get('/api/printify-test', printifyTestHandler);
+
+// Products route for fetching all products
 app.get('/api/products/all', async (req, res) => {
     try {
         const shopId = process.env.SHOP_ID;
@@ -50,10 +56,10 @@ app.get('/api/products/all', async (req, res) => {
     }
 });
 
-// Add logging middleware for debugging
-app.use((req, res, next) => {
-    console.log(`${req.method} ${req.path}`);
-    next();
+// Error handling middleware
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).json({ error: 'Something broke!' });
 });
 
 app.listen(port, () => {

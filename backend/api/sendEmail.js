@@ -1,15 +1,6 @@
-const nodemailer = require('nodemailer');
+import nodemailer from 'nodemailer';
 
-module.exports = async (req, res) => {
-  // Add CORS headers
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'POST,OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-
-  if (req.method === 'OPTIONS') {
-    return res.status(200).end();
-  }
-
+export async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
@@ -37,12 +28,11 @@ module.exports = async (req, res) => {
       }
     }
     
-    // Debug log (will appear in Vercel function logs)
     console.log('Attempting to send email with user:', process.env.EMAIL_USER);
 
     // Create transporter using environment variables
     const transporter = nodemailer.createTransport({
-      host: 'smtp.gmail.com', // or your SMTP host
+      host: 'smtp.gmail.com',
       port: 587,
       secure: false,
       auth: {
@@ -82,7 +72,7 @@ A new event booking request has been received.
     // Send email
     await transporter.sendMail({
       from: process.env.EMAIL_USER,
-      to: 'coitsfte@gmail.com', // Updated from placeholder
+      to: 'coitsfte@gmail.com',
       subject: `New Event Booking: ${formData.eventName}`,
       text: emailContent
     });
@@ -117,4 +107,4 @@ The Coit's Food Truck Team
     console.error('Email error:', error);
     res.status(500).json({ error: 'Failed to send email' });
   }
-}; 
+} 

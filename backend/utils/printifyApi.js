@@ -2,11 +2,8 @@ import axios from 'axios';
 import PRINTIFY_CONFIG from '../config/printify.js';
 
 const printifyApi = axios.create({
-    baseURL: 'https://api.printify.com/v1',
-    headers: {
-        'Authorization': `Bearer ${PRINTIFY_CONFIG.API_TOKEN}`,
-        'Content-Type': 'application/json'
-    }
+    baseURL: PRINTIFY_CONFIG.API_BASE_URL,
+    headers: PRINTIFY_CONFIG.HEADERS
 });
 
 // Add request logging
@@ -63,59 +60,69 @@ const printifyService = {
 
     // Get catalog blueprints
     getCatalogBlueprints: async () => {
-        const response = await printifyApi.get('/catalog/blueprints.json');
-        return response.data;
+        try {
+            const response = await printifyApi.get('/catalog/blueprints.json');
+            return response.data;
+        } catch (error) {
+            console.error('Failed to get blueprints:', {
+                status: error.response?.status,
+                message: error.message
+            });
+            throw error;
+        }
     },
 
     // Get specific product details
     getProduct: async (shopId, productId) => {
-        const response = await printifyApi.get(`/shops/${shopId}/products/${productId}.json`);
-        return response.data;
+        try {
+            const response = await printifyApi.get(`/shops/${shopId}/products/${productId}.json`);
+            return response.data;
+        } catch (error) {
+            console.error('Failed to get product:', {
+                status: error.response?.status,
+                message: error.message
+            });
+            throw error;
+        }
     },
 
     // Get publishing status of a product
     getPublishingStatus: async (shopId, productId) => {
-        const response = await printifyApi.get(`/shops/${shopId}/products/${productId}/publishing.json`);
-        return response.data;
-    }
-};
+        try {
+            const response = await printifyApi.get(`/shops/${shopId}/products/${productId}/publishing.json`);
+            return response.data;
+        } catch (error) {
+            console.error('Failed to get publishing status:', {
+                status: error.response?.status,
+                message: error.message
+            });
+            throw error;
+        }
+    },
 
-const PRINTIFY_API_KEY = process.env.PRINTIFY_API_KEY;
-const SHOP_ID = process.env.SHOP_ID;
+    // Check publishing status for all products
+    checkPublishingStatus: async () => {
+        try {
+            const response = await printifyApi.get(`/shops/${PRINTIFY_CONFIG.SHOP_ID}/products.json`);
+            return response.data.data.filter(product => product.status === 'publishing');
+        } catch (error) {
+            console.error('Error checking publishing status:', error);
+            throw error;
+        }
+    },
 
-export const checkPublishingStatus = async () => {
-    try {
-        const response = await axios.get(`https://api.printify.com/v1/shops/${SHOP_ID}/products.json`, {
-            headers: {
-                'Authorization': `Bearer ${PRINTIFY_API_KEY}`,
-                'Content-Type': 'application/json'
-            }
-        });
-        
-        return response.data.data.filter(product => product.status === 'publishing');
-    } catch (error) {
-        console.error('Error checking publishing status:', error);
-        throw error;
-    }
-};
-
-export const publishProduct = async (productId) => {
-    try {
-        const response = await axios.post(
-            `https://api.printify.com/v1/shops/${SHOP_ID}/products/${productId}/publish.json`,
-            {},  // empty body
-            {
-                headers: {
-                    'Authorization': `Bearer ${PRINTIFY_API_KEY}`,
-                    'Content-Type': 'application/json'
-                }
-            }
-        );
-        
-        return response.data;
-    } catch (error) {
-        console.error(`Error publishing product ${productId}:`, error);
-        throw error;
+    // Publish a product
+    publishProduct: async (productId) => {
+        try {
+            const response = await printifyApi.post(
+                `/shops/${PRINTIFY_CONFIG.SHOP_ID}/products/${productId}/publish.json`,
+                {} // empty body
+            );
+            return response.data;
+        } catch (error) {
+            console.error(`Error publishing product ${productId}:`, error);
+            throw error;
+        }
     }
 };
 

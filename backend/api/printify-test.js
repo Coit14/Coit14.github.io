@@ -1,6 +1,6 @@
-const { printifyController } = require('../controllers/printifyController');
+import { printifyController } from '../controllers/printifyController.js';
 
-module.exports = async function handler(req, res) {
+export async function handler(req, res) {
   if (req.method === 'GET') {
     await printifyController.testConnection(req, res);
   } else {

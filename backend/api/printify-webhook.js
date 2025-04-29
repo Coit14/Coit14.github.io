@@ -1,5 +1,5 @@
 // Webhook handler for Printify events
-export default async function handler(req, res) {
+export async function handler(req, res) {
   // Only allow POST requests
   if (req.method !== 'POST') {
     res.setHeader('Allow', ['POST']);

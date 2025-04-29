@@ -1,5 +1,4 @@
-require('dotenv').config();
-
+// Configuration for Printify API
 const PRINTIFY_CONFIG = {
     API_BASE_URL: 'https://api.printify.com/v1',
     API_TOKEN: process.env.PRINTIFY_API_KEY,
@@ -12,7 +11,7 @@ const PRINTIFY_CONFIG = {
 
 // Enhanced validation
 if (!PRINTIFY_CONFIG.API_TOKEN) {
-    console.error('ERROR: Printify API token is not set. Please check your .env file.');
+    console.error('ERROR: Printify API token is not set in environment variables.');
     process.exit(1);
 }
 
@@ -27,4 +26,4 @@ console.log('Printify Configuration:', {
     }
 });
 
-module.exports = PRINTIFY_CONFIG;
+export default PRINTIFY_CONFIG;

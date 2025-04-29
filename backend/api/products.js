@@ -1,15 +1,6 @@
-const { printifyController } = require('../controllers/printifyController');
+import { printifyController } from '../controllers/printifyController.js';
 
-module.exports = async function handler(req, res) {
-  // Add CORS headers
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-  
-  if (req.method === 'OPTIONS') {
-    return res.status(200).end();
-  }
-
+export async function handler(req, res) {
   if (req.method === 'GET') {
     try {
       console.log('Fetching products from Printify...');

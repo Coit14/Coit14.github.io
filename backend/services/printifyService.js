@@ -1,6 +1,6 @@
-const printifyApi = require('../utils/printifyApi');
-const axios = require('axios');
-const printifyConfig = require('../config/printify');
+import printifyApi from '../utils/printifyApi.js';
+import axios from 'axios';
+import PRINTIFY_CONFIG from '../config/printify.js';
 
 const printifyService = {
     getShops: async () => {
@@ -195,4 +195,4 @@ const printifyService = {
     }
 };
 
-module.exports = printifyService;
+export default printifyService;

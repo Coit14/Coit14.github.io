@@ -1,6 +1,7 @@
-const express = require('express');
+import express from 'express';
+import printifyService from '../utils/printifyApi.js';
+
 const router = express.Router();
-const printifyService = require('../utils/printifyApi');
 
 // Get all products
 router.get('/products', async (req, res) => {
@@ -176,4 +177,4 @@ router.delete('/products/delete-specific', async (req, res) => {
     }
 });
 
-module.exports = router;
+export default router;

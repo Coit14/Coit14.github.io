@@ -1,8 +1,8 @@
-const axios = require('axios');
-const printifyConfig = require('../config/printify');
-const printifyService = require('../services/printifyService');
+import axios from 'axios';
+import PRINTIFY_CONFIG from '../config/printify.js';
+import printifyService from '../services/printifyService.js';
 
-const printifyController = {
+export const printifyController = {
     // Get all published products
     getPublishedProducts: async (req, res) => {
         try {
@@ -136,5 +136,3 @@ const printifyController = {
         }
     }
 };
-
-module.exports = { printifyController };
