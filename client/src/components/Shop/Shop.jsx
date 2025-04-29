@@ -4,6 +4,7 @@ import ProductModal from './ProductModal';
 import './Shop.css';
 import { printifyService } from '../../services/printifyService';
 import LoadingSpinner from '../common/LoadingSpinner';
+import { fetchShopProducts, getProductImage } from '../../services/api';
 
 const Shop = () => {
     const { products, setProducts, isLoading } = useCart();
@@ -60,28 +61,37 @@ const Shop = () => {
     }, [products]);
 
     useEffect(() => {
-        const fetchProducts = async () => {
+        const loadProducts = async () => {
+            setIsLoading(true);
             try {
-                setError(null);
-                console.log('Fetching products...');
-                const fetchedProducts = await printifyService.getPublishedProducts();
-                console.log('Fetched products:', fetchedProducts);
-                if (Array.isArray(fetchedProducts) && fetchedProducts.length > 0) {
-                    setProducts(fetchedProducts);
-                } else {
-                    console.warn('No products found or invalid data format');
-                }
+                const products = await fetchShopProducts();
+                setProducts(products);
+                // Preload modal content for each product
+                products.forEach(product => {
+                    preloadModalContent(product);
+                });
             } catch (error) {
-                console.error('Failed to fetch products:', error);
+                console.error('Error fetching products:', error);
                 setError('Failed to load products. Please try again later.');
+            } finally {
+                setIsLoading(false);
             }
         };
 
-        // Only fetch if we don't already have products
-        if (!products || products.length === 0) {
-            fetchProducts();
+        loadProducts();
+    }, []);
+
+    const preloadModalContent = async (product) => {
+        try {
+            const imageUrl = await getProductImage(product);
+            setPreloadedImages(prev => ({
+                ...prev,
+                [product.id]: imageUrl
+            }));
+        } catch (error) {
+            console.error(`Error preloading modal content for product ${product.id}:`, error);
         }
-    }, [setProducts, products]);
+    };
 
     // Add some debug logging
     useEffect(() => {

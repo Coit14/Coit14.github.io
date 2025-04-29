@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './EventBooking.css';
+import { sendEventBookingEmail } from '../../services/api';
 
 const EventBooking = () => {
     const [formData, setFormData] = useState({
@@ -99,63 +100,50 @@ const EventBooking = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        
-        // Validate form before submission
+        setIsSubmitting(true);
+        setSubmitStatus(null);
+
         if (!validateForm()) {
-            setSubmitStatus({
-                type: 'error',
-                message: 'Please fill in all required fields'
-            });
+            setIsSubmitting(false);
             return;
         }
 
-        setIsSubmitting(true);
-        
         try {
-            const response = await fetch('https://coit14-github-io.vercel.app/api/sendEmail', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formData),
+            await sendEventBookingEmail(formData);
+            setSubmitStatus({
+                type: 'success',
+                message: 'Event request submitted successfully! Check your email for confirmation.'
             });
-
-            const data = await response.json();
-            
-            if (response.ok) {
-                setSubmitStatus({
-                    type: 'success',
-                    message: 'Event request submitted successfully! Check your email for confirmation.'
-                });
-                setFormData({
-                    fullName: '',
-                    email: '',
-                    facebookUsername: '',
-                    eventName: '',
-                    eventDate: '',
-                    eventStartTime: '',
-                    eventEndTime: '',
-                    eventAddress: '',
-                    eventSize: '',
-                    isPrivateEvent: '',
-                    otherFoodTrucks: '',
-                    canAdvertise: '',
-                    advertisingDetails: '',
-                    parkingInfo: '',
-                });
-                window.scrollTo(0, 0);
-            } else {
-                throw new Error(data.error || 'Submission failed');
-            }
+            resetForm();
         } catch (error) {
+            console.error('Error submitting form:', error);
             setSubmitStatus({
                 type: 'error',
-                message: error.message || 'Failed to submit form. Please try again.'
+                message: 'Failed to submit form. Please try again later.'
             });
-            window.scrollTo(0, 0);
         } finally {
             setIsSubmitting(false);
         }
+    };
+
+    const resetForm = () => {
+        setFormData({
+            fullName: '',
+            email: '',
+            facebookUsername: '',
+            eventName: '',
+            eventDate: '',
+            eventStartTime: '',
+            eventEndTime: '',
+            eventAddress: '',
+            eventSize: '',
+            isPrivateEvent: '',
+            otherFoodTrucks: '',
+            canAdvertise: '',
+            advertisingDetails: '',
+            parkingInfo: '',
+        });
+        window.scrollTo(0, 0);
     };
 
     // Helper to get end time options based on selected start time

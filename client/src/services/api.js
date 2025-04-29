@@ -1,5 +1,7 @@
-// Update to use the Vercel URL
-const API_BASE_URL = 'https://coit14-github-io.vercel.app/api';
+import config from '../config/config';
+
+// Use the centralized API URL
+const API_BASE_URL = config.API_URL;
 
 // For debugging
 console.log('API Base URL:', API_BASE_URL);
@@ -125,6 +127,58 @@ export const getVariantId = (product, size, color) => {
     v.options.color === color
   );
   return variant?.id || null;
+};
+
+/**
+ * Sends a contact form submission
+ * @param {Object} formData - Contact form data
+ * @returns {Promise<Object>} Response from the server
+ */
+export const sendContactEmail = async (formData) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/contact`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData)
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('Error sending contact email:', error);
+    throw error;
+  }
+};
+
+/**
+ * Sends an event booking request
+ * @param {Object} formData - Event booking form data
+ * @returns {Promise<Object>} Response from the server
+ */
+export const sendEventBookingEmail = async (formData) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/event-booking`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData)
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('Error sending event booking:', error);
+    throw error;
+  }
 };
 
 // If you have any frontend route references, update them from:
