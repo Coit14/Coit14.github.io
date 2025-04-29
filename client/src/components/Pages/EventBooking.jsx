@@ -9,7 +9,7 @@ const EventBooking = () => {
         eventName: '',
         eventDate: '',
         eventStartTime: '',
-        eventDuration: '',
+        eventEndTime: '',
         eventAddress: '',
         eventSize: '',
         isPrivateEvent: '',
@@ -56,7 +56,7 @@ const EventBooking = () => {
                     eventName: '',
                     eventDate: '',
                     eventStartTime: '',
-                    eventDuration: '',
+                    eventEndTime: '',
                     eventAddress: '',
                     eventSize: '',
                     isPrivateEvent: '',
@@ -78,6 +78,31 @@ const EventBooking = () => {
         } finally {
             setIsSubmitting(false);
         }
+    };
+
+    // Helper to get end time options based on selected start time
+    const getEndTimeOptions = () => {
+        if (!formData.eventStartTime) return [];
+        // Start time in minutes from midnight
+        const [startHour, startMinute] = formData.eventStartTime.split(":").map(Number);
+        const startTotal = startHour * 60 + startMinute;
+        // 2 hours after start
+        const minEnd = startTotal + 120;
+        // 10:00 PM is 22:00 (1320 minutes)
+        const maxEnd = 22 * 60;
+        const options = [];
+        for (let t = minEnd; t <= maxEnd; t += 30) {
+            const hour = Math.floor(t / 60);
+            const minute = t % 60;
+            const period = hour < 12 ? 'AM' : 'PM';
+            const displayHour = hour === 0 ? 12 : hour > 12 ? hour - 12 : hour;
+            const displayMinute = minute.toString().padStart(2, '0');
+            options.push({
+                value: `${hour.toString().padStart(2, '0')}:${displayMinute}`,
+                label: `${displayHour}:${displayMinute} ${period}`
+            });
+        }
+        return options;
     };
 
     return (
@@ -182,29 +207,20 @@ const EventBooking = () => {
                             </select>
                         </div>
                         <div className="time-input">
-                            <label htmlFor="eventDuration">Duration:</label>
+                            <label htmlFor="eventEndTime">End:</label>
                             <select
-                                id="eventDuration"
-                                name="eventDuration"
-                                value={formData.eventDuration}
+                                id="eventEndTime"
+                                name="eventEndTime"
+                                value={formData.eventEndTime}
                                 onChange={handleChange}
                                 required
+                                disabled={!formData.eventStartTime}
+                                className={!formData.eventStartTime ? 'disabled-select' : ''}
                             >
-                                <option value="">Select duration</option>
-                                {Array.from({ length: 13 }, (_, i) => {
-                                    const totalMinutes = 120 + i * 30;
-                                    if (totalMinutes > 480) return null;
-                                    const hours = Math.floor(totalMinutes / 60);
-                                    const minutes = (totalMinutes % 60).toString().padStart(2, '0');
-                                    return (
-                                        <option 
-                                            key={`${hours}:${minutes}`} 
-                                            value={`${hours}:${minutes}`}
-                                        >
-                                            {`${hours}:${minutes} hours`}
-                                        </option>
-                                    );
-                                })}
+                                <option value="">Select end time</option>
+                                {getEndTimeOptions().map(opt => (
+                                    <option key={opt.value} value={opt.value}>{opt.label}</option>
+                                ))}
                             </select>
                         </div>
                     </div>

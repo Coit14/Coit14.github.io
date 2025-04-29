@@ -160,6 +160,14 @@
     border-color: var(--brand-red);
 }
 
+.time-input select.disabled-select:disabled {
+    background-color: #f0f0f0;
+    color: #aaa;
+    border-color: #ddd;
+    cursor: not-allowed;
+    opacity: 1;
+}
+
 .radio-group {
     display: flex;
     gap: 30px;
