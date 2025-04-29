@@ -22,8 +22,9 @@ async function fetchProductsFromPrintify() {
 
         const shopId = shops[0].id;
         const productsResponse = await printifyService.getProducts(shopId);
-        
-        const allProducts = productsResponse.data?.data;
+
+        // ✅ FIX: Directly use the response array
+        const allProducts = productsResponse;
         if (!Array.isArray(allProducts)) throw new Error('Invalid products response structure');
 
         // Log the shape of the first product
