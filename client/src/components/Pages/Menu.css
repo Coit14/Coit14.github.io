@@ -96,7 +96,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
     margin-bottom: 20px;
     padding-bottom: 10px;
 }
@@ -202,17 +201,4 @@
     --brand-dark: #1A1A1A;      /* Dark gray/almost black */
     --brand-hover-red: #6a3f3c; /* Darker red for hover states */
     --brand-hover-blue: #2A2A4D; /* Darker blue for hover states */
-}
-
-/* Schwab's Logo Styles */
-.schwabs-logo-wrapper {
-    margin-top: 0;
-    margin-bottom: 0;
-    margin-left: 10px;
-}
-
-.schwabs-logo {
-    width: 120px;
-    height: auto;
-    max-width: 35%;
 }
