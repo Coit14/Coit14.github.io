@@ -17,7 +17,6 @@ export const printifyController = {
                 }
             );
             
-            console.log('Shops response:', response.data);
             const shopId = response.data[0]?.id;
             
             if (!shopId) {
@@ -36,20 +35,38 @@ export const printifyController = {
                 }
             );
 
-            console.log('Products response:', productsResponse.data);
             const publishedProducts = productsResponse.data.data
                 .filter(product => product.visible && !product.is_deleted)
-                .map(product => ({
-                    id: product.id,
-                    title: product.title,
-                    description: product.description,
-                    images: product.images,
-                    tags: product.tags,
-                    variants: product.variants
-                        .filter(v => v.is_enabled)
-                }));
+                .map(product => {
+                    // Filter variants first
+                    const activeVariants = product.variants
+                        .filter(v => v.is_enabled && v.is_available)
+                        .map(v => ({
+                            id: v.id,
+                            title: v.title,
+                            sku: v.sku,
+                            price: v.price,
+                            cost: v.cost,
+                            grams: v.grams,
+                            options: v.options,
+                            is_enabled: v.is_enabled,
+                            is_available: v.is_available
+                        }));
 
-            console.log('Filtered products:', publishedProducts);
+                    // Skip products with no active variants
+                    if (activeVariants.length === 0) return null;
+
+                    return {
+                        id: product.id,
+                        title: product.title,
+                        description: product.description,
+                        images: product.images,
+                        tags: product.tags,
+                        variants: activeVariants
+                    };
+                })
+                .filter(p => p !== null);
+
             return res.json(publishedProducts);
         } catch (error) {
             console.error('Error fetching products:', error);
