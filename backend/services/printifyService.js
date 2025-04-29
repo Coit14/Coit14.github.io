@@ -184,15 +184,15 @@ const printifyService = {
 
             // Check if product has required fields for publishing
             const product = productResponse.data;
-            if (!product.title || !product.description || !product.variants || product.variants.length === 0) {
+            if (!product.title || !product.description || !product.variants || product.variants.length === 0 || !product.images || product.images.length === 0) {
                 return {
                     success: false,
-                    error: 'Product is not ready for publishing. Please ensure it has a title, description, and at least one variant.',
+                    error: 'Product is not ready for publishing. Please ensure it has a title, description, images, and at least one variant.',
                     status: 400
                 };
             }
 
-            // Proceed with publishing
+            // Proceed with publishing - sending the correct data structure
             const response = await axios({
                 method: 'post',
                 url: `https://api.printify.com/v1/shops/${shopId}/products/${productId}/publish.json`,
@@ -201,10 +201,14 @@ const printifyService = {
                     'Content-Type': 'application/json'
                 },
                 data: {
-                    title: product.title,
-                    description: product.description,
+                    title: true,
+                    description: true,
+                    images: true,
+                    variants: true,
+                    tags: [],
                     shipping_template: product.shipping_template || 1,
-                    print_provider_id: product.print_provider?.id || product.print_provider_id
+                    print_provider_id: product.print_provider?.id || product.print_provider_id,
+                    print_areas: product.print_areas || {}
                 }
             });
 
@@ -227,7 +231,11 @@ const printifyService = {
             // Provide more specific error messages based on the error response
             let errorMessage = error.response?.data?.message || error.message;
             if (error.response?.status === 400) {
-                errorMessage = 'Product validation failed. Please ensure all required fields are filled and valid.';
+                if (error.response?.data?.errors?.reason) {
+                    errorMessage = `Validation failed: ${error.response.data.errors.reason}`;
+                } else {
+                    errorMessage = 'Product validation failed. Please ensure all required fields are filled and valid.';
+                }
             } else if (error.response?.status === 404) {
                 errorMessage = 'Product not found. It may have been deleted.';
             }
