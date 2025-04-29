@@ -55,7 +55,7 @@ const ManageProducts = () => {
     };
 
     const deleteProduct = async (id) => {
-        if (!confirm('Are you sure you want to delete this product and all its variants?')) {
+        if (!window.confirm('Are you sure you want to delete this product and all its variants?')) {
             return;
         }
         
