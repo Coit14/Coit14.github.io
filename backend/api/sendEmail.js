@@ -1,4 +1,11 @@
 import nodemailer from 'nodemailer';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+// Get the directory name of the current module
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 export async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -252,6 +259,9 @@ Best regards,
 The Coit's Food Truck Team
 `;
 
+    // Get absolute path to the logo file
+    const logoPath = path.join(__dirname, '..', 'logo.png');
+
     // Send email to company
     await transporter.sendMail({
       from: process.env.EMAIL_USER,
@@ -260,7 +270,7 @@ The Coit's Food Truck Team
       html: companyEmailHtml,
       attachments: [{
         filename: 'logo.png',
-        path: './backend/logo.png',
+        path: logoPath,
         cid: 'logo'
       }],
       text: companyEmailText
@@ -274,7 +284,7 @@ The Coit's Food Truck Team
       html: customerEmailHtml,
       attachments: [{
         filename: 'logo.png',
-        path: './backend/logo.png',
+        path: logoPath,
         cid: 'logo'
       }],
       text: customerEmailText
