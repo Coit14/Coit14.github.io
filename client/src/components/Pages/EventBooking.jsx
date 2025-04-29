@@ -164,9 +164,10 @@ const EventBooking = () => {
                                 required
                             >
                                 <option value="">Select time</option>
-                                {Array.from({ length: 48 }, (_, i) => {
-                                    const hour = Math.floor(i/2);
-                                    const minute = i % 2 === 0 ? '00' : '30';
+                                {Array.from({ length: 33 }, (_, i) => {
+                                    const slot = i + 12;
+                                    const hour = Math.floor(slot/2);
+                                    const minute = slot % 2 === 0 ? '00' : '30';
                                     const period = hour < 12 ? 'AM' : 'PM';
                                     const displayHour = hour === 0 ? 12 : hour > 12 ? hour - 12 : hour;
                                     return (
@@ -191,8 +192,10 @@ const EventBooking = () => {
                             >
                                 <option value="">Select duration</option>
                                 {Array.from({ length: 13 }, (_, i) => {
-                                    const hours = 2 + Math.floor(i/2);
-                                    const minutes = i % 2 === 0 ? '00' : '30';
+                                    const totalMinutes = 120 + i * 30;
+                                    if (totalMinutes > 480) return null;
+                                    const hours = Math.floor(totalMinutes / 60);
+                                    const minutes = (totalMinutes % 60).toString().padStart(2, '0');
                                     return (
                                         <option 
                                             key={`${hours}:${minutes}`} 
@@ -324,7 +327,7 @@ const EventBooking = () => {
                     />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="parkingInfo">Arrival and setup timeframe for event; earliest tear down time; parking tips; minimum quantity; contract specifications; for Corporate events: does company pay or do customers pay? Is power or a clean water supply available?</label>
+                    <label htmlFor="parkingInfo">Please provide any additional information you would like to share about your event:</label>
                     <textarea
                         id="parkingInfo"
                         name="parkingInfo"
