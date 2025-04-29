@@ -18,8 +18,8 @@ function isValidProduct(product) {
     }
 
     // Check for at least one truly active variant (both enabled and available)
-    const hasActiveVariant = product.variants?.some(v => v.is_enabled && v.is_available);
-    if (!hasActiveVariant) {
+    const activeVariants = product.variants?.filter(v => v.is_enabled && v.is_available) || [];
+    if (activeVariants.length === 0) {
         return false;
     }
 
@@ -46,17 +46,9 @@ async function fetchProductsFromPrintify() {
             .filter(product => product.visible && !product.is_deleted)
             // Then validate remaining products
             .filter(isValidProduct)
-            .map(product => ({
-                id: product.id,
-                title: product.title,
-                description: product.description,
-                images: product.images.map(img => ({
-                    src: img.src,
-                    variant_ids: img.variant_ids
-                })),
-                tags: product.tags,
-                variants: product.variants
-                    // Only include truly active variants
+            .map(product => {
+                // Filter variants first
+                const activeVariants = product.variants
                     .filter(v => v.is_enabled && v.is_available)
                     .map(variant => ({
                         id: variant.id,
@@ -68,12 +60,33 @@ async function fetchProductsFromPrintify() {
                         options: variant.options,
                         is_enabled: variant.is_enabled,
                         is_available: variant.is_available
-                    }))
-            }));
+                    }));
 
-        // Only log actually active products
-        const activeVariantCount = products.reduce((sum, p) => sum + p.variants.length, 0);
+                // Log only active variants for this product
+                if (activeVariants.length > 0) {
+                    console.log(`\n✅ Product: ${product.title}`);
+                    console.log(`Found ${activeVariants.length} active variants:`);
+                    console.log(JSON.stringify(activeVariants.map(v => v.title), null, 2));
+                }
+
+                // Return the sanitized product
+                return {
+                    id: product.id,
+                    title: product.title,
+                    description: product.description,
+                    images: product.images.map(img => ({
+                        src: img.src,
+                        variant_ids: img.variant_ids
+                    })),
+                    tags: product.tags,
+                    variants: activeVariants
+                };
+            });
+
+        // Only log summary of active products
         if (products.length > 0) {
+            const activeVariantCount = products.reduce((sum, p) => sum + p.variants.length, 0);
+            console.log('\n📦 Cache Summary:');
             console.log(`Cached ${products.length} active products with ${activeVariantCount} sellable variants`);
         }
         
