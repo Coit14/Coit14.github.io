@@ -1,10 +1,11 @@
-import { printifyController } from '../controllers/printifyController.js';
+import { getCachedProducts } from '../services/cacheService.js';
 
 export async function handler(req, res) {
   if (req.method === 'GET') {
     try {
-      console.log('Fetching products from Printify...');
-      await printifyController.getPublishedProducts(req, res);
+      console.log('Fetching products from cache...');
+      const products = getCachedProducts();
+      return res.json(products);
     } catch (error) {
       console.error('API Error:', error);
       return res.status(500).json({ 

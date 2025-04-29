@@ -17,15 +17,13 @@ const calculatePrice = (variants) => {
     return formatPrice(enabledVariants[0].price);
 };
 
-const ProductModal = ({ product, preloadedContent, onClose, isOpen }) => {
+const ProductModal = ({ product, onClose, isOpen }) => {
     const { addToCart, setIsCartOpen } = useCart();
     const [selectedColor, setSelectedColor] = useState('');
     const [selectedSize, setSelectedSize] = useState('');
     const [selectedImage, setSelectedImage] = useState(0);
     const [showSuccess, setShowSuccess] = useState(false);
     const [variantsByColor, setVariantsByColor] = useState({});
-    const [modalData, setModalData] = useState(preloadedContent || null);
-    const [selectedVariant, setSelectedVariant] = useState(null);
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
     // Helper function to determine if a string is a size
@@ -85,23 +83,6 @@ const ProductModal = ({ product, preloadedContent, onClose, isOpen }) => {
 
     const currentColorImages = selectedColor ? getColorImages(selectedColor) : [];
 
-    useEffect(() => {
-        if (!preloadedContent) {
-            // Only fetch if content wasn't preloaded
-            const fetchModalData = async () => {
-                try {
-                    const response = await fetch(`http://localhost:3001/api/products/${product.id}`);
-                    const data = await response.json();
-                    setModalData(data);
-                } catch (error) {
-                    console.error('Error fetching modal data:', error);
-                }
-            };
-            
-            fetchModalData();
-        }
-    }, [product.id, preloadedContent]);
-
     const handleAddToCart = () => {
         const selectedVariant = variantsByColor[selectedColor]?.variants
             .find(v => v.size === selectedSize);
@@ -135,7 +116,6 @@ const ProductModal = ({ product, preloadedContent, onClose, isOpen }) => {
     if (isMobile) {
         return <ProductModalMobile 
             product={product}
-            preloadedContent={preloadedContent}
             onClose={onClose}
         />;
     }

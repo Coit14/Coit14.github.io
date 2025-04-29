@@ -16,13 +16,12 @@ const calculatePrice = (variants) => {
     return formatPrice(enabledVariants[0].price);
 };
 
-const ProductModalMobile = ({ product, preloadedContent, onClose }) => {
+const ProductModalMobile = ({ product, onClose }) => {
     const { addToCart, setIsCartOpen } = useCart();
     const [selectedColor, setSelectedColor] = useState('');
     const [selectedSize, setSelectedSize] = useState('');
     const [selectedImage, setSelectedImage] = useState(0);
     const [variantsByColor, setVariantsByColor] = useState({});
-    const [modalData, setModalData] = useState(preloadedContent || null);
     
     // Helper function to determine if a string is a size
     const isSize = (str) => sizeOrder.includes(str);

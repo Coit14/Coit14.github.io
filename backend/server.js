@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import fetch from 'node-fetch';
+import { initializeCache } from './services/cacheService.js';
 
 // Import route handlers
 import { handler as productsHandler } from './api/products.js';
@@ -23,15 +24,19 @@ app.use((req, res, next) => {
     next();
 });
 
-// API Routes
-app.get('/api/products', productsHandler);
-app.post('/api/sendEmail', sendEmailHandler);
-app.post('/api/event-booking', sendEmailHandler);
-app.post('/api/printify-webhook', printifyWebhookHandler);
-app.get('/api/printify-test', printifyTestHandler);
+// Initialize cache before setting up routes
+console.log('Initializing product cache...');
+initializeCache().then(() => {
+  console.log('Cache initialized successfully, setting up routes...');
+  
+  // API routes
+  app.post('/api/event-booking', sendEmailHandler);
+  app.get('/api/products', productsHandler);
+  app.post('/api/printify-webhook', printifyWebhookHandler);
+  app.get('/api/printify-test', printifyTestHandler);
 
-// Products route for fetching all products
-app.get('/api/products/all', async (req, res) => {
+  // Products route for fetching all products
+  app.get('/api/products/all', async (req, res) => {
     try {
         const shopId = process.env.SHOP_ID;
         const response = await fetch(`https://api.printify.com/v1/shops/${shopId}/products.json`, {
@@ -55,14 +60,19 @@ app.get('/api/products/all', async (req, res) => {
         console.error('Error:', error);
         res.status(500).json({ error: 'Failed to fetch products' });
     }
+  });
+
+  // Start server
+  app.listen(port, () => {
+    console.log(`Server running on port ${port}`);
+  });
+}).catch(error => {
+  console.error('Failed to initialize cache:', error);
+  process.exit(1);
 });
 
 // Error handling middleware
 app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).json({ error: 'Something broke!' });
-});
-
-app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
 });
