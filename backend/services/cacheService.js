@@ -5,10 +5,34 @@ let cachedProducts = null;
 let lastCacheTime = null;
 const CACHE_DURATION = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
 
+// Validate individual product
+function isValidProduct(product) {
+    // Check required fields
+    if (!product.id || !product.title) {
+        console.warn(`Skipping invalid product: ${product.id || 'unknown'} — missing id or title`);
+        return false;
+    }
+
+    // Check for at least one image
+    if (!product.images?.length) {
+        console.warn(`Skipping invalid product: ${product.id} — no images`);
+        return false;
+    }
+
+    // Check for at least one enabled variant
+    const hasEnabledVariant = product.variants?.some(v => v.is_enabled);
+    if (!hasEnabledVariant) {
+        console.warn(`Skipping invalid product: ${product.id} — no enabled variants`);
+        return false;
+    }
+
+    return true;
+}
+
 // Function to fetch and process products from Printify
 async function fetchProductsFromPrintify() {
     try {
-        console.log('Fetching fresh products from Printify API...');
+        console.log('Fetching products from Printify API...');
         
         // Get shops first
         const shops = await printifyService.getShops();
@@ -19,23 +43,40 @@ async function fetchProductsFromPrintify() {
         const shopId = shops[0].id;
         const productsResponse = await printifyService.getProducts(shopId);
         
-        // Process and filter products
+        // Process and filter products with sanitized data
         const products = productsResponse.data.data
+            // First filter out non-visible and deleted products silently
             .filter(product => product.visible && !product.is_deleted)
+            // Then validate and map remaining products
+            .filter(isValidProduct)
             .map(product => ({
                 id: product.id,
                 title: product.title,
                 description: product.description,
-                images: product.images,
+                images: product.images.map(img => ({
+                    src: img.src,
+                    variant_ids: img.variant_ids
+                })),
                 tags: product.tags,
                 variants: product.variants
                     .filter(v => v.is_enabled)
+                    .map(variant => ({
+                        id: variant.id,
+                        title: variant.title,
+                        sku: variant.sku,
+                        price: variant.price,
+                        cost: variant.cost,
+                        grams: variant.grams,
+                        options: variant.options,
+                        is_enabled: variant.is_enabled,
+                        is_available: variant.is_available
+                    }))
             }));
 
-        console.log(`Cached ${products.length} products successfully`);
+        console.log(`Successfully cached ${products.length} products with ${products.reduce((sum, p) => sum + p.variants.length, 0)} total variants`);
         return products;
     } catch (error) {
-        console.error('Error fetching products from Printify:', error);
+        console.error('Error fetching products:', error.message);
         throw error;
     }
 }
@@ -53,10 +94,10 @@ function scheduleNextRefresh() {
 
     const msUntilNext3AM = next3AM.getTime() - now.getTime();
     
-    console.log(`Scheduling next cache refresh for ${next3AM.toLocaleString('en-US', { 
+    console.log(`Next cache refresh scheduled for ${next3AM.toLocaleString('en-US', { 
         timeZone: 'America/Chicago',
-        dateStyle: 'full',
-        timeStyle: 'long'
+        dateStyle: 'short',
+        timeStyle: 'short'
     })}`);
 
     return msUntilNext3AM;
@@ -65,9 +106,9 @@ function scheduleNextRefresh() {
 // Initialize cache
 export async function initializeCache() {
     try {
+        console.log('Initializing product cache...');
         cachedProducts = await fetchProductsFromPrintify();
         lastCacheTime = Date.now();
-        console.log('Product cache initialized successfully');
         
         // Schedule first refresh at next 3 AM CT
         const msUntilNext3AM = scheduleNextRefresh();
@@ -78,7 +119,7 @@ export async function initializeCache() {
                 console.log('Performing scheduled cache refresh...');
                 cachedProducts = await fetchProductsFromPrintify();
                 lastCacheTime = Date.now();
-                console.log('Cache refreshed successfully');
+                console.log('Cache refresh complete');
                 
                 // Set up subsequent daily refreshes
                 setInterval(async () => {
@@ -86,21 +127,19 @@ export async function initializeCache() {
                         console.log('Performing scheduled cache refresh...');
                         cachedProducts = await fetchProductsFromPrintify();
                         lastCacheTime = Date.now();
-                        console.log('Cache refreshed successfully');
+                        console.log('Cache refresh complete');
                     } catch (error) {
-                        console.error('Failed to refresh cache:', error);
-                        // Keep the old cache if refresh fails
+                        console.error('Cache refresh failed:', error.message);
                     }
                 }, CACHE_DURATION);
                 
             } catch (error) {
-                console.error('Failed to refresh cache:', error);
-                // Keep the old cache if refresh fails
+                console.error('Initial cache refresh failed:', error.message);
             }
         }, msUntilNext3AM);
         
     } catch (error) {
-        console.error('Failed to initialize cache:', error);
+        console.error('Cache initialization failed:', error.message);
         throw error;
     }
 }
@@ -116,13 +155,13 @@ export function getCachedProducts() {
 // Force refresh cache
 export async function refreshCache() {
     try {
-        console.log('Manually refreshing product cache...');
+        console.log('Manual cache refresh requested...');
         cachedProducts = await fetchProductsFromPrintify();
         lastCacheTime = Date.now();
-        console.log('Cache manually refreshed successfully');
+        console.log('Manual cache refresh complete');
         return true;
     } catch (error) {
-        console.error('Failed to refresh cache:', error);
+        console.error('Manual cache refresh failed:', error.message);
         throw error;
     }
 }
@@ -133,10 +172,11 @@ export function getCacheStatus() {
         isInitialized: !!cachedProducts,
         lastUpdated: lastCacheTime,
         productCount: cachedProducts ? cachedProducts.length : 0,
+        variantCount: cachedProducts ? cachedProducts.reduce((sum, p) => sum + p.variants.length, 0) : 0,
         nextRefresh: new Date(lastCacheTime + CACHE_DURATION).toLocaleString('en-US', {
             timeZone: 'America/Chicago',
-            dateStyle: 'full',
-            timeStyle: 'long'
+            dateStyle: 'short',
+            timeStyle: 'short'
         })
     };
 } 

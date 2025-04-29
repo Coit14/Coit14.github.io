@@ -9,7 +9,7 @@ const Shop = () => {
     const { products, setProducts } = useCart();
     const [error, setError] = useState(null);
     const [selectedProduct, setSelectedProduct] = useState(null);
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(!products || products.length === 0);
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
     // Check for mobile on resize
@@ -22,60 +22,88 @@ const Shop = () => {
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
-    // Load products only once when component mounts
+    // Load products only if not already in context
     useEffect(() => {
         const loadProducts = async () => {
-            // Don't fetch if we already have products
+            // Skip if we already have products
             if (products && products.length > 0) {
+                setIsLoading(false);
                 return;
             }
 
-            setIsLoading(true);
             try {
                 const fetchedProducts = await printifyService.getPublishedProducts();
-                setProducts(fetchedProducts);
+                if (fetchedProducts && Array.isArray(fetchedProducts)) {
+                    setProducts(fetchedProducts);
+                    setError(null);
+                } else {
+                    throw new Error('Invalid product data received');
+                }
             } catch (error) {
-                console.error('Error fetching products:', error);
-                setError('Failed to load products. Please try again later.');
+                console.error('Failed to load products:', error.message);
+                setError(
+                    error.message === 'Failed to fetch products' 
+                        ? 'Unable to load products. Please try again later.'
+                        : 'An unexpected error occurred. Please refresh the page.'
+                );
             } finally {
                 setIsLoading(false);
             }
         };
 
-        loadProducts();
-    }, [products, setProducts]);
+        if (!products || products.length === 0) {
+            loadProducts();
+        }
+    }, []); // Only run on mount
 
     const handleProductClick = (product) => {
-        // For mobile devices, scroll to top before opening modal
         if (isMobile) {
-            window.scrollTo({
-                top: 0,
-                behavior: 'auto'
-            });
-            setTimeout(() => {
-                setSelectedProduct(product);
-            }, 10);
+            window.scrollTo({ top: 0, behavior: 'auto' });
+            setTimeout(() => setSelectedProduct(product), 10);
         } else {
             setSelectedProduct(product);
         }
     };
 
-    // Helper function to format price
-    const formatPrice = (cents) => {
-        return `$${(cents / 100).toFixed(2)}`;
-    };
+    const formatPrice = (cents) => `$${(cents / 100).toFixed(2)}`;
 
     const calculatePrice = (variants) => {
-        if (!variants || variants.length === 0) return 'Price not available';
-        
+        if (!variants?.length) return 'Price not available';
         const enabledVariants = variants.filter(v => v.is_enabled);
-        return formatPrice(enabledVariants[0].price);
+        return enabledVariants.length ? formatPrice(enabledVariants[0].price) : 'Price not available';
     };
 
-    if (isLoading) return <LoadingSpinner />;
-    if (error) return <div className="error-message">{error}</div>;
-    if (!products || !Array.isArray(products) || products.length === 0) {
-        return <div>No products available.</div>;
+    if (isLoading) {
+        return (
+            <div className="shop-loading">
+                <LoadingSpinner />
+                <p>Loading products...</p>
+            </div>
+        );
+    }
+
+    if (error) {
+        return (
+            <div className="shop-error">
+                <h2>Oops!</h2>
+                <p>{error}</p>
+                <button 
+                    className="retry-button"
+                    onClick={() => window.location.reload()}
+                >
+                    Retry
+                </button>
+            </div>
+        );
+    }
+
+    if (!products?.length) {
+        return (
+            <div className="shop-empty">
+                <h2>No Products Available</h2>
+                <p>Check back soon for new merchandise!</p>
+            </div>
+        );
     }
 
     return (
@@ -89,7 +117,7 @@ const Shop = () => {
                 {products.map(product => (
                     <div key={product.id} className="product-card">
                         <div className="product-image-container">
-                            {product.images && product.images[0] ? (
+                            {product.images?.[0] ? (
                                 <img
                                     src={product.images[0].src}
                                     alt={product.title}
