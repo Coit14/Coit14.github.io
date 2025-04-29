@@ -1,6 +1,5 @@
 import React from 'react';
 import './Menu.css';
-import schwabsLogo from '../../assets/schwabs-logo.png';
 
 const Menu = () => {
     return (
@@ -15,20 +14,15 @@ const Menu = () => {
                     <h2>Hot Dogs</h2>
                     <span className="price">$4.00</span>
                 </div>
-                <div className="hotdogs-content">
-                    <ul className="menu-items">
-                        <li>No. 1 - Mustard, Chili & Onions</li>
-                        <li>No. 2 - Mustard & Chili</li>
-                        <li>No. 3 - Mustard</li>
-                        <li>No. 4 - Plain</li> 
-                        <li>No. 5 - Chili Only</li>
-                        <li>No. 6 - Mustard & Onions</li>
-                        <li>No. 7 - Chili & Onions</li>
-                    </ul>
-                    <div className="schwabs-logo-wrapper">
-                        <img src={schwabsLogo} alt="Schwab's Finest Logo" className="schwabs-logo" />
-                    </div>
-                </div>
+                <ul className="menu-items">
+                    <li>No. 1 - Mustard, Chili & Onions</li>
+                    <li>No. 2 - Mustard & Chili</li>
+                    <li>No. 3 - Mustard</li>
+                    <li>No. 4 - Plain</li> 
+                    <li>No. 5 - Chili Only</li>
+                    <li>No. 6 - Mustard & Onions</li>
+                    <li>No. 7 - Chili & Onions</li>
+                </ul>
             </section>
 
             <section className="menu-section animate-in animate-delay-3">
