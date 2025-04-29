@@ -7,10 +7,12 @@ import LoadingSpinner from '../common/LoadingSpinner';
 import { fetchShopProducts, getProductImage } from '../../services/api';
 
 const Shop = () => {
-    const { products, setProducts, isLoading } = useCart();
+    const { products, setProducts } = useCart();
     const [error, setError] = useState(null);
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [preloadedModals, setPreloadedModals] = useState({});
+    const [preloadedImages, setPreloadedImages] = useState({});
+    const [isLoading, setIsLoading] = useState(false);
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
     // Check for mobile on resize
