@@ -96,6 +96,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
     margin-bottom: 20px;
     padding-bottom: 10px;
 }
@@ -205,9 +206,9 @@
 
 /* Schwab's Logo Styles */
 .schwabs-logo-wrapper {
-    text-align: right;
-    margin-top: -20px;
-    margin-bottom: 10px;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 10px;
 }
 
 .schwabs-logo {
