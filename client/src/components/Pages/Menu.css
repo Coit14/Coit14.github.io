@@ -192,6 +192,36 @@
     font-weight: 600;
 }
 
+/* Hot Dogs section with Schwab's logo */
+.hotdogs-content {
+    display: block; /* Default for mobile: normal block layout */
+}
+
+.schwabs-logo-wrapper {
+    display: none; /* Hidden by default on mobile */
+}
+
+.schwabs-logo {
+    width: 120px;
+    height: auto;
+}
+
+/* Responsive adjustments */
+@media (min-width: 768px) {
+    .hotdogs-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .schwabs-logo-wrapper {
+        display: block;
+        flex-shrink: 0;
+        margin-right: 10px;
+    }
+}
+
 /* Keep all other brand colors the same */
 :root {
     --brand-red: #814d49;       /* Coit's primary red */
