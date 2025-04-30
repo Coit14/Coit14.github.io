@@ -156,7 +156,13 @@ const printifyService = {
             });
             return response.data;
         } catch (error) {
-            throw printifyService.handleError(error);
+            console.error("❌ Shipping API error:", {
+                status: error.response?.status,
+                message: error.response?.data?.error || error.message,
+                endpoint: error.config?.url,
+                method: error.config?.method
+            });
+            throw error;
         }
     },
 
