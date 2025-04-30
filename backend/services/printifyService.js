@@ -99,7 +99,7 @@ const printifyService = {
 
     calculateShipping: async (shopId, address, items) => {
         try {
-            console.log("📦 POST /orders/shipping-rates");
+            console.log('📦 Requesting shipping rates for', items.length, 'item(s)');
             
             // Enhanced product and variant verification
             for (const item of items) {
@@ -115,22 +115,29 @@ const printifyService = {
                 }
             }
 
-            const response = await printifyApi.post('/orders/shipping-rates', {
-                address,
-                items: items.map(item => ({
+            const response = await printifyApi.post(`/shops/${shopId}/shipping.json`, {
+                address_to: {
+                    first_name: address.first_name,
+                    last_name: address.last_name,
+                    email: address.email,
+                    country: address.country,
+                    region: address.region,
+                    city: address.city,
+                    address1: address.address1,
+                    address2: address.address2,
+                    zip: address.zip
+                },
+                line_items: items.map(item => ({
                     product_id: item.id,
                     variant_id: item.variantId,
                     quantity: item.quantity
                 }))
             });
+
+            console.log('✅ Shipping rates received:', response.data);
             return response.data;
         } catch (error) {
-            console.error("❌ Shipping API error:", {
-                status: error.response?.status,
-                message: error.response?.data?.error || error.message,
-                endpoint: error.config?.url,
-                method: error.config?.method
-            });
+            console.error('❌ Failed to fetch shipping rates:', error.response?.data || error.message);
             throw error;
         }
     },
