@@ -300,4 +300,48 @@ router.post('/products/:id/unpublish', async (req, res) => {
     }
 });
 
+// Add route to check product shipping readiness
+router.get('/products/:id/status', async (req, res) => {
+    try {
+        const productId = req.params.id;
+        
+        // Get the shop ID first
+        const shops = await printifyService.getShops();
+        if (!shops || !shops.length) {
+            console.error('❌ No shops found');
+            return res.status(500).json({ error: 'No shop found' });
+        }
+        const shopId = shops[0].id;
+
+        // Get detailed product status
+        const productStatus = await printifyService.getProductDetails(shopId, productId);
+        
+        res.json({
+            success: true,
+            product: {
+                id: productStatus.id,
+                title: productStatus.title,
+                isReadyForShipping: productStatus.isReadyForShipping,
+                status: {
+                    visible: productStatus.visible,
+                    print_provider_id: productStatus.print_provider_id,
+                    shipping_template: productStatus.shipping_template,
+                    published: productStatus.published
+                },
+                variants: productStatus.variants.map(v => ({
+                    id: v.id,
+                    is_enabled: v.is_enabled,
+                    is_available: v.is_available
+                }))
+            }
+        });
+    } catch (error) {
+        console.error('❌ Failed to check product status:', error);
+        res.status(500).json({ 
+            error: 'Failed to check product status',
+            details: error.message
+        });
+    }
+});
+
 export default router;

@@ -431,6 +431,53 @@ const printifyService = {
         }
     },
 
+    getProductDetails: async (shopId, productId) => {
+        try {
+            console.log(`🔍 Checking product details for shop ${shopId}, product ${productId}`);
+            
+            const response = await printifyApi.get(`/shops/${shopId}/products/${productId}.json`);
+            const product = response.data;
+            
+            // Log critical shipping-related fields
+            console.log('📦 Product Shipping Status:', {
+                id: product.id,
+                title: product.title,
+                visible: product.visible,
+                print_provider_id: product.print_provider_id,
+                shipping_template: product.shipping_template,
+                published: product.published,
+                variants: product.variants.map(v => ({
+                    id: v.id,
+                    is_enabled: v.is_enabled,
+                    is_available: v.is_available
+                }))
+            });
+
+            // Check if product is ready for shipping
+            const isReadyForShipping = product.visible && 
+                                    product.print_provider_id && 
+                                    product.shipping_template && 
+                                    product.published;
+
+            if (!isReadyForShipping) {
+                console.warn('⚠️ Product not ready for shipping. Missing:', {
+                    visible: !product.visible,
+                    print_provider: !product.print_provider_id,
+                    shipping_template: !product.shipping_template,
+                    published: !product.published
+                });
+            }
+
+            return {
+                ...product,
+                isReadyForShipping
+            };
+        } catch (error) {
+            console.error('❌ Failed to get product details:', error);
+            throw printifyService.handleError(error);
+        }
+    },
+
     handleError: (error) => {
         // Don't transform 404 errors
         if (error.response?.status === 404) {
