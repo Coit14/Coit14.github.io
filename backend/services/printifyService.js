@@ -216,7 +216,8 @@ const printifyService = {
             // Modified condition to ensure confirmation is sent
             // Since publishResponse.data is empty ({}), we'll use the response status instead
             if (publishResponse.status === 200) {
-                console.log(`[Product ${productId}] Publish successful (status ${publishResponse.status}), sending confirmation...`);
+                console.log(`[Product ${productId}] Publish successful (status ${publishResponse.status})`);
+                /* Commenting out manual publishing confirmation
                 try {
                     const confirmResponse = await axios({
                         method: 'post',
@@ -235,6 +236,7 @@ const printifyService = {
                     });
                     // Continue with success response since initial publish worked
                 }
+                */
             } else {
                 console.log(`[Product ${productId}] Publish response status ${publishResponse.status}, skipping confirmation`);
             }
