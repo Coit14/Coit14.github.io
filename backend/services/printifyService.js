@@ -194,7 +194,31 @@ const printifyService = {
                 };
             }
 
-            // Proceed with publishing - sending the correct data structure
+            // Step 1: Update product tags
+            console.log(`[Product ${productId}] Updating tags before publishing...`);
+            try {
+                const updateTagsResponse = await axios({
+                    method: 'put',
+                    url: `https://api.printify.com/v1/shops/${shopId}/products/${productId}.json`,
+                    headers: {
+                        'Authorization': `Bearer ${process.env.PRINTIFY_API_KEY}`,
+                        'Content-Type': 'application/json'
+                    },
+                    data: {
+                        tags: ["coits", "root beer"]
+                    }
+                });
+                console.log(`[Product ${productId}] Tags updated successfully`);
+            } catch (tagsError) {
+                console.error(`[Product ${productId}] Failed to update tags:`, {
+                    message: tagsError.message,
+                    status: tagsError.response?.status,
+                    data: tagsError.response?.data
+                });
+                // Continue with publish attempt even if tags update fails
+            }
+
+            // Step 2: Proceed with publishing
             const publishResponse = await axios({
                 method: 'post',
                 url: `https://api.printify.com/v1/shops/${shopId}/products/${productId}/publish.json`,
@@ -206,7 +230,8 @@ const printifyService = {
                     title: true,
                     description: true,
                     images: true,
-                    variants: true
+                    variants: true,
+                    tags: true
                 }
             });
 
