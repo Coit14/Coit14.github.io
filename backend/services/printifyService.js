@@ -171,36 +171,51 @@ const printifyService = {
     },
 
     publishProduct: async (shopId, productId) => {
-        try {
-            // First, check if the product exists and is ready to publish
-            const productResponse = await axios({
-                method: 'get',
-                url: `https://api.printify.com/v1/shops/${shopId}/products/${productId}.json`,
-                headers: {
-                    'Authorization': `Bearer ${process.env.PRINTIFY_API_KEY}`,
-                    'Content-Type': 'application/json'
+        const maxRetries = 3;
+        let attempt = 0;
+
+        const attemptPublish = async () => {
+            try {
+                // First, check if the product exists and is ready to publish
+                const productResponse = await axios({
+                    method: 'get',
+                    url: `https://api.printify.com/v1/shops/${shopId}/products/${productId}.json`,
+                    headers: {
+                        'Authorization': `Bearer ${process.env.PRINTIFY_API_KEY}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                // Check if product has required fields for publishing
+                const product = productResponse.data;
+                
+                // Log product details for debugging
+                console.log('Product details before publishing:', {
+                    id: product.id,
+                    title: product.title,
+                    hasDescription: !!product.description,
+                    variantCount: product.variants?.length || 0,
+                    imageCount: product.images?.length || 0,
+                    print_provider_id: product.print_provider?.id || product.print_provider_id,
+                    shipping_template: product.shipping_template || 1
+                });
+
+                if (!product.title || !product.description || !product.variants || product.variants.length === 0 || !product.images || product.images.length === 0) {
+                    return {
+                        success: false,
+                        error: 'Product is not ready for publishing. Please ensure it has a title, description, images, and at least one variant.',
+                        status: 400,
+                        details: {
+                            hasTitle: !!product.title,
+                            hasDescription: !!product.description,
+                            variantCount: product.variants?.length || 0,
+                            imageCount: product.images?.length || 0
+                        }
+                    };
                 }
-            });
 
-            // Check if product has required fields for publishing
-            const product = productResponse.data;
-            if (!product.title || !product.description || !product.variants || product.variants.length === 0 || !product.images || product.images.length === 0) {
-                return {
-                    success: false,
-                    error: 'Product is not ready for publishing. Please ensure it has a title, description, images, and at least one variant.',
-                    status: 400
-                };
-            }
-
-            // Proceed with publishing - sending the correct data structure
-            const response = await axios({
-                method: 'post',
-                url: `https://api.printify.com/v1/shops/${shopId}/products/${productId}/publish.json`,
-                headers: {
-                    'Authorization': `Bearer ${process.env.PRINTIFY_API_KEY}`,
-                    'Content-Type': 'application/json'
-                },
-                data: {
+                // Proceed with publishing - sending the correct data structure
+                const publishData = {
                     title: true,
                     description: true,
                     images: true,
@@ -209,43 +224,87 @@ const printifyService = {
                     shipping_template: product.shipping_template || 1,
                     print_provider_id: product.print_provider?.id || product.print_provider_id,
                     print_areas: product.print_areas || {}
+                };
+
+                console.log('Publishing with data:', publishData);
+
+                const response = await axios({
+                    method: 'post',
+                    url: `https://api.printify.com/v1/shops/${shopId}/products/${productId}/publish.json`,
+                    headers: {
+                        'Authorization': `Bearer ${process.env.PRINTIFY_API_KEY}`,
+                        'Content-Type': 'application/json'
+                    },
+                    data: publishData
+                });
+
+                console.log('Publish response:', response.data);
+
+                return {
+                    success: true,
+                    message: 'Product published successfully',
+                    productId,
+                    shopId,
+                    data: response.data
+                };
+            } catch (error) {
+                // If it's a 500 error and we haven't exceeded retries, throw to trigger retry
+                if (error.response?.status === 500 && attempt < maxRetries) {
+                    throw error;
                 }
-            });
 
-            console.log('Publish response:', response.data);
+                console.error('Publish error:', {
+                    message: error.message,
+                    status: error.response?.status,
+                    data: error.response?.data,
+                    attempt: attempt + 1
+                });
 
-            return {
-                success: true,
-                message: 'Product published successfully',
-                productId,
-                shopId,
-                data: response.data
-            };
-        } catch (error) {
-            console.error('Publish error:', {
-                message: error.message,
-                status: error.response?.status,
-                data: error.response?.data
-            });
-
-            // Provide more specific error messages based on the error response
-            let errorMessage = error.response?.data?.message || error.message;
-            if (error.response?.status === 400) {
-                if (error.response?.data?.errors?.reason) {
-                    errorMessage = `Validation failed: ${error.response.data.errors.reason}`;
-                } else {
-                    errorMessage = 'Product validation failed. Please ensure all required fields are filled and valid.';
+                // Provide more specific error messages based on the error response
+                let errorMessage = error.response?.data?.message || error.message;
+                if (error.response?.status === 400) {
+                    if (error.response?.data?.errors?.reason) {
+                        errorMessage = `Validation failed: ${error.response.data.errors.reason}`;
+                    } else {
+                        errorMessage = 'Product validation failed. Please ensure all required fields are filled and valid.';
+                    }
+                } else if (error.response?.status === 404) {
+                    errorMessage = 'Product not found. It may have been deleted.';
+                } else if (error.response?.status === 500) {
+                    errorMessage = `Server error occurred after ${attempt + 1} attempts. Please try again later.`;
                 }
-            } else if (error.response?.status === 404) {
-                errorMessage = 'Product not found. It may have been deleted.';
+
+                return {
+                    success: false,
+                    error: errorMessage,
+                    status: error.response?.status || 500,
+                    details: error.response?.data
+                };
             }
+        };
 
-            return {
-                success: false,
-                error: errorMessage,
-                status: error.response?.status || 500,
-                details: error.response?.data
-            };
+        // Implement retry logic
+        while (attempt < maxRetries) {
+            try {
+                attempt++;
+                if (attempt > 1) {
+                    console.log(`Retry attempt ${attempt} for product ${productId}...`);
+                    // Add a small delay between retries
+                    await new Promise(resolve => setTimeout(resolve, 1000 * attempt));
+                }
+                return await attemptPublish();
+            } catch (error) {
+                if (attempt === maxRetries) {
+                    return {
+                        success: false,
+                        error: `Failed after ${maxRetries} attempts: ${error.message}`,
+                        status: 500,
+                        details: error.response?.data
+                    };
+                }
+                // If not final attempt, continue to retry
+                console.log(`Attempt ${attempt} failed, retrying...`);
+            }
         }
     },
 
