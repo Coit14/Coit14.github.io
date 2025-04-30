@@ -99,7 +99,7 @@ const printifyService = {
 
     calculateShipping: async (shopId, address, items) => {
         try {
-            console.log('📦 Requesting shipping rates for', items.length, 'item(s)');
+            console.log(`📦 Requesting shipping rates for ${items.length} item(s)`);
             
             // Enhanced product and variant verification
             for (const item of items) {
@@ -137,7 +137,12 @@ const printifyService = {
             console.log('✅ Shipping rates received:', response.data);
             return response.data;
         } catch (error) {
-            console.error('❌ Failed to fetch shipping rates:', error.response?.data || error.message);
+            console.error("❌ Shipping API error:", {
+                status: error.response?.status,
+                message: error.response?.data?.error || error.message,
+                endpoint: error.config?.url,
+                method: error.config?.method
+            });
             throw error;
         }
     },

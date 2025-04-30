@@ -75,17 +75,6 @@ router.post('/shipping-rates', async (req, res) => {
             });
         }
 
-        // Log the validated request
-        console.log('📦 Processing shipping calculation:', {
-            address_provided: !!address,
-            items_count: items.length,
-            items: items.map(i => ({
-                product_id: i.id,
-                variant_id: i.variantId,
-                quantity: i.quantity
-            }))
-        });
-
         // Get the shop ID first
         const shops = await printifyService.getShops();
         if (!shops || !shops.length) {
