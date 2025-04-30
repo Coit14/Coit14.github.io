@@ -14,48 +14,54 @@ const CheckoutSteps = {
 
 const fetchShippingOptions = async (shippingInfo, cartItems) => {
     try {
-        console.log('Fetching shipping rates with:', {
-            address: shippingInfo,
-            items: cartItems
-        });
+        // Validate cart items before making the request
+        if (!cartItems || cartItems.length === 0) {
+            console.error('❌ Shipping calculation blocked: Cart is empty');
+            throw new Error('Cart is empty. Cannot calculate shipping.');
+        }
+
+        // Log the exact payload being sent
+        const payload = {
+            address: {
+                first_name: shippingInfo.firstName,
+                last_name: shippingInfo.lastName,
+                email: shippingInfo.email,
+                country: shippingInfo.country,
+                region: shippingInfo.state,
+                city: shippingInfo.city,
+                address1: shippingInfo.address1,
+                address2: shippingInfo.address2,
+                zip: shippingInfo.zipCode,
+            },
+            items: cartItems.map(item => ({
+                id: item.productId,
+                variantId: item.variantId,
+                quantity: item.quantity
+            }))
+        };
+
+        console.log('📦 Shipping calculation payload:', JSON.stringify(payload, null, 2));
         
         const response = await fetch(`${API_URL}/api/printify/shipping-rates`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({
-                address: {
-                    first_name: shippingInfo.firstName,
-                    last_name: shippingInfo.lastName,
-                    email: shippingInfo.email,
-                    country: shippingInfo.country,
-                    region: shippingInfo.state,
-                    city: shippingInfo.city,
-                    address1: shippingInfo.address1,
-                    address2: shippingInfo.address2,
-                    zip: shippingInfo.zipCode,
-                },
-                items: cartItems.map(item => ({
-                    id: item.productId,
-                    variantId: item.variantId,
-                    quantity: item.quantity
-                }))
-            })
+            body: JSON.stringify(payload)
         });
 
         if (!response.ok) {
             const errorData = await response.json();
-            console.error('Shipping calculation failed:', errorData);
+            console.error('❌ Shipping calculation failed:', errorData);
             throw new Error(errorData.error || 'Failed to fetch shipping options');
         }
 
         const data = await response.json();
-        console.log('Received shipping options:', data);
+        console.log('✅ Received shipping options:', data);
         return data;
     } catch (error) {
-        console.error('Error fetching shipping options:', error);
-        return [];
+        console.error('❌ Error fetching shipping options:', error);
+        throw error;
     }
 };
 

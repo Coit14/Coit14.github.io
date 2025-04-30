@@ -57,21 +57,59 @@ router.get('/products/:id', async (req, res) => {
 // Add these new routes
 router.post('/shipping-rates', async (req, res) => {
     try {
+        const { address, items } = req.body;
+
+        // Validate request payload
+        if (!items || items.length === 0) {
+            console.error('❌ Shipping calculation blocked: Empty items array');
+            return res.status(400).json({ 
+                error: 'Cart is empty. Cannot calculate shipping.',
+                details: { received_items: items }
+            });
+        }
+
+        // Validate each item has required fields
+        const invalidItems = items.filter(item => 
+            !item.id || !item.variantId || typeof item.quantity !== 'number'
+        );
+
+        if (invalidItems.length > 0) {
+            console.error('❌ Shipping calculation blocked: Invalid items', invalidItems);
+            return res.status(400).json({
+                error: 'Invalid items in cart',
+                details: { invalid_items: invalidItems }
+            });
+        }
+
+        // Log the validated request
+        console.log('📦 Processing shipping calculation:', {
+            address_provided: !!address,
+            items_count: items.length,
+            items: items.map(i => ({
+                product_id: i.id,
+                variant_id: i.variantId,
+                quantity: i.quantity
+            }))
+        });
+
         // Get the shop ID first
         const shops = await printifyService.getShops();
         if (!shops || !shops.length) {
-            console.error('No shops found');
+            console.error('❌ No shops found');
             return res.status(500).json({ error: 'No shop found' });
         }
         const shopId = shops[0].id;
 
-        const { address, items } = req.body;
         // Call Printify API to calculate shipping with shopId
         const response = await printifyService.calculateShipping(shopId, address, items);
+        console.log('✅ Shipping calculation successful');
         res.json(response.data);
     } catch (error) {
-        console.error('Failed to calculate shipping:', error);
-        res.status(500).json({ error: 'Failed to calculate shipping' });
+        console.error('❌ Failed to calculate shipping:', error);
+        res.status(500).json({ 
+            error: 'Failed to calculate shipping',
+            details: error.message
+        });
     }
 });
 
