@@ -136,13 +136,33 @@ const printifyService = {
                 }))
             });
 
-            // Check variants for each product using provided shopId
+            // Enhanced product and variant verification
             for (const item of items) {
                 const product = await printifyService.getProduct(shopId, item.id);
-                console.log("Variant enabled:", product.variants.map(v => ({
-                    id: v.id,
-                    enabled: v.is_enabled
-                })));
+                console.log("Fetched product for shipping:", {
+                    product_id: product.id,
+                    title: product.title,
+                    total_variants: product.variants.length
+                });
+
+                // Find the specific variant
+                const variant = product.variants.find(v => v.id === item.variantId);
+                
+                if (!variant) {
+                    throw new Error(`Variant ${item.variantId} not found in product ${item.id}`);
+                }
+
+                console.log("Variant details:", {
+                    variant_id: variant.id,
+                    is_enabled: variant.is_enabled,
+                    is_available: variant.is_available,
+                    sku: variant.sku,
+                    title: variant.title
+                });
+
+                if (!variant.is_enabled || !variant.is_available) {
+                    throw new Error(`Variant ${item.variantId} is not available or enabled for product ${item.id}`);
+                }
             }
 
             const response = await printifyApi.post('/orders/shipping-rates', {
