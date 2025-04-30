@@ -206,9 +206,8 @@ const printifyService = {
                     images: true,
                     variants: true,
                     tags: true,
-                    shipping_template: product.shipping_template || 1,
-                    print_provider_id: product.print_provider?.id || product.print_provider_id,
-                    print_areas: product.print_areas || {}
+                    keyFeatures: true,
+                    shipping_template: true
                 }
             });
 
