@@ -172,6 +172,8 @@ const printifyService = {
 
     publishProduct: async (shopId, productId) => {
         try {
+            console.log(`[Publishing] Shop: ${shopId}, Product: ${productId}`);
+            
             // First, check if the product exists and is ready to publish
             const productResponse = await axios({
                 method: 'get',
