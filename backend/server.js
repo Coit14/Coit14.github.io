@@ -4,11 +4,10 @@ import fetch from 'node-fetch';
 import { initializeCache, getCachedProducts } from './services/cacheService.js';
 import printifyRoutes from './routes/printifyRoutes.js';
 
-// Import route handlers
+// Import route handlers - keeping these as they're actively used
 import { handler as productsHandler } from './api/products.js';
 import { handler as sendEmailHandler } from './api/sendEmail.js';
 import { handler as printifyWebhookHandler } from './api/printify-webhook.js';
-import { handler as printifyTestHandler } from './api/printify-test.js';
 
 console.log('API Key:', process.env.PRINTIFY_API_KEY ? 'exists' : 'missing');
 
@@ -33,13 +32,12 @@ console.log('Initializing product cache...');
 initializeCache().then(() => {
     console.log('Cache initialized successfully, setting up routes...');
     
-    // API routes
+    // API routes - keeping these as they're actively used in the application
     app.post('/api/event-booking', sendEmailHandler);
     app.get('/api/products', productsHandler);
     app.post('/api/printify-webhook', printifyWebhookHandler);
-    app.get('/api/printify-test', printifyTestHandler);
 
-    // Products route for fetching all products - now using cache
+    // Products route for fetching all products - using cache
     app.get('/api/products/all', async (req, res) => {
         try {
             const products = getCachedProducts();

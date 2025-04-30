@@ -3,6 +3,7 @@ import { useCart } from '../../contexts/CartContext';
 import ShippingForm from './ShippingForm';
 import PaymentForm from './PaymentForm';
 import OrderReview from './OrderReview';
+import { API_URL } from '../../config/config';
 import './Checkout.css';
 
 const CheckoutSteps = {
@@ -13,7 +14,12 @@ const CheckoutSteps = {
 
 const fetchShippingOptions = async (shippingInfo, cartItems) => {
     try {
-        const response = await fetch('https://your-vercel-backend-url.vercel.app/api/shipping-rates', {
+        console.log('Fetching shipping rates with:', {
+            address: shippingInfo,
+            items: cartItems
+        });
+        
+        const response = await fetch(`${API_URL}/api/printify/shipping-rates`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -39,10 +45,13 @@ const fetchShippingOptions = async (shippingInfo, cartItems) => {
         });
 
         if (!response.ok) {
-            throw new Error('Failed to fetch shipping options');
+            const errorData = await response.json();
+            console.error('Shipping calculation failed:', errorData);
+            throw new Error(errorData.error || 'Failed to fetch shipping options');
         }
 
         const data = await response.json();
+        console.log('Received shipping options:', data);
         return data;
     } catch (error) {
         console.error('Error fetching shipping options:', error);

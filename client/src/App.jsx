@@ -1,5 +1,5 @@
 import React from 'react';
-import { HashRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Layout/Header';
 import Footer from './components/Layout/Footer';
 import Home from './components/Pages/Home';
@@ -10,7 +10,6 @@ import AboutUs from './components/Pages/AboutUs';
 import EventBooking from './components/Pages/EventBooking';
 import NotFound from './components/Pages/NotFound';
 import { CartProvider } from './contexts/CartContext';
-import PrintifyTest from './components/PrintifyTest';
 import Checkout from './components/Checkout/Checkout';
 import './App.css';
 import './styles/layout.css';
@@ -36,18 +35,12 @@ function App() {
                             <Route path="/shop" element={<Shop />} />
                             <Route path="/checkout" element={<Checkout />} />
                             <Route path="/book-event" element={<EventBooking />} />
-                            <Route path="/printifycheck" element={<PrintifyTest />} />
                             <Route path="/manage-products" element={<ManageProducts />} />
                             <Route path="*" element={<NotFound />} />
                         </Routes>
                     </main>
                     <Footer />
                 </div>
-                <footer>
-                    <Link to="/manage-products" style={{ position: 'fixed', bottom: '10px', right: '10px', textDecoration: 'none' }}>
-                        🔒
-                    </Link>
-                </footer>
             </Router>
         </CartProvider>
     );

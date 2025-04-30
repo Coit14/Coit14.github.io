@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Footer.css';
 import { FaFacebook } from 'react-icons/fa';
 import { socialLinks } from '../../config/social';
@@ -22,6 +23,10 @@ function Footer() {
                 <div className="footer-bottom">
                     <p>&copy; {new Date().getFullYear()} Coit's Food Truck. All rights reserved.</p>
                 </div>
+
+                <Link to="/manage-products" className="admin-link">
+                    🔒
+                </Link>
             </div>
         </footer>
     );
