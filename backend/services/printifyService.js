@@ -217,7 +217,8 @@ const printifyService = {
             // Since publishResponse.data is empty ({}), we'll use the response status instead
             if (publishResponse.status === 200) {
                 console.log(`[Product ${productId}] Publish successful (status ${publishResponse.status})`);
-                /* Commenting out manual publishing confirmation
+                
+                // Step 1: Send the standard publish confirmation
                 try {
                     const confirmResponse = await axios({
                         method: 'post',
@@ -234,9 +235,30 @@ const printifyService = {
                         status: confirmError.response?.status,
                         data: confirmError.response?.data
                     });
-                    // Continue with success response since initial publish worked
                 }
-                */
+
+                // Step 2: Force confirm by setting "published: true"
+                try {
+                    const forceConfirmResponse = await axios({
+                        method: 'put',
+                        url: `https://api.printify.com/v1/shops/${shopId}/products/${productId}.json`,
+                        headers: {
+                            'Authorization': `Bearer ${process.env.PRINTIFY_API_KEY}`,
+                            'Content-Type': 'application/json'
+                        },
+                        data: {
+                            published: true
+                        }
+                    });
+                    console.log(`[Product ${productId}] Forced confirmation (published: true) complete.`);
+                } catch (forceConfirmError) {
+                    console.error(`[Product ${productId}] Forced publish confirmation failed:`, {
+                        message: forceConfirmError.message,
+                        status: forceConfirmError.response?.status,
+                        data: forceConfirmError.response?.data
+                    });
+                    // Still continue as long as publish itself succeeded
+                }
             } else {
                 console.log(`[Product ${productId}] Publish response status ${publishResponse.status}, skipping confirmation`);
             }
