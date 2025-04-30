@@ -79,6 +79,15 @@ body {
     background-color: #218838;
 }
 
+.manage-products button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.manage-products button:disabled:hover {
+    background-color: inherit;
+}
+
 .manage-products .delete-button {
     background-color: #dc3545;
     color: white;

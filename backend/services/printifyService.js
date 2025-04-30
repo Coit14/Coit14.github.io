@@ -213,6 +213,24 @@ const printifyService = {
 
             console.log('Publish response:', response.data);
 
+            // If publish was successful, confirm the publishing succeeded
+            if (response.data.success) {
+                try {
+                    await axios({
+                        method: 'post',
+                        url: `https://api.printify.com/v1/shops/${shopId}/products/${productId}/publishing_succeeded.json`,
+                        headers: {
+                            'Authorization': `Bearer ${process.env.PRINTIFY_API_KEY}`,
+                            'Content-Type': 'application/json'
+                        }
+                    });
+                    console.log('Successfully confirmed publishing status for product:', productId);
+                } catch (confirmError) {
+                    console.error('Failed to confirm publishing status:', confirmError);
+                    // Even if confirmation fails, we still return success since the publish worked
+                }
+            }
+
             return {
                 success: true,
                 message: 'Product published successfully',
