@@ -205,7 +205,7 @@ const printifyService = {
                     description: true,
                     images: true,
                     variants: true,
-                    tags: [],
+                    tags: true,
                     shipping_template: product.shipping_template || 1,
                     print_provider_id: product.print_provider?.id || product.print_provider_id,
                     print_areas: product.print_areas || {}
