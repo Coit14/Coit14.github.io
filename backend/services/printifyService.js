@@ -122,6 +122,29 @@ const printifyService = {
 
     calculateShipping: async (address, items) => {
         try {
+            // Debug: Check available shops
+            const shops = await printifyService.getShops();
+            console.log("Available shops:", shops);
+
+            // Debug block for shipping parameters
+            console.log("Shipping Check:", {
+                address,
+                items: items.map(i => ({
+                    product_id: i.id,
+                    variant_id: i.variantId,
+                    quantity: i.quantity
+                }))
+            });
+
+            // Check variants for each product
+            for (const item of items) {
+                const product = await printifyService.getProduct(item.shopId, item.id);
+                console.log("Variant enabled:", product.variants.map(v => ({
+                    id: v.id,
+                    enabled: v.is_enabled
+                })));
+            }
+
             const response = await printifyApi.post('/orders/shipping-rates', {
                 address,
                 items: items.map(item => ({
