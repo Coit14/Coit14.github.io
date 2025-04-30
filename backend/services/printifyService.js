@@ -115,8 +115,8 @@ const printifyService = {
                 }
             }
 
-            const response = await printifyApi.post(`/shops/${shopId}/shipping.json`, {
-                address_to: {
+            const response = await printifyApi.post('/v1/orders/shipping-rates', {
+                address: {
                     first_name: address.first_name,
                     last_name: address.last_name,
                     email: address.email,
@@ -127,7 +127,7 @@ const printifyService = {
                     address2: address.address2,
                     zip: address.zip
                 },
-                line_items: items.map(item => ({
+                items: items.map(item => ({
                     product_id: item.id,
                     variant_id: item.variantId,
                     quantity: item.quantity
