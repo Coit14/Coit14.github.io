@@ -124,41 +124,22 @@ const printifyService = {
         try {
             // Debug: Check available shops
             const shops = await printifyService.getShops();
-            console.log("Available shops:", shops);
+            console.log("📦 Available shops:", shops.length);
 
             // Debug block for shipping parameters
-            console.log("Shipping Check:", {
-                address,
-                items: items.map(i => ({
-                    product_id: i.id,
-                    variant_id: i.variantId,
-                    quantity: i.quantity
-                }))
+            console.log("📦 Shipping request:", {
+                items_count: items.length,
+                address_provided: !!address
             });
 
             // Enhanced product and variant verification
             for (const item of items) {
                 const product = await printifyService.getProduct(shopId, item.id);
-                console.log("Fetched product for shipping:", {
-                    product_id: product.id,
-                    title: product.title,
-                    total_variants: product.variants.length
-                });
-
-                // Find the specific variant
                 const variant = product.variants.find(v => v.id === item.variantId);
                 
                 if (!variant) {
                     throw new Error(`Variant ${item.variantId} not found in product ${item.id}`);
                 }
-
-                console.log("Variant details:", {
-                    variant_id: variant.id,
-                    is_enabled: variant.is_enabled,
-                    is_available: variant.is_available,
-                    sku: variant.sku,
-                    title: variant.title
-                });
 
                 if (!variant.is_enabled || !variant.is_available) {
                     throw new Error(`Variant ${item.variantId} is not available or enabled for product ${item.id}`);
@@ -181,15 +162,9 @@ const printifyService = {
 
     calculateTax: async (shopId, address, items) => {
         try {
-            // Debug: Log tax calculation parameters
-            console.log("Tax Calculation Check:", {
-                shopId,
-                address,
-                items: items.map(i => ({
-                    product_id: i.id,
-                    variant_id: i.variantId,
-                    quantity: i.quantity
-                }))
+            console.log("📦 Tax calculation request:", {
+                items_count: items.length,
+                address_provided: !!address
             });
 
             const response = await printifyApi.post('/orders/taxes', {
@@ -208,16 +183,10 @@ const printifyService = {
 
     createOrder: async (shopId, address, items, shippingMethod) => {
         try {
-            // Debug: Log order creation parameters
-            console.log("Order Creation Check:", {
-                shopId,
-                address,
-                items: items.map(i => ({
-                    product_id: i.id,
-                    variant_id: i.variantId,
-                    quantity: i.quantity
-                })),
-                shippingMethod
+            console.log("📦 Order creation request:", {
+                items_count: items.length,
+                address_provided: !!address,
+                shipping_method: shippingMethod?.id
             });
 
             const response = await printifyApi.post('/orders.json', {
@@ -433,24 +402,19 @@ const printifyService = {
 
     getProductDetails: async (shopId, productId) => {
         try {
-            console.log(`🔍 Checking product details for shop ${shopId}, product ${productId}`);
+            console.log(`🔍 Checking product ${productId} in shop ${shopId}`);
             
             const response = await printifyApi.get(`/shops/${shopId}/products/${productId}.json`);
             const product = response.data;
             
             // Log critical shipping-related fields
-            console.log('📦 Product Shipping Status:', {
+            console.log('📦 Product status:', {
                 id: product.id,
                 title: product.title,
                 visible: product.visible,
                 print_provider_id: product.print_provider_id,
                 shipping_template: product.shipping_template,
-                published: product.published,
-                variants: product.variants.map(v => ({
-                    id: v.id,
-                    is_enabled: v.is_enabled,
-                    is_available: v.is_available
-                }))
+                published: product.published
             });
 
             // Check if product is ready for shipping
@@ -473,7 +437,6 @@ const printifyService = {
                 isReadyForShipping
             };
         } catch (error) {
-            console.error('❌ Failed to get product details:', error);
             throw printifyService.handleError(error);
         }
     },
@@ -484,9 +447,14 @@ const printifyService = {
             return error;
         }
         
-        const errorMessage = error.response?.data?.message || error.message;
-        console.error('Printify API Error:', errorMessage);
-        return new Error(errorMessage);
+        console.error("❌ Printify API error:", {
+            status: error.response?.status,
+            message: error.response?.data?.error || error.message,
+            endpoint: error.config?.url,
+            method: error.config?.method
+        });
+        
+        return new Error(error.response?.data?.error || error.message);
     }
 };
 
