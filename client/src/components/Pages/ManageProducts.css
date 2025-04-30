@@ -61,8 +61,8 @@ body {
 }
 
 .manage-products button {
-    margin: 0 5px;
     padding: 8px 16px;
+    margin: 0 4px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -70,12 +70,12 @@ body {
     transition: background-color 0.2s;
 }
 
-.manage-products button:first-child {
+.manage-products button:not(.delete-button):not(.unpublish-button) {
     background-color: #28a745;
     color: white;
 }
 
-.manage-products button:first-child:hover {
+.manage-products button:not(.delete-button):not(.unpublish-button):hover {
     background-color: #218838;
 }
 
@@ -86,6 +86,15 @@ body {
 
 .manage-products .delete-button:hover {
     background-color: #c82333;
+}
+
+.manage-products .unpublish-button {
+    background-color: #ffc107;
+    color: #000;
+}
+
+.manage-products .unpublish-button:hover {
+    background-color: #e0a800;
 }
 
 .manage-products strong {

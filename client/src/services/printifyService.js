@@ -125,6 +125,30 @@ export const printifyService = {
     }
   },
 
+  // Unpublish a product
+  unpublishProduct: async (productId) => {
+    try {
+      const response = await fetch(`${API_URL}/api/printify/products/${productId}/unpublish`, {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        mode: 'cors'
+      });
+      
+      return await handleResponse(response);
+    } catch (error) {
+      console.error('Error in unpublishProduct:', {
+        productId,
+        message: error.message,
+        status: error.status,
+        details: error.details
+      });
+      throw error;
+    }
+  },
+
   // Test Printify connection
   testConnection: async () => {
     try {

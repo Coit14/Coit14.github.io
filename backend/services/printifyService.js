@@ -248,6 +248,49 @@ const printifyService = {
         }
     },
 
+    unpublishProduct: async (shopId, productId) => {
+        try {
+            // Make the request to unpublish
+            const response = await axios({
+                method: 'post',
+                url: `https://api.printify.com/v1/shops/${shopId}/products/${productId}/unpublish.json`,
+                headers: {
+                    'Authorization': `Bearer ${process.env.PRINTIFY_API_KEY}`,
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            console.log('Unpublish response:', response.data);
+
+            return {
+                success: true,
+                message: 'Product unpublished successfully',
+                productId,
+                shopId,
+                data: response.data
+            };
+        } catch (error) {
+            console.error('Unpublish error:', {
+                message: error.message,
+                status: error.response?.status,
+                data: error.response?.data
+            });
+
+            // Provide specific error messages
+            let errorMessage = error.response?.data?.message || error.message;
+            if (error.response?.status === 404) {
+                errorMessage = 'Product not found. It may have been deleted.';
+            }
+
+            return {
+                success: false,
+                error: errorMessage,
+                status: error.response?.status || 500,
+                details: error.response?.data
+            };
+        }
+    },
+
     handleError: (error) => {
         // Don't transform 404 errors
         if (error.response?.status === 404) {

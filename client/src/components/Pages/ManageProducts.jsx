@@ -62,6 +62,23 @@ const ManageProducts = () => {
         }
     };
 
+    const unpublishProduct = async (id) => {
+        try {
+            const response = await printifyService.unpublishProduct(id);
+            if (response.success) {
+                setProducts(products.map(product => 
+                    product.id === id ? { ...product, status: 'Unpublished' } : product
+                ));
+                alert('Product and all its variants unpublished successfully');
+            } else {
+                alert(`Unpublishing failed: ${response.error || 'Unknown error occurred'}`);
+            }
+        } catch (error) {
+            console.error('Error unpublishing product:', error);
+            alert('Failed to unpublish product: ' + (error.message || 'Unknown error occurred'));
+        }
+    };
+
     const deleteProduct = async (id) => {
         if (!window.confirm('Are you sure you want to delete this product and all its variants?')) {
             return;
@@ -146,12 +163,22 @@ const ManageProducts = () => {
                             <td>{getVariantSummary(product)}</td>
                             <td>{product.status || 'Unpublished'}</td>
                             <td>
-                                <button 
-                                    onClick={() => publishProduct(product.id)}
-                                    title="Publish all variants"
-                                >
-                                    Publish All
-                                </button>
+                                {product.status === 'Published' ? (
+                                    <button 
+                                        onClick={() => unpublishProduct(product.id)}
+                                        title="Unpublish all variants"
+                                        className="unpublish-button"
+                                    >
+                                        Unpublish All
+                                    </button>
+                                ) : (
+                                    <button 
+                                        onClick={() => publishProduct(product.id)}
+                                        title="Publish all variants"
+                                    >
+                                        Publish All
+                                    </button>
+                                )}
                                 <button 
                                     onClick={() => deleteProduct(product.id)}
                                     title="Delete product and all its variants"

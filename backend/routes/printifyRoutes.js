@@ -214,4 +214,43 @@ router.delete('/products/:id', async (req, res) => {
     }
 });
 
+// Add route to unpublish a product
+router.post('/products/:id/unpublish', async (req, res) => {
+    try {
+        console.log('Attempting to unpublish product:', req.params.id);
+        
+        const shops = await printifyService.getShops();
+        if (!shops || !shops.length) {
+            console.error('No shops found');
+            return res.status(500).json({ error: 'No shop found' });
+        }
+        
+        const shopId = shops[0].id;
+        const productId = req.params.id;
+        
+        console.log(`Unpublishing product ${productId} from shop ${shopId}`);
+        
+        const result = await printifyService.unpublishProduct(shopId, productId);
+        console.log('Unpublish result:', result);
+        
+        if (result.success) {
+            // Refresh the cache after successful unpublish
+            await refreshCache();
+            res.json(result);
+        } else {
+            res.status(400).json(result);
+        }
+    } catch (error) {
+        console.error('Failed to unpublish product:', {
+            productId: req.params.id,
+            error: error.message,
+            stack: error.stack
+        });
+        res.status(500).json({
+            error: 'Failed to unpublish product',
+            details: error.message
+        });
+    }
+});
+
 export default router;
