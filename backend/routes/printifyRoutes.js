@@ -9,12 +9,8 @@ router.get('/products', async (req, res) => {
     try {
         // Get products directly from cache
         const products = getCachedProducts();
-        console.log(`Serving ${products.length} products from cache`);
         res.json(products);
     } catch (error) {
-        console.error('Error serving products from cache:', {
-            message: error.message
-        });
         res.status(500).json({ 
             error: 'Failed to fetch products',
             details: error.message
@@ -61,7 +57,6 @@ router.post('/shipping-rates', async (req, res) => {
 
         // Validate request payload
         if (!items || items.length === 0) {
-            console.error('❌ Shipping calculation blocked: Empty items array');
             return res.status(400).json({ 
                 error: 'Cart is empty. Cannot calculate shipping.',
                 details: { received_items: items }
@@ -74,7 +69,6 @@ router.post('/shipping-rates', async (req, res) => {
         );
 
         if (invalidItems.length > 0) {
-            console.error('❌ Shipping calculation blocked: Invalid items', invalidItems);
             return res.status(400).json({
                 error: 'Invalid items in cart',
                 details: { invalid_items: invalidItems }
@@ -95,7 +89,6 @@ router.post('/shipping-rates', async (req, res) => {
         // Get the shop ID first
         const shops = await printifyService.getShops();
         if (!shops || !shops.length) {
-            console.error('❌ No shops found');
             return res.status(500).json({ error: 'No shop found' });
         }
         const shopId = shops[0].id;
@@ -105,7 +98,6 @@ router.post('/shipping-rates', async (req, res) => {
         console.log('✅ Shipping calculation successful');
         res.json(response.data);
     } catch (error) {
-        console.error('❌ Failed to calculate shipping:', error);
         res.status(500).json({ 
             error: 'Failed to calculate shipping',
             details: error.message
@@ -175,7 +167,6 @@ router.delete('/products/delete-specific', async (req, res) => {
         });
         
     } catch (error) {
-        console.error('Failed to delete products:', error);
         res.status(500).json({ 
             error: 'Failed to delete products',
             details: error.message
@@ -186,35 +177,23 @@ router.delete('/products/delete-specific', async (req, res) => {
 // Add route to publish a product
 router.post('/products/:id/publish', async (req, res) => {
     try {
-        console.log('Attempting to publish product:', req.params.id);
-        
         const shops = await printifyService.getShops();
         if (!shops || !shops.length) {
-            console.error('No shops found');
             return res.status(500).json({ error: 'No shop found' });
         }
         
         const shopId = shops[0].id;
         const productId = req.params.id;
         
-        console.log(`Publishing product ${productId} from shop ${shopId}`);
-        
         const result = await printifyService.publishProduct(shopId, productId);
-        console.log('Publish result:', result);
         
         if (result.success) {
-            // Refresh the cache after successful publish
             await refreshCache();
             res.json(result);
         } else {
             res.status(400).json(result);
         }
     } catch (error) {
-        console.error('Failed to publish product:', {
-            productId: req.params.id,
-            error: error.message,
-            stack: error.stack
-        });
         res.status(500).json({
             error: 'Failed to publish product',
             details: error.message
@@ -225,35 +204,23 @@ router.post('/products/:id/publish', async (req, res) => {
 // Add route to delete a product
 router.delete('/products/:id', async (req, res) => {
     try {
-        console.log('Attempting to delete product:', req.params.id);
-        
         const shops = await printifyService.getShops();
         if (!shops || !shops.length) {
-            console.error('No shops found');
             return res.status(500).json({ error: 'No shop found' });
         }
         
         const shopId = shops[0].id;
         const productId = req.params.id;
         
-        console.log(`Deleting product ${productId} from shop ${shopId}`);
-        
         const result = await printifyService.deleteProduct(shopId, productId);
-        console.log('Delete result:', result);
         
         if (result.success) {
-            // Refresh the cache after successful deletion
             await refreshCache();
             res.json(result);
         } else {
             res.status(400).json(result);
         }
     } catch (error) {
-        console.error('Failed to delete product:', {
-            productId: req.params.id,
-            error: error.message,
-            stack: error.stack
-        });
         res.status(500).json({
             error: 'Failed to delete product',
             details: error.message
@@ -264,35 +231,23 @@ router.delete('/products/:id', async (req, res) => {
 // Add route to unpublish a product
 router.post('/products/:id/unpublish', async (req, res) => {
     try {
-        console.log('Attempting to unpublish product:', req.params.id);
-        
         const shops = await printifyService.getShops();
         if (!shops || !shops.length) {
-            console.error('No shops found');
             return res.status(500).json({ error: 'No shop found' });
         }
         
         const shopId = shops[0].id;
         const productId = req.params.id;
         
-        console.log(`Unpublishing product ${productId} from shop ${shopId}`);
-        
         const result = await printifyService.unpublishProduct(shopId, productId);
-        console.log('Unpublish result:', result);
         
         if (result.success) {
-            // Refresh the cache after successful unpublish
             await refreshCache();
             res.json(result);
         } else {
             res.status(400).json(result);
         }
     } catch (error) {
-        console.error('Failed to unpublish product:', {
-            productId: req.params.id,
-            error: error.message,
-            stack: error.stack
-        });
         res.status(500).json({
             error: 'Failed to unpublish product',
             details: error.message
@@ -305,15 +260,12 @@ router.get('/products/:id/status', async (req, res) => {
     try {
         const productId = req.params.id;
         
-        // Get the shop ID first
         const shops = await printifyService.getShops();
         if (!shops || !shops.length) {
-            console.error('❌ No shops found');
             return res.status(500).json({ error: 'No shop found' });
         }
         const shopId = shops[0].id;
 
-        // Get detailed product status
         const productStatus = await printifyService.getProductDetails(shopId, productId);
         
         res.json({
@@ -336,7 +288,6 @@ router.get('/products/:id/status', async (req, res) => {
             }
         });
     } catch (error) {
-        console.error('❌ Failed to check product status:', error);
         res.status(500).json({ 
             error: 'Failed to check product status',
             details: error.message
