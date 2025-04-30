@@ -193,7 +193,7 @@ const printifyService = {
             }
 
             // Proceed with publishing - sending the correct data structure
-            const response = await axios({
+            const publishResponse = await axios({
                 method: 'post',
                 url: `https://api.printify.com/v1/shops/${shopId}/products/${productId}/publish.json`,
                 headers: {
@@ -211,12 +211,13 @@ const printifyService = {
                 }
             });
 
-            console.log('Publish response:', response.data);
+            console.log(`[Product ${productId}] Initial publish response:`, publishResponse.data);
 
-            // If publish was successful, confirm the publishing succeeded
-            if (response.data.success) {
+            // If publish was successful, immediately confirm the publishing status
+            if (publishResponse.data.success) {
+                console.log(`[Product ${productId}] Publish successful, sending confirmation...`);
                 try {
-                    await axios({
+                    const confirmResponse = await axios({
                         method: 'post',
                         url: `https://api.printify.com/v1/shops/${shopId}/products/${productId}/publishing_succeeded.json`,
                         headers: {
@@ -224,10 +225,14 @@ const printifyService = {
                             'Content-Type': 'application/json'
                         }
                     });
-                    console.log('Successfully confirmed publishing status for product:', productId);
+                    console.log(`[Product ${productId}] Publishing confirmation successful:`, confirmResponse.data);
                 } catch (confirmError) {
-                    console.error('Failed to confirm publishing status:', confirmError);
-                    // Even if confirmation fails, we still return success since the publish worked
+                    console.error(`[Product ${productId}] Failed to confirm publishing status:`, {
+                        error: confirmError.message,
+                        status: confirmError.response?.status,
+                        data: confirmError.response?.data
+                    });
+                    // Continue with success response since initial publish worked
                 }
             }
 
@@ -236,7 +241,7 @@ const printifyService = {
                 message: 'Product published successfully',
                 productId,
                 shopId,
-                data: response.data
+                data: publishResponse.data
             };
         } catch (error) {
             console.error('Publish error:', {
