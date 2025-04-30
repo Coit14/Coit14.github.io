@@ -201,13 +201,15 @@ const printifyService = {
                     'Content-Type': 'application/json'
                 },
                 data: {
-                    title: true,
-                    description: true,
-                    images: true,
-                    variants: true,
-                    tags: true,
-                    keyFeatures: true,
-                    shipping_template: true
+                    publishing: {
+                        title: true,
+                        description: true,
+                        images: true,
+                        variants: true,
+                        tags: true,
+                        keyFeatures: true,
+                        shipping_template: true
+                    }
                 }
             });
 
