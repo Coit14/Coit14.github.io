@@ -120,7 +120,7 @@ const printifyService = {
         }
     },
 
-    calculateShipping: async (address, items) => {
+    calculateShipping: async (shopId, address, items) => {
         try {
             // Debug: Check available shops
             const shops = await printifyService.getShops();
@@ -136,9 +136,9 @@ const printifyService = {
                 }))
             });
 
-            // Check variants for each product
+            // Check variants for each product using provided shopId
             for (const item of items) {
-                const product = await printifyService.getProduct(item.shopId, item.id);
+                const product = await printifyService.getProduct(shopId, item.id);
                 console.log("Variant enabled:", product.variants.map(v => ({
                     id: v.id,
                     enabled: v.is_enabled
@@ -159,8 +159,19 @@ const printifyService = {
         }
     },
 
-    calculateTax: async (address, items) => {
+    calculateTax: async (shopId, address, items) => {
         try {
+            // Debug: Log tax calculation parameters
+            console.log("Tax Calculation Check:", {
+                shopId,
+                address,
+                items: items.map(i => ({
+                    product_id: i.id,
+                    variant_id: i.variantId,
+                    quantity: i.quantity
+                }))
+            });
+
             const response = await printifyApi.post('/orders/taxes', {
                 address,
                 items: items.map(item => ({
@@ -175,8 +186,20 @@ const printifyService = {
         }
     },
 
-    createOrder: async (address, items, shippingMethod) => {
+    createOrder: async (shopId, address, items, shippingMethod) => {
         try {
+            // Debug: Log order creation parameters
+            console.log("Order Creation Check:", {
+                shopId,
+                address,
+                items: items.map(i => ({
+                    product_id: i.id,
+                    variant_id: i.variantId,
+                    quantity: i.quantity
+                })),
+                shippingMethod
+            });
+
             const response = await printifyApi.post('/orders.json', {
                 external_id: `order_${Date.now()}`,
                 shipping_method: shippingMethod.id,

@@ -57,11 +57,20 @@ router.get('/products/:id', async (req, res) => {
 // Add these new routes
 router.post('/shipping-rates', async (req, res) => {
     try {
+        // Get the shop ID first
+        const shops = await printifyService.getShops();
+        if (!shops || !shops.length) {
+            console.error('No shops found');
+            return res.status(500).json({ error: 'No shop found' });
+        }
+        const shopId = shops[0].id;
+
         const { address, items } = req.body;
-        // Call Printify API to calculate shipping
-        const response = await printifyService.calculateShipping(address, items);
+        // Call Printify API to calculate shipping with shopId
+        const response = await printifyService.calculateShipping(shopId, address, items);
         res.json(response.data);
     } catch (error) {
+        console.error('Failed to calculate shipping:', error);
         res.status(500).json({ error: 'Failed to calculate shipping' });
     }
 });
