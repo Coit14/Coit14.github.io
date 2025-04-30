@@ -206,10 +206,7 @@ const printifyService = {
                     title: true,
                     description: true,
                     images: true,
-                    variants: true,
-                    tags: true,
-                    keyFeatures: true,
-                    shipping_template: true
+                    variants: true
                 }
             });
 
