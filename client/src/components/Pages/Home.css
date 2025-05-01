@@ -858,4 +858,32 @@
         left: 50% !important;
         transform: translateX(-50%);
     }
+}
+
+/* Stack container to enforce vertical rhythm */
+.stacked-section {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto 80px auto;
+  padding: 0 20px;
+}
+
+/* Optional divider between sections */
+.content-section {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.content-section:last-child {
+  border-bottom: none;
+}
+
+/* Updated image layout */
+.section-image {
+  flex: 1;
+  max-width: 600px;
+  height: auto;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
 } 
