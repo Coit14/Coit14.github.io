@@ -55,23 +55,19 @@
     color: rgba(245, 245, 243, 0.8);
     font-size: 0.85rem;
     font-weight: 700;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 /* Admin Link Styles */
 .admin-link {
-    position: absolute;
-    right: 15px;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
     text-decoration: none;
     opacity: 0.5;
     transition: opacity 0.3s ease;
     cursor: default;
     color: var(--white);
-    display: flex;
-    align-items: center;
+    z-index: 100;
 }
 
 .admin-link:hover {
