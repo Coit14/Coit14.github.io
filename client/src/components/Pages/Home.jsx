@@ -101,36 +101,38 @@ const Home = () => {
         </div>
       </section>
 
-      {/* SHOP */}
-      <section className="stacked-section grid-section shop-highlight">
-        <div className="grid-text">
-          <h2>Exclusive Coit's Merch</h2>
-          <p>Show your love for Oklahoma's favorite food truck with retro-inspired tees, hoodies, and collectibles.</p>
+      {/* Horizontal Sections */}
+      <section className="horizontal-section-wrapper">
+        <div className="info-section">
+          <img src="/images/About_IMG.png" alt="Booking" />
+          <h2>Book Our Food Truck</h2>
+          <p>Private events, weddings, and more — bring Coit's to your guests.</p>
+          <Link to="/book-event" className="cta-button">Book Now</Link>
+        </div>
+        
+        <div className="info-section">
+          <img 
+            src={shopImages[currentImageIndex]} 
+            alt="Shop Preview"
+            className={`shop-preview ${currentImageIndex === 0 ? 'visible' : ''}`}
+          />
+          <h2>Coit's Merch</h2>
+          <p>Rep the brand with vintage tees and hoodies straight from the truck.</p>
           <Link to="/shop" className="cta-button">Visit the Shop</Link>
         </div>
-        <div className="grid-gallery">
-          {shopImages.slice(0, 4).map((img, i) => (
-            <img
-              key={i}
-              src={img}
-              alt={`Merch ${i + 1}`}
-              className={`shop-preview ${currentImageIndex === i ? 'visible' : ''}`}
-            />
-          ))}
-        </div>
-      </section>
-
-      {/* BOOKING */}
-      <section className="stacked-section booking-highlight">
-        <div className="booking-content">
-          <div className="booking-image-wrapper">
-            <img src="/images/hero-image.jpg" alt="Coit's at an Event" />
-          </div>
-          <div className="booking-text">
-            <h2>Book Our Food Truck</h2>
-            <p>Private events, weddings, corporate lunches—bring the flavor of Coit's straight to your guests.</p>
-            <Link to="/book-event" className="cta-button">Book Now</Link>
-          </div>
+        
+        <div className="info-section">
+          <img src="/images/About_IMG.png" alt="Find Our Truck" />
+          <h2>Find Our Truck</h2>
+          <p>We post our daily truck locations on Facebook. Check in and come find us!</p>
+          <a 
+            href="https://www.facebook.com/coitsfoodtruck/" 
+            className="cta-button" 
+            target="_blank" 
+            rel="noopener noreferrer"
+          >
+            Visit Facebook
+          </a>
         </div>
       </section>
     </div>

@@ -890,7 +890,7 @@
 
 .hero-banner {
   height: 80vh;
-  background: url('../../../public/images/About_IMG.png') no-repeat center center / cover;
+  background: url('/images/hero-image.png') no-repeat center center / cover;
   position: relative;
   display: flex;
   align-items: center;
@@ -1061,5 +1061,88 @@
   .grid-text p,
   .booking-text p {
     font-size: 1.1rem;
+  }
+}
+
+/* Horizontal Sections */
+.horizontal-section-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 20px;
+  padding: 40px 5%;
+  background: #f9f9f9;
+  flex-wrap: wrap;
+}
+
+.info-section {
+  flex: 1;
+  min-width: 280px;
+  max-width: 33%;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+}
+
+.info-section img {
+  width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-bottom: 15px;
+  transition: transform 0.3s ease;
+}
+
+.info-section img:hover {
+  transform: scale(1.02);
+}
+
+.info-section h2 {
+  font-size: 1.6rem;
+  color: var(--brand-red);
+  margin-bottom: 10px;
+}
+
+.info-section p {
+  font-size: 1rem;
+  margin-bottom: 15px;
+  color: #444;
+  line-height: 1.4;
+}
+
+.shop-preview {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.shop-preview.visible {
+  opacity: 1;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .horizontal-section-wrapper {
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .info-section {
+    max-width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .hero-overlay {
+    margin: 0 20px;
+    padding: 30px;
+  }
+
+  .hero-overlay h1 {
+    font-size: 2.2rem;
+  }
+
+  .hero-overlay p {
+    font-size: 1rem;
   }
 } 
