@@ -67,7 +67,6 @@ const Home = () => {
       });
     }, observerOptions);
 
-    // Observe all animate-in elements
     document.querySelectorAll('.animate-in').forEach(el => {
       observer.observe(el);
     });
@@ -91,73 +90,49 @@ const Home = () => {
 
   return (
     <div className="home-content">
-      {/* Hero Section */}
-      <div className="stacked-section">
-        <section className="content-section">
-          <div className="section-content left animate-in animate-delay-1">
-            <h2>Oklahoma's Favorite Since 1954</h2>
-            <p>
-            Coit's has been serving Oklahoma since 1954. Our food truck still continues as a family-owned and operated business.
-            We proudly serve our original Schwab's chili and hot dogs alongside our famous handmade root beer.
-            </p>
-            <Link to="/about" className="cta-button">Learn More</Link>
-          </div>
-        </section>
-      </div>
+      {/* HERO */}
+      <section className="hero-banner">
+        <div className="hero-overlay">
+          <h1>Oklahoma's Favorite Since 1954</h1>
+          <p>
+            Family-owned and serving Schwab's chili dogs, handmade root beer, and Oklahoma pride since day one.
+          </p>
+          <Link to="/about" className="cta-button hero-btn">Learn More</Link>
+        </div>
+      </section>
 
-      {/* Shop Section */}
-      <div className="stacked-section">
-        <section className="content-section shop-section">
-          <div className="section-image left animate-in animate-delay-3">
-            <div className="cycling-images-container">
-              {shopImages.map((img, index) => (
-                <img 
-                  key={index}
-                  src={img}
-                  alt={`Coit's Merchandise ${index + 1}`}
-                  className={`shop-image ${currentImageIndex === index ? 'active' : ''}`}
-                  style={{ 
-                    opacity: currentImageIndex === index ? 1 : 0,
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    transition: 'opacity 0.5s ease-in-out'
-                  }}
-                />
-              ))}
-            </div>
-          </div>
-          <div className="section-content right animate-in animate-delay-4">
-            <h2>Exclusive Merchandise</h2>
-            <p>
-              Check out our shop for exclusive Coit's merchandise! From t-shirts 
-              to collectibles, show your love for Oklahoma's favorite food truck.
-            </p>
-            <Link to="/shop" className="cta-button">Visit the Shop</Link>
-          </div>
-        </section>
-      </div>
+      {/* SHOP */}
+      <section className="stacked-section grid-section shop-highlight">
+        <div className="grid-text">
+          <h2>Exclusive Coit's Merch</h2>
+          <p>Show your love for Oklahoma's favorite food truck with retro-inspired tees, hoodies, and collectibles.</p>
+          <Link to="/shop" className="cta-button">Visit the Shop</Link>
+        </div>
+        <div className="grid-gallery">
+          {shopImages.map((img, i) => (
+            <img
+              key={i}
+              src={img}
+              alt={`Merch ${i + 1}`}
+              className={`shop-preview ${currentImageIndex === i ? 'visible' : ''}`}
+            />
+          ))}
+        </div>
+      </section>
 
-      {/* Booking Section with updated styling */}
-      <div className="stacked-section">
-        <section className="content-section booking-section">
-          <div className="section-content left animate-in animate-delay-5">
-            <h2>Book Us for Your Event</h2>
-            <p>
-              Want to make your event special? Book Coit's Food Truck for your next 
-              gathering! We cater private events, corporate functions, weddings, and more.
-            </p>
+      {/* BOOKING */}
+      <section className="stacked-section booking-highlight">
+        <div className="booking-content">
+          <div className="booking-image-wrapper">
+            <img src="/images/hero-image.jpg" alt="Coit's at an Event" />
+          </div>
+          <div className="booking-text">
+            <h2>Book Our Food Truck</h2>
+            <p>Private events, weddings, corporate lunches—bring the flavor of Coit's straight to your guests.</p>
             <Link to="/book-event" className="cta-button">Book Now</Link>
           </div>
-          <div className="section-image right animate-in animate-delay-6">
-            <img 
-              src="/images/hero-image.jpg" 
-              alt="Coit's Food Truck at an event" 
-              className="booking-image"
-            />
-          </div>
-        </section>
-      </div>
+        </div>
+      </section>
     </div>
   );
 };
