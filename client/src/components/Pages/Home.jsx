@@ -109,7 +109,7 @@ const Home = () => {
           <Link to="/shop" className="cta-button">Visit the Shop</Link>
         </div>
         <div className="grid-gallery">
-          {shopImages.map((img, i) => (
+          {shopImages.slice(0, 4).map((img, i) => (
             <img
               key={i}
               src={img}

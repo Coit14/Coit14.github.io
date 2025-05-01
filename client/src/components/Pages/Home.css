@@ -899,18 +899,20 @@
 }
 
 .hero-overlay {
-  background: rgba(0, 0, 0, 0.45);
+  background: rgba(163, 52, 47, 0.85);
   padding: 40px;
-  border-radius: 12px;
+  border-radius: 8px;
   text-align: center;
   color: white;
   max-width: 700px;
-  box-shadow: 0 0 40px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
 .hero-overlay h1 {
   font-size: 3.5rem;
   margin-bottom: 20px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
 }
 
 .hero-overlay p {
@@ -922,12 +924,12 @@
 .hero-btn {
   background: var(--white);
   color: var(--brand-red);
-  border: 2px solid white;
+  border: 2px solid var(--white);
 }
 
 .hero-btn:hover {
   background: transparent;
-  color: white;
+  color: var(--white);
 }
 
 .grid-section {
@@ -935,13 +937,16 @@
   grid-template-columns: 1fr 1fr;
   gap: 60px;
   align-items: center;
-  padding: 100px 10%;
+  padding: 80px 10%;
+  background-color: #fdfdfd;
 }
 
 .grid-text h2 {
   font-size: 2.8rem;
   margin-bottom: 20px;
   color: var(--brand-red);
+  font-weight: 800;
+  letter-spacing: 0.5px;
 }
 
 .grid-text p {
@@ -953,26 +958,27 @@
 .grid-gallery {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 15px;
+  gap: 20px;
 }
 
 .shop-preview {
   width: 100%;
-  border-radius: 12px;
+  height: 250px;
+  border-radius: 8px;
   object-fit: cover;
   opacity: 0;
   transform: scale(0.95);
-  transition: opacity 0.5s ease, transform 0.5s ease;
+  transition: all 0.3s ease;
 }
 
 .shop-preview.visible {
   opacity: 1;
-  transform: scale(1);
+  transform: scale(1.05);
 }
 
 .booking-highlight {
-  background: linear-gradient(135deg, #ffffff, #f4f4f4);
-  padding: 100px 10%;
+  background: linear-gradient(135deg, #ffffff 0%, #f3f3f3 100%);
+  padding: 80px 10%;
 }
 
 .booking-content {
@@ -984,9 +990,9 @@
 
 .booking-image-wrapper {
   flex: 1;
-  border-radius: 16px;
+  border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
 }
 
 .booking-image-wrapper img {
@@ -1003,6 +1009,8 @@
   font-size: 2.8rem;
   margin-bottom: 20px;
   color: var(--brand-red);
+  font-weight: 800;
+  letter-spacing: 0.5px;
 }
 
 .booking-text p {
@@ -1011,18 +1019,30 @@
   line-height: 1.6;
 }
 
-@media (max-width: 1024px) {
-  .grid-section, .booking-content {
-    flex-direction: column;
+@media (max-width: 768px) {
+  .grid-section {
     grid-template-columns: 1fr;
+    padding: 60px 5%;
+    gap: 40px;
   }
 
   .grid-gallery {
-    grid-template-columns: 1fr 1fr;
+    order: -1;
   }
 
   .booking-content {
     flex-direction: column;
+    gap: 40px;
+  }
+
+  .booking-image-wrapper {
+    width: 100%;
+    aspect-ratio: 16/9;
+  }
+
+  .hero-overlay {
+    margin: 0 20px;
+    padding: 30px;
   }
 
   .hero-overlay h1 {
@@ -1030,6 +1050,16 @@
   }
 
   .hero-overlay p {
-    font-size: 1rem;
+    font-size: 1.1rem;
+  }
+
+  .grid-text h2,
+  .booking-text h2 {
+    font-size: 2.2rem;
+  }
+
+  .grid-text p,
+  .booking-text p {
+    font-size: 1.1rem;
   }
 } 
