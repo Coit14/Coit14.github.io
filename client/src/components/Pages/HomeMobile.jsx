@@ -91,7 +91,7 @@ const HomeMobile = () => {
       <section className="mobile-section">
         <div className="mobile-image-container animate-in">
           <img 
-            src="/images/menu.jpg" 
+            src="/images/hero-image.jpg" 
             alt="Coit's Food Truck at an event" 
             className="mobile-booking-image"
           />
