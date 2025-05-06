@@ -101,41 +101,62 @@ const printifyService = {
         try {
             console.log(`📦 Requesting shipping rates for ${items.length} item(s)`);
             
-            // Enhanced product and variant verification
-            for (const item of items) {
-                const product = await printifyService.getProduct(shopId, item.id);
-                const variant = product.variants.find(v => v.id === item.variantId);
-                
-                if (!variant) {
-                    throw new Error(`Variant ${item.variantId} not found in product ${item.id}`);
-                }
+            // Get shipping rates for each item
+            const shippingRates = await Promise.all(items.map(async (item) => {
+                try {
+                    // Get full product data to extract blueprint and provider IDs
+                    const product = await printifyService.getProduct(shopId, item.id);
+                    const variant = product.variants.find(v => v.id === item.variantId);
+                    
+                    if (!variant) {
+                        throw new Error(`Variant ${item.variantId} not found in product ${item.id}`);
+                    }
 
-                if (!variant.is_enabled || !variant.is_available) {
-                    throw new Error(`Variant ${item.variantId} is not available or enabled for product ${item.id}`);
+                    if (!variant.is_enabled || !variant.is_available) {
+                        throw new Error(`Variant ${item.variantId} is not available or enabled for product ${item.id}`);
+                    }
+
+                    const blueprintId = product.blueprint_id;
+                    const printProviderId = product.print_provider_id;
+
+                    console.log(`[Shipping] Product: ${product.title}, blueprint: ${blueprintId}, provider: ${printProviderId}, variant: ${item.variantId}`);
+
+                    // Call V2 shipping endpoint
+                    const response = await printifyApi.get(`/v2/catalog/blueprints/${blueprintId}/print_providers/${printProviderId}/shipping/standard.json`);
+                    
+                    // Find shipping rate for the variant and country
+                    const shippingRate = response.data.find(rate => 
+                        rate.variant_id === item.variantId && 
+                        (rate.country === address.country || rate.country === 'REST_OF_THE_WORLD')
+                    );
+
+                    if (!shippingRate) {
+                        console.warn(`⚠️ No shipping rate found for variant ${item.variantId} to ${address.country}`);
+                        return null;
+                    }
+
+                    return {
+                        id: `${item.id}-${item.variantId}`,
+                        name: 'Standard Shipping',
+                        cost: shippingRate.first_item.amount,
+                        min_delivery_days: shippingRate.handling_time.from,
+                        max_delivery_days: shippingRate.handling_time.to
+                    };
+                } catch (error) {
+                    console.error(`❌ Error getting shipping rate for item ${item.id}:`, error.message);
+                    return null;
                 }
+            }));
+
+            // Filter out any null results and combine rates
+            const validRates = shippingRates.filter(rate => rate !== null);
+            
+            if (validRates.length === 0) {
+                throw new Error('No valid shipping rates found for any items');
             }
 
-            const response = await printifyApi.post('/v1/orders/shipping-rates', {
-                address: {
-                    first_name: address.first_name,
-                    last_name: address.last_name,
-                    email: address.email,
-                    country: address.country,
-                    region: address.region,
-                    city: address.city,
-                    address1: address.address1,
-                    address2: address.address2,
-                    zip: address.zip
-                },
-                items: items.map(item => ({
-                    product_id: item.id,
-                    variant_id: item.variantId,
-                    quantity: item.quantity
-                }))
-            });
-
-            console.log('✅ Shipping rates received:', response.data);
-            return response.data;
+            console.log('✅ Shipping rates received:', validRates);
+            return validRates;
         } catch (error) {
             console.error("❌ Shipping API error:", {
                 status: error.response?.status,

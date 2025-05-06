@@ -85,7 +85,7 @@ router.post('/shipping-rates', async (req, res) => {
         // Call Printify API to calculate shipping with shopId
         const response = await printifyService.calculateShipping(shopId, address, items);
         console.log('✅ Shipping calculation successful');
-        res.json(response.data);
+        res.json(response);
     } catch (error) {
         res.status(500).json({ 
             error: 'Failed to calculate shipping',
