@@ -19,22 +19,32 @@ const ProductModalMobile = ({ productId, onClose }) => {
 
     // Fetch product data when modal opens
     useEffect(() => {
+        if (!productId) {
+            console.error('ProductModalMobile: No productId provided');
+            setError('Invalid product ID');
+            setIsLoading(false);
+            return;
+        }
+
         const fetchProduct = async () => {
             try {
-                const productData = await printService.getProduct(productId);
-                setProduct(productData);
+                setIsLoading(true);
                 setError(null);
+                const productData = await printService.getProduct(productId);
+                if (!productData) {
+                    throw new Error('No product data received');
+                }
+                setProduct(productData);
             } catch (err) {
                 console.error('Failed to fetch product:', err);
                 setError('Failed to load product details. Please try again.');
+                setProduct(null);
             } finally {
                 setIsLoading(false);
             }
         };
 
-        if (productId) {
-            fetchProduct();
-        }
+        fetchProduct();
     }, [productId]);
 
     const handleAddToCart = () => {
