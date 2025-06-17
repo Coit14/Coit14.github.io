@@ -16,11 +16,11 @@
     width: 95%;
     max-width: 500px;
     background: white;
-    border-radius: 12px;
+    border-radius: 16px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 32px rgba(0,0,0,0.10);
 }
 
 .mobile-modal-close {
@@ -41,56 +41,62 @@
     justify-content: center;
 }
 
-.mobile-image-carousel {
+.mobile-image-container {
     position: relative;
     width: 100%;
     height: 50vh;
     min-height: 250px;
     max-height: 60vh;
-    background: #f5f5f5;
-    overflow: hidden;
-    flex-shrink: 0;
+    background: #f8f8f8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.mobile-image-carousel img {
-    position: absolute;
-    top: 0;
-    left: 0;
+.mobile-product-image {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.25s;
 }
 
-.mobile-image-carousel img.active {
-    opacity: 1;
+.mobile-product-image.fade {
+    opacity: 0.2;
 }
 
-.mobile-image-dots {
+.mobile-image-nav {
     position: absolute;
-    bottom: 1rem;
-    left: 0;
-    right: 0;
-    display: flex;
-    justify-content: center;
-    gap: 0.5rem;
-}
-
-.dot {
-    width: 12px;
-    height: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.95);
+    border: 2px solid var(--brand-red);
+    color: var(--brand-red);
+    font-size: 1.5rem;
+    width: 2.5rem;
+    height: 2.5rem;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
-    margin: 0 4px;
-    border: 2px solid transparent;
-    transition: all 0.2s ease;
+    z-index: 2;
+    transition: background 0.2s, color 0.2s, border 0.2s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    opacity: 0.92;
 }
 
-.dot.active {
-    background: white;
-    transform: scale(1.2);
+.mobile-image-nav.prev {
+    left: 0.5rem;
+}
+
+.mobile-image-nav.next {
+    right: 0.5rem;
+}
+
+.mobile-image-nav:active {
+    background: var(--brand-red);
+    color: white;
+    border-color: var(--brand-red);
 }
 
 .mobile-product-info {
@@ -100,8 +106,10 @@
 }
 
 .mobile-product-info h2 {
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
+    font-size: 1.4rem;
+    margin: 0 0 0.5rem 0;
+    font-weight: 700;
+    color: var(--brand-dark);
 }
 
 .product-type {
@@ -111,12 +119,6 @@
     line-height: 1.4;
 }
 
-.mobile-price {
-    font-size: 1.25rem;
-    color: var(--brand-red);
-    margin-bottom: 1.5rem;
-}
-
 .mobile-color-selection,
 .mobile-size-selection {
     margin-bottom: 1.5rem;
@@ -124,60 +126,65 @@
 
 .mobile-color-selection h3,
 .mobile-size-selection h3 {
-    font-size: 1rem;
+    font-size: 1.1rem;
+    color: var(--brand-red);
     margin-bottom: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
 }
 
 .mobile-color-options {
     display: flex;
-    gap: 1rem;
-    overflow-x: auto;
-    padding-bottom: 0.5rem;
-}
-
-.mobile-color-option {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-wrap: wrap;
     gap: 0.5rem;
+}
+
+.mobile-color-button {
+    border: 2px solid var(--brand-red);
+    background: #fff;
+    color: var(--brand-red);
+    border-radius: 6px;
+    padding: 0.5rem 1.2rem;
+    font-weight: 600;
+    font-size: 1rem;
     cursor: pointer;
+    transition: background 0.2s, color 0.2s;
 }
 
-.mobile-color-option img {
-    width: 60px;
-    height: 60px;
-    border-radius: 8px;
-    border: 2px solid transparent;
-}
-
-.mobile-color-option.selected img {
-    border-color: var(--brand-red);
-}
-
-.mobile-color-option span {
-    font-size: 0.875rem;
-    color: #666;
+.mobile-color-button.selected {
+    background: var(--brand-red);
+    color: #fff;
 }
 
 .mobile-size-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
     gap: 0.5rem;
 }
 
 .mobile-size-button {
-    padding: 0.75rem;
-    border: 1px solid #ddd;
-    background: white;
-    border-radius: 4px;
+    border: 2px solid var(--brand-red);
+    background: #fff;
+    color: var(--brand-red);
+    border-radius: 6px;
+    padding: 0.5rem 1.2rem;
+    font-weight: 600;
+    font-size: 1rem;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: background 0.2s, color 0.2s;
 }
 
 .mobile-size-button.selected {
     background: var(--brand-red);
-    border-color: var(--brand-red);
-    color: white;
+    color: #fff;
+}
+
+.mobile-price {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--brand-red);
+    margin: 1.5rem 0 1rem 0;
+    text-align: center;
 }
 
 .mobile-add-to-cart-container {
@@ -196,69 +203,22 @@
     background: var(--brand-red);
     color: white;
     border: none;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: 500;
+    border-radius: 30px;
+    font-size: 1.1rem;
+    font-weight: 700;
     cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    transition: background 0.2s, box-shadow 0.2s;
+}
+
+.mobile-add-to-cart-button:active:not(.disabled) {
+    background: var(--brand-hover-red);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.10);
 }
 
 .mobile-add-to-cart-button.disabled {
     background: #ccc;
     cursor: not-allowed;
-}
-
-.mobile-image-nav {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    font-size: 24px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 2;
-    padding: 0;
-    line-height: 1;
-    touch-action: manipulation;
-}
-
-.mobile-image-nav.prev {
-    left: 10px;
-}
-
-.mobile-image-nav.next {
-    right: 10px;
-}
-
-.mobile-image-nav:active {
-    background: rgba(0, 0, 0, 0.7);
-    transform: translateY(-50%) scale(0.95);
-}
-
-@keyframes swipeHint {
-    0% { opacity: 0; transform: translateX(-30px); }
-    50% { opacity: 1; transform: translateX(0); }
-    100% { opacity: 0; transform: translateX(30px); }
-}
-
-.swipe-hint {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
-    background: rgba(0, 0, 0, 0.5);
-    padding: 10px 20px;
-    border-radius: 20px;
-    pointer-events: none;
-    animation: swipeHint 2s ease-in-out;
-    opacity: 0;
 }
 
 @supports (-webkit-touch-callout: none) {

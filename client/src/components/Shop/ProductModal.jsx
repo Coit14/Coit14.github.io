@@ -144,14 +144,19 @@ const ProductModal = ({ product, onClose }) => {
         }
     };
 
+    const handleClose = () => {
+        setIsCartOpen(true);
+        onClose();
+    };
+
     if (isMobile) {
-        return <ProductModalMobile product={product} onClose={onClose} />;
+        return <ProductModalMobile product={product} onClose={handleClose} />;
     }
 
     return (
-        <div className="modal-overlay" onClick={onClose}>
+        <div className="modal-overlay" onClick={handleClose}>
             <div className="modal-content product-modal-styled" onClick={e => e.stopPropagation()}>
-                <button className="modal-close" onClick={onClose}>&times;</button>
+                <button className="modal-close" onClick={handleClose}>&times;</button>
                 <div className="modal-header" style={{ marginBottom: '1.5rem' }}>
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.5rem' }}>
                         <h2 style={{ margin: 0, fontWeight: 700, fontSize: '1.4rem', color: 'var(--brand-dark)' }}>{productName}</h2>
@@ -214,15 +219,15 @@ const ProductModal = ({ product, onClose }) => {
                                 </div>
                             </div>
                         )}
-                        {/* Price just above Add to Bag button */}
-                        <div className="styled-price prominent-price" style={{ margin: '2rem 0 0.5rem 0', textAlign: 'center' }}>
+                        {/* Price display moved below color/size selection */}
+                        <div className="styled-price prominent-price" style={{ margin: '1.5rem 0 1rem 0', textAlign: 'center' }}>
                             {formatPrice(priceToShow)}
                         </div>
                         <button 
                             className={`add-to-cart-button styled-add-to-cart ${!selectedVariant ? 'disabled' : ''}`}
                             disabled={!selectedVariant}
                             onClick={handleAddToCart}
-                            style={{ width: '100%', margin: '0 0 1.5rem 0', alignSelf: 'center' }}
+                            style={{ width: '100%', margin: '0 0 1rem 0', alignSelf: 'center' }}
                         >
                             Add to Bag
                         </button>

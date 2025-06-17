@@ -14,15 +14,37 @@ const ProductCard = ({ product, onClick }) => {
         return Math.min(...prices);
     };
 
+    const getFirstVariantImage = () => {
+        if (!product.sync_variants?.length) return null;
+        
+        // Get the first variant
+        const firstVariant = product.sync_variants[0];
+        
+        // If the variant has files, look for a valid preview image
+        if (firstVariant.files && firstVariant.files.length > 1) {
+            const validPreview = firstVariant.files
+                .slice(1) // Skip the first file (usually the uploaded design)
+                .find(f => f.type === 'preview' && f.preview_url && f.visible !== false);
+            
+            if (validPreview) {
+                return validPreview.preview_url;
+            }
+        }
+        
+        // Fallback to product thumbnail
+        return product.sync_product?.thumbnail_url;
+    };
+
     const startingPrice = getStartingPrice();
+    const productImage = getFirstVariantImage();
 
     return (
         <div className="product-card">
             <div className="product-image-container">
-                {product.sync_product?.thumbnail_url ? (
+                {productImage ? (
                     <img
-                        src={product.sync_product.thumbnail_url}
-                        alt={product.sync_product.name || 'Coit\'s product'}
+                        src={productImage}
+                        alt={product.sync_product?.name || 'Coit\'s product'}
                         className="product-image"
                         loading="lazy"
                     />
