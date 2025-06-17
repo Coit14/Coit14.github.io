@@ -27,10 +27,8 @@ const ProductModal = ({ product, onClose }) => {
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
-    if (!product) return null;
-
-    const variants = product.sync_variants || [];
-    const productInfo = product.sync_product || {};
+    const variants = product?.sync_variants || [];
+    const productInfo = product?.sync_product || {};
     const imageUrl = productInfo.thumbnail_url;
     const productName = productInfo.name;
     const description = productInfo.description || '';
@@ -75,6 +73,8 @@ const ProductModal = ({ product, onClose }) => {
             setSelectedSize(sizeOptions[0]);
         }
     }, [product]);
+
+    if (!product) return null;
 
     const getStartingPrice = () => {
         if (!variants.length) return null;
