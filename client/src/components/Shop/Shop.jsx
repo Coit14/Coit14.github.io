@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useCart } from '../../contexts/CartContext';
 import ProductModal from './ProductModal';
 import './Shop.css';
-import { printifyService } from '../../services/printifyService';
+import * as printService from '../../services/printfulService';
 import LoadingSpinner from '../common/LoadingSpinner';
 
 const Shop = () => {
@@ -32,7 +32,7 @@ const Shop = () => {
             }
 
             try {
-                const fetchedProducts = await printifyService.getPublishedProducts();
+                const fetchedProducts = await printService.getPublishedProducts();
                 if (fetchedProducts && Array.isArray(fetchedProducts)) {
                     setProducts(fetchedProducts);
                     setError(null);

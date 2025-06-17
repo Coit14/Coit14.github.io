@@ -1,9 +1,11 @@
-import printifyService from '../services/printifyService.js';
+// TODO: Update cache logic for Printful integration. Printify logic removed.
 
 // Cache storage
 let cachedProducts = null;
 let lastCacheTime = null;
 const CACHE_DURATION = 24 * 60 * 60 * 1000; // 24 hours
+
+// Placeholder for future Printful cache logic
 
 // Validate individual product
 function isValidProduct(product) {
@@ -145,22 +147,15 @@ export async function initializeCache() {
 
 // Get products from cache
 export function getCachedProducts() {
-    if (!cachedProducts) throw new Error('Cache not initialized');
     return cachedProducts;
 }
 
 // Force refresh
 export async function refreshCache() {
-    try {
-        console.log('Manual cache refresh requested...');
-        cachedProducts = await fetchProductsFromPrintify();
-        lastCacheTime = Date.now();
-        console.log('Manual cache refresh complete');
-        return true;
-    } catch (error) {
-        console.error('Manual cache refresh failed:', error.message);
-        throw error;
-    }
+    // TODO: Implement Printful product caching
+    cachedProducts = [];
+    lastCacheTime = Date.now();
+    return true;
 }
 
 // Cache health check

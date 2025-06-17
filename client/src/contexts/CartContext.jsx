@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { printifyService } from '../services/printifyService';
+import * as printService from '../services/printfulService';
 
 const CartContext = createContext();
 
@@ -20,7 +20,7 @@ export const CartProvider = ({ children }) => {
             try {
                 setIsLoading(true);
                 console.log('Preloading products...');
-                const fetchedProducts = await printifyService.getPublishedProducts();
+                const fetchedProducts = await printService.getPublishedProducts();
                 console.log('Preloaded products:', fetchedProducts);
                 setProducts(fetchedProducts);
             } catch (error) {

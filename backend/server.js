@@ -2,7 +2,8 @@ import express from 'express';
 import cors from 'cors';
 import fetch from 'node-fetch';
 import { initializeCache, getCachedProducts } from './services/cacheService.js';
-import printifyRoutes from './routes/printifyRoutes.js';
+// import printifyRoutes from './routes/printifyRoutes.js';
+import printfulRoutes from './routes/printfulRoutes.js';
 
 // Import route handlers - keeping these as they're actively used
 import { handler as productsHandler } from './api/products.js';
@@ -25,7 +26,8 @@ app.use((req, res, next) => {
 });
 
 // Use printify routes
-app.use('/api/printify', printifyRoutes);
+// app.use('/api/printify', printifyRoutes);
+app.use('/api/printful', printfulRoutes);
 
 // Initialize cache before setting up routes
 console.log('Initializing product cache...');

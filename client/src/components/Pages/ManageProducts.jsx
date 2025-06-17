@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { printifyService } from '../../services/printifyService';
+import * as printService from '../../services/printfulService';
 import LoadingSpinner from '../common/LoadingSpinner';
 import './ManageProducts.css';
 
@@ -13,7 +13,7 @@ const ManageProducts = () => {
     useEffect(() => {
         const loadProducts = async () => {
             try {
-                const fetchedProducts = await printifyService.getPublishedProducts();
+                const fetchedProducts = await printService.getPublishedProducts();
                 if (fetchedProducts && Array.isArray(fetchedProducts)) {
                     setProducts(fetchedProducts);
                     setError(null);
@@ -38,70 +38,6 @@ const ManageProducts = () => {
         const sizes = new Set(product.variants.map(v => v.options?.size)).size;
         
         return `${colors} colors • ${sizes} sizes • Total ${product.variants.length} variants`;
-    };
-
-    const publishProduct = async (id) => {
-        try {
-            setPublishingProducts(prev => new Set([...prev, id]));
-            const response = await printifyService.publishProduct(id);
-            if (response.success) {
-                setProducts(products.map(product => 
-                    product.id === id ? { ...product, status: 'Published' } : product
-                ));
-                alert('Product and all its variants published successfully');
-            } else {
-                // Handle specific error cases
-                const errorMessage = response.error || 'Failed to publish product';
-                if (response.status === 400) {
-                    alert(`Publishing failed: ${errorMessage}\n\nPlease ensure the product has:\n- A title\n- A description\n- At least one variant`);
-                } else {
-                    alert(`Publishing failed: ${errorMessage}`);
-                }
-            }
-        } catch (error) {
-            console.error('Error publishing product:', error);
-            alert('Failed to publish product: ' + (error.message || 'Unknown error occurred'));
-        } finally {
-            setPublishingProducts(prev => {
-                const next = new Set(prev);
-                next.delete(id);
-                return next;
-            });
-        }
-    };
-
-    const unpublishProduct = async (id) => {
-        try {
-            const response = await printifyService.unpublishProduct(id);
-            if (response.success) {
-                setProducts(products.map(product => 
-                    product.id === id ? { ...product, status: 'Unpublished' } : product
-                ));
-                alert('Product and all its variants unpublished successfully');
-            } else {
-                alert(`Unpublishing failed: ${response.error || 'Unknown error occurred'}`);
-            }
-        } catch (error) {
-            console.error('Error unpublishing product:', error);
-            alert('Failed to unpublish product: ' + (error.message || 'Unknown error occurred'));
-        }
-    };
-
-    const deleteProduct = async (id) => {
-        if (!window.confirm('Are you sure you want to delete this product and all its variants?')) {
-            return;
-        }
-        
-        try {
-            const response = await printifyService.deleteProduct(id);
-            if (response.success) {
-                setProducts(products.filter(product => product.id !== id));
-                alert('Product and all its variants deleted successfully');
-            }
-        } catch (error) {
-            console.error('Error deleting product:', error);
-            alert('Failed to delete product and its variants');
-        }
     };
 
     if (isLoading) {
@@ -173,29 +109,7 @@ const ManageProducts = () => {
                                 {publishingProducts.has(product.id) ? 'Publishing...' : (product.status || 'Unpublished')}
                             </td>
                             <td>
-                                <button 
-                                    onClick={() => unpublishProduct(product.id)}
-                                    title="Unpublish all variants"
-                                    className="unpublish-button"
-                                    disabled={publishingProducts.has(product.id)}
-                                >
-                                    Unpublish All
-                                </button>
-                                <button 
-                                    onClick={() => publishProduct(product.id)}
-                                    title="Publish all variants"
-                                    disabled={publishingProducts.has(product.id)}
-                                >
-                                    {publishingProducts.has(product.id) ? 'Publishing...' : 'Publish All'}
-                                </button>
-                                <button 
-                                    onClick={() => deleteProduct(product.id)}
-                                    title="Delete product and all its variants"
-                                    className="delete-button"
-                                    disabled={publishingProducts.has(product.id)}
-                                >
-                                    Delete All
-                                </button>
+                                {/* Remove publish/unpublish/delete logic for now */}
                             </td>
                         </tr>
                     ))}
