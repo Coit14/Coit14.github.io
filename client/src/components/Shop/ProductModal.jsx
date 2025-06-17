@@ -82,6 +82,7 @@ const ProductModal = ({ product, onClose }) => {
         return Math.min(...prices);
     };
     const startingPrice = getStartingPrice();
+    const priceToShow = selectedVariant ? selectedVariant.retail_price : startingPrice;
 
     const handleAddToCart = () => {
         if (selectedVariant) {
@@ -117,8 +118,11 @@ const ProductModal = ({ product, onClose }) => {
         <div className="modal-overlay" onClick={onClose}>
             <div className="modal-content product-modal-styled" onClick={e => e.stopPropagation()}>
                 <button className="modal-close" onClick={onClose}>&times;</button>
-                <div className="modal-header">
-                    <h2>{productName}</h2>
+                <div className="modal-header" style={{ marginBottom: '1.5rem' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.5rem' }}>
+                        <h2 style={{ margin: 0, fontWeight: 700, fontSize: '1.4rem', color: 'var(--brand-dark)' }}>{productName}</h2>
+                        <span style={{ fontWeight: 700, fontSize: '1.2rem', color: 'var(--brand-red)' }}>{formatPrice(priceToShow)}</span>
+                    </div>
                     {description && (
                         <div className="product-type" dangerouslySetInnerHTML={{ __html: description }} />
                     )}
@@ -132,11 +136,6 @@ const ProductModal = ({ product, onClose }) => {
                         />
                     </div>
                     <div className="product-details styled-details">
-                        <div className="product-price-modal styled-price">
-                            {startingPrice && (
-                                <span>From {formatPrice(startingPrice)}</span>
-                            )}
-                        </div>
                         {/* Color selection if multiple colors */}
                         {colorOptions.length > 1 && (
                             <div className="color-options-section">
@@ -147,7 +146,6 @@ const ProductModal = ({ product, onClose }) => {
                                             key={color}
                                             className={`color-swatch-btn${selectedColor === color ? ' selected' : ''}`}
                                             onClick={() => setSelectedColor(color)}
-                                            style={{ background: selectedColor === color ? '#b12220' : '#fff', color: selectedColor === color ? '#fff' : '#222', border: '1.5px solid #b12220', marginRight: 8, marginBottom: 8, padding: '0.5rem 1.2rem', borderRadius: 6, fontWeight: 600, cursor: 'pointer' }}
                                         >
                                             {color}
                                         </button>
@@ -155,8 +153,8 @@ const ProductModal = ({ product, onClose }) => {
                                 </div>
                             </div>
                         )}
-                        {/* Size selection if multiple sizes and not all one size */}
-                        {!allOneSize && sizeOptions.length > 1 && (
+                        {/* Size selection if more than one unique size */}
+                        {sizeOptions.length > 1 && (
                             <div className="size-options-section">
                                 <h3>Choose Size</h3>
                                 <div className="size-grid styled-size-grid">
@@ -165,20 +163,11 @@ const ProductModal = ({ product, onClose }) => {
                                             key={size}
                                             className={`size-button${selectedSize === size ? ' selected' : ''}`}
                                             onClick={() => setSelectedSize(size)}
-                                            style={{ background: selectedSize === size ? '#b12220' : '#fff', color: selectedSize === size ? '#fff' : '#222', border: '1.5px solid #b12220', marginRight: 8, marginBottom: 8, padding: '0.5rem 1.2rem', borderRadius: 6, fontWeight: 600, cursor: 'pointer' }}
                                         >
                                             {size}
                                         </button>
                                     ))}
                                 </div>
-                            </div>
-                        )}
-                        {/* Variant details */}
-                        {selectedVariant && (
-                            <div className="variant-details styled-variant-details">
-                                <p className="variant-color">Color: {selectedVariant.color}</p>
-                                <p className="variant-size">Size: {selectedVariant.size}</p>
-                                <p className="variant-price">Price: {formatPrice(selectedVariant.retail_price)}</p>
                             </div>
                         )}
                         <button 
