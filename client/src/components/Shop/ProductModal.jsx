@@ -92,12 +92,16 @@ const ProductModal = ({ product, onClose }) => {
     const startingPrice = getStartingPrice();
     const priceToShow = selectedVariant ? selectedVariant.retail_price : startingPrice;
 
-    // Get images for the selected variant
+    // Get only valid mockup images for the selected variant
     let images = [];
     if (selectedVariant) {
-        if (selectedVariant.files && selectedVariant.files.length > 0) {
-            images = selectedVariant.files.map(f => f.preview_url).filter(Boolean);
+        if (selectedVariant.files && selectedVariant.files.length > 1) {
+            images = selectedVariant.files
+                .slice(1) // skip the first file (usually the uploaded design)
+                .filter(f => f.type === 'preview' && f.preview_url)
+                .map(f => f.preview_url);
         }
+        // fallback: if no valid mockups, try product.image
         if (images.length === 0 && selectedVariant.product?.image) {
             images = [selectedVariant.product.image];
         }
@@ -151,7 +155,6 @@ const ProductModal = ({ product, onClose }) => {
                 <div className="modal-header" style={{ marginBottom: '1.5rem' }}>
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.5rem' }}>
                         <h2 style={{ margin: 0, fontWeight: 700, fontSize: '1.4rem', color: 'var(--brand-dark)' }}>{productName}</h2>
-                        <span style={{ fontWeight: 700, fontSize: '1.2rem', color: 'var(--brand-red)' }}>{formatPrice(priceToShow)}</span>
                     </div>
                     {description && (
                         <div className="product-type" dangerouslySetInnerHTML={{ __html: description }} />
@@ -211,13 +214,15 @@ const ProductModal = ({ product, onClose }) => {
                                 </div>
                             </div>
                         )}
-                        {/* Add to Bag button at the bottom */}
-                        <div style={{ flex: 1 }} />
+                        {/* Price just above Add to Bag button */}
+                        <div className="styled-price prominent-price" style={{ margin: '2rem 0 0.5rem 0', textAlign: 'center' }}>
+                            {formatPrice(priceToShow)}
+                        </div>
                         <button 
                             className={`add-to-cart-button styled-add-to-cart ${!selectedVariant ? 'disabled' : ''}`}
                             disabled={!selectedVariant}
                             onClick={handleAddToCart}
-                            style={{ width: '100%', margin: '2rem 0 0 0', alignSelf: 'center' }}
+                            style={{ width: '100%', margin: '0 0 1.5rem 0', alignSelf: 'center' }}
                         >
                             Add to Bag
                         </button>
