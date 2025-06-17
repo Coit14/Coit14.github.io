@@ -16,7 +16,8 @@ const ProductModal = ({ product, onClose }) => {
     const [selectedColor, setSelectedColor] = useState(null);
     const [selectedSize, setSelectedSize] = useState(null);
     const [selectedVariant, setSelectedVariant] = useState(null);
-    const [showSuccess, setShowSuccess] = useState(false);
+    const [imageIndex, setImageIndex] = useState(0);
+    const [fade, setFade] = useState(false);
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
     useEffect(() => {
@@ -29,7 +30,6 @@ const ProductModal = ({ product, onClose }) => {
 
     const variants = product?.sync_variants || [];
     const productInfo = product?.sync_product || {};
-    const imageUrl = productInfo.thumbnail_url;
     const productName = productInfo.name;
     const description = productInfo.description || '';
 
@@ -74,6 +74,14 @@ const ProductModal = ({ product, onClose }) => {
         }
     }, [product]);
 
+    // Reset image index and animate fade on color/variant change
+    useEffect(() => {
+        setFade(true);
+        setImageIndex(0);
+        const timeout = setTimeout(() => setFade(false), 250);
+        return () => clearTimeout(timeout);
+    }, [selectedVariant]);
+
     if (!product) return null;
 
     const getStartingPrice = () => {
@@ -84,6 +92,38 @@ const ProductModal = ({ product, onClose }) => {
     const startingPrice = getStartingPrice();
     const priceToShow = selectedVariant ? selectedVariant.retail_price : startingPrice;
 
+    // Get images for the selected variant
+    let images = [];
+    if (selectedVariant) {
+        if (selectedVariant.files && selectedVariant.files.length > 0) {
+            images = selectedVariant.files.map(f => f.preview_url).filter(Boolean);
+        }
+        if (images.length === 0 && selectedVariant.product?.image) {
+            images = [selectedVariant.product.image];
+        }
+    }
+    // Fallback to product thumbnail if no images
+    if (images.length === 0 && productInfo.thumbnail_url) {
+        images = [productInfo.thumbnail_url];
+    }
+
+    const handlePrevImage = (e) => {
+        e.stopPropagation();
+        setFade(true);
+        setTimeout(() => {
+            setImageIndex((prev) => (prev - 1 + images.length) % images.length);
+            setFade(false);
+        }, 150);
+    };
+    const handleNextImage = (e) => {
+        e.stopPropagation();
+        setFade(true);
+        setTimeout(() => {
+            setImageIndex((prev) => (prev + 1) % images.length);
+            setFade(false);
+        }, 150);
+    };
+
     const handleAddToCart = () => {
         if (selectedVariant) {
             addToCart({
@@ -91,23 +131,13 @@ const ProductModal = ({ product, onClose }) => {
                 variantId: selectedVariant.id,
                 name: productName,
                 price: selectedVariant.retail_price,
-                image: imageUrl,
+                image: images[imageIndex] || images[0],
                 size: selectedVariant.size,
                 color: selectedVariant.color
             });
             setIsCartOpen(true);
             onClose();
         }
-    };
-
-    const handleViewCart = () => {
-        setIsCartOpen(true);
-        onClose();
-    };
-
-    const handleContinueShopping = () => {
-        setShowSuccess(false);
-        onClose();
     };
 
     if (isMobile) {
@@ -128,12 +158,23 @@ const ProductModal = ({ product, onClose }) => {
                     )}
                 </div>
                 <div className="modal-product-layout styled-layout">
-                    <div className="main-image-container styled-image">
+                    <div className="main-image-container styled-image" style={{ position: 'relative', justifyContent: 'center', alignItems: 'center', minHeight: 260 }}>
+                        {images.length > 1 && (
+                            <button className="carousel-arrow left" onClick={handlePrevImage} aria-label="Previous image" disabled={images.length <= 1}>
+                                &#8592;
+                            </button>
+                        )}
                         <img 
-                            src={imageUrl}
+                            src={images[imageIndex]}
                             alt={productName}
-                            className="main-image"
+                            className={`main-image${fade ? ' fade' : ''}`}
+                            style={{ objectFit: 'contain', maxWidth: '100%', height: 'auto', display: 'block', margin: '0 auto', transition: 'opacity 0.25s' }}
                         />
+                        {images.length > 1 && (
+                            <button className="carousel-arrow right" onClick={handleNextImage} aria-label="Next image" disabled={images.length <= 1}>
+                                &#8594;
+                            </button>
+                        )}
                     </div>
                     <div className="product-details styled-details">
                         {/* Color selection if multiple colors */}
@@ -170,38 +211,18 @@ const ProductModal = ({ product, onClose }) => {
                                 </div>
                             </div>
                         )}
+                        {/* Add to Bag button at the bottom */}
+                        <div style={{ flex: 1 }} />
                         <button 
                             className={`add-to-cart-button styled-add-to-cart ${!selectedVariant ? 'disabled' : ''}`}
                             disabled={!selectedVariant}
                             onClick={handleAddToCart}
+                            style={{ width: '100%', margin: '2rem 0 0 0', alignSelf: 'center' }}
                         >
                             Add to Bag
                         </button>
                     </div>
                 </div>
-                {showSuccess && (
-                    <div className="success-overlay">
-                        <div className="success-message">
-                            <div className="success-icon">✓</div>
-                            <h3>Added to Cart!</h3>
-                            <p>{productName} - {selectedVariant.size} ({selectedVariant.color})</p>
-                            <div className="success-buttons">
-                                <button 
-                                    className="view-cart-button"
-                                    onClick={handleViewCart}
-                                >
-                                    View Cart
-                                </button>
-                                <button 
-                                    className="continue-shopping-button"
-                                    onClick={handleContinueShopping}
-                                >
-                                    Continue Shopping
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                )}
             </div>
         </div>
     );
