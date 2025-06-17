@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/static/css/main.d1f0e11e.css",
-    "main.js": "/static/js/main.bf15c110.js",
+    "main.css": "/static/css/main.036fa5cd.css",
+    "main.js": "/static/js/main.f2247616.js",
     "static/media/schwabs-logo.png": "/static/media/schwabs-logo.e1e5f57c5e1e92573efc.png",
     "static/media/hero-image.jpg": "/static/media/hero-image.b62eda08fb52bc98adb9.jpg",
     "index.html": "/index.html",
-    "main.d1f0e11e.css.map": "/static/css/main.d1f0e11e.css.map",
-    "main.bf15c110.js.map": "/static/js/main.bf15c110.js.map"
+    "main.036fa5cd.css.map": "/static/css/main.036fa5cd.css.map",
+    "main.f2247616.js.map": "/static/js/main.f2247616.js.map"
   },
   "entrypoints": [
-    "static/css/main.d1f0e11e.css",
-    "static/js/main.bf15c110.js"
+    "static/css/main.036fa5cd.css",
+    "static/js/main.f2247616.js"
   ]
 }
