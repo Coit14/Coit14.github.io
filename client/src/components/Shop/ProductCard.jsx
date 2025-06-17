@@ -12,10 +12,10 @@ const ProductCard = ({ product, onClick }) => {
     return (
         <div className="product-card">
             <div className="product-image-container">
-                {product.thumbnail_url ? (
+                {product.sync_product?.thumbnail_url ? (
                     <img
-                        src={product.thumbnail_url}
-                        alt={product.name}
+                        src={product.sync_product.thumbnail_url}
+                        alt={product.sync_product.name || 'Coit\'s product'}
                         className="product-image"
                         loading="lazy"
                     />
@@ -24,7 +24,7 @@ const ProductCard = ({ product, onClick }) => {
                 )}
             </div>
             <div className="product-info">
-                <h3 className="product-title">{product.name}</h3>
+                <h3 className="product-title">{product.sync_product?.name}</h3>
                 {price && (
                     <div className="product-price">{formatPrice(price)}</div>
                 )}
