@@ -4,7 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import './Cart.css';
 
 const formatPrice = (price) => {
-    return `$${price.toFixed(2)}`;
+    if (!price) return '$0.00';
+    const num = typeof price === 'string' ? parseFloat(price) : price;
+    if (isNaN(num)) return '$0.00';
+    return `$${num.toFixed(2)}`;
 };
 
 const Cart = () => {

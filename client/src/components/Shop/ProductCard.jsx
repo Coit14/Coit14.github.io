@@ -17,22 +17,27 @@ const ProductCard = ({ product, onClick }) => {
     const getFirstVariantImage = () => {
         if (!product.sync_variants?.length) return null;
         
-        // Get the first variant
+        // Get the first variant (which is black)
         const firstVariant = product.sync_variants[0];
         
-        // If the variant has files, look for a valid preview image
+        // Get images array using the same logic as the modal
+        let images = [];
         if (firstVariant.files && firstVariant.files.length > 1) {
-            const validPreview = firstVariant.files
-                .slice(1) // Skip the first file (usually the uploaded design)
-                .find(f => f.type === 'preview' && f.preview_url && f.visible !== false);
-            
-            if (validPreview) {
-                return validPreview.preview_url;
-            }
+            images = firstVariant.files
+                .slice(1) // skip the first file (usually the uploaded design)
+                .filter(f => f.type === 'preview' && f.preview_url)
+                .map(f => f.preview_url);
         }
-        
-        // Fallback to product thumbnail
-        return product.sync_product?.thumbnail_url;
+        // fallback: if no valid mockups, try product.image
+        if (images.length === 0 && firstVariant.product?.image) {
+            images = [firstVariant.product.image];
+        }
+        // Fallback to product thumbnail if no images
+        if (images.length === 0 && product.sync_product?.thumbnail_url) {
+            images = [product.sync_product.thumbnail_url];
+        }
+
+        return images[0] || null;
     };
 
     const startingPrice = getStartingPrice();
