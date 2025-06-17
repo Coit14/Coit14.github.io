@@ -8,7 +8,14 @@ const formatPrice = (price) => {
 };
 
 const ProductCard = ({ product, onClick }) => {
-    const price = product.retail_price || product.price;
+    const getStartingPrice = () => {
+        if (!product.sync_variants?.length) return null;
+        const prices = product.sync_variants.map(v => parseFloat(v.retail_price));
+        return Math.min(...prices);
+    };
+
+    const startingPrice = getStartingPrice();
+
     return (
         <div className="product-card">
             <div className="product-image-container">
@@ -25,12 +32,14 @@ const ProductCard = ({ product, onClick }) => {
             </div>
             <div className="product-info">
                 <h3 className="product-title">{product.sync_product?.name}</h3>
-                {price && (
-                    <div className="product-price">{formatPrice(price)}</div>
+                {startingPrice && (
+                    <p className="product-price">
+                        {formatPrice(startingPrice)}
+                    </p>
                 )}
                 <button
                     className="view-details-button"
-                    onClick={onClick}
+                    onClick={() => onClick(product.sync_product.id)}
                 >
                     View Details
                 </button>
