@@ -20,29 +20,25 @@ const fetchShippingOptions = async (shippingInfo, cartItems) => {
             throw new Error('Cart is empty. Cannot calculate shipping.');
         }
 
-        // Log the exact payload being sent
+        // Format the payload according to Printful's API requirements
         const payload = {
-            address: {
-                first_name: shippingInfo.firstName,
-                last_name: shippingInfo.lastName,
-                email: shippingInfo.email,
-                country: shippingInfo.country,
-                region: shippingInfo.state,
-                city: shippingInfo.city,
+            recipient: {
                 address1: shippingInfo.address1,
-                address2: shippingInfo.address2,
-                zip: shippingInfo.zipCode,
+                address2: shippingInfo.address2 || '',
+                city: shippingInfo.city,
+                country_code: shippingInfo.country,
+                state_code: shippingInfo.state,
+                zip: shippingInfo.zipCode
             },
             items: cartItems.map(item => ({
-                id: item.productId,
-                variantId: item.variantId,
+                variant_id: item.variantId,
                 quantity: item.quantity
             }))
         };
 
         console.log('📦 Shipping calculation payload:', JSON.stringify(payload, null, 2));
         
-        const response = await fetch(`${API_URL}/api/printify/shipping-rates`, {
+        const response = await fetch(`${API_URL}/api/printful/shipping-rates`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -88,6 +84,7 @@ const Checkout = () => {
         total: getCartTotal()
     });
     const [shippingStage, setShippingStage] = useState('address');
+    const [error, setError] = useState(null);
 
     const handleAddressSubmit = async (info) => {
         setShippingInfo(info);
@@ -105,6 +102,7 @@ const Checkout = () => {
             setShippingStage('method');
         } catch (error) {
             console.error('Error fetching shipping options:', error);
+            setError('Unable to calculate shipping rates. Please try again.');
         }
     };
 

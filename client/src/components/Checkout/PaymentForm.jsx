@@ -1,14 +1,73 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useCart } from '../../contexts/CartContext';
+import { API_URL } from '../../config/config';
 import './PaymentForm.css';
 
-const PaymentForm = ({ onSubmit, orderSummary }) => {
+const PaymentForm = ({ onSubmit, orderSummary, shippingInfo }) => {
     const { cartItems } = useCart();
+    const [isProcessing, setIsProcessing] = useState(false);
+    const [error, setError] = useState(null);
 
-    const handleSubmit = (e) => {
+    const createPrintfulOrder = async () => {
+        try {
+            const response = await fetch(`${API_URL}/api/printful/create-order`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    recipient: {
+                        name: `${shippingInfo.firstName} ${shippingInfo.lastName}`,
+                        email: shippingInfo.email,
+                        address1: shippingInfo.address1,
+                        address2: shippingInfo.address2 || '',
+                        city: shippingInfo.city,
+                        state_code: shippingInfo.state,
+                        country_code: shippingInfo.country,
+                        zip: shippingInfo.zipCode
+                    },
+                    items: cartItems.map(item => ({
+                        variant_id: item.variantId,
+                        quantity: item.quantity
+                    })),
+                    shipping: {
+                        method: selectedShipping?.name,
+                        rate: selectedShipping?.rate
+                    }
+                })
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error || 'Failed to create order');
+            }
+
+            const orderData = await response.json();
+            console.log('✅ Printful order created:', orderData);
+            return orderData;
+        } catch (error) {
+            console.error('❌ Error creating Printful order:', error);
+            throw new Error(error.message || 'Failed to create order. Please try again.');
+        }
+    };
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // We'll add Stripe payment logic here later
-        onSubmit();
+        setIsProcessing(true);
+        setError(null);
+
+        try {
+            // Create Printful order first
+            const printfulOrder = await createPrintfulOrder();
+            
+            // TODO: Add Stripe payment processing here
+            // For now, we'll just proceed to review
+            onSubmit(printfulOrder);
+        } catch (error) {
+            setError(error.message || 'An error occurred while processing your order');
+        } finally {
+            setIsProcessing(false);
+        }
     };
 
     return (
@@ -20,11 +79,11 @@ const PaymentForm = ({ onSubmit, orderSummary }) => {
                         {cartItems.map(item => (
                             <div key={item.variantId} className="order-item">
                                 <div className="item-image">
-                                    <img src={item.image} alt={item.title} />
+                                    <img src={item.image} alt={item.name} />
                                 </div>
                                 <div className="item-details">
-                                    <h4>{item.title}</h4>
-                                    <p className="variant-title">{item.variantTitle}</p>
+                                    <h4>{item.name}</h4>
+                                    <p className="variant-title">{item.color} - {item.size}</p>
                                     <p className="item-quantity">Quantity: {item.quantity}</p>
                                 </div>
                                 <div className="item-price">
@@ -41,6 +100,11 @@ const PaymentForm = ({ onSubmit, orderSummary }) => {
                         {/* Stripe Elements will be inserted here */}
                         <p>Stripe payment form will be integrated here</p>
                     </div>
+                    {error && (
+                        <div className="error-message">
+                            {error}
+                        </div>
+                    )}
                 </div>
 
                 <div className="order-total">
@@ -66,8 +130,9 @@ const PaymentForm = ({ onSubmit, orderSummary }) => {
                     type="submit"
                     className="submit-payment-button"
                     onClick={handleSubmit}
+                    disabled={isProcessing}
                 >
-                    Place Order
+                    {isProcessing ? 'Processing...' : 'Place Order'}
                 </button>
             </div>
         </div>

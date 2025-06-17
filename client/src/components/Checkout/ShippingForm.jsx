@@ -8,7 +8,8 @@ const ShippingForm = ({
     shippingMethods, 
     selectedShipping, 
     onSelectShipping,
-    shippingInfo
+    shippingInfo,
+    isLoading
 }) => {
     const [formData, setFormData] = useState({
         firstName: '',
@@ -41,14 +42,35 @@ const ShippingForm = ({
     const validateForm = () => {
         const newErrors = {};
         const requiredFields = ['firstName', 'lastName', 'email', 'address1', 'city', 'state', 'zipCode'];
+        
+        // Basic required field validation
         requiredFields.forEach(field => {
             if (!formData[field]) {
                 newErrors[field] = 'This field is required';
             }
         });
+
+        // Email validation
         if (formData.email && !/\S+@\S+\.\S+/.test(formData.email)) {
             newErrors.email = 'Please enter a valid email';
         }
+
+        // ZIP code validation for US addresses
+        if (formData.country === 'US' && formData.zipCode) {
+            const zipRegex = /^\d{5}(-\d{4})?$/;
+            if (!zipRegex.test(formData.zipCode)) {
+                newErrors.zipCode = 'Please enter a valid ZIP code';
+            }
+        }
+
+        // State validation for US addresses
+        if (formData.country === 'US' && formData.state) {
+            const stateRegex = /^[A-Z]{2}$/;
+            if (!stateRegex.test(formData.state)) {
+                newErrors.state = 'Please enter a valid state code (e.g., CA)';
+            }
+        }
+
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
     };
@@ -57,7 +79,12 @@ const ShippingForm = ({
     const handleAddressSubmit = (e) => {
         e.preventDefault();
         if (validateForm()) {
-            onAddressSubmit(formData);
+            // Format state code to uppercase for Printful
+            const formattedData = {
+                ...formData,
+                state: formData.state.toUpperCase()
+            };
+            onAddressSubmit(formattedData);
         }
     };
 
@@ -199,24 +226,27 @@ const ShippingForm = ({
                     <div className="form-section">
                         <h3>Shipping Method</h3>
                         <div className="shipping-methods">
-                            {shippingMethods.length === 0 && (
+                            {isLoading ? (
+                                <div className="loading-message">Calculating shipping rates...</div>
+                            ) : shippingMethods.length === 0 ? (
                                 <div>No shipping methods available for this address.</div>
-                            )}
-                            {shippingMethods.map(method => (
-                                <div 
-                                    key={method.id}
-                                    className={`shipping-method ${selectedShipping?.id === method.id ? 'selected' : ''}`}
-                                    onClick={() => onSelectShipping(method)}
-                                >
-                                    <div className="method-info">
-                                        <span className="method-name">{method.name}</span>
-                                        <span className="method-time">{method.delivery_time}</span>
+                            ) : (
+                                shippingMethods.map(method => (
+                                    <div 
+                                        key={method.id}
+                                        className={`shipping-method ${selectedShipping?.id === method.id ? 'selected' : ''}`}
+                                        onClick={() => onSelectShipping(method)}
+                                    >
+                                        <div className="method-info">
+                                            <span className="method-name">{method.name}</span>
+                                            <span className="method-time">{method.delivery_time}</span>
+                                        </div>
+                                        <span className="method-price">
+                                            ${(method.rate / 100).toFixed(2)}
+                                        </span>
                                     </div>
-                                    <span className="method-price">
-                                        ${(method.rate / 100).toFixed(2)}
-                                    </span>
-                                </div>
-                            ))}
+                                ))
+                            )}
                         </div>
                     </div>
                 )}
@@ -228,8 +258,9 @@ const ShippingForm = ({
                             type="button"
                             className="continue-button"
                             onClick={handleAddressSubmit}
+                            disabled={isLoading}
                         >
-                            Continue to Shipping Options
+                            {isLoading ? 'Calculating...' : 'Continue to Shipping Options'}
                         </button>
                     )}
                     {shippingStage === 'method' && (
@@ -237,7 +268,7 @@ const ShippingForm = ({
                             type="button"
                             className="continue-button"
                             onClick={handleShippingMethodSubmit}
-                            disabled={!selectedShipping}
+                            disabled={!selectedShipping || isLoading}
                         >
                             Continue to Payment
                         </button>

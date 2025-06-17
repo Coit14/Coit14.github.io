@@ -4,7 +4,7 @@
     padding: 20px;
 }
 
-.payment-form-content {
+.payment-form {
     display: flex;
     flex-direction: column;
     gap: 30px;
@@ -21,94 +21,73 @@
     color: var(--brand-red);
     margin-bottom: 20px;
     font-size: 1.2rem;
+    font-weight: 600;
 }
 
-.order-items {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+.form-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 20px;
 }
 
-.order-item {
-    display: flex;
-    align-items: center;
-    padding: 15px;
-    border: 1px solid #eee;
-    border-radius: 6px;
+.form-group {
+    margin-bottom: 20px;
 }
 
-.item-image {
-    width: 80px;
-    height: 80px;
-    margin-right: 15px;
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #333;
 }
 
-.item-image img {
+.form-group input {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    padding: 12px;
+    border: 1px solid #ddd;
     border-radius: 4px;
-}
-
-.item-details {
-    flex: 1;
-}
-
-.item-details h4 {
-    margin: 0 0 5px 0;
     font-size: 16px;
+    transition: all 0.2s ease;
 }
 
-.variant-title {
-    color: #666;
+.form-group input:focus {
+    border-color: var(--brand-red);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(var(--brand-red-rgb), 0.1);
+}
+
+.form-group input.error {
+    border-color: #dc3545;
+    background-color: #fff8f8;
+}
+
+.error-message {
+    color: #dc3545;
     font-size: 14px;
-    margin: 0 0 5px 0;
+    margin-top: 5px;
+    display: block;
 }
 
-.item-quantity {
-    color: #666;
-    font-size: 14px;
-    margin: 0;
-}
-
-.item-price {
-    font-weight: 600;
-    color: var(--brand-red);
-    min-width: 80px;
-    text-align: right;
-}
-
-.payment-placeholder {
-    padding: 20px;
-    background: #f8f8f8;
+.card-element-container {
+    padding: 12px;
+    border: 1px solid #ddd;
     border-radius: 4px;
-    text-align: center;
-    color: #666;
-}
-
-.order-total {
     background: white;
-    padding: 25px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
 }
 
-.total-line {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-    padding: 5px 0;
+.card-element-container:focus-within {
+    border-color: var(--brand-red);
+    box-shadow: 0 0 0 2px rgba(var(--brand-red-rgb), 0.1);
 }
 
-.grand-total {
-    border-top: 2px solid #eee;
-    margin-top: 10px;
-    padding-top: 15px;
-    font-weight: 600;
-    font-size: 1.2em;
+.card-element-container.error {
+    border-color: #dc3545;
+    background-color: #fff8f8;
 }
 
-.submit-payment-button {
+.submit-button {
     background-color: var(--brand-red);
     color: white;
     padding: 15px 30px;
@@ -117,12 +96,62 @@
     font-size: 16px;
     font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.2s;
+    transition: all 0.2s ease;
     width: 100%;
 }
 
-.submit-payment-button:hover {
+.submit-button:hover {
     background-color: var(--brand-hover-red);
+    transform: translateY(-1px);
+}
+
+.submit-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid var(--brand-red);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.error-banner {
+    background-color: #fff8f8;
+    border: 1px solid #dc3545;
+    border-radius: 4px;
+    padding: 15px;
+    margin-bottom: 20px;
+    color: #dc3545;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.error-banner svg {
+    flex-shrink: 0;
 }
 
 @media (max-width: 768px) {
@@ -134,17 +163,8 @@
         padding: 15px;
     }
 
-    .order-item {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .item-image {
-        margin: 0 0 10px 0;
-    }
-
-    .item-price {
-        margin-top: 10px;
-        text-align: center;
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 15px;
     }
 } 

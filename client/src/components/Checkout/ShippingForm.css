@@ -21,6 +21,7 @@
     color: var(--brand-red);
     margin-bottom: 20px;
     font-size: 1.2rem;
+    font-weight: 600;
 }
 
 .form-row {
@@ -47,16 +48,18 @@
     border: 1px solid #ddd;
     border-radius: 4px;
     font-size: 16px;
-    transition: border-color 0.2s;
+    transition: all 0.2s ease;
 }
 
 .form-group input:focus {
     border-color: var(--brand-red);
     outline: none;
+    box-shadow: 0 0 0 2px rgba(var(--brand-red-rgb), 0.1);
 }
 
 .form-group input.error {
     border-color: #dc3545;
+    background-color: #fff8f8;
 }
 
 .error-message {
@@ -80,11 +83,13 @@
     border: 2px solid #ddd;
     border-radius: 6px;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all 0.2s ease;
+    background: white;
 }
 
 .shipping-method:hover {
     border-color: var(--brand-red);
+    transform: translateY(-1px);
 }
 
 .shipping-method.selected {
@@ -95,10 +100,12 @@
 .method-info {
     display: flex;
     flex-direction: column;
+    gap: 4px;
 }
 
 .method-name {
     font-weight: 600;
+    color: #333;
 }
 
 .method-time {
@@ -109,6 +116,7 @@
 .method-price {
     font-weight: 600;
     color: var(--brand-red);
+    font-size: 1.1em;
 }
 
 .continue-button {
@@ -120,17 +128,28 @@
     font-size: 16px;
     font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.2s;
+    transition: all 0.2s ease;
     width: 100%;
 }
 
 .continue-button:hover {
     background-color: var(--brand-hover-red);
+    transform: translateY(-1px);
 }
 
 .continue-button:disabled {
     background-color: #ccc;
     cursor: not-allowed;
+    transform: none;
+}
+
+.loading-message {
+    text-align: center;
+    color: #666;
+    padding: 20px;
+    font-style: italic;
+    background: #f8f8f8;
+    border-radius: 4px;
 }
 
 @media (max-width: 768px) {
@@ -145,5 +164,15 @@
     .form-row {
         grid-template-columns: 1fr;
         gap: 15px;
+    }
+
+    .shipping-method {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+
+    .method-price {
+        margin-top: 5px;
     }
 } 

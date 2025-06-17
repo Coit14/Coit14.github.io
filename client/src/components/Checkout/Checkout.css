@@ -2,6 +2,7 @@
     max-width: 1200px;
     margin: 0 auto;
     padding: 70px 20px;
+    min-height: calc(100vh - 200px); /* Account for header/footer */
 }
 
 .checkout-steps {
@@ -9,6 +10,7 @@
     justify-content: center;
     margin-bottom: 40px;
     gap: 40px;
+    position: relative;
 }
 
 .step {
@@ -17,6 +19,8 @@
     color: #666;
     font-weight: 500;
     position: relative;
+    padding: 0 20px;
+    transition: color 0.3s ease;
 }
 
 .step::after {
@@ -39,9 +43,27 @@
 }
 
 .checkout-content {
-    background: #f8f8f8;
+    background: #fff;
     border-radius: 8px;
+    padding: 30px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.error-message {
+    color: #dc3545;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    padding: 10px;
+    border-radius: 4px;
+    margin: 10px 0;
+    font-size: 0.9em;
+}
+
+.loading-message {
+    text-align: center;
+    color: #666;
     padding: 20px;
+    font-style: italic;
 }
 
 @media (max-width: 768px) {
@@ -51,9 +73,15 @@
 
     .checkout-steps {
         gap: 20px;
+        flex-wrap: wrap;
     }
 
     .step {
         font-size: 14px;
+        padding: 0 10px;
+    }
+
+    .checkout-content {
+        padding: 20px;
     }
 } 

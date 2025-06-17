@@ -145,7 +145,6 @@ const ProductModal = ({ product, onClose }) => {
     };
 
     const handleClose = () => {
-        setIsCartOpen(true);
         onClose();
     };
 
