@@ -9,7 +9,7 @@ import ProductCard from './ProductCard';
 const Shop = () => {
     const { products, setProducts } = useCart();
     const [error, setError] = useState(null);
-    const [selectedProductId, setSelectedProductId] = useState(null);
+    const [selectedProduct, setSelectedProduct] = useState(null);
     const [isLoading, setIsLoading] = useState(!products || products.length === 0);
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
@@ -57,12 +57,12 @@ const Shop = () => {
         }
     }, []); // Only run on mount
 
-    const handleProductClick = (productId) => {
+    const handleProductClick = (product) => {
         if (isMobile) {
             window.scrollTo({ top: 0, behavior: 'auto' });
-            setTimeout(() => setSelectedProductId(productId), 10);
+            setTimeout(() => setSelectedProduct(product), 10);
         } else {
-            setSelectedProductId(productId);
+            setSelectedProduct(product);
         }
     };
 
@@ -111,15 +111,15 @@ const Shop = () => {
                     <ProductCard
                         key={product.id}
                         product={product}
-                        onClick={() => handleProductClick(product.id)}
+                        onClick={() => handleProductClick(product)}
                     />
                 ))}
             </div>
 
-            {selectedProductId && (
+            {selectedProduct && (
                 <ProductModal
-                    productId={selectedProductId}
-                    onClose={() => setSelectedProductId(null)}
+                    product={selectedProduct}
+                    onClose={() => setSelectedProduct(null)}
                 />
             )}
         </div>
