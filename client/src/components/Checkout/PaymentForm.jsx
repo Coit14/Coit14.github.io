@@ -3,7 +3,7 @@ import { useCart } from '../../contexts/CartContext';
 import { API_URL } from '../../config/config';
 import './PaymentForm.css';
 
-const PaymentForm = ({ onSubmit, orderSummary, shippingInfo }) => {
+const PaymentForm = ({ onSubmit, orderSummary, shippingInfo, selectedShipping }) => {
     const { cartItems } = useCart();
     const [isProcessing, setIsProcessing] = useState(false);
     const [error, setError] = useState(null);
