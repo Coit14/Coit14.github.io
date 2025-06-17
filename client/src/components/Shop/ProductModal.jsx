@@ -95,8 +95,8 @@ const ProductModal = ({ product, onClose }) => {
                 size: selectedVariant.size,
                 color: selectedVariant.color
             });
-            setShowSuccess(true);
             setIsCartOpen(true);
+            onClose();
         }
     };
 
