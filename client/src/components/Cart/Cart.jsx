@@ -3,8 +3,8 @@ import { useCart } from '../../contexts/CartContext';
 import { useNavigate } from 'react-router-dom';
 import './Cart.css';
 
-const formatPrice = (cents) => {
-    return `$${(cents / 100).toFixed(2)}`;
+const formatPrice = (price) => {
+    return `$${price.toFixed(2)}`;
 };
 
 const Cart = () => {
@@ -48,24 +48,26 @@ const Cart = () => {
                             <p className="empty-cart">Your cart is empty</p>
                         ) : (
                             cartItems.map(item => (
-                                <div key={item.variantId} className="cart-item">
+                                <div key={`${item.productId}-${item.variantId}`} className="cart-item">
                                     <div className="cart-item-image">
-                                        <img src={item.image} alt={item.title} />
+                                        <img src={item.image} alt={item.name} />
                                     </div>
                                     <div className="cart-item-details">
-                                        <h3>{item.title}</h3>
-                                        <p className="variant-title">{item.variantTitle}</p>
+                                        <h3>{item.name}</h3>
+                                        <p className="variant-details">
+                                            {item.size} - {item.color}
+                                        </p>
                                         <p className="item-price">{formatPrice(item.price)}</p>
                                         <div className="quantity-controls">
                                             <button 
-                                                onClick={() => updateQuantity(item.variantId, item.quantity - 1)}
+                                                onClick={() => updateQuantity(item.productId, item.variantId, item.quantity - 1)}
                                                 disabled={item.quantity <= 1}
                                             >
                                                 -
                                             </button>
                                             <span>{item.quantity}</span>
                                             <button 
-                                                onClick={() => updateQuantity(item.variantId, item.quantity + 1)}
+                                                onClick={() => updateQuantity(item.productId, item.variantId, item.quantity + 1)}
                                             >
                                                 +
                                             </button>
@@ -73,7 +75,7 @@ const Cart = () => {
                                     </div>
                                     <button 
                                         className="remove-item"
-                                        onClick={() => removeFromCart(item.variantId)}
+                                        onClick={() => removeFromCart(item.productId, item.variantId)}
                                     >
                                         Remove
                                     </button>

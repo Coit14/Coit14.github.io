@@ -32,44 +32,43 @@ export const CartProvider = ({ children }) => {
         preloadProducts();
     }, []);
 
-    const addToCart = (product, variant, quantity = 1) => {
+    const addToCart = (item) => {
         setCartItems(prevItems => {
             const existingItem = prevItems.find(
-                item => item.variantId === variant.id
+                cartItem => cartItem.productId === item.productId && 
+                           cartItem.variantId === item.variantId
             );
 
             if (existingItem) {
-                return prevItems.map(item =>
-                    item.variantId === variant.id
-                        ? { ...item, quantity: item.quantity + quantity }
-                        : item
+                return prevItems.map(cartItem =>
+                    cartItem.productId === item.productId && 
+                    cartItem.variantId === item.variantId
+                        ? { ...cartItem, quantity: cartItem.quantity + 1 }
+                        : cartItem
                 );
             }
 
             return [...prevItems, {
-                productId: product.id,
-                variantId: variant.id,
-                title: product.title,
-                variantTitle: variant.title,
-                price: variant.price,
-                image: product.images[0]?.src,
-                quantity
+                ...item,
+                quantity: 1
             }];
         });
     };
 
-    const removeFromCart = (variantId) => {
+    const removeFromCart = (productId, variantId) => {
         setCartItems(prevItems => 
-            prevItems.filter(item => item.variantId !== variantId)
+            prevItems.filter(item => 
+                !(item.productId === productId && item.variantId === variantId)
+            )
         );
     };
 
-    const updateQuantity = (variantId, quantity) => {
+    const updateQuantity = (productId, variantId, quantity) => {
         if (quantity < 1) return;
         
         setCartItems(prevItems =>
             prevItems.map(item =>
-                item.variantId === variantId
+                item.productId === productId && item.variantId === variantId
                     ? { ...item, quantity }
                     : item
             )

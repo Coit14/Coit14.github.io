@@ -1,104 +1,82 @@
 import React, { useState, useEffect } from 'react';
 import './ProductModalMobile.css';
 import { useCart } from '../../contexts/CartContext';
+import * as printService from '../../services/printfulService';
 
-const formatPrice = (cents) => {
-    return `$${(cents / 100).toFixed(2)}`;
+const formatPrice = (price) => {
+    return `$${price.toFixed(2)}`;
 };
 
 // Size order for sorting
 const sizeOrder = ['XS', 'S', 'M', 'L', 'XL', '2XL', '3XL', '4XL', '5XL'];
 
-const calculatePrice = (variants) => {
-    if (!variants || variants.length === 0) return 'Price not available';
-    
-    const enabledVariants = variants.filter(v => v.is_enabled);
-    return formatPrice(enabledVariants[0].price);
-};
-
-const ProductModalMobile = ({ product, onClose }) => {
+const ProductModalMobile = ({ productId, onClose }) => {
     const { addToCart, setIsCartOpen } = useCart();
-    const [selectedColor, setSelectedColor] = useState('');
-    const [selectedSize, setSelectedSize] = useState('');
-    const [selectedImage, setSelectedImage] = useState(0);
-    const [variantsByColor, setVariantsByColor] = useState({});
-    
-    // Helper function to determine if a string is a size
-    const isSize = (str) => sizeOrder.includes(str);
+    const [product, setProduct] = useState(null);
+    const [selectedVariant, setSelectedVariant] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState(null);
 
-    // Group variants by color
-    const groupVariantsByColor = (variants, productImages) => {
-        return variants.reduce((acc, variant) => {
-            const parts = variant.title.split(' / ');
-            let color, size;
-            if (isSize(parts[0])) {
-                size = parts[0];
-                color = parts[1];
-            } else {
-                color = parts[0];
-                size = parts[1];
-            }
-
-            if (!acc[color]) {
-                const variantImage = productImages.find(img => img.variant_ids.includes(variant.id));
-                acc[color] = {
-                    variants: [],
-                    previewImage: variantImage ? variantImage.src : null
-                };
-            }
-            acc[color].variants.push({...variant, size});
-            return acc;
-        }, {});
-    };
-
+    // Fetch product data when modal opens
     useEffect(() => {
-        if (product && product.variants) {
-            const enabledVariants = product.variants.filter(v => v.is_enabled);
-            const groupedVariants = groupVariantsByColor(enabledVariants, product.images || []);
-            setVariantsByColor(groupedVariants);
-            
-            const colors = Object.keys(groupedVariants);
-            if (colors.length > 0) {
-                setSelectedColor(colors[0]);
+        const fetchProduct = async () => {
+            try {
+                const productData = await printService.getProduct(productId);
+                setProduct(productData);
+                setError(null);
+            } catch (err) {
+                console.error('Failed to fetch product:', err);
+                setError('Failed to load product details. Please try again.');
+            } finally {
+                setIsLoading(false);
             }
+        };
+
+        if (productId) {
+            fetchProduct();
         }
-    }, [product]);
-
-    const getColorImages = (color) => {
-        if (!product?.images || !variantsByColor[color]) return [];
-        return product.images.filter(img => 
-            img.variant_ids.some(id => 
-                variantsByColor[color].variants.some(variant => variant.id === id)
-            )
-        );
-    };
-
-    const currentColorImages = selectedColor ? getColorImages(selectedColor) : [];
+    }, [productId]);
 
     const handleAddToCart = () => {
-        const selectedVariant = variantsByColor[selectedColor]?.variants
-            .find(v => v.size === selectedSize);
-            
         if (selectedVariant) {
-            addToCart(product, selectedVariant);
+            addToCart({
+                productId: product.id,
+                variantId: selectedVariant.id,
+                name: product.name,
+                price: selectedVariant.retail_price,
+                image: product.thumbnail_url || product.files[0].preview_url,
+                size: selectedVariant.size,
+                color: selectedVariant.color
+            });
             onClose();
             setIsCartOpen(true);
         }
     };
 
-    const handlePrevImage = (e) => {
-        e.stopPropagation();
-        setSelectedImage(prev => 
-            prev === 0 ? currentColorImages.length - 1 : prev - 1
+    if (isLoading) {
+        return (
+            <div className="mobile-modal-overlay">
+                <div className="mobile-modal-content">
+                    <div className="loading-spinner">Loading...</div>
+                </div>
+            </div>
         );
-    };
+    }
 
-    const handleNextImage = (e) => {
-        e.stopPropagation();
-        setSelectedImage(prev => 
-            prev === currentColorImages.length - 1 ? 0 : prev + 1
+    if (error) {
+        return (
+            <div className="mobile-modal-overlay">
+                <div className="mobile-modal-content">
+                    <div className="error-message">{error}</div>
+                    <button onClick={onClose}>Close</button>
+                </div>
+            </div>
         );
-    };
+    }
+
+    if (!product) return null;
+
+    const availableVariants = product.variants.filter(v => v.is_available);
 
     return (
         <div className="mobile-modal-overlay" onClick={onClose}>
@@ -113,88 +91,31 @@ const ProductModalMobile = ({ product, onClose }) => {
                     &times;
                 </button>
                 
-                {/* Image Carousel */}
-                <div className="mobile-image-carousel">
-                    {currentColorImages.map((image, index) => (
-                        <img 
-                            key={image.id}
-                            src={image.src}
-                            alt={`${product.title} view ${index + 1}`}
-                            className={selectedImage === index ? 'active' : ''}
-                        />
-                    ))}
-                    
-                    {currentColorImages.length > 1 && (
-                        <>
-                            <button 
-                                className="mobile-image-nav prev"
-                                onClick={handlePrevImage}
-                                aria-label="Previous image"
-                            >
-                                ‹
-                            </button>
-                            <button 
-                                className="mobile-image-nav next"
-                                onClick={handleNextImage}
-                                aria-label="Next image"
-                            >
-                                ›
-                            </button>
-                        </>
-                    )}
-
-                    <div className="mobile-image-dots">
-                        {currentColorImages.map((_, index) => (
-                            <span 
-                                key={index} 
-                                className={`dot ${selectedImage === index ? 'active' : ''}`}
-                                onClick={(e) => {
-                                    e.stopPropagation();
-                                    setSelectedImage(index);
-                                }}
-                            />
-                        ))}
-                    </div>
+                {/* Product Image */}
+                <div className="mobile-image-container">
+                    <img 
+                        src={product.thumbnail_url || product.files[0].preview_url}
+                        alt={product.name}
+                        className="mobile-product-image"
+                    />
                 </div>
 
                 {/* Product Info */}
                 <div className="mobile-product-info">
-                    <h2>{product.title}</h2>
+                    <h2>{product.name}</h2>
                     <div className="product-type" dangerouslySetInnerHTML={{ __html: product.description }} />
-                    <p className="mobile-price">{calculatePrice(product.variants)}</p>
                     
-                    {/* Color Selection */}
-                    <div className="mobile-color-selection">
-                        <h3>Color</h3>
-                        <div className="mobile-color-options">
-                            {Object.entries(variantsByColor).map(([color, data]) => (
-                                <div 
-                                    key={color}
-                                    className={`mobile-color-option ${selectedColor === color ? 'selected' : ''}`}
-                                    onClick={() => {
-                                        setSelectedColor(color);
-                                        setSelectedImage(0);
-                                        setSelectedSize('');
-                                    }}
-                                >
-                                    <img src={data.previewImage} alt={color} />
-                                    <span>{color}</span>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-
                     {/* Size Selection */}
                     <div className="mobile-size-selection">
                         <h3>Size</h3>
                         <div className="mobile-size-grid">
-                            {selectedColor && variantsByColor[selectedColor]?.variants
+                            {availableVariants
                                 .sort((a, b) => sizeOrder.indexOf(a.size) - sizeOrder.indexOf(b.size))
                                 .map(variant => (
                                     <button
                                         key={variant.id}
-                                        className={`mobile-size-button ${selectedSize === variant.size ? 'selected' : ''}`}
-                                        onClick={() => setSelectedSize(variant.size)}
+                                        className={`mobile-size-button ${selectedVariant?.id === variant.id ? 'selected' : ''}`}
+                                        onClick={() => setSelectedVariant(variant)}
                                     >
                                         {variant.size}
                                     </button>
@@ -202,13 +123,22 @@ const ProductModalMobile = ({ product, onClose }) => {
                             }
                         </div>
                     </div>
+
+                    {selectedVariant && (
+                        <div className="mobile-variant-details">
+                            <p className="mobile-variant-color">Color: {selectedVariant.color}</p>
+                            <p className="mobile-variant-price">
+                                Price: {formatPrice(selectedVariant.retail_price)}
+                            </p>
+                        </div>
+                    )}
                 </div>
 
                 {/* Add to Cart Button - Fixed at bottom */}
                 <div className="mobile-add-to-cart-container">
                     <button 
-                        className={`mobile-add-to-cart-button ${!selectedSize ? 'disabled' : ''}`}
-                        disabled={!selectedSize}
+                        className={`mobile-add-to-cart-button ${!selectedVariant ? 'disabled' : ''}`}
+                        disabled={!selectedVariant}
                         onClick={handleAddToCart}
                     >
                         Add to Cart

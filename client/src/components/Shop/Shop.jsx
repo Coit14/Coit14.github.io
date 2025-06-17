@@ -8,7 +8,7 @@ import LoadingSpinner from '../common/LoadingSpinner';
 const Shop = () => {
     const { products, setProducts } = useCart();
     const [error, setError] = useState(null);
-    const [selectedProduct, setSelectedProduct] = useState(null);
+    const [selectedProductId, setSelectedProductId] = useState(null);
     const [isLoading, setIsLoading] = useState(!products || products.length === 0);
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
@@ -56,21 +56,13 @@ const Shop = () => {
         }
     }, []); // Only run on mount
 
-    const handleProductClick = (product) => {
+    const handleProductClick = (productId) => {
         if (isMobile) {
             window.scrollTo({ top: 0, behavior: 'auto' });
-            setTimeout(() => setSelectedProduct(product), 10);
+            setTimeout(() => setSelectedProductId(productId), 10);
         } else {
-            setSelectedProduct(product);
+            setSelectedProductId(productId);
         }
-    };
-
-    const formatPrice = (cents) => `$${(cents / 100).toFixed(2)}`;
-
-    const calculatePrice = (variants) => {
-        if (!variants?.length) return 'Price not available';
-        const enabledVariants = variants.filter(v => v.is_enabled);
-        return enabledVariants.length ? formatPrice(enabledVariants[0].price) : 'Price not available';
     };
 
     if (isLoading) {
@@ -117,10 +109,10 @@ const Shop = () => {
                 {products.map(product => (
                     <div key={product.id} className="product-card">
                         <div className="product-image-container">
-                            {product.images?.[0] ? (
+                            {product.thumbnail_url ? (
                                 <img
-                                    src={product.images[0].src}
-                                    alt={product.title}
+                                    src={product.thumbnail_url}
+                                    alt={product.name}
                                     className="product-image"
                                     loading="lazy"
                                 />
@@ -129,13 +121,10 @@ const Shop = () => {
                             )}
                         </div>
                         <div className="product-info">
-                            <h3 className="product-title">{product.title}</h3>
-                            <p className="product-price">
-                                {calculatePrice(product.variants)}
-                            </p>
+                            <h3 className="product-title">{product.name}</h3>
                             <button
                                 className="view-details-button"
-                                onClick={() => handleProductClick(product)}
+                                onClick={() => handleProductClick(product.id)}
                             >
                                 View Details
                             </button>
@@ -144,10 +133,10 @@ const Shop = () => {
                 ))}
             </div>
 
-            {selectedProduct && (
+            {selectedProductId && (
                 <ProductModal
-                    product={selectedProduct}
-                    onClose={() => setSelectedProduct(null)}
+                    productId={selectedProductId}
+                    onClose={() => setSelectedProductId(null)}
                 />
             )}
         </div>
