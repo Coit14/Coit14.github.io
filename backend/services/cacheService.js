@@ -1,7 +1,8 @@
 // TODO: Update cache logic for Printful integration. Printify logic removed.
 
-// Cache storage
-let cachedProducts = null;
+// Printful cacheService stub (Printify logic removed)
+
+let cachedProducts = [];
 let lastCacheTime = null;
 const CACHE_DURATION = 24 * 60 * 60 * 1000; // 24 hours
 
@@ -111,38 +112,10 @@ function scheduleNextRefresh() {
 
 // Initialize cache
 export async function initializeCache() {
-    try {
-        console.log('Initializing product cache...');
-        cachedProducts = await fetchProductsFromPrintify();
-        lastCacheTime = Date.now();
-
-        const msUntilNext3AM = scheduleNextRefresh();
-
-        setTimeout(async () => {
-            try {
-                console.log('Performing scheduled cache refresh...');
-                cachedProducts = await fetchProductsFromPrintify();
-                lastCacheTime = Date.now();
-                console.log('Cache refresh complete');
-
-                setInterval(async () => {
-                    try {
-                        console.log('Performing scheduled cache refresh...');
-                        cachedProducts = await fetchProductsFromPrintify();
-                        lastCacheTime = Date.now();
-                        console.log('Cache refresh complete');
-                    } catch (error) {
-                        console.error('Cache refresh failed:', error.message);
-                    }
-                }, CACHE_DURATION);
-            } catch (error) {
-                console.error('Initial cache refresh failed:', error.message);
-            }
-        }, msUntilNext3AM);
-    } catch (error) {
-        console.error('Cache initialization failed:', error.message);
-        throw error;
-    }
+    cachedProducts = [];
+    lastCacheTime = Date.now();
+    console.log('Cache initialized (stub)');
+    return true;
 }
 
 // Get products from cache
@@ -152,9 +125,9 @@ export function getCachedProducts() {
 
 // Force refresh
 export async function refreshCache() {
-    // TODO: Implement Printful product caching
     cachedProducts = [];
     lastCacheTime = Date.now();
+    console.log('Cache refreshed (stub)');
     return true;
 }
 
