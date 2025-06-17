@@ -2,6 +2,8 @@
 
 // Printful cacheService stub (Printify logic removed)
 
+import printfulService from './printfulService.js';
+
 let cachedProducts = [];
 let lastCacheTime = null;
 const CACHE_DURATION = 24 * 60 * 60 * 1000; // 24 hours
@@ -112,10 +114,23 @@ function scheduleNextRefresh() {
 
 // Initialize cache
 export async function initializeCache() {
-    cachedProducts = [];
-    lastCacheTime = Date.now();
-    console.log('Cache initialized (stub)');
-    return true;
+    try {
+        const rawProducts = await printfulService.getProducts();
+        const enrichedProducts = [];
+
+        for (const p of rawProducts) {
+            const fullProduct = await printfulService.getProduct(p.id);
+            enrichedProducts.push(fullProduct);
+        }
+
+        cachedProducts = enrichedProducts;
+        lastCacheTime = Date.now();
+        console.log(`Cached ${cachedProducts.length} Printful products.`);
+        return true;
+    } catch (error) {
+        console.error('Failed to initialize Printful product cache:', error);
+        throw error;
+    }
 }
 
 // Get products from cache
@@ -125,10 +140,7 @@ export function getCachedProducts() {
 
 // Force refresh
 export async function refreshCache() {
-    cachedProducts = [];
-    lastCacheTime = Date.now();
-    console.log('Cache refreshed (stub)');
-    return true;
+    return initializeCache();
 }
 
 // Cache health check

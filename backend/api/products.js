@@ -5,6 +5,9 @@ export async function handler(req, res) {
     try {
       console.log('Fetching products from cache...');
       const products = getCachedProducts();
+      if (!Array.isArray(products) || products.length === 0) {
+        return res.status(404).json({ error: 'No products available' });
+      }
       return res.json(products);
     } catch (error) {
       console.error('API Error:', error);

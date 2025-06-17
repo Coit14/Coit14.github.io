@@ -19,6 +19,11 @@ const printfulService = {
   getShippingRates: async (shippingData) => {
     const res = await printfulApi.post('/shipping/rates', shippingData);
     return res.data.result;
+  },
+
+  getVariantById: async (productId, variantId) => {
+    const product = await printfulService.getProduct(productId);
+    return product.variants.find(v => v.id === variantId);
   }
 };
 
