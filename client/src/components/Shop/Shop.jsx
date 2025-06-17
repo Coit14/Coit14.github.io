@@ -4,6 +4,7 @@ import ProductModal from './ProductModal';
 import './Shop.css';
 import * as printService from '../../services/printfulService';
 import LoadingSpinner from '../common/LoadingSpinner';
+import ProductCard from './ProductCard';
 
 const Shop = () => {
     const { products, setProducts } = useCart();
@@ -107,29 +108,11 @@ const Shop = () => {
 
             <div className="products-grid">
                 {products.map(product => (
-                    <div key={product.id} className="product-card">
-                        <div className="product-image-container">
-                            {product.thumbnail_url ? (
-                                <img
-                                    src={product.thumbnail_url}
-                                    alt={product.name}
-                                    className="product-image"
-                                    loading="lazy"
-                                />
-                            ) : (
-                                <div className="no-image">No image available</div>
-                            )}
-                        </div>
-                        <div className="product-info">
-                            <h3 className="product-title">{product.name}</h3>
-                            <button
-                                className="view-details-button"
-                                onClick={() => handleProductClick(product.id)}
-                            >
-                                View Details
-                            </button>
-                        </div>
-                    </div>
+                    <ProductCard
+                        key={product.id}
+                        product={product}
+                        onClick={() => handleProductClick(product.id)}
+                    />
                 ))}
             </div>
 
