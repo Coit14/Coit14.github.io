@@ -84,11 +84,14 @@ const Checkout = () => {
         total: getCartTotal()
     });
     const [shippingStage, setShippingStage] = useState('address');
+    const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
 
     const handleAddressSubmit = async (info) => {
         setShippingInfo(info);
         setSelectedShipping(null);
+        setIsLoading(true);
+        setError(null);
         try {
             const shippingOptions = await fetchShippingOptions(info, cartItems);
             setShippingMethods(
@@ -102,7 +105,9 @@ const Checkout = () => {
             setShippingStage('method');
         } catch (error) {
             console.error('Error fetching shipping options:', error);
-            setError('Unable to calculate shipping rates. Please try again.');
+            setError(error.message || 'Unable to calculate shipping rates. Please try again.');
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -151,6 +156,8 @@ const Checkout = () => {
                         selectedShipping={selectedShipping}
                         onSelectShipping={setSelectedShipping}
                         shippingInfo={shippingInfo}
+                        isLoading={isLoading}
+                        error={error}
                     />
                 )}
 

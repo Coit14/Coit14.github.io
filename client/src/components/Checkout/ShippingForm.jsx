@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './ShippingForm.css';
+import LoadingSpinner from '../common/LoadingSpinner';
 
 const ShippingForm = ({ 
     shippingStage, // 'address' | 'method'
@@ -9,7 +10,8 @@ const ShippingForm = ({
     selectedShipping, 
     onSelectShipping,
     shippingInfo,
-    isLoading
+    isLoading,
+    error
 }) => {
     const [formData, setFormData] = useState({
         firstName: '',
@@ -106,6 +108,14 @@ const ShippingForm = ({
 
     return (
         <div className="shipping-form-container">
+            {isLoading && (
+                <div className="loading-overlay">
+                    <LoadingSpinner />
+                </div>
+            )}
+            {error && (
+                <div className="error-message">{error}</div>
+            )}
             <form className="shipping-form">
                 <div className="form-section">
                     <h3>Contact Information</h3>
