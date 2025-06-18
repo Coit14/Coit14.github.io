@@ -4,11 +4,13 @@ import { useCart } from '../../contexts/CartContext';
 import * as printService from '../../services/printfulService';
 
 const formatPrice = (price) => {
-    return `$${price.toFixed(2)}`;
+    if (!price) return '';
+    const num = typeof price === 'string' ? parseFloat(price) : price;
+    return `$${num.toFixed(2)}`;
 };
 
 // Size order for sorting
-const sizeOrder = ['XS', 'S', 'M', 'L', 'XL', '2XL', '3XL', '4XL', '5XL'];
+const sizeOrder = ['XS', 'S', 'M', 'L', 'XL', '2XL', '3XL', '4XL', '5XL', 'One size'];
 
 const ProductModalMobile = ({ product, onClose }) => {
     const { addToCart, setIsCartOpen } = useCart();
@@ -73,6 +75,13 @@ const ProductModalMobile = ({ product, onClose }) => {
         return () => clearTimeout(timeout);
     }, [selectedVariant]);
 
+    // Safety check: reset image index if it's out of bounds
+    useEffect(() => {
+        if (imageIndex >= images.length && images.length > 0) {
+            setImageIndex(0);
+        }
+    }, [images.length, imageIndex]);
+
     // Get only valid mockup images for the selected variant
     let images = [];
     if (selectedVariant) {
@@ -94,6 +103,7 @@ const ProductModalMobile = ({ product, onClose }) => {
 
     const handlePrevImage = (e) => {
         e.stopPropagation();
+        if (images.length <= 1) return;
         setFade(true);
         setTimeout(() => {
             setImageIndex((prev) => (prev - 1 + images.length) % images.length);
@@ -103,6 +113,7 @@ const ProductModalMobile = ({ product, onClose }) => {
 
     const handleNextImage = (e) => {
         e.stopPropagation();
+        if (images.length <= 1) return;
         setFade(true);
         setTimeout(() => {
             setImageIndex((prev) => (prev + 1) % images.length);
@@ -143,11 +154,15 @@ const ProductModalMobile = ({ product, onClose }) => {
                             &#8592;
                         </button>
                     )}
-                    <img 
-                        src={images[imageIndex]}
-                        alt={productName}
-                        className={`mobile-product-image${fade ? ' fade' : ''}`}
-                    />
+                    {images.length > 0 && images[imageIndex] ? (
+                        <img 
+                            src={images[imageIndex]}
+                            alt={productName}
+                            className={`mobile-product-image${fade ? ' fade' : ''}`}
+                        />
+                    ) : (
+                        <div className="mobile-no-image">No image available</div>
+                    )}
                     {images.length > 1 && (
                         <button className="mobile-image-nav next" onClick={handleNextImage} aria-label="Next image">
                             &#8594;
