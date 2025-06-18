@@ -18,7 +18,8 @@
     "express": "^5.1.0",
     "node-cron": "^4.1.0",
     "node-fetch": "^3.3.2",
-    "nodemailer": "^6.9.9"
+    "nodemailer": "^6.9.9",
+    "stripe": "^18.2.1"
   },
   "engines": {
     "node": ">=18.0.0"

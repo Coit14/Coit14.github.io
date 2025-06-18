@@ -4,6 +4,7 @@ import fetch from 'node-fetch';
 import { initializeCache, getCachedProducts } from './services/cacheService.js';
 // import printifyRoutes from './routes/printifyRoutes.js';
 import printfulRoutes from './routes/printfulRoutes.js';
+import stripeRoutes from './routes/stripeRoutes.js';
 import cron from 'node-cron';
 import { exec } from 'child_process';
 import productsRouter from './api/products.js';
@@ -31,6 +32,7 @@ app.use((req, res, next) => {
 // Use printify routes
 // app.use('/api/printify', printifyRoutes);
 app.use('/api/printful', printfulRoutes);
+app.use('/api/checkout', stripeRoutes);
 
 // Initialize cache before setting up routes
 console.log('Initializing product cache...');

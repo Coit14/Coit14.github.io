@@ -4,6 +4,7 @@ import ShippingForm from './ShippingForm';
 import PaymentForm from './PaymentForm';
 import OrderReview from './OrderReview';
 import { API_URL } from '../../config/config';
+import { handleCheckout } from '../../services/stripeService';
 import './Checkout.css';
 
 const CheckoutSteps = {
@@ -126,10 +127,26 @@ const Checkout = () => {
 
     const handlePaymentSubmit = async () => {
         try {
-            // We'll add payment processing later
-            setCurrentStep(CheckoutSteps.REVIEW);
+            // Format items for Stripe checkout
+            const items = cartItems.map(item => ({
+                name: item.name,
+                quantity: item.quantity,
+                price: Math.round(item.price * 100) // Convert to cents
+            }));
+
+            // Add shipping cost as a separate line item
+            if (selectedShipping) {
+                items.push({
+                    name: `Shipping - ${selectedShipping.name}`,
+                    quantity: 1,
+                    price: Math.round(selectedShipping.rate * 100)
+                });
+            }
+
+            await handleCheckout(items);
         } catch (error) {
             console.error('Payment failed:', error);
+            setError(error.message || 'Payment processing failed. Please try again.');
         }
     };
 

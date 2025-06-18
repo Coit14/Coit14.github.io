@@ -11,6 +11,8 @@ import EventBooking from './components/Pages/EventBooking';
 import NotFound from './components/Pages/NotFound';
 import { CartProvider } from './contexts/CartContext';
 import Checkout from './components/Checkout/Checkout';
+import CheckoutSuccess from './components/CheckoutSuccess';
+import CheckoutCancel from './components/CheckoutCancel';
 import './App.css';
 import './styles/layout.css';
 import './index.css';
@@ -34,6 +36,8 @@ function App() {
                             <Route path="/menu" element={<Menu />} />
                             <Route path="/shop" element={<Shop />} />
                             <Route path="/checkout" element={<Checkout />} />
+                            <Route path="/checkout/success" element={<CheckoutSuccess />} />
+                            <Route path="/checkout/cancel" element={<CheckoutCancel />} />
                             <Route path="/book-event" element={<EventBooking />} />
                             <Route path="/manage-products" element={<ManageProducts />} />
                             <Route path="*" element={<NotFound />} />
