@@ -113,10 +113,11 @@ const Checkout = () => {
 
     const handleShippingMethodSubmit = () => {
         if (selectedShipping) {
+            const shippingRate = Number(selectedShipping.rate) || 0;
             setOrderSummary(prev => ({
                 ...prev,
-                shipping: selectedShipping.rate,
-                total: prev.subtotal + selectedShipping.rate + prev.tax
+                shipping: shippingRate,
+                total: prev.subtotal + shippingRate + prev.tax
             }));
             setCurrentStep(CheckoutSteps.PAYMENT);
             setShippingStage('address');

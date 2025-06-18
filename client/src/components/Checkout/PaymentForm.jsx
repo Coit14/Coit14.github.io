@@ -110,19 +110,19 @@ const PaymentForm = ({ onSubmit, orderSummary, shippingInfo, selectedShipping })
                 <div className="order-total">
                     <div className="total-line">
                         <span>Subtotal</span>
-                        <span>${orderSummary.subtotal.toFixed(2)}</span>
+                        <span>${Number(orderSummary.subtotal).toFixed(2)}</span>
                     </div>
                     <div className="total-line">
                         <span>Shipping</span>
-                        <span>${orderSummary.shipping.toFixed(2)}</span>
+                        <span>${Number(orderSummary.shipping).toFixed(2)}</span>
                     </div>
                     <div className="total-line">
                         <span>Tax</span>
-                        <span>${orderSummary.tax.toFixed(2)}</span>
+                        <span>${Number(orderSummary.tax).toFixed(2)}</span>
                     </div>
                     <div className="total-line grand-total">
                         <span>Total</span>
-                        <span>${orderSummary.total.toFixed(2)}</span>
+                        <span>${Number(orderSummary.total).toFixed(2)}</span>
                     </div>
                 </div>
 
