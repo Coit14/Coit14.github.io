@@ -5,6 +5,7 @@ console.log('REACT_APP_STRIPE_PUBLISHABLE_KEY:', process.env.REACT_APP_STRIPE_PU
 
 // Fallback to a placeholder test key if not defined
 // REMINDER: Set REACT_APP_STRIPE_PUBLISHABLE_KEY in Render dashboard (frontend build settings)
+// set in render, good for production.
 const stripeKey = process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY || '';
 const stripePromise = stripeKey ? loadStripe(stripeKey) : null;
 
