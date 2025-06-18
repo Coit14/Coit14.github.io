@@ -133,6 +133,7 @@ const ProductModal = ({ product, onClose }) => {
             addToCart({
                 productId: productInfo.id,
                 variantId: selectedVariant.id,
+                variant_id: selectedVariant.variant_id,
                 name: productName,
                 price: selectedVariant.retail_price,
                 image: images[imageIndex] || images[0],

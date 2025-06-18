@@ -27,7 +27,7 @@ const PaymentForm = ({ onSubmit, orderSummary, shippingInfo, selectedShipping })
                         zip: shippingInfo.zipCode
                     },
                     items: cartItems.map(item => ({
-                        variant_id: item.variantId,
+                        variant_id: item.variant_id,
                         quantity: item.quantity
                     })),
                     shipping: {

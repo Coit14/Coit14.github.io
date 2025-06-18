@@ -31,7 +31,7 @@ const fetchShippingOptions = async (shippingInfo, cartItems) => {
                 zip: shippingInfo.zipCode
             },
             items: cartItems.map(item => ({
-                variant_id: item.variantId,
+                variant_id: item.variant_id,
                 quantity: item.quantity
             }))
         };
