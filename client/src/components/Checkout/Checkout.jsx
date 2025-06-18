@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useCart } from '../../contexts/CartContext';
 import ShippingForm from './ShippingForm';
-import PaymentForm from './PaymentForm';
+// import PaymentForm from './PaymentForm'; // Removed
 import OrderReview from './OrderReview';
 import { API_URL } from '../../config/config';
 import { handleCheckout } from '../../services/stripeService';
@@ -143,6 +143,11 @@ const Checkout = () => {
                 });
             }
 
+            // Persist order info for Printful order creation after payment
+            localStorage.setItem('cartItems', JSON.stringify(cartItems));
+            localStorage.setItem('shippingInfo', JSON.stringify(shippingInfo));
+            localStorage.setItem('selectedShipping', JSON.stringify(selectedShipping));
+
             await handleCheckout(items);
         } catch (error) {
             console.error('Payment failed:', error);
@@ -180,10 +185,13 @@ const Checkout = () => {
                 )}
 
                 {currentStep === CheckoutSteps.PAYMENT && (
-                    <PaymentForm
-                        onSubmit={handlePaymentSubmit}
-                        orderSummary={orderSummary}
-                    />
+                    <div className="payment-step">
+                        <h2>Review & Pay</h2>
+                        <button className="place-order-btn" onClick={handlePaymentSubmit} disabled={isLoading}>
+                            {isLoading ? 'Processing...' : 'Place Order'}
+                        </button>
+                        {error && <div className="checkout-error">{error}</div>}
+                    </div>
                 )}
 
                 {currentStep === CheckoutSteps.REVIEW && (
