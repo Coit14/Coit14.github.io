@@ -152,6 +152,20 @@ const ProductModalMobile = ({ product, onClose }) => {
                             &#8594;
                         </button>
                     )}
+                    {/* Carousel dots */}
+                    {images.length > 1 && (
+                        <div className="mobile-carousel-dots">
+                            {images.slice(0, 3).map((_, idx) => (
+                                <span
+                                    key={idx}
+                                    className={`mobile-carousel-dot${imageIndex === idx ? ' active' : ''}`}
+                                />
+                            ))}
+                            {images.length > 3 && imageIndex > 2 && (
+                                <span className="mobile-carousel-dot more">...</span>
+                            )}
+                        </div>
+                    )}
                 </div>
 
                 {/* Product Info */}

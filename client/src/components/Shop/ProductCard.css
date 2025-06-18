@@ -30,7 +30,9 @@
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  object-position: center;
+  background: transparent;
   transition: transform 0.3s ease;
 }
 

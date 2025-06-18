@@ -523,3 +523,105 @@
     min-height: 260px;
 }
 
+/* Add new flex layout for modal */
+.modal-product-flex-layout {
+    display: flex;
+    flex-direction: row;
+    gap: 3rem;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+/* Options area (right side) */
+.modal-options-area {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    min-width: 320px;
+    max-width: 420px;
+    flex: 1 1 350px;
+}
+
+/* Price and Add to Bag button grouped */
+.price-and-add {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+.product-price.styled-price {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--brand-red);
+    margin: 0;
+}
+.add-to-cart-button.styled-add-to-cart {
+    min-width: 180px;
+    font-size: 1.1rem;
+    padding: 1rem 2.5rem;
+    margin: 0;
+}
+
+/* Horizontal size grid */
+.size-grid-horizontal {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1100px) {
+    .modal-product-flex-layout {
+        gap: 1.5rem;
+    }
+    .modal-options-area {
+        min-width: 220px;
+        max-width: 100%;
+    }
+}
+@media (max-width: 900px) {
+    .modal-product-flex-layout {
+        flex-direction: column;
+        gap: 2rem;
+        align-items: stretch;
+    }
+    .modal-options-area {
+        min-width: 0;
+        max-width: 100%;
+    }
+    .price-and-add {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: stretch;
+    }
+}
+
+.carousel-dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+.carousel-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #ccc;
+    display: inline-block;
+    transition: background 0.2s;
+}
+.carousel-dot.active {
+    background: var(--brand-red);
+}
+.carousel-dot.more {
+    width: auto;
+    height: auto;
+    background: none;
+    color: #888;
+    font-size: 1.1rem;
+    margin-left: 0.25rem;
+}
+

@@ -164,7 +164,7 @@ const ProductModal = ({ product, onClose }) => {
                         <div className="product-type" dangerouslySetInnerHTML={{ __html: description }} />
                     )}
                 </div>
-                <div className="modal-product-layout styled-layout">
+                <div className="modal-product-flex-layout">
                     <div className="main-image-container styled-image" style={{ position: 'relative', justifyContent: 'center', alignItems: 'center', minHeight: 260 }}>
                         {images.length > 1 && (
                             <button className="carousel-arrow left" onClick={handlePrevImage} aria-label="Previous image" disabled={images.length <= 1}>
@@ -182,8 +182,22 @@ const ProductModal = ({ product, onClose }) => {
                                 &#8594;
                             </button>
                         )}
+                        {/* Carousel dots */}
+                        {images.length > 1 && (
+                            <div className="carousel-dots">
+                                {images.slice(0, 3).map((_, idx) => (
+                                    <span
+                                        key={idx}
+                                        className={`carousel-dot${imageIndex === idx ? ' active' : ''}`}
+                                    />
+                                ))}
+                                {images.length > 3 && imageIndex > 2 && (
+                                    <span className="carousel-dot more">...</span>
+                                )}
+                            </div>
+                        )}
                     </div>
-                    <div className="product-details styled-details">
+                    <div className="product-details styled-details modal-options-area">
                         {/* Color selection if multiple colors */}
                         {colorOptions.length > 1 && (
                             <div className="color-options-section">
@@ -201,12 +215,12 @@ const ProductModal = ({ product, onClose }) => {
                                 </div>
                             </div>
                         )}
-                        {/* Size selection if more than one unique size */}
-                        {sizeOptions.length > 1 && (
-                            <div className="size-options-section">
+                        {/* Size selection if multiple sizes */}
+                        {!allOneSize && sizeOptions.length > 0 && (
+                            <div className="size-selection-section">
                                 <h3>Choose Size</h3>
-                                <div className="size-grid styled-size-grid">
-                                    {sizeOptions.sort((a, b) => sizeOrder.indexOf(a) - sizeOrder.indexOf(b)).map(size => (
+                                <div className="size-grid-horizontal">
+                                    {sizeOrder.filter(size => sizeOptions.includes(size)).map(size => (
                                         <button
                                             key={size}
                                             className={`size-button${selectedSize === size ? ' selected' : ''}`}
@@ -218,18 +232,17 @@ const ProductModal = ({ product, onClose }) => {
                                 </div>
                             </div>
                         )}
-                        {/* Price display moved below color/size selection */}
-                        <div className="styled-price prominent-price" style={{ margin: '1.5rem 0 1rem 0', textAlign: 'center' }}>
-                            {formatPrice(priceToShow)}
+                        {/* Price and Add to Bag button */}
+                        <div className="price-and-add">
+                            <div className="product-price styled-price">{formatPrice(priceToShow)}</div>
+                            <button
+                                className={`add-to-cart-button styled-add-to-cart${!selectedVariant ? ' disabled' : ''}`}
+                                onClick={handleAddToCart}
+                                disabled={!selectedVariant}
+                            >
+                                Add to Bag
+                            </button>
                         </div>
-                        <button 
-                            className={`add-to-cart-button styled-add-to-cart ${!selectedVariant ? 'disabled' : ''}`}
-                            disabled={!selectedVariant}
-                            onClick={handleAddToCart}
-                            style={{ width: '100%', margin: '0 0 1rem 0', alignSelf: 'center' }}
-                        >
-                            Add to Bag
-                        </button>
                     </div>
                 </div>
             </div>

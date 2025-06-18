@@ -225,4 +225,31 @@
     .mobile-modal-content {
         height: -webkit-fill-available;
     }
+}
+
+.mobile-carousel-dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+.mobile-carousel-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #ccc;
+    display: inline-block;
+    transition: background 0.2s;
+}
+.mobile-carousel-dot.active {
+    background: var(--brand-red);
+}
+.mobile-carousel-dot.more {
+    width: auto;
+    height: auto;
+    background: none;
+    color: #888;
+    font-size: 1.1rem;
+    margin-left: 0.25rem;
 } 
