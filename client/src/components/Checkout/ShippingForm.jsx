@@ -249,10 +249,12 @@ const ShippingForm = ({
                                     >
                                         <div className="method-info">
                                             <span className="method-name">{method.name}</span>
-                                            <span className="method-time">{method.delivery_time}</span>
+                                            {method.min_delivery_days !== undefined && method.max_delivery_days !== undefined && method.min_delivery_days !== null && method.max_delivery_days !== null ? (
+                                                <span className="method-time">{method.min_delivery_days}-{method.max_delivery_days} days</span>
+                                            ) : null}
                                         </div>
                                         <span className="method-price">
-                                            ${(method.rate / 100).toFixed(2)}
+                                            ${parseFloat(method.rate || method.cost).toFixed(2)}
                                         </span>
                                     </div>
                                 ))

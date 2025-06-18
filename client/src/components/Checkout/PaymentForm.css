@@ -111,6 +111,31 @@
     transform: none;
 }
 
+.submit-payment-button {
+    background-color: var(--brand-red);
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.submit-payment-button:hover {
+    background-color: var(--brand-hover-red);
+    transform: translateY(-1px);
+}
+
+.submit-payment-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    transform: none;
+}
+
 .loading-overlay {
     position: fixed;
     top: 0;

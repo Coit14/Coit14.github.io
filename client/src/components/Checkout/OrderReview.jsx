@@ -22,19 +22,19 @@ const OrderReview = ({ orderSummary, shippingInfo, printfulOrder }) => {
                     <div className="summary-details">
                         <div className="summary-line">
                             <span>Subtotal:</span>
-                            <span>${(orderSummary.subtotal / 100).toFixed(2)}</span>
+                            <span>${orderSummary.subtotal.toFixed(2)}</span>
                         </div>
                         <div className="summary-line">
                             <span>Shipping:</span>
-                            <span>${(orderSummary.shipping / 100).toFixed(2)}</span>
+                            <span>${orderSummary.shipping.toFixed(2)}</span>
                         </div>
                         <div className="summary-line">
                             <span>Tax:</span>
-                            <span>${(orderSummary.tax / 100).toFixed(2)}</span>
+                            <span>${orderSummary.tax.toFixed(2)}</span>
                         </div>
                         <div className="summary-line total">
                             <span>Total:</span>
-                            <span>${(orderSummary.total / 100).toFixed(2)}</span>
+                            <span>${orderSummary.total.toFixed(2)}</span>
                         </div>
                     </div>
                 </div>
