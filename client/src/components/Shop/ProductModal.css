@@ -625,3 +625,65 @@
     margin-left: 0.25rem;
 }
 
+.modal-header-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 1.5rem;
+}
+.modal-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--brand-dark);
+    margin: 0;
+    text-align: left;
+}
+.modal-price {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--brand-red);
+    margin-left: 1.5rem;
+    white-space: nowrap;
+}
+.modal-options-vertical {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+.color-options-horizontal {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+.size-options-horizontal {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+.add-to-bag-bottom-row {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    margin-top: 2.5rem;
+}
+@media (max-width: 900px) {
+    .modal-header-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    .modal-title, .modal-price {
+        font-size: 1.1rem;
+    }
+    .add-to-bag-bottom-row {
+        justify-content: center;
+        margin-top: 1.5rem;
+    }
+}
+

@@ -156,15 +156,11 @@ const ProductModal = ({ product, onClose }) => {
         <div className="modal-overlay" onClick={handleClose}>
             <div className="modal-content product-modal-styled" onClick={e => e.stopPropagation()}>
                 <button className="modal-close" onClick={handleClose}>&times;</button>
-                <div className="modal-header" style={{ marginBottom: '1.5rem' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.5rem' }}>
-                        <h2 style={{ margin: 0, fontWeight: 700, fontSize: '1.4rem', color: 'var(--brand-dark)' }}>{productName}</h2>
-                    </div>
-                    {description && (
-                        <div className="product-type" dangerouslySetInnerHTML={{ __html: description }} />
-                    )}
+                <div className="modal-header-row">
+                    <h2 className="modal-title">{productName}</h2>
+                    <span className="modal-price">{formatPrice(priceToShow)}</span>
                 </div>
-                <div className="modal-product-flex-layout">
+                <div className="modal-product-flex-layout modal-product-flex-single-row">
                     <div className="main-image-container styled-image" style={{ position: 'relative', justifyContent: 'center', alignItems: 'center', minHeight: 260 }}>
                         {images.length > 1 && (
                             <button className="carousel-arrow left" onClick={handlePrevImage} aria-label="Previous image" disabled={images.length <= 1}>
@@ -197,12 +193,12 @@ const ProductModal = ({ product, onClose }) => {
                             </div>
                         )}
                     </div>
-                    <div className="product-details styled-details modal-options-area">
+                    <div className="product-details styled-details modal-options-area modal-options-vertical">
                         {/* Color selection if multiple colors */}
                         {colorOptions.length > 1 && (
                             <div className="color-options-section">
                                 <h3>Choose Color</h3>
-                                <div className="color-options-grid">
+                                <div className="color-options-horizontal">
                                     {colorOptions.map(color => (
                                         <button
                                             key={color}
@@ -219,7 +215,7 @@ const ProductModal = ({ product, onClose }) => {
                         {!allOneSize && sizeOptions.length > 0 && (
                             <div className="size-selection-section">
                                 <h3>Choose Size</h3>
-                                <div className="size-grid-horizontal">
+                                <div className="size-options-horizontal">
                                     {sizeOrder.filter(size => sizeOptions.includes(size)).map(size => (
                                         <button
                                             key={size}
@@ -232,9 +228,8 @@ const ProductModal = ({ product, onClose }) => {
                                 </div>
                             </div>
                         )}
-                        {/* Price and Add to Bag button */}
-                        <div className="price-and-add">
-                            <div className="product-price styled-price">{formatPrice(priceToShow)}</div>
+                        {/* Add to Bag button at bottom right */}
+                        <div className="add-to-bag-bottom-row">
                             <button
                                 className={`add-to-cart-button styled-add-to-cart${!selectedVariant ? ' disabled' : ''}`}
                                 onClick={handleAddToCart}
