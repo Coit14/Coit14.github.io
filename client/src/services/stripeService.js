@@ -1,8 +1,18 @@
 import { loadStripe } from '@stripe/stripe-js';
 
-const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
+// Log the Stripe publishable key for debugging (will be undefined in production if not set)
+console.log('REACT_APP_STRIPE_PUBLISHABLE_KEY:', process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
+
+// Fallback to a placeholder test key if not defined
+// REMINDER: Set REACT_APP_STRIPE_PUBLISHABLE_KEY in Render dashboard (frontend build settings)
+const stripeKey = process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY || '';
+const stripePromise = stripeKey ? loadStripe(stripeKey) : null;
 
 export const handleCheckout = async (items) => {
+  if (!stripePromise) {
+    console.error('Stripe is not configured. Please set REACT_APP_STRIPE_PUBLISHABLE_KEY in your environment.');
+    return;
+  }
   try {
     const stripe = await stripePromise;
     
