@@ -1,4 +1,26 @@
 import { getCachedProducts } from '../services/cacheService.js';
+const express = require('express');
+const path = require('path');
+const fs = require('fs');
+
+const router = express.Router();
+
+router.get('/', (req, res) => {
+    const productsPath = path.resolve(__dirname, 'products.json');
+    fs.readFile(productsPath, 'utf8', (err, data) => {
+        if (err) {
+            return res.status(500).json({ error: 'Failed to load products.' });
+        }
+        try {
+            const products = JSON.parse(data);
+            res.json(products);
+        } catch (parseErr) {
+            res.status(500).json({ error: 'Failed to parse products.' });
+        }
+    });
+});
+
+module.exports = router;
 
 export async function handler(req, res) {
   if (req.method === 'GET') {

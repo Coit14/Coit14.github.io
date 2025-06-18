@@ -1,0 +1,2215 @@
+[
+  {
+    "sync_product": {
+      "id": 384879589,
+      "external_id": "6851fd693b8ef9",
+      "name": "Coit's Classic Tee",
+      "variants": 15,
+      "synced": 15,
+      "thumbnail_url": "https://files.cdn.printful.com/files/050/050b664e258fe213064fed3c42f555fa_preview.png",
+      "is_ignored": false
+    },
+    "sync_variants": [
+      {
+        "id": 4858421058,
+        "external_id": "6851fd693b8f92",
+        "sync_product_id": 384879589,
+        "name": "Coit's Classic Tee / Black Heather / S",
+        "synced": true,
+        "variant_id": 8923,
+        "main_category_id": 24,
+        "warehouse_product_id": null,
+        "warehouse_product_variant_id": null,
+        "retail_price": "20.00",
+        "sku": "6851FD693AB5B_Black-Heather-S",
+        "currency": "USD",
+        "product": {
+          "variant_id": 8923,
+          "product_id": 71,
+          "image": "https://files.cdn.printful.com/products/71/8923_1581408908.jpg",
+          "name": "Bella + Canvas 3001 Unisex Short Sleeve Jersey T-Shirt with Tear Away Label (Black Heather / S)"
+        },
+        "files": [
+          {
+            "id": 841386652,
+            "type": "front_large",
+            "hash": "0078473fb30c6f959347e1485d3230b4",
+            "url": null,
+            "filename": "prinful_logo_red.png",
+            "mime_type": "image/png",
+            "size": 1592804,
+            "width": 1024,
+            "height": 1024,
+            "dpi": null,
+            "status": "ok",
+            "created": 1750186608,
+            "thumbnail_url": "https://files.cdn.printful.com/files/007/0078473fb30c6f959347e1485d3230b4_thumb.png",
+            "preview_url": "https://files.cdn.printful.com/files/007/0078473fb30c6f959347e1485d3230b4_preview.png",
+            "visible": true,
+            "is_temporary": false,
+            "message": "",
+            "options": [],
+            "stitch_count_tier": null
+          },
+          {
+            "id": 841487700,
+            "type": "preview",
+            "hash": "050b664e258fe213064fed3c42f555fa",
+            "url": null,
+            "filename": "unisex-staple-t-shirt-black-heather-front-6851fd6491588.jpg",
+            "mime_type": "image/jpeg",
+            "size": 153447,
+            "width": 1000,
+            "height": 1000,
+            "dpi": null,
+            "status": "ok",
+            "created": 1750203752,
+            "thumbnail_url": "https://files.cdn.printful.com/files/050/050b664e258fe213064fed3c42f555fa_thumb.png",
+            "preview_url": "https://files.cdn.printful.com/files/050/050b664e258fe213064fed3c42f555fa_preview.png",
+            "visible": false,
+            "is_temporary": false,
+            "message": "",
+            "stitch_count_tier": null
+          }
+        ],
+        "options": [
+          {
+            "id": "embroidery_type",
+            "value": "flat"
+          },
+          {
+            "id": "thread_colors",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors",
+            "value": []
+          },
+          {
+            "id": "thread_colors_3d",
+            "value": []
+          },
+          {
+            "id": "thread_colors_chest_left",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors_chest_left",
+            "value": []
+          },
+          {
+            "id": "thread_colors_large_center",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors_large_center",
+            "value": []
+          },
+          {
+            "id": "thread_colors_chest_center",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors_chest_center",
+            "value": []
+          },
+          {
+            "id": "thread_colors_sleeve_left_top",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors_sleeve_left_top",
+            "value": []
+          },
+          {
+            "id": "thread_colors_sleeve_right_top",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors_sleeve_right_top",
+            "value": []
+          },
+          {
+            "id": "lifelike",
+            "value": false
+          }
+        ],
+        "is_ignored": false,
+        "size": "S",
+        "color": "Black Heather",
+        "availability_status": "active"
+      },
+      {
+        "id": 4858421059,
+        "external_id": "6851fd693b8ff2",
+        "sync_product_id": 384879589,
+        "name": "Coit's Classic Tee / Black Heather / M",
+        "synced": true,
+        "variant_id": 8924,
+        "main_category_id": 24,
+        "warehouse_product_id": null,
+        "warehouse_product_variant_id": null,
+        "retail_price": "20.00",
+        "sku": "6851FD693AB5B_Black-Heather-M",
+        "currency": "USD",
+        "product": {
+          "variant_id": 8924,
+          "product_id": 71,
+          "image": "https://files.cdn.printful.com/products/71/8924_1581408904.jpg",
+          "name": "Bella + Canvas 3001 Unisex Short Sleeve Jersey T-Shirt with Tear Away Label (Black Heather / M)"
+        },
+        "files": [
+          {
+            "id": 841386652,
+            "type": "front_large",
+            "hash": "0078473fb30c6f959347e1485d3230b4",
+            "url": null,
+            "filename": "prinful_logo_red.png",
+            "mime_type": "image/png",
+            "size": 1592804,
+            "width": 1024,
+            "height": 1024,
+            "dpi": null,
+            "status": "ok",
+            "created": 1750186608,
+            "thumbnail_url": "https://files.cdn.printful.com/files/007/0078473fb30c6f959347e1485d3230b4_thumb.png",
+            "preview_url": "https://files.cdn.printful.com/files/007/0078473fb30c6f959347e1485d3230b4_preview.png",
+            "visible": true,
+            "is_temporary": false,
+            "message": "",
+            "options": [],
+            "stitch_count_tier": null
+          },
+          {
+            "id": 841487700,
+            "type": "preview",
+            "hash": "050b664e258fe213064fed3c42f555fa",
+            "url": null,
+            "filename": "unisex-staple-t-shirt-black-heather-front-6851fd6491588.jpg",
+            "mime_type": "image/jpeg",
+            "size": 153447,
+            "width": 1000,
+            "height": 1000,
+            "dpi": null,
+            "status": "ok",
+            "created": 1750203752,
+            "thumbnail_url": "https://files.cdn.printful.com/files/050/050b664e258fe213064fed3c42f555fa_thumb.png",
+            "preview_url": "https://files.cdn.printful.com/files/050/050b664e258fe213064fed3c42f555fa_preview.png",
+            "visible": false,
+            "is_temporary": false,
+            "message": "",
+            "stitch_count_tier": null
+          }
+        ],
+        "options": [
+          {
+            "id": "embroidery_type",
+            "value": "flat"
+          },
+          {
+            "id": "thread_colors",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors",
+            "value": []
+          },
+          {
+            "id": "thread_colors_3d",
+            "value": []
+          },
+          {
+            "id": "thread_colors_chest_left",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors_chest_left",
+            "value": []
+          },
+          {
+            "id": "thread_colors_large_center",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors_large_center",
+            "value": []
+          },
+          {
+            "id": "thread_colors_chest_center",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors_chest_center",
+            "value": []
+          },
+          {
+            "id": "thread_colors_sleeve_left_top",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors_sleeve_left_top",
+            "value": []
+          },
+          {
+            "id": "thread_colors_sleeve_right_top",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors_sleeve_right_top",
+            "value": []
+          },
+          {
+            "id": "lifelike",
+            "value": false
+          }
+        ],
+        "is_ignored": false,
+        "size": "M",
+        "color": "Black Heather",
+        "availability_status": "active"
+      },
+      {
+        "id": 4858421060,
+        "external_id": "6851fd693b9054",
+        "sync_product_id": 384879589,
+        "name": "Coit's Classic Tee / Black Heather / L",
+        "synced": true,
+        "variant_id": 8925,
+        "main_category_id": 24,
+        "warehouse_product_id": null,
+        "warehouse_product_variant_id": null,
+        "retail_price": "20.00",
+        "sku": "6851FD693AB5B_Black-Heather-L",
+        "currency": "USD",
+        "product": {
+          "variant_id": 8925,
+          "product_id": 71,
+          "image": "https://files.cdn.printful.com/products/71/8925_1581408898.jpg",
+          "name": "Bella + Canvas 3001 Unisex Short Sleeve Jersey T-Shirt with Tear Away Label (Black Heather / L)"
+        },
+        "files": [
+          {
+            "id": 841386652,
+            "type": "front_large",
+            "hash": "0078473fb30c6f959347e1485d3230b4",
+            "url": null,
+            "filename": "prinful_logo_red.png",
+            "mime_type": "image/png",
+            "size": 1592804,
+            "width": 1024,
+            "height": 1024,
+            "dpi": null,
+            "status": "ok",
+            "created": 1750186608,
+            "thumbnail_url": "https://files.cdn.printful.com/files/007/0078473fb30c6f959347e1485d3230b4_thumb.png",
+            "preview_url": "https://files.cdn.printful.com/files/007/0078473fb30c6f959347e1485d3230b4_preview.png",
+            "visible": true,
+            "is_temporary": false,
+            "message": "",
+            "options": [],
+            "stitch_count_tier": null
+          },
+          {
+            "id": 841487700,
+            "type": "preview",
+            "hash": "050b664e258fe213064fed3c42f555fa",
+            "url": null,
+            "filename": "unisex-staple-t-shirt-black-heather-front-6851fd6491588.jpg",
+            "mime_type": "image/jpeg",
+            "size": 153447,
+            "width": 1000,
+            "height": 1000,
+            "dpi": null,
+            "status": "ok",
+            "created": 1750203752,
+            "thumbnail_url": "https://files.cdn.printful.com/files/050/050b664e258fe213064fed3c42f555fa_thumb.png",
+            "preview_url": "https://files.cdn.printful.com/files/050/050b664e258fe213064fed3c42f555fa_preview.png",
+            "visible": false,
+            "is_temporary": false,
+            "message": "",
+            "stitch_count_tier": null
+          }
+        ],
+        "options": [
+          {
+            "id": "embroidery_type",
+            "value": "flat"
+          },
+          {
+            "id": "thread_colors",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors",
+            "value": []
+          },
+          {
+            "id": "thread_colors_3d",
+            "value": []
+          },
+          {
+            "id": "thread_colors_chest_left",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors_chest_left",
+            "value": []
+          },
+          {
+            "id": "thread_colors_large_center",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors_large_center",
+            "value": []
+          },
+          {
+            "id": "thread_colors_chest_center",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors_chest_center",
+            "value": []
+          },
+          {
+            "id": "thread_colors_sleeve_left_top",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors_sleeve_left_top",
+            "value": []
+          },
+          {
+            "id": "thread_colors_sleeve_right_top",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors_sleeve_right_top",
+            "value": []
+          },
+          {
+            "id": "lifelike",
+            "value": false
+          }
+        ],
+        "is_ignored": false,
+        "size": "L",
+        "color": "Black Heather",
+        "availability_status": "active"
+      },
+      {
+        "id": 4858421061,
+        "external_id": "6851fd693b9197",
+        "sync_product_id": 384879589,
+        "name": "Coit's Classic Tee / Black Heather / XL",
+        "synced": true,
+        "variant_id": 8926,
+        "main_category_id": 24,
+        "warehouse_product_id": null,
+        "warehouse_product_variant_id": null,
+        "retail_price": "20.00",
+        "sku": "6851FD693AB5B_Black-Heather-XL",
+        "currency": "USD",
+        "product": {
+          "variant_id": 8926,
+          "product_id": 71,
+          "image": "https://files.cdn.printful.com/products/71/8926_1581408912.jpg",
+          "name": "Bella + Canvas 3001 Unisex Short Sleeve Jersey T-Shirt with Tear Away Label (Black Heather / XL)"
+        },
+        "files": [
+          {
+            "id": 841386652,
+            "type": "front_large",
+            "hash": "0078473fb30c6f959347e1485d3230b4",
+            "url": null,
+            "filename": "prinful_logo_red.png",
+            "mime_type": "image/png",
+            "size": 1592804,
+            "width": 1024,
+            "height": 1024,
+            "dpi": null,
+            "status": "ok",
+            "created": 1750186608,
+            "thumbnail_url": "https://files.cdn.printful.com/files/007/0078473fb30c6f959347e1485d3230b4_thumb.png",
+            "preview_url": "https://files.cdn.printful.com/files/007/0078473fb30c6f959347e1485d3230b4_preview.png",
+            "visible": true,
+            "is_temporary": false,
+            "message": "",
+            "options": [],
+            "stitch_count_tier": null
+          },
+          {
+            "id": 841487700,
+            "type": "preview",
+            "hash": "050b664e258fe213064fed3c42f555fa",
+            "url": null,
+            "filename": "unisex-staple-t-shirt-black-heather-front-6851fd6491588.jpg",
+            "mime_type": "image/jpeg",
+            "size": 153447,
+            "width": 1000,
+            "height": 1000,
+            "dpi": null,
+            "status": "ok",
+            "created": 1750203752,
+            "thumbnail_url": "https://files.cdn.printful.com/files/050/050b664e258fe213064fed3c42f555fa_thumb.png",
+            "preview_url": "https://files.cdn.printful.com/files/050/050b664e258fe213064fed3c42f555fa_preview.png",
+            "visible": false,
+            "is_temporary": false,
+            "message": "",
+            "stitch_count_tier": null
+          }
+        ],
+        "options": [
+          {
+            "id": "embroidery_type",
+            "value": "flat"
+          },
+          {
+            "id": "thread_colors",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors",
+            "value": []
+          },
+          {
+            "id": "thread_colors_3d",
+            "value": []
+          },
+          {
+            "id": "thread_colors_chest_left",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors_chest_left",
+            "value": []
+          },
+          {
+            "id": "thread_colors_large_center",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors_large_center",
+            "value": []
+          },
+          {
+            "id": "thread_colors_chest_center",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors_chest_center",
+            "value": []
+          },
+          {
+            "id": "thread_colors_sleeve_left_top",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors_sleeve_left_top",
+            "value": []
+          },
+          {
+            "id": "thread_colors_sleeve_right_top",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors_sleeve_right_top",
+            "value": []
+          },
+          {
+            "id": "lifelike",
+            "value": false
+          }
+        ],
+        "is_ignored": false,
+        "size": "XL",
+        "color": "Black Heather",
+        "availability_status": "active"
+      },
+      {
+        "id": 4858421062,
+        "external_id": "6851fd693b91e4",
+        "sync_product_id": 384879589,
+        "name": "Coit's Classic Tee / Black Heather / 2XL",
+        "synced": true,
+        "variant_id": 8927,
+        "main_category_id": 24,
+        "warehouse_product_id": null,
+        "warehouse_product_variant_id": null,
+        "retail_price": "20.00",
+        "sku": "6851FD693AB5B_Black-Heather-2XL",
+        "currency": "USD",
+        "product": {
+          "variant_id": 8927,
+          "product_id": 71,
+          "image": "https://files.cdn.printful.com/products/71/8927_1581408889.jpg",
+          "name": "Bella + Canvas 3001 Unisex Short Sleeve Jersey T-Shirt with Tear Away Label (Black Heather / 2XL)"
+        },
+        "files": [
+          {
+            "id": 841386652,
+            "type": "front_large",
+            "hash": "0078473fb30c6f959347e1485d3230b4",
+            "url": null,
+            "filename": "prinful_logo_red.png",
+            "mime_type": "image/png",
+            "size": 1592804,
+            "width": 1024,
+            "height": 1024,
+            "dpi": null,
+            "status": "ok",
+            "created": 1750186608,
+            "thumbnail_url": "https://files.cdn.printful.com/files/007/0078473fb30c6f959347e1485d3230b4_thumb.png",
+            "preview_url": "https://files.cdn.printful.com/files/007/0078473fb30c6f959347e1485d3230b4_preview.png",
+            "visible": true,
+            "is_temporary": false,
+            "message": "",
+            "options": [],
+            "stitch_count_tier": null
+          },
+          {
+            "id": 841487700,
+            "type": "preview",
+            "hash": "050b664e258fe213064fed3c42f555fa",
+            "url": null,
+            "filename": "unisex-staple-t-shirt-black-heather-front-6851fd6491588.jpg",
+            "mime_type": "image/jpeg",
+            "size": 153447,
+            "width": 1000,
+            "height": 1000,
+            "dpi": null,
+            "status": "ok",
+            "created": 1750203752,
+            "thumbnail_url": "https://files.cdn.printful.com/files/050/050b664e258fe213064fed3c42f555fa_thumb.png",
+            "preview_url": "https://files.cdn.printful.com/files/050/050b664e258fe213064fed3c42f555fa_preview.png",
+            "visible": false,
+            "is_temporary": false,
+            "message": "",
+            "stitch_count_tier": null
+          }
+        ],
+        "options": [
+          {
+            "id": "embroidery_type",
+            "value": "flat"
+          },
+          {
+            "id": "thread_colors",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors",
+            "value": []
+          },
+          {
+            "id": "thread_colors_3d",
+            "value": []
+          },
+          {
+            "id": "thread_colors_chest_left",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors_chest_left",
+            "value": []
+          },
+          {
+            "id": "thread_colors_large_center",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors_large_center",
+            "value": []
+          },
+          {
+            "id": "thread_colors_chest_center",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors_chest_center",
+            "value": []
+          },
+          {
+            "id": "thread_colors_sleeve_left_top",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors_sleeve_left_top",
+            "value": []
+          },
+          {
+            "id": "thread_colors_sleeve_right_top",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors_sleeve_right_top",
+            "value": []
+          },
+          {
+            "id": "lifelike",
+            "value": false
+          }
+        ],
+        "is_ignored": false,
+        "size": "2XL",
+        "color": "Black Heather",
+        "availability_status": "active"
+      },
+      {
+        "id": 4858421063,
+        "external_id": "6851fd693b9234",
+        "sync_product_id": 384879589,
+        "name": "Coit's Classic Tee / Athletic Heather / S",
+        "synced": true,
+        "variant_id": 6948,
+        "main_category_id": 24,
+        "warehouse_product_id": null,
+        "warehouse_product_variant_id": null,
+        "retail_price": "20.00",
+        "sku": "6851FD693AB5B_Athletic-Heather-S",
+        "currency": "USD",
+        "product": {
+          "variant_id": 6948,
+          "product_id": 71,
+          "image": "https://files.cdn.printful.com/products/71/6948_1581408462.jpg",
+          "name": "Bella + Canvas 3001 Unisex Short Sleeve Jersey T-Shirt with Tear Away Label (Athletic Heather / S)"
+        },
+        "files": [
+          {
+            "id": 841386652,
+            "type": "front_large",
+            "hash": "0078473fb30c6f959347e1485d3230b4",
+            "url": null,
+            "filename": "prinful_logo_red.png",
+            "mime_type": "image/png",
+            "size": 1592804,
+            "width": 1024,
+            "height": 1024,
+            "dpi": null,
+            "status": "ok",
+            "created": 1750186608,
+            "thumbnail_url": "https://files.cdn.printful.com/files/007/0078473fb30c6f959347e1485d3230b4_thumb.png",
+            "preview_url": "https://files.cdn.printful.com/files/007/0078473fb30c6f959347e1485d3230b4_preview.png",
+            "visible": true,
+            "is_temporary": false,
+            "message": "",
+            "options": [],
+            "stitch_count_tier": null
+          },
+          {
+            "id": 841487701,
+            "type": "preview",
+            "hash": "59f4e2dc05e1d6ab4efbb2cb9aa35d0f",
+            "url": null,
+            "filename": "unisex-staple-t-shirt-athletic-heather-front-6851fd6495f58.jpg",
+            "mime_type": "image/jpeg",
+            "size": 182808,
+            "width": 1000,
+            "height": 1000,
+            "dpi": null,
+            "status": "ok",
+            "created": 1750203752,
+            "thumbnail_url": "https://files.cdn.printful.com/files/59f/59f4e2dc05e1d6ab4efbb2cb9aa35d0f_thumb.png",
+            "preview_url": "https://files.cdn.printful.com/files/59f/59f4e2dc05e1d6ab4efbb2cb9aa35d0f_preview.png",
+            "visible": false,
+            "is_temporary": false,
+            "message": "",
+            "stitch_count_tier": null
+          }
+        ],
+        "options": [
+          {
+            "id": "embroidery_type",
+            "value": "flat"
+          },
+          {
+            "id": "thread_colors",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors",
+            "value": []
+          },
+          {
+            "id": "thread_colors_3d",
+            "value": []
+          },
+          {
+            "id": "thread_colors_chest_left",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors_chest_left",
+            "value": []
+          },
+          {
+            "id": "thread_colors_large_center",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors_large_center",
+            "value": []
+          },
+          {
+            "id": "thread_colors_chest_center",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors_chest_center",
+            "value": []
+          },
+          {
+            "id": "thread_colors_sleeve_left_top",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors_sleeve_left_top",
+            "value": []
+          },
+          {
+            "id": "thread_colors_sleeve_right_top",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors_sleeve_right_top",
+            "value": []
+          },
+          {
+            "id": "lifelike",
+            "value": false
+          }
+        ],
+        "is_ignored": false,
+        "size": "S",
+        "color": "Athletic Heather",
+        "availability_status": "active"
+      },
+      {
+        "id": 4858421064,
+        "external_id": "6851fd693b9283",
+        "sync_product_id": 384879589,
+        "name": "Coit's Classic Tee / Athletic Heather / M",
+        "synced": true,
+        "variant_id": 6949,
+        "main_category_id": 24,
+        "warehouse_product_id": null,
+        "warehouse_product_variant_id": null,
+        "retail_price": "20.00",
+        "sku": "6851FD693AB5B_Athletic-Heather-M",
+        "currency": "USD",
+        "product": {
+          "variant_id": 6949,
+          "product_id": 71,
+          "image": "https://files.cdn.printful.com/products/71/6949_1581408457.jpg",
+          "name": "Bella + Canvas 3001 Unisex Short Sleeve Jersey T-Shirt with Tear Away Label (Athletic Heather / M)"
+        },
+        "files": [
+          {
+            "id": 841386652,
+            "type": "front_large",
+            "hash": "0078473fb30c6f959347e1485d3230b4",
+            "url": null,
+            "filename": "prinful_logo_red.png",
+            "mime_type": "image/png",
+            "size": 1592804,
+            "width": 1024,
+            "height": 1024,
+            "dpi": null,
+            "status": "ok",
+            "created": 1750186608,
+            "thumbnail_url": "https://files.cdn.printful.com/files/007/0078473fb30c6f959347e1485d3230b4_thumb.png",
+            "preview_url": "https://files.cdn.printful.com/files/007/0078473fb30c6f959347e1485d3230b4_preview.png",
+            "visible": true,
+            "is_temporary": false,
+            "message": "",
+            "options": [],
+            "stitch_count_tier": null
+          },
+          {
+            "id": 841487701,
+            "type": "preview",
+            "hash": "59f4e2dc05e1d6ab4efbb2cb9aa35d0f",
+            "url": null,
+            "filename": "unisex-staple-t-shirt-athletic-heather-front-6851fd6495f58.jpg",
+            "mime_type": "image/jpeg",
+            "size": 182808,
+            "width": 1000,
+            "height": 1000,
+            "dpi": null,
+            "status": "ok",
+            "created": 1750203752,
+            "thumbnail_url": "https://files.cdn.printful.com/files/59f/59f4e2dc05e1d6ab4efbb2cb9aa35d0f_thumb.png",
+            "preview_url": "https://files.cdn.printful.com/files/59f/59f4e2dc05e1d6ab4efbb2cb9aa35d0f_preview.png",
+            "visible": false,
+            "is_temporary": false,
+            "message": "",
+            "stitch_count_tier": null
+          }
+        ],
+        "options": [
+          {
+            "id": "embroidery_type",
+            "value": "flat"
+          },
+          {
+            "id": "thread_colors",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors",
+            "value": []
+          },
+          {
+            "id": "thread_colors_3d",
+            "value": []
+          },
+          {
+            "id": "thread_colors_chest_left",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors_chest_left",
+            "value": []
+          },
+          {
+            "id": "thread_colors_large_center",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors_large_center",
+            "value": []
+          },
+          {
+            "id": "thread_colors_chest_center",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors_chest_center",
+            "value": []
+          },
+          {
+            "id": "thread_colors_sleeve_left_top",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors_sleeve_left_top",
+            "value": []
+          },
+          {
+            "id": "thread_colors_sleeve_right_top",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors_sleeve_right_top",
+            "value": []
+          },
+          {
+            "id": "lifelike",
+            "value": false
+          }
+        ],
+        "is_ignored": false,
+        "size": "M",
+        "color": "Athletic Heather",
+        "availability_status": "active"
+      },
+      {
+        "id": 4858421065,
+        "external_id": "6851fd693b92c8",
+        "sync_product_id": 384879589,
+        "name": "Coit's Classic Tee / Athletic Heather / L",
+        "synced": true,
+        "variant_id": 6950,
+        "main_category_id": 24,
+        "warehouse_product_id": null,
+        "warehouse_product_variant_id": null,
+        "retail_price": "20.00",
+        "sku": "6851FD693AB5B_Athletic-Heather-L",
+        "currency": "USD",
+        "product": {
+          "variant_id": 6950,
+          "product_id": 71,
+          "image": "https://files.cdn.printful.com/products/71/6950_1581408454.jpg",
+          "name": "Bella + Canvas 3001 Unisex Short Sleeve Jersey T-Shirt with Tear Away Label (Athletic Heather / L)"
+        },
+        "files": [
+          {
+            "id": 841386652,
+            "type": "front_large",
+            "hash": "0078473fb30c6f959347e1485d3230b4",
+            "url": null,
+            "filename": "prinful_logo_red.png",
+            "mime_type": "image/png",
+            "size": 1592804,
+            "width": 1024,
+            "height": 1024,
+            "dpi": null,
+            "status": "ok",
+            "created": 1750186608,
+            "thumbnail_url": "https://files.cdn.printful.com/files/007/0078473fb30c6f959347e1485d3230b4_thumb.png",
+            "preview_url": "https://files.cdn.printful.com/files/007/0078473fb30c6f959347e1485d3230b4_preview.png",
+            "visible": true,
+            "is_temporary": false,
+            "message": "",
+            "options": [],
+            "stitch_count_tier": null
+          },
+          {
+            "id": 841487701,
+            "type": "preview",
+            "hash": "59f4e2dc05e1d6ab4efbb2cb9aa35d0f",
+            "url": null,
+            "filename": "unisex-staple-t-shirt-athletic-heather-front-6851fd6495f58.jpg",
+            "mime_type": "image/jpeg",
+            "size": 182808,
+            "width": 1000,
+            "height": 1000,
+            "dpi": null,
+            "status": "ok",
+            "created": 1750203752,
+            "thumbnail_url": "https://files.cdn.printful.com/files/59f/59f4e2dc05e1d6ab4efbb2cb9aa35d0f_thumb.png",
+            "preview_url": "https://files.cdn.printful.com/files/59f/59f4e2dc05e1d6ab4efbb2cb9aa35d0f_preview.png",
+            "visible": false,
+            "is_temporary": false,
+            "message": "",
+            "stitch_count_tier": null
+          }
+        ],
+        "options": [
+          {
+            "id": "embroidery_type",
+            "value": "flat"
+          },
+          {
+            "id": "thread_colors",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors",
+            "value": []
+          },
+          {
+            "id": "thread_colors_3d",
+            "value": []
+          },
+          {
+            "id": "thread_colors_chest_left",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors_chest_left",
+            "value": []
+          },
+          {
+            "id": "thread_colors_large_center",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors_large_center",
+            "value": []
+          },
+          {
+            "id": "thread_colors_chest_center",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors_chest_center",
+            "value": []
+          },
+          {
+            "id": "thread_colors_sleeve_left_top",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors_sleeve_left_top",
+            "value": []
+          },
+          {
+            "id": "thread_colors_sleeve_right_top",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors_sleeve_right_top",
+            "value": []
+          },
+          {
+            "id": "lifelike",
+            "value": false
+          }
+        ],
+        "is_ignored": false,
+        "size": "L",
+        "color": "Athletic Heather",
+        "availability_status": "active"
+      },
+      {
+        "id": 4858421066,
+        "external_id": "6851fd693b9314",
+        "sync_product_id": 384879589,
+        "name": "Coit's Classic Tee / Athletic Heather / XL",
+        "synced": true,
+        "variant_id": 6951,
+        "main_category_id": 24,
+        "warehouse_product_id": null,
+        "warehouse_product_variant_id": null,
+        "retail_price": "20.00",
+        "sku": "6851FD693AB5B_Athletic-Heather-XL",
+        "currency": "USD",
+        "product": {
+          "variant_id": 6951,
+          "product_id": 71,
+          "image": "https://files.cdn.printful.com/products/71/6951_1581408465.jpg",
+          "name": "Bella + Canvas 3001 Unisex Short Sleeve Jersey T-Shirt with Tear Away Label (Athletic Heather / XL)"
+        },
+        "files": [
+          {
+            "id": 841386652,
+            "type": "front_large",
+            "hash": "0078473fb30c6f959347e1485d3230b4",
+            "url": null,
+            "filename": "prinful_logo_red.png",
+            "mime_type": "image/png",
+            "size": 1592804,
+            "width": 1024,
+            "height": 1024,
+            "dpi": null,
+            "status": "ok",
+            "created": 1750186608,
+            "thumbnail_url": "https://files.cdn.printful.com/files/007/0078473fb30c6f959347e1485d3230b4_thumb.png",
+            "preview_url": "https://files.cdn.printful.com/files/007/0078473fb30c6f959347e1485d3230b4_preview.png",
+            "visible": true,
+            "is_temporary": false,
+            "message": "",
+            "options": [],
+            "stitch_count_tier": null
+          },
+          {
+            "id": 841487701,
+            "type": "preview",
+            "hash": "59f4e2dc05e1d6ab4efbb2cb9aa35d0f",
+            "url": null,
+            "filename": "unisex-staple-t-shirt-athletic-heather-front-6851fd6495f58.jpg",
+            "mime_type": "image/jpeg",
+            "size": 182808,
+            "width": 1000,
+            "height": 1000,
+            "dpi": null,
+            "status": "ok",
+            "created": 1750203752,
+            "thumbnail_url": "https://files.cdn.printful.com/files/59f/59f4e2dc05e1d6ab4efbb2cb9aa35d0f_thumb.png",
+            "preview_url": "https://files.cdn.printful.com/files/59f/59f4e2dc05e1d6ab4efbb2cb9aa35d0f_preview.png",
+            "visible": false,
+            "is_temporary": false,
+            "message": "",
+            "stitch_count_tier": null
+          }
+        ],
+        "options": [
+          {
+            "id": "embroidery_type",
+            "value": "flat"
+          },
+          {
+            "id": "thread_colors",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors",
+            "value": []
+          },
+          {
+            "id": "thread_colors_3d",
+            "value": []
+          },
+          {
+            "id": "thread_colors_chest_left",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors_chest_left",
+            "value": []
+          },
+          {
+            "id": "thread_colors_large_center",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors_large_center",
+            "value": []
+          },
+          {
+            "id": "thread_colors_chest_center",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors_chest_center",
+            "value": []
+          },
+          {
+            "id": "thread_colors_sleeve_left_top",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors_sleeve_left_top",
+            "value": []
+          },
+          {
+            "id": "thread_colors_sleeve_right_top",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors_sleeve_right_top",
+            "value": []
+          },
+          {
+            "id": "lifelike",
+            "value": false
+          }
+        ],
+        "is_ignored": false,
+        "size": "XL",
+        "color": "Athletic Heather",
+        "availability_status": "active"
+      },
+      {
+        "id": 4858421067,
+        "external_id": "6851fd693b9358",
+        "sync_product_id": 384879589,
+        "name": "Coit's Classic Tee / Athletic Heather / 2XL",
+        "synced": true,
+        "variant_id": 6952,
+        "main_category_id": 24,
+        "warehouse_product_id": null,
+        "warehouse_product_variant_id": null,
+        "retail_price": "20.00",
+        "sku": "6851FD693AB5B_Athletic-Heather-2XL",
+        "currency": "USD",
+        "product": {
+          "variant_id": 6952,
+          "product_id": 71,
+          "image": "https://files.cdn.printful.com/products/71/6952_1581408445.jpg",
+          "name": "Bella + Canvas 3001 Unisex Short Sleeve Jersey T-Shirt with Tear Away Label (Athletic Heather / 2XL)"
+        },
+        "files": [
+          {
+            "id": 841386652,
+            "type": "front_large",
+            "hash": "0078473fb30c6f959347e1485d3230b4",
+            "url": null,
+            "filename": "prinful_logo_red.png",
+            "mime_type": "image/png",
+            "size": 1592804,
+            "width": 1024,
+            "height": 1024,
+            "dpi": null,
+            "status": "ok",
+            "created": 1750186608,
+            "thumbnail_url": "https://files.cdn.printful.com/files/007/0078473fb30c6f959347e1485d3230b4_thumb.png",
+            "preview_url": "https://files.cdn.printful.com/files/007/0078473fb30c6f959347e1485d3230b4_preview.png",
+            "visible": true,
+            "is_temporary": false,
+            "message": "",
+            "options": [],
+            "stitch_count_tier": null
+          },
+          {
+            "id": 841487701,
+            "type": "preview",
+            "hash": "59f4e2dc05e1d6ab4efbb2cb9aa35d0f",
+            "url": null,
+            "filename": "unisex-staple-t-shirt-athletic-heather-front-6851fd6495f58.jpg",
+            "mime_type": "image/jpeg",
+            "size": 182808,
+            "width": 1000,
+            "height": 1000,
+            "dpi": null,
+            "status": "ok",
+            "created": 1750203752,
+            "thumbnail_url": "https://files.cdn.printful.com/files/59f/59f4e2dc05e1d6ab4efbb2cb9aa35d0f_thumb.png",
+            "preview_url": "https://files.cdn.printful.com/files/59f/59f4e2dc05e1d6ab4efbb2cb9aa35d0f_preview.png",
+            "visible": false,
+            "is_temporary": false,
+            "message": "",
+            "stitch_count_tier": null
+          }
+        ],
+        "options": [
+          {
+            "id": "embroidery_type",
+            "value": "flat"
+          },
+          {
+            "id": "thread_colors",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors",
+            "value": []
+          },
+          {
+            "id": "thread_colors_3d",
+            "value": []
+          },
+          {
+            "id": "thread_colors_chest_left",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors_chest_left",
+            "value": []
+          },
+          {
+            "id": "thread_colors_large_center",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors_large_center",
+            "value": []
+          },
+          {
+            "id": "thread_colors_chest_center",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors_chest_center",
+            "value": []
+          },
+          {
+            "id": "thread_colors_sleeve_left_top",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors_sleeve_left_top",
+            "value": []
+          },
+          {
+            "id": "thread_colors_sleeve_right_top",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors_sleeve_right_top",
+            "value": []
+          },
+          {
+            "id": "lifelike",
+            "value": false
+          }
+        ],
+        "is_ignored": false,
+        "size": "2XL",
+        "color": "Athletic Heather",
+        "availability_status": "active"
+      },
+      {
+        "id": 4858421068,
+        "external_id": "6851fd693b93a4",
+        "sync_product_id": 384879589,
+        "name": "Coit's Classic Tee / White / S",
+        "synced": true,
+        "variant_id": 4011,
+        "main_category_id": 24,
+        "warehouse_product_id": null,
+        "warehouse_product_variant_id": null,
+        "retail_price": "20.00",
+        "sku": "6851FD693AB5B_White-S",
+        "currency": "USD",
+        "product": {
+          "variant_id": 4011,
+          "product_id": 71,
+          "image": "https://files.cdn.printful.com/products/71/4011_1581412549.jpg",
+          "name": "Bella + Canvas 3001 Unisex Short Sleeve Jersey T-Shirt with Tear Away Label (White / S)"
+        },
+        "files": [
+          {
+            "id": 841386652,
+            "type": "front_large",
+            "hash": "0078473fb30c6f959347e1485d3230b4",
+            "url": null,
+            "filename": "prinful_logo_red.png",
+            "mime_type": "image/png",
+            "size": 1592804,
+            "width": 1024,
+            "height": 1024,
+            "dpi": null,
+            "status": "ok",
+            "created": 1750186608,
+            "thumbnail_url": "https://files.cdn.printful.com/files/007/0078473fb30c6f959347e1485d3230b4_thumb.png",
+            "preview_url": "https://files.cdn.printful.com/files/007/0078473fb30c6f959347e1485d3230b4_preview.png",
+            "visible": true,
+            "is_temporary": false,
+            "message": "",
+            "options": [],
+            "stitch_count_tier": null
+          },
+          {
+            "id": 841487702,
+            "type": "preview",
+            "hash": "ad55a843c3b3dcef3ac9647fb0df3683",
+            "url": null,
+            "filename": "unisex-staple-t-shirt-white-front-6851fd649c567.jpg",
+            "mime_type": "image/jpeg",
+            "size": 67676,
+            "width": 1000,
+            "height": 1000,
+            "dpi": null,
+            "status": "ok",
+            "created": 1750203753,
+            "thumbnail_url": "https://files.cdn.printful.com/files/ad5/ad55a843c3b3dcef3ac9647fb0df3683_thumb.png",
+            "preview_url": "https://files.cdn.printful.com/files/ad5/ad55a843c3b3dcef3ac9647fb0df3683_preview.png",
+            "visible": false,
+            "is_temporary": false,
+            "message": "",
+            "stitch_count_tier": null
+          }
+        ],
+        "options": [
+          {
+            "id": "embroidery_type",
+            "value": "flat"
+          },
+          {
+            "id": "thread_colors",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors",
+            "value": []
+          },
+          {
+            "id": "thread_colors_3d",
+            "value": []
+          },
+          {
+            "id": "thread_colors_chest_left",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors_chest_left",
+            "value": []
+          },
+          {
+            "id": "thread_colors_large_center",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors_large_center",
+            "value": []
+          },
+          {
+            "id": "thread_colors_chest_center",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors_chest_center",
+            "value": []
+          },
+          {
+            "id": "thread_colors_sleeve_left_top",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors_sleeve_left_top",
+            "value": []
+          },
+          {
+            "id": "thread_colors_sleeve_right_top",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors_sleeve_right_top",
+            "value": []
+          },
+          {
+            "id": "lifelike",
+            "value": false
+          }
+        ],
+        "is_ignored": false,
+        "size": "S",
+        "color": "White",
+        "availability_status": "active"
+      },
+      {
+        "id": 4858421069,
+        "external_id": "6851fd693b93f3",
+        "sync_product_id": 384879589,
+        "name": "Coit's Classic Tee / White / M",
+        "synced": true,
+        "variant_id": 4012,
+        "main_category_id": 24,
+        "warehouse_product_id": null,
+        "warehouse_product_variant_id": null,
+        "retail_price": "20.00",
+        "sku": "6851FD693AB5B_White-M",
+        "currency": "USD",
+        "product": {
+          "variant_id": 4012,
+          "product_id": 71,
+          "image": "https://files.cdn.printful.com/products/71/4012_1581412546.jpg",
+          "name": "Bella + Canvas 3001 Unisex Short Sleeve Jersey T-Shirt with Tear Away Label (White / M)"
+        },
+        "files": [
+          {
+            "id": 841386652,
+            "type": "front_large",
+            "hash": "0078473fb30c6f959347e1485d3230b4",
+            "url": null,
+            "filename": "prinful_logo_red.png",
+            "mime_type": "image/png",
+            "size": 1592804,
+            "width": 1024,
+            "height": 1024,
+            "dpi": null,
+            "status": "ok",
+            "created": 1750186608,
+            "thumbnail_url": "https://files.cdn.printful.com/files/007/0078473fb30c6f959347e1485d3230b4_thumb.png",
+            "preview_url": "https://files.cdn.printful.com/files/007/0078473fb30c6f959347e1485d3230b4_preview.png",
+            "visible": true,
+            "is_temporary": false,
+            "message": "",
+            "options": [],
+            "stitch_count_tier": null
+          },
+          {
+            "id": 841487702,
+            "type": "preview",
+            "hash": "ad55a843c3b3dcef3ac9647fb0df3683",
+            "url": null,
+            "filename": "unisex-staple-t-shirt-white-front-6851fd649c567.jpg",
+            "mime_type": "image/jpeg",
+            "size": 67676,
+            "width": 1000,
+            "height": 1000,
+            "dpi": null,
+            "status": "ok",
+            "created": 1750203753,
+            "thumbnail_url": "https://files.cdn.printful.com/files/ad5/ad55a843c3b3dcef3ac9647fb0df3683_thumb.png",
+            "preview_url": "https://files.cdn.printful.com/files/ad5/ad55a843c3b3dcef3ac9647fb0df3683_preview.png",
+            "visible": false,
+            "is_temporary": false,
+            "message": "",
+            "stitch_count_tier": null
+          }
+        ],
+        "options": [
+          {
+            "id": "embroidery_type",
+            "value": "flat"
+          },
+          {
+            "id": "thread_colors",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors",
+            "value": []
+          },
+          {
+            "id": "thread_colors_3d",
+            "value": []
+          },
+          {
+            "id": "thread_colors_chest_left",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors_chest_left",
+            "value": []
+          },
+          {
+            "id": "thread_colors_large_center",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors_large_center",
+            "value": []
+          },
+          {
+            "id": "thread_colors_chest_center",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors_chest_center",
+            "value": []
+          },
+          {
+            "id": "thread_colors_sleeve_left_top",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors_sleeve_left_top",
+            "value": []
+          },
+          {
+            "id": "thread_colors_sleeve_right_top",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors_sleeve_right_top",
+            "value": []
+          },
+          {
+            "id": "lifelike",
+            "value": false
+          }
+        ],
+        "is_ignored": false,
+        "size": "M",
+        "color": "White",
+        "availability_status": "active"
+      },
+      {
+        "id": 4858421070,
+        "external_id": "6851fd693b9449",
+        "sync_product_id": 384879589,
+        "name": "Coit's Classic Tee / White / L",
+        "synced": true,
+        "variant_id": 4013,
+        "main_category_id": 24,
+        "warehouse_product_id": null,
+        "warehouse_product_variant_id": null,
+        "retail_price": "20.00",
+        "sku": "6851FD693AB5B_White-L",
+        "currency": "USD",
+        "product": {
+          "variant_id": 4013,
+          "product_id": 71,
+          "image": "https://files.cdn.printful.com/products/71/4013_1581412544.jpg",
+          "name": "Bella + Canvas 3001 Unisex Short Sleeve Jersey T-Shirt with Tear Away Label (White / L)"
+        },
+        "files": [
+          {
+            "id": 841386652,
+            "type": "front_large",
+            "hash": "0078473fb30c6f959347e1485d3230b4",
+            "url": null,
+            "filename": "prinful_logo_red.png",
+            "mime_type": "image/png",
+            "size": 1592804,
+            "width": 1024,
+            "height": 1024,
+            "dpi": null,
+            "status": "ok",
+            "created": 1750186608,
+            "thumbnail_url": "https://files.cdn.printful.com/files/007/0078473fb30c6f959347e1485d3230b4_thumb.png",
+            "preview_url": "https://files.cdn.printful.com/files/007/0078473fb30c6f959347e1485d3230b4_preview.png",
+            "visible": true,
+            "is_temporary": false,
+            "message": "",
+            "options": [],
+            "stitch_count_tier": null
+          },
+          {
+            "id": 841487702,
+            "type": "preview",
+            "hash": "ad55a843c3b3dcef3ac9647fb0df3683",
+            "url": null,
+            "filename": "unisex-staple-t-shirt-white-front-6851fd649c567.jpg",
+            "mime_type": "image/jpeg",
+            "size": 67676,
+            "width": 1000,
+            "height": 1000,
+            "dpi": null,
+            "status": "ok",
+            "created": 1750203753,
+            "thumbnail_url": "https://files.cdn.printful.com/files/ad5/ad55a843c3b3dcef3ac9647fb0df3683_thumb.png",
+            "preview_url": "https://files.cdn.printful.com/files/ad5/ad55a843c3b3dcef3ac9647fb0df3683_preview.png",
+            "visible": false,
+            "is_temporary": false,
+            "message": "",
+            "stitch_count_tier": null
+          }
+        ],
+        "options": [
+          {
+            "id": "embroidery_type",
+            "value": "flat"
+          },
+          {
+            "id": "thread_colors",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors",
+            "value": []
+          },
+          {
+            "id": "thread_colors_3d",
+            "value": []
+          },
+          {
+            "id": "thread_colors_chest_left",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors_chest_left",
+            "value": []
+          },
+          {
+            "id": "thread_colors_large_center",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors_large_center",
+            "value": []
+          },
+          {
+            "id": "thread_colors_chest_center",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors_chest_center",
+            "value": []
+          },
+          {
+            "id": "thread_colors_sleeve_left_top",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors_sleeve_left_top",
+            "value": []
+          },
+          {
+            "id": "thread_colors_sleeve_right_top",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors_sleeve_right_top",
+            "value": []
+          },
+          {
+            "id": "lifelike",
+            "value": false
+          }
+        ],
+        "is_ignored": false,
+        "size": "L",
+        "color": "White",
+        "availability_status": "active"
+      },
+      {
+        "id": 4858421071,
+        "external_id": "6851fd693b9488",
+        "sync_product_id": 384879589,
+        "name": "Coit's Classic Tee / White / XL",
+        "synced": true,
+        "variant_id": 4014,
+        "main_category_id": 24,
+        "warehouse_product_id": null,
+        "warehouse_product_variant_id": null,
+        "retail_price": "20.00",
+        "sku": "6851FD693AB5B_White-XL",
+        "currency": "USD",
+        "product": {
+          "variant_id": 4014,
+          "product_id": 71,
+          "image": "https://files.cdn.printful.com/products/71/4014_1581412553.jpg",
+          "name": "Bella + Canvas 3001 Unisex Short Sleeve Jersey T-Shirt with Tear Away Label (White / XL)"
+        },
+        "files": [
+          {
+            "id": 841386652,
+            "type": "front_large",
+            "hash": "0078473fb30c6f959347e1485d3230b4",
+            "url": null,
+            "filename": "prinful_logo_red.png",
+            "mime_type": "image/png",
+            "size": 1592804,
+            "width": 1024,
+            "height": 1024,
+            "dpi": null,
+            "status": "ok",
+            "created": 1750186608,
+            "thumbnail_url": "https://files.cdn.printful.com/files/007/0078473fb30c6f959347e1485d3230b4_thumb.png",
+            "preview_url": "https://files.cdn.printful.com/files/007/0078473fb30c6f959347e1485d3230b4_preview.png",
+            "visible": true,
+            "is_temporary": false,
+            "message": "",
+            "options": [],
+            "stitch_count_tier": null
+          },
+          {
+            "id": 841487702,
+            "type": "preview",
+            "hash": "ad55a843c3b3dcef3ac9647fb0df3683",
+            "url": null,
+            "filename": "unisex-staple-t-shirt-white-front-6851fd649c567.jpg",
+            "mime_type": "image/jpeg",
+            "size": 67676,
+            "width": 1000,
+            "height": 1000,
+            "dpi": null,
+            "status": "ok",
+            "created": 1750203753,
+            "thumbnail_url": "https://files.cdn.printful.com/files/ad5/ad55a843c3b3dcef3ac9647fb0df3683_thumb.png",
+            "preview_url": "https://files.cdn.printful.com/files/ad5/ad55a843c3b3dcef3ac9647fb0df3683_preview.png",
+            "visible": false,
+            "is_temporary": false,
+            "message": "",
+            "stitch_count_tier": null
+          }
+        ],
+        "options": [
+          {
+            "id": "embroidery_type",
+            "value": "flat"
+          },
+          {
+            "id": "thread_colors",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors",
+            "value": []
+          },
+          {
+            "id": "thread_colors_3d",
+            "value": []
+          },
+          {
+            "id": "thread_colors_chest_left",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors_chest_left",
+            "value": []
+          },
+          {
+            "id": "thread_colors_large_center",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors_large_center",
+            "value": []
+          },
+          {
+            "id": "thread_colors_chest_center",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors_chest_center",
+            "value": []
+          },
+          {
+            "id": "thread_colors_sleeve_left_top",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors_sleeve_left_top",
+            "value": []
+          },
+          {
+            "id": "thread_colors_sleeve_right_top",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors_sleeve_right_top",
+            "value": []
+          },
+          {
+            "id": "lifelike",
+            "value": false
+          }
+        ],
+        "is_ignored": false,
+        "size": "XL",
+        "color": "White",
+        "availability_status": "active"
+      },
+      {
+        "id": 4858421072,
+        "external_id": "6851fd693b94d3",
+        "sync_product_id": 384879589,
+        "name": "Coit's Classic Tee / White / 2XL",
+        "synced": true,
+        "variant_id": 4015,
+        "main_category_id": 24,
+        "warehouse_product_id": null,
+        "warehouse_product_variant_id": null,
+        "retail_price": "20.00",
+        "sku": "6851FD693AB5B_White-2XL",
+        "currency": "USD",
+        "product": {
+          "variant_id": 4015,
+          "product_id": 71,
+          "image": "https://files.cdn.printful.com/products/71/4015_1581412536.jpg",
+          "name": "Bella + Canvas 3001 Unisex Short Sleeve Jersey T-Shirt with Tear Away Label (White / 2XL)"
+        },
+        "files": [
+          {
+            "id": 841386652,
+            "type": "front_large",
+            "hash": "0078473fb30c6f959347e1485d3230b4",
+            "url": null,
+            "filename": "prinful_logo_red.png",
+            "mime_type": "image/png",
+            "size": 1592804,
+            "width": 1024,
+            "height": 1024,
+            "dpi": null,
+            "status": "ok",
+            "created": 1750186608,
+            "thumbnail_url": "https://files.cdn.printful.com/files/007/0078473fb30c6f959347e1485d3230b4_thumb.png",
+            "preview_url": "https://files.cdn.printful.com/files/007/0078473fb30c6f959347e1485d3230b4_preview.png",
+            "visible": true,
+            "is_temporary": false,
+            "message": "",
+            "options": [],
+            "stitch_count_tier": null
+          },
+          {
+            "id": 841487702,
+            "type": "preview",
+            "hash": "ad55a843c3b3dcef3ac9647fb0df3683",
+            "url": null,
+            "filename": "unisex-staple-t-shirt-white-front-6851fd649c567.jpg",
+            "mime_type": "image/jpeg",
+            "size": 67676,
+            "width": 1000,
+            "height": 1000,
+            "dpi": null,
+            "status": "ok",
+            "created": 1750203753,
+            "thumbnail_url": "https://files.cdn.printful.com/files/ad5/ad55a843c3b3dcef3ac9647fb0df3683_thumb.png",
+            "preview_url": "https://files.cdn.printful.com/files/ad5/ad55a843c3b3dcef3ac9647fb0df3683_preview.png",
+            "visible": false,
+            "is_temporary": false,
+            "message": "",
+            "stitch_count_tier": null
+          }
+        ],
+        "options": [
+          {
+            "id": "embroidery_type",
+            "value": "flat"
+          },
+          {
+            "id": "thread_colors",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors",
+            "value": []
+          },
+          {
+            "id": "thread_colors_3d",
+            "value": []
+          },
+          {
+            "id": "thread_colors_chest_left",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors_chest_left",
+            "value": []
+          },
+          {
+            "id": "thread_colors_large_center",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors_large_center",
+            "value": []
+          },
+          {
+            "id": "thread_colors_chest_center",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors_chest_center",
+            "value": []
+          },
+          {
+            "id": "thread_colors_sleeve_left_top",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors_sleeve_left_top",
+            "value": []
+          },
+          {
+            "id": "thread_colors_sleeve_right_top",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors_sleeve_right_top",
+            "value": []
+          },
+          {
+            "id": "lifelike",
+            "value": false
+          }
+        ],
+        "is_ignored": false,
+        "size": "2XL",
+        "color": "White",
+        "availability_status": "active"
+      }
+    ]
+  },
+  {
+    "sync_product": {
+      "id": 384855465,
+      "external_id": "6851b648e6bcd9",
+      "name": "Coit's Classic Trucker Hat",
+      "variants": 3,
+      "synced": 3,
+      "thumbnail_url": "https://files.cdn.printful.com/files/4f9/4f94a40c0191df2c4fee34352bcdb499_preview.png",
+      "is_ignored": false
+    },
+    "sync_variants": [
+      {
+        "id": 4858126209,
+        "external_id": "6851b648e6bd78",
+        "sync_product_id": 384855465,
+        "name": "Coit's Classic Trucker Hat",
+        "synced": true,
+        "variant_id": 16709,
+        "main_category_id": 40,
+        "warehouse_product_id": null,
+        "warehouse_product_variant_id": null,
+        "retail_price": "22.00",
+        "sku": "6851B648E65BC",
+        "currency": "USD",
+        "product": {
+          "variant_id": 16709,
+          "product_id": 252,
+          "image": "https://files.cdn.printful.com/products/252/16709_1680092944.jpg",
+          "name": "Yupoong 6606 Retro Trucker Cap (Charcoal/ Black)"
+        },
+        "files": [
+          {
+            "id": 841378159,
+            "type": "embroidery_front_large",
+            "hash": "cf031dc3f00d33f3805dca0a0829b1fa",
+            "url": null,
+            "filename": "clear_logo.png",
+            "mime_type": "image/png",
+            "size": 954668,
+            "width": 1024,
+            "height": 1024,
+            "dpi": null,
+            "status": "ok",
+            "created": 1750185185,
+            "thumbnail_url": "https://files.cdn.printful.com/files/cf0/cf031dc3f00d33f3805dca0a0829b1fa_thumb.png",
+            "preview_url": "https://files.cdn.printful.com/files/cf0/cf031dc3f00d33f3805dca0a0829b1fa_preview.png",
+            "visible": true,
+            "is_temporary": false,
+            "message": "",
+            "stitch_count_tier": null
+          },
+          {
+            "id": 841488437,
+            "type": "preview",
+            "hash": "8ec19f30a45d23a12340869d87f06aaa",
+            "url": null,
+            "filename": "retro-trucker-hat-charcoal-black-front-6851fdeab0aef.jpg",
+            "mime_type": "image/jpeg",
+            "size": 251057,
+            "width": 1000,
+            "height": 1000,
+            "dpi": null,
+            "status": "ok",
+            "created": 1750203884,
+            "thumbnail_url": "https://files.cdn.printful.com/files/8ec/8ec19f30a45d23a12340869d87f06aaa_thumb.png",
+            "preview_url": "https://files.cdn.printful.com/files/8ec/8ec19f30a45d23a12340869d87f06aaa_preview.png",
+            "visible": false,
+            "is_temporary": false,
+            "message": "",
+            "stitch_count_tier": null
+          }
+        ],
+        "options": [
+          {
+            "id": "embroidery_type",
+            "value": "flat"
+          },
+          {
+            "id": "thread_colors",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors",
+            "value": []
+          },
+          {
+            "id": "thread_colors_3d",
+            "value": []
+          }
+        ],
+        "is_ignored": false,
+        "size": "One size",
+        "color": "Charcoal/ Black",
+        "availability_status": "active"
+      },
+      {
+        "id": 4858128682,
+        "external_id": "6851b71fe77195",
+        "sync_product_id": 384855465,
+        "name": "Coit's Classic Trucker Hat / Cranberry",
+        "synced": true,
+        "variant_id": 20395,
+        "main_category_id": 40,
+        "warehouse_product_id": null,
+        "warehouse_product_variant_id": null,
+        "retail_price": "22.00",
+        "sku": "6851B71FE6F14_Cranberry",
+        "currency": "USD",
+        "product": {
+          "variant_id": 20395,
+          "product_id": 252,
+          "image": "https://files.cdn.printful.com/products/252/20395_1725007404.jpg",
+          "name": "Yupoong 6606 Retro Trucker Cap (Cranberry)"
+        },
+        "files": [
+          {
+            "id": 841378159,
+            "type": "embroidery_front_large",
+            "hash": "cf031dc3f00d33f3805dca0a0829b1fa",
+            "url": null,
+            "filename": "clear_logo.png",
+            "mime_type": "image/png",
+            "size": 954668,
+            "width": 1024,
+            "height": 1024,
+            "dpi": null,
+            "status": "ok",
+            "created": 1750185185,
+            "thumbnail_url": "https://files.cdn.printful.com/files/cf0/cf031dc3f00d33f3805dca0a0829b1fa_thumb.png",
+            "preview_url": "https://files.cdn.printful.com/files/cf0/cf031dc3f00d33f3805dca0a0829b1fa_preview.png",
+            "visible": true,
+            "is_temporary": false,
+            "message": "",
+            "stitch_count_tier": null
+          },
+          {
+            "id": 841488438,
+            "type": "preview",
+            "hash": "fd6d22f3db656aac5156387fd12b68c3",
+            "url": null,
+            "filename": "retro-trucker-hat-cranberry-front-6851fdeaafdd4.jpg",
+            "mime_type": "image/jpeg",
+            "size": 291354,
+            "width": 1000,
+            "height": 1000,
+            "dpi": null,
+            "status": "ok",
+            "created": 1750203884,
+            "thumbnail_url": "https://files.cdn.printful.com/files/fd6/fd6d22f3db656aac5156387fd12b68c3_thumb.png",
+            "preview_url": "https://files.cdn.printful.com/files/fd6/fd6d22f3db656aac5156387fd12b68c3_preview.png",
+            "visible": false,
+            "is_temporary": false,
+            "message": "",
+            "stitch_count_tier": null
+          }
+        ],
+        "options": [
+          {
+            "id": "embroidery_type",
+            "value": "flat"
+          },
+          {
+            "id": "thread_colors",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors",
+            "value": []
+          },
+          {
+            "id": "thread_colors_3d",
+            "value": []
+          }
+        ],
+        "is_ignored": false,
+        "size": "One size",
+        "color": "Cranberry",
+        "availability_status": "active"
+      },
+      {
+        "id": 4858128683,
+        "external_id": "6851b71fe77266",
+        "sync_product_id": 384855465,
+        "name": "Coit's Classic Trucker Hat / White",
+        "synced": true,
+        "variant_id": 8746,
+        "main_category_id": 40,
+        "warehouse_product_id": null,
+        "warehouse_product_variant_id": null,
+        "retail_price": "22.00",
+        "sku": "6851B71FE6F14_White",
+        "currency": "USD",
+        "product": {
+          "variant_id": 8746,
+          "product_id": 252,
+          "image": "https://files.cdn.printful.com/products/252/8746_1585041861.jpg",
+          "name": "Yupoong 6606 Retro Trucker Cap (White)"
+        },
+        "files": [
+          {
+            "id": 841378159,
+            "type": "embroidery_front_large",
+            "hash": "cf031dc3f00d33f3805dca0a0829b1fa",
+            "url": null,
+            "filename": "clear_logo.png",
+            "mime_type": "image/png",
+            "size": 954668,
+            "width": 1024,
+            "height": 1024,
+            "dpi": null,
+            "status": "ok",
+            "created": 1750185185,
+            "thumbnail_url": "https://files.cdn.printful.com/files/cf0/cf031dc3f00d33f3805dca0a0829b1fa_thumb.png",
+            "preview_url": "https://files.cdn.printful.com/files/cf0/cf031dc3f00d33f3805dca0a0829b1fa_preview.png",
+            "visible": true,
+            "is_temporary": false,
+            "message": "",
+            "stitch_count_tier": null
+          },
+          {
+            "id": 841488439,
+            "type": "preview",
+            "hash": "958a861931b2911f801b595f0dad26fd",
+            "url": null,
+            "filename": "retro-trucker-hat-white-front-6851fdeab0e5c.jpg",
+            "mime_type": "image/jpeg",
+            "size": 228178,
+            "width": 1000,
+            "height": 1000,
+            "dpi": null,
+            "status": "ok",
+            "created": 1750203884,
+            "thumbnail_url": "https://files.cdn.printful.com/files/958/958a861931b2911f801b595f0dad26fd_thumb.png",
+            "preview_url": "https://files.cdn.printful.com/files/958/958a861931b2911f801b595f0dad26fd_preview.png",
+            "visible": false,
+            "is_temporary": false,
+            "message": "",
+            "stitch_count_tier": null
+          }
+        ],
+        "options": [
+          {
+            "id": "embroidery_type",
+            "value": "flat"
+          },
+          {
+            "id": "thread_colors",
+            "value": []
+          },
+          {
+            "id": "text_thread_colors",
+            "value": []
+          },
+          {
+            "id": "thread_colors_3d",
+            "value": []
+          }
+        ],
+        "is_ignored": false,
+        "size": "One size",
+        "color": "White",
+        "availability_status": "active"
+      }
+    ]
+  }
+]

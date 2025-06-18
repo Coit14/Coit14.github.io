@@ -4,6 +4,8 @@ import fetch from 'node-fetch';
 import { initializeCache, getCachedProducts } from './services/cacheService.js';
 // import printifyRoutes from './routes/printifyRoutes.js';
 import printfulRoutes from './routes/printfulRoutes.js';
+import cron from 'node-cron';
+import { exec } from 'child_process';
 
 // Import route handlers - keeping these as they're actively used
 import { handler as productsHandler } from './api/products.js';
@@ -51,6 +53,22 @@ initializeCache().then(() => {
             console.error('Error serving products from cache:', error);
             res.status(500).json({ error: 'Failed to fetch products' });
         }
+    });
+
+    // Schedule to run every Sunday at 3am
+    cron.schedule('0 3 * * 0', () => {
+        console.log('Running weekly Printful product sync...');
+        exec('node ./api/syncPrintfulProducts.js', (error, stdout, stderr) => {
+            if (error) {
+                console.error(`Sync error: ${error.message}`);
+                return;
+            }
+            if (stderr) {
+                console.error(`Sync stderr: ${stderr}`);
+                return;
+            }
+            console.log(`Sync stdout: ${stdout}`);
+        });
     });
 
     // Start server
