@@ -1,9 +1,12 @@
+import express from 'express';
+import path from 'path';
+import fs from 'fs';
+import { fileURLToPath } from 'url';
 import { getCachedProducts } from '../services/cacheService.js';
-const express = require('express');
-const path = require('path');
-const fs = require('fs');
 
 const router = express.Router();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 router.get('/', (req, res) => {
     const productsPath = path.resolve(__dirname, 'products.json');
@@ -20,7 +23,7 @@ router.get('/', (req, res) => {
     });
 });
 
-module.exports = router;
+export default router;
 
 export async function handler(req, res) {
   if (req.method === 'GET') {

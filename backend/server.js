@@ -6,9 +6,9 @@ import { initializeCache, getCachedProducts } from './services/cacheService.js';
 import printfulRoutes from './routes/printfulRoutes.js';
 import cron from 'node-cron';
 import { exec } from 'child_process';
+import productsRouter from './api/products.js';
 
 // Import route handlers - keeping these as they're actively used
-import { handler as productsHandler } from './api/products.js';
 import { handler as sendEmailHandler } from './api/sendEmail.js';
 import { handler as printfulWebhookHandler } from './api/printful-webhook.js';
 // import { handler as printifyWebhookHandler } from './api/printify-webhook.js';
@@ -39,7 +39,7 @@ initializeCache().then(() => {
     
     // API routes - keeping these as they're actively used in the application
     app.post('/api/event-booking', sendEmailHandler);
-    app.get('/api/products', productsHandler);
+    app.use('/api/products', productsRouter);
     app.post('/api/printful-webhook', printfulWebhookHandler);
     // app.post('/api/printify-webhook', printifyWebhookHandler);
 
