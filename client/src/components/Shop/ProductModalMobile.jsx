@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './ProductModalMobile.css';
 import { useCart } from '../../contexts/CartContext';
-import * as printService from '../../services/printfulService';
 
 const formatPrice = (price) => {
     if (!price) return '';
@@ -19,8 +18,6 @@ const ProductModalMobile = ({ product, onClose }) => {
     const [selectedVariant, setSelectedVariant] = useState(null);
     const [imageIndex, setImageIndex] = useState(0);
     const [fade, setFade] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState(null);
 
     const variants = product?.sync_variants || [];
     const productInfo = product?.sync_product || {};
@@ -39,6 +36,30 @@ const ProductModalMobile = ({ product, onClose }) => {
     const sizeOptions = selectedColor
         ? Array.from(new Set(variants.filter(v => v.color === selectedColor).map(v => v.size)))
         : uniqueSizes;
+
+    // Get only valid mockup images for the selected variant - MOVED BEFORE useEffect
+    const getImages = () => {
+        let images = [];
+        if (selectedVariant) {
+            if (selectedVariant.files && selectedVariant.files.length > 1) {
+                images = selectedVariant.files
+                    .slice(1) // skip the first file (usually the uploaded design)
+                    .filter(f => f.type === 'preview' && f.preview_url)
+                    .map(f => f.preview_url);
+            }
+            // fallback: if no valid mockups, try product.image
+            if (images.length === 0 && selectedVariant.product?.image) {
+                images = [selectedVariant.product.image];
+            }
+        }
+        // Fallback to product thumbnail if no images
+        if (images.length === 0 && productInfo.thumbnail_url) {
+            images = [productInfo.thumbnail_url];
+        }
+        return images;
+    };
+
+    const images = getImages();
 
     // Find the selected variant
     useEffect(() => {
@@ -82,25 +103,6 @@ const ProductModalMobile = ({ product, onClose }) => {
         }
     }, [images.length, imageIndex]);
 
-    // Get only valid mockup images for the selected variant
-    let images = [];
-    if (selectedVariant) {
-        if (selectedVariant.files && selectedVariant.files.length > 1) {
-            images = selectedVariant.files
-                .slice(1) // skip the first file (usually the uploaded design)
-                .filter(f => f.type === 'preview' && f.preview_url && f.visible !== false)
-                .map(f => f.preview_url);
-        }
-        // fallback: if no valid mockups, try product.image
-        if (images.length === 0 && selectedVariant.product?.image) {
-            images = [selectedVariant.product.image];
-        }
-    }
-    // Fallback to product thumbnail if no images
-    if (images.length === 0 && productInfo.thumbnail_url) {
-        images = [productInfo.thumbnail_url];
-    }
-
     const handlePrevImage = (e) => {
         e.stopPropagation();
         if (images.length <= 1) return;
@@ -140,7 +142,13 @@ const ProductModalMobile = ({ product, onClose }) => {
 
     if (!product) return null;
 
-    const priceToShow = selectedVariant ? selectedVariant.retail_price : null;
+    const getStartingPrice = () => {
+        if (!variants.length) return null;
+        const prices = variants.map(v => parseFloat(v.retail_price));
+        return Math.min(...prices);
+    };
+    const startingPrice = getStartingPrice();
+    const priceToShow = selectedVariant ? selectedVariant.retail_price : startingPrice;
 
     return (
         <div className="mobile-modal-overlay" onClick={onClose}>
@@ -187,7 +195,9 @@ const ProductModalMobile = ({ product, onClose }) => {
                 {/* Product Info */}
                 <div className="mobile-product-info">
                     <h2>{productName}</h2>
-                    <div className="product-type" dangerouslySetInnerHTML={{ __html: description }} />
+                    {description && (
+                        <div className="product-type" dangerouslySetInnerHTML={{ __html: description }} />
+                    )}
                     
                     {/* Color Selection */}
                     {colorOptions.length > 1 && (
@@ -208,11 +218,11 @@ const ProductModalMobile = ({ product, onClose }) => {
                     )}
 
                     {/* Size Selection */}
-                    {sizeOptions.length > 1 && (
+                    {!allOneSize && sizeOptions.length > 0 && (
                         <div className="mobile-size-selection">
                             <h3>Choose Size</h3>
                             <div className="mobile-size-grid">
-                                {sizeOptions.sort((a, b) => sizeOrder.indexOf(a) - sizeOrder.indexOf(b)).map(size => (
+                                {sizeOrder.filter(size => sizeOptions.includes(size)).map(size => (
                                     <button
                                         key={size}
                                         className={`mobile-size-button ${selectedSize === size ? 'selected' : ''}`}

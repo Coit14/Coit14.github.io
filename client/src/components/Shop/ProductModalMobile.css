@@ -16,29 +16,24 @@
     width: 95%;
     max-width: 500px;
     background: white;
-    border-radius: 16px;
+    border-radius: 8px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
     box-shadow: 0 4px 32px rgba(0,0,0,0.10);
+    padding: 0;
 }
 
 .mobile-modal-close {
     position: absolute;
-    right: 1rem;
-    top: 1rem;
-    background: rgba(0, 0, 0, 0.5);
-    color: white;
+    right: 1.5rem;
+    top: 1.5rem;
+    background: none;
     border: none;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
     font-size: 1.5rem;
     cursor: pointer;
     z-index: 1002;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    color: #333;
 }
 
 .mobile-image-container {
@@ -160,11 +155,15 @@
     font-size: 1rem;
     cursor: pointer;
     transition: background 0.2s, color 0.2s;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
 }
 
-.mobile-color-button.selected {
+.mobile-color-button.selected,
+.mobile-color-button:focus {
     background: var(--brand-red);
     color: #fff;
+    outline: none;
 }
 
 .mobile-size-grid {
@@ -183,11 +182,15 @@
     font-size: 1rem;
     cursor: pointer;
     transition: background 0.2s, color 0.2s;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
 }
 
-.mobile-size-button.selected {
+.mobile-size-button.selected,
+.mobile-size-button:focus {
     background: var(--brand-red);
     color: #fff;
+    outline: none;
 }
 
 .mobile-price {
@@ -222,6 +225,7 @@
     transition: background 0.2s, box-shadow 0.2s;
 }
 
+.mobile-add-to-cart-button:hover:not(.disabled),
 .mobile-add-to-cart-button:active:not(.disabled) {
     background: var(--brand-hover-red);
     box-shadow: 0 4px 16px rgba(0,0,0,0.10);
