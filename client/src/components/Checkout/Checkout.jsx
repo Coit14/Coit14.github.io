@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useCart } from '../../contexts/CartContext';
+import { useLocation } from 'react-router-dom';
 import ShippingForm from './ShippingForm';
 // import PaymentForm from './PaymentForm'; // Removed
 import OrderReview from './OrderReview';
@@ -87,6 +88,8 @@ const Checkout = () => {
     const [shippingStage, setShippingStage] = useState('address');
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
+    const [checkoutCancelled, setCheckoutCancelled] = useState(false);
+    const location = useLocation();
 
     const handleAddressSubmit = async (info) => {
         setShippingInfo(info);
@@ -155,6 +158,13 @@ const Checkout = () => {
         }
     };
 
+    useEffect(() => {
+        const params = new URLSearchParams(location.search);
+        if (params.get("cancelled")) {
+            setCheckoutCancelled(true);
+        }
+    }, [location.search]);
+
     return (
         <div className="checkout-container">
             <div className="checkout-steps">
@@ -170,6 +180,12 @@ const Checkout = () => {
             </div>
 
             <div className="checkout-content">
+                {checkoutCancelled && (
+                    <div style={{ marginBottom: "1rem", color: "red", padding: "10px", backgroundColor: "#f8d7da", border: "1px solid #f5c6cb", borderRadius: "4px" }}>
+                        You cancelled your payment. No charges were made.
+                    </div>
+                )}
+                
                 {currentStep === CheckoutSteps.SHIPPING && (
                     <ShippingForm
                         shippingStage={shippingStage}
