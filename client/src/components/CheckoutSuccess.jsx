@@ -48,13 +48,22 @@ const CheckoutSuccess = () => {
       return;
     }
 
+    // Validate shipping rate
+    const shippingRate = parseFloat(selectedShipping.rate);
+    if (isNaN(shippingRate)) {
+      console.error('❌ Invalid shipping rate:', selectedShipping.rate);
+      setError('Invalid shipping rate');
+      setOrderStatus('error');
+      return;
+    }
+
     // Prepare order payload for Printful
     const orderPayload = {
       recipient: {
         name: `${shippingInfo.firstName} ${shippingInfo.lastName}`,
         email: shippingInfo.email,
         address1: shippingInfo.address1,
-        address2: shippingInfo.address2,
+        address2: shippingInfo.address2 || '',  // Ensure address2 is never undefined
         city: shippingInfo.city,
         state_code: shippingInfo.state,
         country_code: shippingInfo.country,
@@ -66,7 +75,7 @@ const CheckoutSuccess = () => {
       })),
       shipping: {
         method: selectedShipping.id,
-        rate: selectedShipping.rate
+        rate: shippingRate
       }
     };
 

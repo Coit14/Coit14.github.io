@@ -13,18 +13,28 @@ const printfulService = {
 
   createOrder: async (orderData) => {
     try {
+      console.log('📦 Creating Printful draft order with data:', JSON.stringify(orderData, null, 2));
+      
       // First, create a draft order
       const draftOrder = await printfulApi.post('/orders', {
         ...orderData,
         status: 'draft'
       });
 
+      console.log('✅ Draft order created:', draftOrder.data.result.id);
+
       // Then, confirm the order
       const confirmedOrder = await printfulApi.post(`/orders/${draftOrder.data.result.id}/confirm`);
       
+      console.log('✅ Order confirmed:', confirmedOrder.data.result.id);
       return confirmedOrder.data.result;
     } catch (error) {
-      console.error('Error creating Printful order:', error.response?.data || error.message);
+      console.error('❌ Error creating Printful order:', {
+        message: error.message,
+        response: error.response?.data,
+        status: error.response?.status,
+        orderData: JSON.stringify(orderData, null, 2)
+      });
       throw new Error(error.response?.data?.error?.message || 'Failed to create order');
     }
   },
