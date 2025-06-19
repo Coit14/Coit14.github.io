@@ -241,23 +241,28 @@ const ShippingForm = ({
                             ) : shippingMethods.length === 0 ? (
                                 <div>No shipping methods available for this address.</div>
                             ) : (
-                                shippingMethods.map(method => (
-                                    <div 
-                                        key={method.id}
-                                        className={`shipping-method ${selectedShipping?.id === method.id ? 'selected' : ''}`}
-                                        onClick={() => onSelectShipping(method)}
-                                    >
-                                        <div className="method-info">
-                                            <span className="method-name">{method.name}</span>
-                                            {method.min_delivery_days !== undefined && method.max_delivery_days !== undefined && method.min_delivery_days !== null && method.max_delivery_days !== null ? (
-                                                <span className="method-time">{method.min_delivery_days}-{method.max_delivery_days} days</span>
-                                            ) : null}
+                                shippingMethods.map(method => {
+                                    // Format rate display
+                                    const rate = parseFloat(method.rate);
+                                    const rateDisplay = !isNaN(rate) ? `$${rate.toFixed(2)}` : 'Price unavailable';
+                                    
+                                    // Format delivery time display
+                                    const deliveryTime = method.delivery_time || 'Delivery time unavailable';
+
+                                    return (
+                                        <div 
+                                            key={method.id || Math.random()}
+                                            className={`shipping-method ${selectedShipping?.id === method.id ? 'selected' : ''}`}
+                                            onClick={() => method.id ? onSelectShipping(method) : null}
+                                        >
+                                            <div className="method-info">
+                                                <div className="method-name">{method.name}</div>
+                                                <div className="method-delivery">{deliveryTime}</div>
+                                            </div>
+                                            <div className="method-price">{rateDisplay}</div>
                                         </div>
-                                        <span className="method-price">
-                                            ${parseFloat(method.rate || method.cost).toFixed(2)}
-                                        </span>
-                                    </div>
-                                ))
+                                    );
+                                })
                             )}
                         </div>
                     </div>
@@ -276,14 +281,22 @@ const ShippingForm = ({
                         </button>
                     )}
                     {shippingStage === 'method' && (
-                        <button 
-                            type="button"
-                            className="continue-button"
-                            onClick={handleShippingMethodSubmit}
-                            disabled={!selectedShipping || isLoading}
-                        >
-                            Continue to Payment
-                        </button>
+                        <div className="form-actions">
+                            <button 
+                                type="submit" 
+                                className="continue-button"
+                                onClick={handleShippingMethodSubmit}
+                                disabled={!selectedShipping?.id || isLoading}
+                            >
+                                {isLoading ? 'Loading...' : 'Continue to Payment'}
+                            </button>
+                            {!selectedShipping?.id && shippingMethods.length > 0 && (
+                                <div className="error-message">Please select a shipping method to continue</div>
+                            )}
+                            {shippingMethods.length === 0 && !isLoading && (
+                                <div className="error-message">No shipping methods available for this address</div>
+                            )}
+                        </div>
                     )}
                 </div>
             </form>

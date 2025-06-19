@@ -53,19 +53,61 @@ const printfulService = {
 
   getShippingRates: async (shippingData) => {
     try {
+      console.log('📦 Requesting shipping rates from Printful...');
+      
+      // If no store ID is set, get it first
+      if (!process.env.PRINTFUL_STORE_ID) {
+        const storeInfo = await printfulApi.get('/store');
+        process.env.PRINTFUL_STORE_ID = storeInfo.data.result.id;
+        printfulApi.defaults.headers['X-PF-Store-Id'] = process.env.PRINTFUL_STORE_ID;
+      }
+
       const res = await printfulApi.post('/shipping/rates', shippingData);
       
-      // Format the response to include only necessary information
-      // and ensure rate is properly formatted
-      return res.data.result.map(rate => ({
-        id: parseInt(rate.id, 10), // Ensure ID is a number
-        name: `${rate.name} (Estimated delivery: ${rate.min_delivery_days}⁠–${rate.max_delivery_days} days) `,
-        rate: rate.rate.toString(), // Ensure rate is a string for consistency
-        delivery_time: `${rate.min_delivery_days}-${rate.max_delivery_days} days`
-      }));
+      if (!res.data?.result || !Array.isArray(res.data.result)) {
+        console.error('❌ Invalid response from Printful shipping rates:', res.data);
+        throw new Error('Invalid response from shipping rate calculation');
+      }
+
+      // Format and validate each rate
+      const formattedRates = res.data.result.map(rate => {
+        // Ensure rate is a valid number
+        const rateValue = parseFloat(rate.rate);
+        if (isNaN(rateValue)) {
+          console.warn('⚠️ Invalid rate value received:', rate.rate);
+          return null;
+        }
+
+        // Format delivery time
+        const minDays = parseInt(rate.min_delivery_days, 10);
+        const maxDays = parseInt(rate.max_delivery_days, 10);
+        const deliveryTime = !isNaN(minDays) && !isNaN(maxDays)
+          ? `${minDays}–${maxDays} days`
+          : 'Delivery time varies';
+
+        return {
+          id: parseInt(rate.id, 10),
+          name: rate.name,
+          rate: rateValue.toFixed(2),
+          delivery_time: deliveryTime,
+          min_delivery_days: !isNaN(minDays) ? minDays : null,
+          max_delivery_days: !isNaN(maxDays) ? maxDays : null
+        };
+      }).filter(rate => rate !== null && !isNaN(rate.id) && rate.id > 0);
+
+      if (formattedRates.length === 0) {
+        throw new Error('No valid shipping rates available');
+      }
+
+      console.log('✅ Shipping rates retrieved successfully:', formattedRates);
+      return formattedRates;
     } catch (error) {
-      console.error('Error getting shipping rates:', error.response?.data || error.message);
-      throw new Error(error.response?.data?.error?.message || 'Failed to calculate shipping rates');
+      console.error('❌ Error getting shipping rates:', {
+        message: error.message,
+        response: error.response?.data,
+        request: shippingData
+      });
+      throw new Error(error.response?.data?.error?.message || error.message || 'Failed to calculate shipping rates');
     }
   },
 
