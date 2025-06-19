@@ -13,7 +13,9 @@ const CheckoutSuccess = () => {
     console.log('🔍 Current URL:', window.location.href);
     console.log('🔍 Current search params:', window.location.search);
     
-    const sessionId = new URLSearchParams(window.location.search).get('session_id');
+    const params = new URLSearchParams(window.location.search);
+    const rootParams = new URLSearchParams(window.location.href.split('#')[0].split('?')[1] || '');
+    const sessionId = params.get('session_id') || rootParams.get('session_id');
     console.log('🔍 CheckoutSuccess: session_id =', sessionId);
     
     // For testing purposes, if no session_id but we have localStorage data, proceed anyway
@@ -63,7 +65,7 @@ const CheckoutSuccess = () => {
         quantity: item.quantity
       })),
       shipping: {
-        method: selectedShipping.name,
+        method: selectedShipping.id,
         rate: selectedShipping.rate
       }
     };

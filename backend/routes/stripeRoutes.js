@@ -11,7 +11,7 @@ router.post('/create-session', async (req, res) => {
   try {
     const { items } = req.body;
     
-    const successUrl = `${process.env.FRONTEND_URL}/#/checkout/success?session_id={CHECKOUT_SESSION_ID}`;
+    const successUrl = `${process.env.FRONTEND_URL}?session_id={CHECKOUT_SESSION_ID}/#/checkout/success`;
     const cancelUrl = `${process.env.FRONTEND_URL}/#/checkout/cancel`;
     
     console.log('🔧 Creating Stripe session with URLs:');

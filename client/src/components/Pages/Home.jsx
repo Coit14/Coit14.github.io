@@ -146,8 +146,8 @@ const Home = () => {
         </div>
         <div className="section-image right animate-in animate-delay-6">
           <img 
-            src="/images/menu.jpg" 
-            alt="Coit's Food Truck at an event" 
+            src="/images/coits_img.jpg" 
+            alt="Coit's menu board with hot dogs and drinks display" 
             className="booking-image"
           />
         </div>
