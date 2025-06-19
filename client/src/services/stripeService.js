@@ -1,4 +1,5 @@
 import { loadStripe } from '@stripe/stripe-js';
+import { API_URL } from '../config/config';
 
 // Log the Stripe publishable key for debugging (will be undefined in production if not set)
 console.log('REACT_APP_STRIPE_PUBLISHABLE_KEY:', process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
@@ -18,13 +19,18 @@ export const handleCheckout = async (items) => {
     const stripe = await stripePromise;
     
     // Call your backend to create a checkout session
-    const response = await fetch('/api/checkout/create-session', {
+    const response = await fetch(`${API_URL}/api/checkout/create-session`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ items }),
     });
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => null);
+      throw new Error(errorData?.error || `HTTP error! status: ${response.status}`);
+    }
 
     const { sessionId } = await response.json();
 

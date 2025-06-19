@@ -186,11 +186,97 @@ const Checkout = () => {
 
                 {currentStep === CheckoutSteps.PAYMENT && (
                     <div className="payment-step">
-                        <h2>Review & Pay</h2>
-                        <button className="place-order-btn" onClick={handlePaymentSubmit} disabled={isLoading}>
-                            {isLoading ? 'Processing...' : 'Place Order'}
-                        </button>
-                        {error && <div className="checkout-error">{error}</div>}
+                        <div className="order-summary-section">
+                            <h2>Order Summary</h2>
+                            <div className="order-items">
+                                {cartItems.map(item => (
+                                    <div key={item.variantId} className="order-item">
+                                        <div className="item-image">
+                                            <img src={item.image} alt={item.name} />
+                                        </div>
+                                        <div className="item-details">
+                                            <h4>{item.name}</h4>
+                                            <p className="variant-title">{item.color} - {item.size}</p>
+                                            <p className="item-quantity">Quantity: {item.quantity}</p>
+                                        </div>
+                                        <div className="item-price">
+                                            ${(item.price * item.quantity).toFixed(2)}
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                            
+                            <div className="order-totals">
+                                <div className="total-line">
+                                    <span>Subtotal</span>
+                                    <span>${orderSummary.subtotal.toFixed(2)}</span>
+                                </div>
+                                <div className="total-line">
+                                    <span>Shipping ({selectedShipping?.name})</span>
+                                    <span>${orderSummary.shipping.toFixed(2)}</span>
+                                </div>
+                                {orderSummary.tax > 0 && (
+                                    <div className="total-line">
+                                        <span>Tax</span>
+                                        <span>${orderSummary.tax.toFixed(2)}</span>
+                                    </div>
+                                )}
+                                <div className="total-line grand-total">
+                                    <span>Total</span>
+                                    <span>${orderSummary.total.toFixed(2)}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="payment-section">
+                            <h2>Secure Payment</h2>
+                            <div className="payment-info">
+                                <div className="security-badges">
+                                    <i className="fas fa-lock"></i>
+                                    <span>Secure Checkout by Stripe</span>
+                                </div>
+                                <div className="payment-methods">
+                                    <p>We accept:</p>
+                                    <div className="card-icons">
+                                        <i className="fab fa-cc-visa"></i>
+                                        <i className="fab fa-cc-mastercard"></i>
+                                        <i className="fab fa-cc-amex"></i>
+                                        <i className="fab fa-cc-discover"></i>
+                                    </div>
+                                </div>
+                                <div className="checkout-notice">
+                                    <p>You'll be redirected to Stripe's secure payment page to complete your purchase.</p>
+                                </div>
+                            </div>
+
+                            <div className="shipping-preview">
+                                <h3>Shipping To:</h3>
+                                <p>{shippingInfo.firstName} {shippingInfo.lastName}</p>
+                                <p>{shippingInfo.address1}</p>
+                                {shippingInfo.address2 && <p>{shippingInfo.address2}</p>}
+                                <p>{shippingInfo.city}, {shippingInfo.state} {shippingInfo.zipCode}</p>
+                                <p>{shippingInfo.country}</p>
+                            </div>
+
+                            <button 
+                                className="checkout-button"
+                                onClick={handlePaymentSubmit} 
+                                disabled={isLoading}
+                            >
+                                {isLoading ? (
+                                    <span className="button-content">
+                                        <i className="fas fa-spinner fa-spin"></i>
+                                        Processing...
+                                    </span>
+                                ) : (
+                                    <span className="button-content">
+                                        <i className="fas fa-lock"></i>
+                                        Pay ${orderSummary.total.toFixed(2)}
+                                    </span>
+                                )}
+                            </button>
+                            {error && <div className="checkout-error">{error}</div>}
+                        </div>
                     </div>
                 )}
 
