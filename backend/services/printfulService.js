@@ -73,10 +73,19 @@ const printfulService = {
       console.log('📦 Printful response status:', res.status);
       console.log('📦 Printful response data:', JSON.stringify(res.data, null, 2));
       
-      if (!res.data?.result || !Array.isArray(res.data.result)) {
-        console.error('❌ Invalid response from Printful shipping rates:', res.data);
-        throw new Error('Invalid response from shipping rate calculation');
+      // Check if response has the expected structure
+      if (!res.data || typeof res.data !== 'object') {
+        console.error('❌ Invalid response structure from Printful shipping rates:', res.data);
+        throw new Error('Invalid response structure from shipping rate calculation');
       }
+
+      // Check if result exists and is an array (even if empty)
+      if (!Array.isArray(res.data.result)) {
+        console.error('❌ Invalid result format from Printful shipping rates:', res.data.result);
+        throw new Error('Invalid result format from shipping rate calculation');
+      }
+
+      console.log('[DEBUG] Valid shipping rates received:', res.data.result);
 
       // Format and validate each rate
       const formattedRates = res.data.result.map(rate => {
