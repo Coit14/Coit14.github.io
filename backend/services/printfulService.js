@@ -104,14 +104,14 @@ const printfulService = {
           : 'Delivery time varies';
 
         return {
-          id: parseInt(rate.id, 10),
+          id: rate.id, // keep as string to support IDs like "STANDARD"
           name: rate.name,
           rate: rateValue.toFixed(2),
           delivery_time: deliveryTime,
           min_delivery_days: !isNaN(minDays) ? minDays : null,
           max_delivery_days: !isNaN(maxDays) ? maxDays : null
         };
-      }).filter(rate => rate !== null && !isNaN(rate.id) && rate.id > 0);
+      }).filter(rate => rate !== null && typeof rate.id === 'string' && rate.id.length > 0);
 
       if (formattedRates.length === 0) {
         throw new Error('No valid shipping rates available');
