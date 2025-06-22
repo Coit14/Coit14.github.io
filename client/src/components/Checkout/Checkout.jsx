@@ -292,18 +292,6 @@ const Checkout = () => {
                                 )}
                             </button>
                             
-                            {/* Temporary test button for debugging */}
-                            <button 
-                                className="checkout-button"
-                                style={{ marginTop: '10px', backgroundColor: '#007bff' }}
-                                onClick={() => {
-                                    console.log('🧪 Test button clicked - navigating to success page');
-                                    window.location.href = '/#/checkout/success?session_id=test_session_123';
-                                }}
-                            >
-                                🧪 Test Success Page
-                            </button>
-                            
                             {error && <div className="checkout-error">{error}</div>}
                         </div>
                     </div>

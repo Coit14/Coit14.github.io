@@ -17,7 +17,6 @@ import './App.css';
 import './styles/layout.css';
 import './index.css';
 import ScrollToTop from './components/utils/ScrollToTop';
-import ManageProducts from './components/Pages/ManageProducts';
 
 function App() {
     return (
@@ -39,7 +38,6 @@ function App() {
                             <Route path="/checkout/success" element={<CheckoutSuccess />} />
                             <Route path="/checkout/cancel" element={<CheckoutCancel />} />
                             <Route path="/book-event" element={<EventBooking />} />
-                            <Route path="/manage-products" element={<ManageProducts />} />
                             <Route path="*" element={<NotFound />} />
                         </Routes>
                     </main>
