@@ -22,6 +22,13 @@ const fetchShippingOptions = async (shippingInfo, cartItems) => {
             throw new Error('Cart is empty. Cannot calculate shipping.');
         }
 
+        // Validate that all items have valid variant_ids
+        const invalidItems = cartItems.filter(item => !item.variant_id);
+        if (invalidItems.length > 0) {
+            console.error('❌ Invalid items in cart:', invalidItems);
+            throw new Error('Some items in your cart are invalid. Please refresh the page and try again.');
+        }
+
         // Format the payload according to Printful's API requirements
         const payload = {
             recipient: {
@@ -48,18 +55,53 @@ const fetchShippingOptions = async (shippingInfo, cartItems) => {
             body: JSON.stringify(payload)
         });
 
+        console.log('📦 Shipping API response status:', response.status);
+        
         if (!response.ok) {
             const errorData = await response.json();
-            console.error('❌ Shipping calculation failed:', errorData);
-            throw new Error(errorData.error || 'Failed to fetch shipping options');
+            console.error('❌ Shipping API error response:', errorData);
+            
+            // Handle specific error cases
+            if (response.status === 400) {
+                throw new Error(errorData.details || errorData.error || 'Invalid shipping address. Please check your information.');
+            } else if (response.status === 401) {
+                throw new Error('Authentication error. Please contact support.');
+            } else if (response.status === 403) {
+                throw new Error('Shipping calculation not available. Please contact support.');
+            } else if (response.status === 404) {
+                throw new Error('No shipping options available for this address and items.');
+            } else if (response.status === 500) {
+                throw new Error('Shipping service temporarily unavailable. Please try again later.');
+            } else {
+                throw new Error(errorData.error || 'Failed to calculate shipping rates');
+            }
         }
 
-        const data = await response.json();
-        console.log('✅ Received shipping options:', data);
-        return data;
+        const rates = await response.json();
+        console.log('✅ Shipping rates received:', rates);
+        
+        if (!Array.isArray(rates) || rates.length === 0) {
+            throw new Error('No shipping options available for this address and items.');
+        }
+
+        return rates;
     } catch (error) {
         console.error('❌ Error fetching shipping options:', error);
-        throw error;
+        
+        // Provide user-friendly error messages
+        if (error.message.includes('Cart is empty')) {
+            throw new Error('Your cart is empty. Please add items before proceeding.');
+        } else if (error.message.includes('Invalid items')) {
+            throw new Error('Some items in your cart are no longer available. Please refresh the page.');
+        } else if (error.message.includes('Invalid shipping address')) {
+            throw new Error('Please check your shipping address and try again.');
+        } else if (error.message.includes('No shipping options')) {
+            throw new Error('We cannot ship to this address. Please try a different address.');
+        } else if (error.message.includes('temporarily unavailable')) {
+            throw new Error('Shipping calculation is temporarily unavailable. Please try again in a few minutes.');
+        } else {
+            throw new Error('Unable to calculate shipping rates. Please try again or contact support.');
+        }
     }
 };
 
