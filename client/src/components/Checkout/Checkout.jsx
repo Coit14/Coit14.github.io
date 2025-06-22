@@ -144,8 +144,8 @@ const Checkout = () => {
                 shippingOptions.map(option => ({
                     id: option.id,
                     name: option.name,
-                    rate: option.cost,
-                    delivery_time: `${option.min_delivery_days}-${option.max_delivery_days} days`
+                    rate: option.rate,
+                    delivery_time: option.delivery_time
                 }))
             );
             setShippingStage('method');

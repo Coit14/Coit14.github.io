@@ -83,8 +83,8 @@ router.post('/shipping-rates', async (req, res) => {
     // Validate each rate has required fields
     const validRates = rates.filter(rate => 
       rate && 
-      typeof rate.id === 'number' && 
-      rate.id > 0 &&
+      typeof rate.id === 'string' && 
+      rate.id.length > 0 &&
       typeof rate.rate === 'string' &&
       parseFloat(rate.rate) >= 0
     );
@@ -98,7 +98,7 @@ router.post('/shipping-rates', async (req, res) => {
     }
 
     console.log('✅ Shipping rates calculated successfully:', validRates);
-    res.json(validRates);
+    res.status(200).json(validRates);
   } catch (error) {
     console.error('❌ Error calculating shipping rates:', error);
     res.status(500).json({ 

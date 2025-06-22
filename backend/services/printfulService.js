@@ -15,7 +15,7 @@ const printfulService = {
     try {
       // Validate shipping ID
       const shippingId = orderData.shipping?.method;
-      if (!Number.isInteger(Number(shippingId)) || Number(shippingId) <= 0) {
+      if (!shippingId || typeof shippingId !== 'string' || shippingId.length === 0) {
         throw new Error('Invalid shipping ID provided');
       }
 

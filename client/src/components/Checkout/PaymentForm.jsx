@@ -31,7 +31,7 @@ const PaymentForm = ({ onSubmit, orderSummary, shippingInfo, selectedShipping })
                         quantity: item.quantity
                     })),
                     shipping: {
-                        method: selectedShipping?.name,
+                        method: selectedShipping?.id,
                         rate: selectedShipping?.rate
                     }
                 })

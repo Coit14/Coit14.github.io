@@ -49,8 +49,8 @@ const CheckoutSuccess = () => {
     }
 
     // Validate shipping ID
-    const shippingId = parseInt(selectedShipping.id, 10);
-    if (!Number.isInteger(shippingId) || shippingId <= 0) {
+    const shippingId = selectedShipping.id;
+    if (!shippingId || typeof shippingId !== 'string' || shippingId.length === 0) {
       console.error('❌ Invalid shipping ID:', selectedShipping.id);
       setError('Invalid shipping method');
       setOrderStatus('error');
