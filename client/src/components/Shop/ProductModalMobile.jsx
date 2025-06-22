@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './ProductModalMobile.css';
 import { useCart } from '../../contexts/CartContext';
 
@@ -18,7 +18,12 @@ const ProductModalMobile = ({ product, onClose }) => {
     const [selectedVariant, setSelectedVariant] = useState(null);
     const [imageIndex, setImageIndex] = useState(0);
     const [fade, setFade] = useState(false);
-    const isInitialMount = React.useRef(true);
+    const prevVariantRef = useRef();
+
+    useEffect(() => {
+        prevVariantRef.current = selectedVariant;
+    });
+    const prevVariant = prevVariantRef.current;
 
     const variants = product?.sync_variants || [];
     const productInfo = product?.sync_product || {};
@@ -91,15 +96,14 @@ const ProductModalMobile = ({ product, onClose }) => {
 
     // Reset image index and animate fade on color/variant change
     useEffect(() => {
-        if (isInitialMount.current) {
-            isInitialMount.current = false;
-            return;
+        // Only run the fade effect if the variant has actually changed from one valid variant to another
+        if (prevVariant && selectedVariant && prevVariant.id !== selectedVariant.id) {
+            setFade(true);
+            setImageIndex(0);
+            const timeout = setTimeout(() => setFade(false), 250);
+            return () => clearTimeout(timeout);
         }
-        setFade(true);
-        setImageIndex(0);
-        const timeout = setTimeout(() => setFade(false), 250);
-        return () => clearTimeout(timeout);
-    }, [selectedVariant]);
+    }, [selectedVariant, prevVariant]);
 
     // Safety check: reset image index if it's out of bounds
     useEffect(() => {
