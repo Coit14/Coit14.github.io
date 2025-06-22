@@ -1,19 +1,16 @@
 .product-card {
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  overflow: visible;
   display: flex;
   flex-direction: column;
-  width: 100%;
-  aspect-ratio: 3/3.2;
-  transition: box-shadow 0.2s;
-  font-family: inherit;
-  box-sizing: border-box;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  overflow: hidden;
+  transition: all 0.3s ease;
 }
 
 .product-card:hover {
-  box-shadow: 0 4px 16px rgba(0,0,0,0.16);
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
 }
 
 .product-card:focus-within {
@@ -24,7 +21,7 @@
 
 .product-image-container {
   width: 100%;
-  padding-top: 80%;
+  padding-top: 100%;
   position: relative;
   overflow: hidden;
   background: var(--brand-gray);
@@ -47,7 +44,7 @@
 }
 
 .product-info {
-  padding: clamp(0.75rem, 3vw, 1.25rem);
+  padding: clamp(0.75rem, 4vw, 1.25rem);
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -56,16 +53,16 @@
 }
 
 .product-title {
-  font-size: clamp(1rem, 4vw, 1.1rem);
+  font-size: clamp(0.9rem, 3.5vw, 1.1rem);
   margin-bottom: 0.5rem;
   font-weight: 600;
   color: var(--brand-dark);
-  line-height: 1.4;
+  line-height: 1.3;
 }
 
 .product-price {
   font-weight: 600;
-  font-size: clamp(1rem, 3.5vw, 1.1rem);
+  font-size: clamp(0.9rem, 3.5vw, 1rem);
   margin: 0.5rem 0;
   color: var(--brand-red);
 }
@@ -75,8 +72,8 @@
   color: #fff;
   border: none;
   border-radius: 5px;
-  padding: clamp(0.5rem, 2.5vw, 0.7rem) clamp(1rem, 5vw, 1.2rem);
-  font-size: clamp(0.9rem, 3.5vw, 1rem);
+  padding: clamp(0.6rem, 2.5vw, 0.8rem) 1.2rem;
+  font-size: clamp(0.8rem, 3vw, 0.9rem);
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;

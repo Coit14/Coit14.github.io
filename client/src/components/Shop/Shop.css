@@ -36,11 +36,12 @@
 
 .products-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: clamp(1rem, 2.5vw, 2rem);
   padding: clamp(1rem, 2.5vw, 2rem);
   max-width: 1200px;
   margin: 0 auto;
+  grid-column: 1 / -1;
 }
 
 .product-card {
@@ -247,6 +248,13 @@
 
   .shop-container {
     padding: 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .products-grid {
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: clamp(0.75rem, 4vw, 1.2rem);
   }
 }
 

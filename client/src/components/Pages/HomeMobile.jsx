@@ -65,44 +65,48 @@ const HomeMobile = () => {
 
       {/* Shop Section */}
       <section className="mobile-section">
-        <div className="mobile-image-container animate-in">
-          <div className="mobile-cycling-images">
-            {shopImages.map((img, index) => (
-              <img 
-                key={index}
-                src={img}
-                alt={`Coit's Merchandise ${index + 1}`}
-                className={`mobile-shop-image ${currentImageIndex === index ? 'active' : ''}`}
-              />
-            ))}
+        <div className="mobile-feature-card animate-in">
+          <div className="mobile-image-container">
+            <div className="mobile-cycling-images">
+              {shopImages.map((img, index) => (
+                <img 
+                  key={index}
+                  src={img}
+                  alt={`Coit's Merchandise ${index + 1}`}
+                  className={`mobile-shop-image ${currentImageIndex === index ? 'active' : ''}`}
+                />
+              ))}
+            </div>
           </div>
-        </div>
-        <div className="mobile-content animate-in">
-          <h2>Exclusive Merchandise</h2>
-          <p>
-            Check out our shop for exclusive Coit's merchandise! From t-shirts 
-            to collectibles, show your love for Oklahoma's favorite food truck.
-          </p>
-          <Link to="/shop" className="mobile-cta-button">Visit the Shop</Link>
+          <div className="mobile-content">
+            <h2>Exclusive Merchandise</h2>
+            <p>
+              Check out our shop for exclusive Coit's merchandise! From t-shirts 
+              to collectibles, show your love for Oklahoma's favorite food truck.
+            </p>
+            <Link to="/shop" className="mobile-cta-button">Visit the Shop</Link>
+          </div>
         </div>
       </section>
 
       {/* Booking Section */}
       <section className="mobile-section">
-        <div className="mobile-image-container animate-in">
-          <img 
-            src="/images/coits_img.jpg" 
-            alt="Coit's menu board with hot dogs and drinks display" 
-            className="mobile-booking-image"
-          />
-        </div>
-        <div className="mobile-content animate-in">
-          <h2>Book Us for Your Event</h2>
-          <p>
-            Want to make your event special? Book Coit's Food Truck for your next 
-            gathering! We cater private events, corporate functions, weddings, and more.
-          </p>
-          <Link to="/book-event" className="mobile-cta-button">Book Now</Link>
+        <div className="mobile-feature-card animate-in">
+          <div className="mobile-image-container">
+            <img 
+              src="/images/coits_img.jpg" 
+              alt="Coit's menu board with hot dogs and drinks display" 
+              className="mobile-booking-image"
+            />
+          </div>
+          <div className="mobile-content">
+            <h2>Book Us for Your Event</h2>
+            <p>
+              Want to make your event special? Book Coit's Food Truck for your next 
+              gathering! We cater private events, corporate functions, weddings, and more.
+            </p>
+            <Link to="/book-event" className="mobile-cta-button">Book Now</Link>
+          </div>
         </div>
       </section>
     </div>
