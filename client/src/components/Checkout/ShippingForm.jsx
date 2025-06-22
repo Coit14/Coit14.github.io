@@ -290,9 +290,6 @@ const ShippingForm = ({
                             >
                                 {isLoading ? 'Loading...' : 'Continue to Payment'}
                             </button>
-                            {!selectedShipping?.id && shippingMethods.length > 0 && (
-                                <div className="error-message">Please select a shipping method to continue</div>
-                            )}
                             {shippingMethods.length === 0 && !isLoading && (
                                 <div className="error-message">No shipping methods available for this address</div>
                             )}
