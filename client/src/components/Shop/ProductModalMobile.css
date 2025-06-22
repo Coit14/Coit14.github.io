@@ -26,14 +26,16 @@
 
 .mobile-modal-close {
     position: absolute;
-    right: 1.5rem;
-    top: 1.5rem;
+    right: 1rem;
+    top: 1rem;
     background: none;
     border: none;
-    font-size: 1.5rem;
+    font-size: clamp(1.5rem, 5vw, 1.8rem);
     cursor: pointer;
     z-index: 1002;
     color: #333;
+    padding: 0.5rem;
+    line-height: 1;
 }
 
 .mobile-image-container {
@@ -53,6 +55,7 @@
     height: 100%;
     object-fit: contain;
     transition: opacity 0.25s;
+    opacity: 0.2;
 }
 
 .mobile-product-image.fade {
@@ -77,9 +80,9 @@
     background: rgba(255,255,255,0.95);
     border: 2px solid var(--brand-red);
     color: var(--brand-red);
-    font-size: 1.5rem;
-    width: 2.5rem;
-    height: 2.5rem;
+    font-size: clamp(1.2rem, 4vw, 1.5rem);
+    width: clamp(2.2rem, 8vw, 2.8rem);
+    height: clamp(2.2rem, 8vw, 2.8rem);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -99,20 +102,22 @@
     right: 0.5rem;
 }
 
-.mobile-image-nav:active {
+.mobile-image-nav:active,
+.mobile-image-nav:focus {
     background: var(--brand-red);
     color: white;
     border-color: var(--brand-red);
+    outline: none;
 }
 
 .mobile-product-info {
-    padding: 1.5rem;
+    padding: clamp(1rem, 4vw, 1.5rem);
     padding-bottom: 1rem;
     flex: 1 0 auto;
 }
 
 .mobile-product-info h2 {
-    font-size: 1.4rem;
+    font-size: clamp(1.2rem, 5vw, 1.5rem);
     margin: 0 0 0.5rem 0;
     font-weight: 700;
     color: var(--brand-dark);
@@ -121,7 +126,7 @@
 .product-type {
     color: #757575;
     margin-bottom: 1rem;
-    font-size: 0.9rem;
+    font-size: clamp(0.85rem, 3vw, 0.95rem);
     line-height: 1.4;
 }
 
@@ -132,7 +137,7 @@
 
 .mobile-color-selection h3,
 .mobile-size-selection h3 {
-    font-size: 1.1rem;
+    font-size: clamp(1rem, 4vw, 1.2rem);
     color: var(--brand-red);
     margin-bottom: 0.75rem;
     font-weight: 700;
@@ -145,14 +150,15 @@
     gap: 0.5rem;
 }
 
-.mobile-color-button {
+.mobile-color-button,
+.mobile-size-button {
     border: 2px solid var(--brand-red);
     background: #fff;
     color: var(--brand-red);
     border-radius: 6px;
-    padding: 0.5rem 1.2rem;
+    padding: clamp(0.5rem, 2vw, 0.7rem) clamp(0.8rem, 3vw, 1.2rem);
     font-weight: 600;
-    font-size: 1rem;
+    font-size: clamp(0.9rem, 3vw, 1rem);
     cursor: pointer;
     transition: background 0.2s, color 0.2s;
     margin-right: 0.5rem;
@@ -160,7 +166,9 @@
 }
 
 .mobile-color-button.selected,
-.mobile-color-button:focus {
+.mobile-color-button:focus,
+.mobile-size-button.selected,
+.mobile-size-button:focus {
     background: var(--brand-red);
     color: #fff;
     outline: none;
@@ -172,29 +180,8 @@
     gap: 0.5rem;
 }
 
-.mobile-size-button {
-    border: 2px solid var(--brand-red);
-    background: #fff;
-    color: var(--brand-red);
-    border-radius: 6px;
-    padding: 0.5rem 1.2rem;
-    font-weight: 600;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background 0.2s, color 0.2s;
-    margin-right: 0.5rem;
-    margin-bottom: 0.5rem;
-}
-
-.mobile-size-button.selected,
-.mobile-size-button:focus {
-    background: var(--brand-red);
-    color: #fff;
-    outline: none;
-}
-
 .mobile-price {
-    font-size: 1.25rem;
+    font-size: clamp(1.2rem, 5vw, 1.4rem);
     font-weight: 600;
     color: var(--brand-red);
     margin: 1.5rem 0 1rem 0;
@@ -213,12 +200,12 @@
 
 .mobile-add-to-cart-button {
     width: 100%;
-    padding: 1rem;
+    padding: clamp(0.9rem, 4vw, 1.1rem);
     background: var(--brand-red);
     color: white;
     border: none;
     border-radius: 30px;
-    font-size: 1.1rem;
+    font-size: clamp(1rem, 4.5vw, 1.2rem);
     font-weight: 700;
     cursor: pointer;
     box-shadow: 0 2px 8px rgba(0,0,0,0.07);

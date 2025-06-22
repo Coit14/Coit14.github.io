@@ -56,8 +56,7 @@ const HomeMobile = () => {
         <div className="mobile-hero-content animate-in">
           <h2>Oklahoma's Favorite Since 1954</h2>
           <p>
-            Coit's has been serving Oklahoma since 1954. Our food truck still continues as a family-owned and operated business.
-            We proudly serve our original Schwab's chili and hot dogs alongside our famous handmade root beer.
+            A family-owned tradition serving our original Schwab's chili, classic hot dogs, and famous handmade root beer.
           </p>
           <Link to="/about" className="mobile-cta-button">Learn More</Link>
         </div>

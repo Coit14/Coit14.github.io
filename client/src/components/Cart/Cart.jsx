@@ -58,7 +58,7 @@ const Cart = () => {
                                     <div className="cart-item-details">
                                         <h3>{item.name}</h3>
                                         <p className="variant-details">
-                                            {item.size} - {item.color}
+                                            {item.size}{item.color && ` - ${item.color}`}
                                         </p>
                                         <p className="item-price">{formatPrice(item.price)}</p>
                                         <div className="quantity-controls">
