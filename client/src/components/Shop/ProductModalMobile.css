@@ -113,7 +113,6 @@
 .mobile-product-info {
     padding: clamp(1rem, 4vw, 1.5rem);
     padding-bottom: 1rem;
-    flex: 1 0 auto;
 }
 
 .mobile-product-info h2 {

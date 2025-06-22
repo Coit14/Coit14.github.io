@@ -56,7 +56,16 @@ const Cart = () => {
                                         <img src={item.image} alt={item.name} />
                                     </div>
                                     <div className="cart-item-details">
-                                        <h3>{item.name}</h3>
+                                        <div className="cart-item-header">
+                                            <h3>{item.name}</h3>
+                                            <button 
+                                                className="remove-item"
+                                                onClick={() => removeFromCart(item.productId, item.variantId)}
+                                                aria-label={`Remove ${item.name}`}
+                                            >
+                                                Remove
+                                            </button>
+                                        </div>
                                         <p className="variant-details">
                                             {item.size}{item.color && ` - ${item.color}`}
                                         </p>
@@ -65,23 +74,19 @@ const Cart = () => {
                                             <button 
                                                 onClick={() => updateQuantity(item.productId, item.variantId, item.quantity - 1)}
                                                 disabled={item.quantity <= 1}
+                                                aria-label="Decrease quantity"
                                             >
                                                 -
                                             </button>
                                             <span>{item.quantity}</span>
                                             <button 
                                                 onClick={() => updateQuantity(item.productId, item.variantId, item.quantity + 1)}
+                                                aria-label="Increase quantity"
                                             >
                                                 +
                                             </button>
                                         </div>
                                     </div>
-                                    <button 
-                                        className="remove-item"
-                                        onClick={() => removeFromCart(item.productId, item.variantId)}
-                                    >
-                                        Remove
-                                    </button>
                                 </div>
                             ))
                         )}

@@ -18,6 +18,7 @@ const ProductModalMobile = ({ product, onClose }) => {
     const [selectedVariant, setSelectedVariant] = useState(null);
     const [imageIndex, setImageIndex] = useState(0);
     const [fade, setFade] = useState(false);
+    const isInitialMount = React.useRef(true);
 
     const variants = product?.sync_variants || [];
     const productInfo = product?.sync_product || {};
@@ -90,6 +91,10 @@ const ProductModalMobile = ({ product, onClose }) => {
 
     // Reset image index and animate fade on color/variant change
     useEffect(() => {
+        if (isInitialMount.current) {
+            isInitialMount.current = false;
+            return;
+        }
         setFade(true);
         setImageIndex(0);
         const timeout = setTimeout(() => setFade(false), 250);
