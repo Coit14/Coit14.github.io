@@ -16,6 +16,12 @@
   box-shadow: 0 4px 16px rgba(0,0,0,0.16);
 }
 
+.product-card:focus-within {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.16);
+    outline: 2px solid var(--brand-red);
+    outline-offset: 2px;
+}
+
 .product-image-container {
   width: 100%;
   padding-top: 80%;
@@ -41,7 +47,7 @@
 }
 
 .product-info {
-  padding: 1.25rem 1.25rem 0.5rem;
+  padding: clamp(0.75rem, 3vw, 1.25rem);
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -50,7 +56,7 @@
 }
 
 .product-title {
-  font-size: 1.1rem;
+  font-size: clamp(1rem, 4vw, 1.1rem);
   margin-bottom: 0.5rem;
   font-weight: 600;
   color: var(--brand-dark);
@@ -59,7 +65,7 @@
 
 .product-price {
   font-weight: 600;
-  font-size: 1rem;
+  font-size: clamp(1rem, 3.5vw, 1.1rem);
   margin: 0.5rem 0;
   color: var(--brand-red);
 }
@@ -69,8 +75,8 @@
   color: #fff;
   border: none;
   border-radius: 5px;
-  padding: 0.6rem 1.2rem;
-  font-size: 1rem;
+  padding: clamp(0.5rem, 2.5vw, 0.7rem) clamp(1rem, 5vw, 1.2rem);
+  font-size: clamp(0.9rem, 3.5vw, 1rem);
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -81,7 +87,8 @@
 
 .view-details-button:hover {
   background: var(--brand-hover-red);
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 .no-image {
