@@ -53,6 +53,10 @@ const printfulService = {
 
   getShippingRates: async (shippingData) => {
     try {
+      // TODO: Remove before production – debugging Printful credentials
+      console.log('[DEBUG] Printful API Key prefix:', process.env.PRINTFUL_API_KEY?.slice(0, 8) + '...');
+      console.log('[DEBUG] Printful Store ID:', process.env.PRINTFUL_STORE_ID?.slice(0, 6) + '...');
+      
       console.log('📦 Requesting shipping rates from Printful...');
       console.log('📦 API Key exists:', !!process.env.PRINTFUL_API_KEY);
       console.log('📦 Store ID:', process.env.PRINTFUL_STORE_ID || 'not set');
