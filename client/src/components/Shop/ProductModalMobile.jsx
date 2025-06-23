@@ -96,14 +96,11 @@ const ProductModalMobile = ({ product, onClose }) => {
 
     // Reset image index and animate fade on color/variant change
     useEffect(() => {
-        // Only run the fade effect if the variant has actually changed from one valid variant to another
-        if (prevVariant && selectedVariant && prevVariant.id !== selectedVariant.id) {
-            setFade(true);
-            setImageIndex(0);
-            const timeout = setTimeout(() => setFade(false), 250);
-            return () => clearTimeout(timeout);
-        }
-    }, [selectedVariant, prevVariant]);
+        setFade(true);
+        setImageIndex(0);
+        const timeout = setTimeout(() => setFade(false), 250);
+        return () => clearTimeout(timeout);
+    }, [selectedVariant]);
 
     // Safety check: reset image index if it's out of bounds
     useEffect(() => {
