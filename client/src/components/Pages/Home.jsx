@@ -142,16 +142,7 @@ const Home = () => {
       {/* Hero Section */}
       <section className="hero-section">
         <div className="hero-content animate-in animate-delay-1">
-          <h2>Oklahoma's Favorite Since 1954</h2>
-          <p>
-            A family-owned tradition serving our original Schwab's chili, classic hot dogs, and famous handmade root beer.
-          </p>
-          <Link to="/about" className="cta-button">
-            <span>Learn More</span>
-            <svg className="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M5 12h14M12 5l7 7-7 7"/>
-            </svg>
-          </Link>
+          <h2>OKLAHOMA'S FAVORITE SINCE 1954</h2>
         </div>
       </section>
 
@@ -161,8 +152,8 @@ const Home = () => {
         <div className={`feature-card hero-card ${visibleCards >= 1 ? 'animate-in animate-delay-2' : 'hidden'}`}>
           <div className="card-image-container">
             <img 
-              src="/images/hero-image.jpg" 
-              alt="Coit's Food Truck serving customers" 
+              src="/images/placeholder-image.jpg" 
+              alt="Placeholder for Family Tradition" 
               className="hero-card-image"
               loading="lazy"
             />
@@ -261,8 +252,8 @@ const Home = () => {
         <div className={`feature-card ${visibleCards >= 4 ? 'animate-in animate-delay-5' : 'hidden'}`}>
           <div className="card-image-container">
             <img 
-              src="/images/coits_img.jpg" 
-              alt="Coit's Food Truck at an event" 
+              src="/images/placeholder-image.jpg" 
+              alt="Placeholder for Book Us for Your Event" 
               className="booking-image"
               loading="lazy"
             />
@@ -285,6 +276,37 @@ const Home = () => {
                 <path d="M5 12h14M12 5l7 7-7 7"/>
               </svg>
             </Link>
+          </div>
+        </div>
+
+        {/* Find Us Card */}
+        <div className={`feature-card ${visibleCards >= 5 ? 'animate-in animate-delay-6' : 'hidden'}`}>
+          <div className="card-image-container">
+            <img 
+              src="/images/placeholder-image.jpg" 
+              alt="Find Us on Facebook" 
+              className="booking-image"
+              loading="lazy"
+            />
+            <div className="card-overlay">
+              <div className="overlay-content">
+                <span className="overlay-text">Find Us</span>
+              </div>
+            </div>
+          </div>
+          <div className="card-content">
+            <div className="card-badge">Find Us</div>
+            <h2>Where's Coit's?</h2>
+            <p>
+              Want to know where we'll be next? We post all our upcoming events and locations on Facebook. 
+              Follow us to stay up to date and never miss your chance for a classic Coit's meal!
+            </p>
+            <a href="https://www.facebook.com/coitsfoodtruck/" target="_blank" rel="noopener noreferrer" className="cta-button">
+              <span>Follow on Facebook</span>
+              <svg className="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </a>
           </div>
         </div>
       </div>

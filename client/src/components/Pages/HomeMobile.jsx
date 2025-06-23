@@ -55,10 +55,6 @@ const HomeMobile = () => {
       <section className="mobile-hero-section">
         <div className="mobile-hero-content animate-in">
           <h2>Oklahoma's Favorite Since 1954</h2>
-          <p>
-            A family-owned tradition serving our original Schwab's chili, classic hot dogs, and famous handmade root beer.
-          </p>
-          <Link to="/about" className="mobile-cta-button">Learn More</Link>
         </div>
       </section>
 
@@ -93,8 +89,27 @@ const HomeMobile = () => {
         <div className="mobile-feature-card animate-in">
           <div className="mobile-image-container">
             <img 
-              src="/images/coits_img.jpg" 
-              alt="Coit's menu board with hot dogs and drinks display" 
+              src="/images/placeholder-image.jpg" 
+              alt="Placeholder for Family Tradition" 
+              className="mobile-booking-image"
+            />
+          </div>
+          <div className="mobile-content">
+            <h2>Family Tradition</h2>
+            <p>
+              Since 1954, Coit's has been serving Oklahoma with our legendary Schwab's chili, perfectly grilled hot dogs, and refreshing handmade root beer. A family tradition that continues to bring joy to every event.
+            </p>
+            <Link to="/about" className="mobile-cta-button">Learn More</Link>
+          </div>
+        </div>
+      </section>
+
+      <section className="mobile-section">
+        <div className="mobile-feature-card animate-in">
+          <div className="mobile-image-container">
+            <img 
+              src="/images/placeholder-image.jpg" 
+              alt="Placeholder for Book Us for Your Event" 
               className="mobile-booking-image"
             />
           </div>
@@ -105,6 +120,26 @@ const HomeMobile = () => {
               gathering! We cater private events, corporate functions, weddings, and more.
             </p>
             <Link to="/book-event" className="mobile-cta-button">Book Now</Link>
+          </div>
+        </div>
+      </section>
+
+      <section className="mobile-section">
+        <div className="mobile-feature-card animate-in">
+          <div className="mobile-image-container">
+            <img 
+              src="/images/placeholder-image.jpg" 
+              alt="Find Us on Facebook" 
+              className="mobile-booking-image"
+            />
+          </div>
+          <div className="mobile-content">
+            <h2>Find Us</h2>
+            <p>
+              Want to know where we'll be next? We post all our upcoming events and locations on Facebook. 
+              Follow us to stay up to date and never miss your chance for a classic Coit's meal!
+            </p>
+            <a href="https://www.facebook.com/coitsfoodtruck/" target="_blank" rel="noopener noreferrer" className="mobile-cta-button">Follow on Facebook</a>
           </div>
         </div>
       </section>
