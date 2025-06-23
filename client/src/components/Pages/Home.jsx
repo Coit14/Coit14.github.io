@@ -148,8 +148,8 @@ const Home = () => {
         <div className={`feature-card hero-card ${visibleCards >= 1 ? 'animate-in animate-delay-2' : 'hidden'}`}>
           <div className="card-image-container">
             <img 
-              src="/images/placeholder-image.jpg" 
-              alt="Placeholder for Family Tradition" 
+              src="/images/rb_stand.jpg" 
+              alt="Coit's Root Beer Stand - Family Tradition" 
               className="hero-card-image"
               loading="lazy"
             />
@@ -244,7 +244,7 @@ const Home = () => {
           <div className="card-image-container">
             <img 
               src="/images/ft.jpg" 
-              alt="Book Us for Your Event - Coit's Food Truck" 
+              alt="Coit's Food Truck - Book Us for Your Event" 
               className="booking-image"
               loading="lazy"
             />

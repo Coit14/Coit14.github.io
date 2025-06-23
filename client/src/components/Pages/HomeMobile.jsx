@@ -72,8 +72,8 @@ const HomeMobile = () => {
         <div className={`mobile-feature-card ${visibleCards >= 1 ? 'animate-in' : 'hidden'}`}> 
           <div className="mobile-image-container">
             <img 
-              src="/images/placeholder-image.jpg" 
-              alt="Placeholder for Family Tradition" 
+              src="/images/rb_stand.jpg" 
+              alt="Coit's Root Beer Stand - Family Tradition" 
               className="mobile-booking-image"
             />
           </div>
@@ -133,8 +133,8 @@ const HomeMobile = () => {
         <div className={`mobile-feature-card ${visibleCards >= 4 ? 'animate-in' : 'hidden'}`}> 
           <div className="mobile-image-container">
             <img 
-              src="/images/placeholder-image.jpg" 
-              alt="Placeholder for Book Us for Your Event" 
+              src="/images/ft.jpg" 
+              alt="Coit's Food Truck - Book Us for Your Event" 
               className="mobile-booking-image"
             />
           </div>
