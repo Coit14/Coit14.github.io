@@ -76,6 +76,7 @@ const HomeMobile = () => {
               src="/images/image-28.png" 
               alt="Coit's Root Beer Stand - Family Tradition" 
               className="mobile-booking-image"
+              style={{ objectPosition: 'left center' }}
             />
           </div>
           <div className="mobile-content">
@@ -96,6 +97,7 @@ const HomeMobile = () => {
               src="/images/coits_img.jpg" 
               alt="Coit's menu board with hot dogs and drinks display" 
               className="menu-card-image"
+              style={{ objectPosition: 'center bottom' }}
             />
           </div>
           <div className="mobile-content">
