@@ -164,7 +164,7 @@ const Home = () => {
             <div className="card-badge">Our Story</div>
             <h2>Family Tradition</h2>
             <p>
-              Since 1954, Coit's has been serving Oklahoma with our legendary Schwab's chili, 
+              Since 1954, Coit's has been serving Oklahoma with the original Schwab's chili, 
               perfectly grilled hot dogs, and refreshing handmade root beer. A family tradition 
               that continues to bring joy to every event.
             </p>

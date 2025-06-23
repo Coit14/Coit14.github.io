@@ -57,11 +57,10 @@ const Menu = () => {
                         </ul>
                     </div>
                     <div className="beverage-block float-block">
-                        <div className="beverage-block-header">
-                            <span className="beverage-name">Root Beer Float</span>
-                            <span className="price">$6.00</span>
-                        </div>
-                        <div className="beverage-float-desc">Our Original Handmade Float</div>
+                        <div className="beverage-name">Root Beer Float</div>
+                        <ul className="beverage-sizes">
+                            <li>Our Original Handmade Float <span className="price">$6.00</span></li>
+                        </ul>
                     </div>
                     <div className="beverage-block">
                         <div className="beverage-name">Dr. Pepper or Diet Coke</div>
