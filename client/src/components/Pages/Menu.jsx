@@ -15,7 +15,7 @@ const Menu = () => {
                     <h2>Hot Dogs</h2>
                     <span className="price">$5.00</span>
                 </div>
-                <div className="hotdogs-content">
+                <div className="hotdogs-content refined-hotdogs">
                     <ul className="menu-items">
                         <li>No. 1 - Mustard, Chili & Onions</li>
                         <li>No. 2 - Mustard & Chili</li>
@@ -25,8 +25,8 @@ const Menu = () => {
                         <li>No. 6 - Mustard & Onions</li>
                         <li>No. 7 - Chili & Onions</li>
                     </ul>
-                    <div className="schwabs-logo-wrapper">
-                        <img src={schwabsLogo} alt="Schwab's Finest Logo" className="schwabs-logo" />
+                    <div className="schwabs-logo-wrapper refined-logo">
+                        <img src={schwabsLogo} alt="Schwab's Finest Logo" className="schwabs-logo refined-logo-img" />
                     </div>
                 </div>
             </section>
@@ -44,33 +44,40 @@ const Menu = () => {
             </section>
 
             <section className="menu-section animate-in animate-delay-4">
-                <h2>Beverages</h2>
-                <div className="beverages">
-                    <div className="beverage-items">
-                        <p>• Coit's Root Beer</p>
-                        <p>• Other Soft Drinks (Dr. Pepper, Diet Coke)</p>
+                <div className="menu-item-header">
+                    <h2>Beverages</h2>
+                </div>
+                <div className="beverages-list">
+                    <div className="beverage-block">
+                        <div className="beverage-name">Coit's Root Beer</div>
+                        <ul className="beverage-sizes">
+                            <li>20 oz <span className="price">$3.00</span></li>
+                            <li>32 oz <span className="price">$4.00</span></li>
+                            <li>Gallon <span className="price">$9.00</span></li>
+                        </ul>
                     </div>
-                    <div className="beverage-prices">
-                        <p>20 oz - $3.00</p>
-                        <p>32 oz - $4.00</p>
-                        <p>Gallon - $9.00</p>
+                    <div className="beverage-block">
+                        <div className="beverage-name">Dr. Pepper</div>
+                        <ul className="beverage-sizes">
+                            <li>20 oz <span className="price">$3.00</span></li>
+                            <li>32 oz <span className="price">$4.00</span></li>
+                        </ul>
+                    </div>
+                    <div className="beverage-block">
+                        <div className="beverage-name">Diet Coke</div>
+                        <ul className="beverage-sizes">
+                            <li>20 oz <span className="price">$3.00</span></li>
+                            <li>32 oz <span className="price">$4.00</span></li>
+                        </ul>
                     </div>
                 </div>
-            </section>
-
-            <section className="menu-section animate-in animate-delay-5">
-                <h2>Snacks</h2>
-                <div className="menu-item">
-                    <span>Lays Chips - Plain or Barbecue</span>
-                    <span className="price">$1.00</span>
-                </div>
-            </section>
-
-            <section className="menu-section animate-in animate-delay-6">
-                <h2>Root Beer Floats</h2>
-                <div className="menu-item">
-                    <span>Our Original Handmade Float - 20 oz</span>
-                    <span className="price">$6.00</span>
+                <div className="beverage-divider" />
+                <div className="float-section">
+                    <div className="float-header">Root Beer Float</div>
+                    <div className="float-details">
+                        <span>Our Original Handmade Float</span>
+                        <span>20 oz <span className="price">$6.00</span></span>
+                    </div>
                 </div>
             </section>
         </div>
