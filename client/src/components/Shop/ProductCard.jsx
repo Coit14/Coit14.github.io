@@ -68,7 +68,7 @@ const ProductCard = ({ product, onClick }) => {
                     className="view-details-button"
                     onClick={() => onClick(product.sync_product.id)}
                 >
-                    View Details
+                    View Options
                 </button>
             </div>
         </div>

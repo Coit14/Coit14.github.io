@@ -194,9 +194,9 @@ const Home = () => {
           </div>
           <div className="card-content">
             <div className="card-badge">Menu</div>
-            <h2>Our Classic Menu</h2>
+            <h2>Our Menu</h2>
             <p>
-              Discover our classic menu featuring the original Schwab's chili, 
+              Explore our menu featuring the original Schwab's chili, 
               perfectly grilled hot dogs, and our famous handmade root beer. 
               Every bite tells a story of tradition and quality.
             </p>
@@ -226,9 +226,9 @@ const Home = () => {
           </div>
           <div className="card-content">
             <div className="card-badge">Find Us</div>
-            <h2>Where's Coit's?</h2>
+            <h2>Where are we?</h2>
             <p>
-              Want to know where we'll be next? We post all our upcoming events and locations on Facebook. 
+              We post all our upcoming events and locations on Facebook. 
               Follow us to stay up to date and never miss your chance for a classic Coit's meal!
             </p>
             <a href="https://www.facebook.com/coitsfoodtruck/" target="_blank" rel="noopener noreferrer" className="cta-button">
@@ -260,7 +260,7 @@ const Home = () => {
             <h2>Book Us for Your Event</h2>
             <p>
               Want to make your event special? Book Coit's Food Truck for your next 
-              gathering! We cater private events, corporate functions, weddings, and more.
+              gathering! We book private events, corporate functions, weddings, and more.
             </p>
             <Link to="/book-event" className="cta-button">
               <span>Book Now</span>
@@ -295,8 +295,8 @@ const Home = () => {
             <div className="card-badge">Shop</div>
             <h2>Exclusive Merchandise</h2>
             <p>
-              Check out our shop for exclusive Coit's merchandise! From t-shirts 
-              to collectibles, show your love for Oklahoma's favorite food truck.
+              Check out our shop for exclusive Coit's merchandise! 
+              Show your love for Oklahoma's favorite food truck!
             </p>
             <Link to="/shop" className="cta-button">
               <span>Visit the Shop</span>
