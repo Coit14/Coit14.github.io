@@ -45,7 +45,6 @@
   align-items: center;
   justify-content: center;
   padding: clamp(2rem, 8vh, 4rem) clamp(1rem, 5vw, 2rem);
-  margin-top: var(--header-height);
 }
 
 .hero-content {
