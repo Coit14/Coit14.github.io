@@ -187,4 +187,14 @@
   color: #fff;
   text-align: center;
   text-shadow: 1px 1px 6px rgba(0,0,0,0.18);
+}
+
+/* Force center-bottom for menu card image */
+.mobile-section:nth-of-type(2) .menu-card-image {
+  object-position: center bottom !important;
+}
+
+/* Force left-align for Family Tradition image */
+.mobile-section:first-of-type .mobile-booking-image {
+  object-position: left center !important;
 } 

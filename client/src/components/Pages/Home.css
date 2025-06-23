@@ -1168,4 +1168,14 @@
 /* Left-align the food truck image in the Book Us card (4th card) */
 .feature-card:nth-child(4) .booking-image {
   object-position: left center;
+}
+
+/* Force center-bottom for menu card image */
+.feature-card.menu-card .card-image-container > .menu-card-image {
+  object-position: center bottom !important;
+}
+
+/* Force left-align for Family Tradition image (hero card) */
+.feature-card.hero-card .card-image-container > .hero-card-image {
+  object-position: left center !important;
 } 
