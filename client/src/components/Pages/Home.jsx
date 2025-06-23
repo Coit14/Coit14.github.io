@@ -62,13 +62,13 @@ const Home = () => {
 
     const revealCards = () => {
       const timer = setTimeout(() => {
-        setVisibleCards(prev => Math.min(prev + 1, 4));
+        setVisibleCards(prev => Math.min(prev + 1, 5));
       }, 200);
       return timer;
     };
 
     const timers = [];
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < 5; i++) {
       timers.push(setTimeout(revealCards, i * 300));
     }
 
@@ -142,7 +142,7 @@ const Home = () => {
       {/* Hero Section */}
       <section className="hero-section">
         <div className="hero-content animate-in animate-delay-1">
-          <h2>OKLAHOMA'S FAVORITE SINCE 1954</h2>
+          <h2>SERVING OKLAHOMA SINCE 1954</h2>
         </div>
       </section>
 

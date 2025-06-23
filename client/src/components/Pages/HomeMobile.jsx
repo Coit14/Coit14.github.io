@@ -54,7 +54,7 @@ const HomeMobile = () => {
       {/* Hero Section */}
       <section className="mobile-hero-section">
         <div className="mobile-hero-content animate-in">
-          <h2>Oklahoma's Favorite Since 1954</h2>
+          <h2>SERVING OKLAHOMA SINCE 1954</h2>
         </div>
       </section>
 
