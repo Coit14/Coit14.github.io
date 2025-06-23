@@ -281,7 +281,7 @@
 
 @media (max-width: 768px) {
     .checkout-container {
-        padding: 20px 10px;
+        padding: clamp(4rem, 8vw, 5rem) clamp(0.5rem, 3vw, 1rem);
     }
 
     .checkout-steps {

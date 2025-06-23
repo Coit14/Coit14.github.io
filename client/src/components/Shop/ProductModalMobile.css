@@ -55,7 +55,7 @@
     height: 100%;
     object-fit: contain;
     transition: opacity 0.25s;
-    opacity: 0.2;
+    opacity: 1;
 }
 
 .mobile-product-image.fade {
