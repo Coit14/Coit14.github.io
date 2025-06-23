@@ -72,7 +72,7 @@ const HomeMobile = () => {
         <div className={`mobile-feature-card ${visibleCards >= 1 ? 'animate-in' : 'hidden'}`}> 
           <div className="mobile-image-container">
             <img 
-              src="/images/rb_stand.jpg" 
+              src="/images/image-28.png" 
               alt="Coit's Root Beer Stand - Family Tradition" 
               className="mobile-booking-image"
             />

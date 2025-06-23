@@ -148,7 +148,7 @@ const Home = () => {
         <div className={`feature-card hero-card ${visibleCards >= 1 ? 'animate-in animate-delay-2' : 'hidden'}`}>
           <div className="card-image-container">
             <img 
-              src="/images/rb_stand.jpg" 
+              src="/images/image-28.png" 
               alt="Coit's Root Beer Stand - Family Tradition" 
               className="hero-card-image"
               loading="lazy"
