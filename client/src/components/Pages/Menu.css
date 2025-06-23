@@ -1,50 +1,58 @@
 .menu-container {
-    width: 95%;
+    width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-    padding: clamp(2.5rem, 8vw, 3.75rem) clamp(1rem, 5vw, 1.25rem) clamp(1.25rem, 5vw, 1.25rem);
+    padding: clamp(1.5rem, 4vw, 3rem) clamp(1rem, 4vw, 2rem);
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    min-height: 100vh;
 }
 
 .menu-header {
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: clamp(2rem, 6vw, 4rem);
+    padding: clamp(1.5rem, 4vw, 3rem) 0;
 }
 
 .menu-header h1 {
     color: var(--brand-red);
-    font-size: 3rem;
-    margin-bottom: 10px;
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
 }
 
 .menu-note {
-    color: var(black);
+    color: #666;
     font-style: italic;
+    font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+    margin: 0;
 }
 
 .menu-section {
-    margin-bottom: 40px;
-    padding: 25px;
-    border-radius: 8px;
-    background: var(--white);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: clamp(1.5rem, 4vw, 2.5rem);
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.menu-section:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
 }
 
 .menu-section h2 {
     color: var(--brand-red);
-    font-size: 1.8rem;
-    margin-bottom: 8px;
-    border-bottom: 2px solid var(--brand-red);
-    padding-bottom: 6px;
-}
-
-/* Consistent spacing for all menu items */
-.menu-items li,
-.menu-item,
-.beverage-items p,
-.beverage-prices p {
-    padding: 8px 0;
+    font-size: clamp(1.4rem, 4vw, 2rem);
+    font-weight: 600;
     margin: 0;
-    color: var(--text-color);
+    padding: clamp(1.25rem, 3vw, 1.75rem) clamp(1.25rem, 3vw, 2rem);
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    border-bottom: 2px solid #f0f0f0;
+    letter-spacing: -0.01em;
 }
 
 .menu-items {
@@ -53,107 +61,214 @@
     margin: 0;
 }
 
+.menu-items li {
+    padding: clamp(0.75rem, 2vw, 1rem) clamp(1.25rem, 3vw, 2rem);
+    margin: 0;
+    color: #333;
+    font-size: clamp(0.95rem, 2.5vw, 1.05rem);
+    line-height: 1.5;
+    border-bottom: 1px solid #f5f5f5;
+    transition: background-color 0.2s ease;
+}
+
+.menu-items li:last-child {
+    border-bottom: none;
+}
+
+.menu-items li:hover {
+    background-color: #fafafa;
+}
+
 .price {
     color: var(--brand-red);
     font-weight: 600;
-    font-size: 1.2rem;
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
 }
 
 .item-description {
-    color: var(--text-color);
-    padding: 8px 0;
+    color: #666;
+    font-size: clamp(0.9rem, 2.5vw, 1rem);
+    padding: clamp(0.5rem, 1.5vw, 0.75rem) clamp(1.25rem, 3vw, 2rem);
     margin: 0;
+    line-height: 1.4;
+    background-color: #fafafa;
 }
 
 .add-ons {
-    padding: 8px 0;
+    padding: clamp(0.75rem, 2vw, 1rem) clamp(1.25rem, 3vw, 2rem);
     margin: 0;
-    color: var(--text-color);
+    color: #555;
+    font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+    background-color: #f8f9fa;
+    border-top: 1px solid #f0f0f0;
 }
 
 .toppings {
-    color: var(--text-color);
-    margin-left: 10px;
+    color: #666;
+    margin-left: 0.5rem;
+    font-weight: 500;
 }
 
 .beverages {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 10px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: clamp(1rem, 3vw, 2rem);
+    padding: clamp(1rem, 2.5vw, 1.5rem) clamp(1.25rem, 3vw, 2rem);
+    align-items: start;
 }
 
 .beverage-items {
-    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.beverage-items p {
+    margin: 0;
+    color: #333;
+    font-size: clamp(0.95rem, 2.5vw, 1.05rem);
+    line-height: 1.4;
 }
 
 .beverage-prices {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
     text-align: right;
-    color: var(--brand-dark);
+}
+
+.beverage-prices p {
+    margin: 0;
+    color: var(--brand-red);
     font-weight: 600;
-    font-size: 0.95rem;
+    font-size: clamp(0.9rem, 2.5vw, 1rem);
 }
 
 .menu-item-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 8px;
-    padding-bottom: 10px;
+    padding: clamp(1rem, 2.5vw, 1.5rem) clamp(1.25rem, 3vw, 2rem);
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    border-bottom: 2px solid #f0f0f0;
 }
 
 .menu-item-header h2 {
     color: var(--brand-red);
-    font-size: 1.8rem;
+    font-size: clamp(1.4rem, 4vw, 2rem);
+    font-weight: 600;
     margin: 0;
+    padding: 0;
+    background: none;
+    border-bottom: none;
+    letter-spacing: -0.01em;
 }
 
 .menu-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 8px 0;
+    padding: clamp(0.75rem, 2vw, 1rem) clamp(1.25rem, 3vw, 2rem);
     margin: 0;
+    border-bottom: 1px solid #f5f5f5;
+    transition: background-color 0.2s ease;
+}
+
+.menu-item:last-child {
+    border-bottom: none;
+}
+
+.menu-item:hover {
+    background-color: #fafafa;
 }
 
 .menu-item span {
     margin: 0;
     line-height: 1.5;
-}
-
-.chips {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     color: #333;
+    font-size: clamp(0.95rem, 2.5vw, 1.05rem);
 }
 
-.float {
+/* Hot Dogs section with Schwab's logo */
+.hotdogs-content {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: #333;
+    flex-direction: column;
+    gap: clamp(1rem, 3vw, 1.5rem);
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .menu-container {
-        padding: clamp(2.5rem, 8vw, 2.5rem) clamp(1rem, 5vw, 1rem) clamp(1rem, 5vw, 1rem);
+.schwabs-logo-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: clamp(1rem, 2.5vw, 1.5rem);
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    border-top: 1px solid #f0f0f0;
+}
+
+.schwabs-logo {
+    width: clamp(80px, 20vw, 120px);
+    height: auto;
+    opacity: 0.8;
+    transition: opacity 0.2s ease;
+}
+
+.schwabs-logo:hover {
+    opacity: 1;
+}
+
+/* Responsive design */
+@media (min-width: 768px) {
+    .hotdogs-content {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: clamp(2rem, 4vw, 3rem);
     }
 
-    .menu-header h1 {
-        font-size: 2rem;
+    .schwabs-logo-wrapper {
+        flex-shrink: 0;
+        width: clamp(120px, 15vw, 150px);
+        padding: clamp(1.5rem, 3vw, 2rem);
+        border-top: none;
+        border-left: 1px solid #f0f0f0;
+    }
+
+    .beverages {
+        grid-template-columns: 1fr auto;
+        align-items: center;
+    }
+}
+
+@media (max-width: 767px) {
+    .menu-container {
+        padding: clamp(1rem, 3vw, 1.5rem) clamp(0.75rem, 3vw, 1rem);
+    }
+
+    .menu-section {
+        margin-bottom: clamp(1rem, 3vw, 1.5rem);
+        border-radius: 12px;
     }
 
     .menu-section h2 {
-        font-size: 1.5rem;
+        border-radius: 12px 12px 0 0;
+    }
+
+    .beverages {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .beverage-prices {
+        text-align: left;
+        border-top: 1px solid #f0f0f0;
+        padding-top: 1rem;
     }
 }
 
-/* Animation classes (if not already in layout.css) */
+/* Animation classes */
 @keyframes fadeInUp {
     from {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(30px);
     }
     to {
         opacity: 1;
@@ -179,63 +294,19 @@
         animation: none !important;
         opacity: 1 !important;
     }
-}
-
-/* Update text color for menu items */
-.menu-item-title {
-    color: #000000; /* Changed from the dull color to pure black */
-    font-weight: 600;
-    margin-bottom: 4px;
-}
-
-.menu-item-description {
-    color: #333333; /* Darker gray for better readability */
-    font-size: 0.95rem;
-    margin-bottom: 8px;
-}
-
-.menu-item-price {
-    color: var(--brand-red); /* Keep the brand red for prices */
-    font-weight: 600;
-}
-
-/* Hot Dogs section with Schwab's logo */
-.hotdogs-content {
-    display: block; /* Default for mobile: normal block layout */
-}
-
-.schwabs-logo-wrapper {
-    display: none; /* Hidden by default on mobile */
-}
-
-.schwabs-logo {
-    width: 120px;
-    height: auto;
-}
-
-/* Responsive adjustments */
-@media (min-width: 768px) {
-    .hotdogs-content {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 20px;
-    }
-
-    .schwabs-logo-wrapper {
-        display: block;
-        flex-shrink: 0;
-        margin-right: 10px;
+    
+    .menu-section:hover {
+        transform: none;
     }
 }
 
-/* Keep all other brand colors the same */
+/* Brand colors */
 :root {
-    --brand-red: #814d49;       /* Coit's primary red */
-    --brand-blue: #3C3B6E;      /* Coit's navy blue */
-    --brand-white: #FFFFFF;     /* White */
-    --brand-gray: #F5F5F5;      /* Light gray for backgrounds */
-    --brand-dark: #1A1A1A;      /* Dark gray/almost black */
-    --brand-hover-red: #6a3f3c; /* Darker red for hover states */
-    --brand-hover-blue: #2A2A4D; /* Darker blue for hover states */
+    --brand-red: #814d49;
+    --brand-blue: #3C3B6E;
+    --brand-white: #FFFFFF;
+    --brand-gray: #F5F5F5;
+    --brand-dark: #1A1A1A;
+    --brand-hover-red: #6a3f3c;
+    --brand-hover-blue: #2A2A4D;
 }
