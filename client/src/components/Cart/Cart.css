@@ -45,7 +45,7 @@
 }
 
 .cart-header {
-    padding: 20px;
+    padding: clamp(1rem, 5vw, 1.25rem);
     border-bottom: 1px solid #eee;
     display: flex;
     justify-content: space-between;
@@ -78,7 +78,7 @@
 .cart-items {
     flex: 1;
     overflow-y: auto;
-    padding: 20px;
+    padding: clamp(1rem, 5vw, 1.25rem);
 }
 
 .empty-cart {
@@ -199,7 +199,7 @@
 }
 
 .cart-footer {
-    padding: 20px;
+    padding: clamp(1rem, 5vw, 1.25rem);
     border-top: 1px solid #eee;
     background: white;
 }

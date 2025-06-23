@@ -80,7 +80,7 @@ const ProductModal = ({ product, onClose }) => {
         setImageIndex(0);
         const timeout = setTimeout(() => setFade(false), 250);
         return () => clearTimeout(timeout);
-    }, [selectedVariant]);
+    }, [selectedColor]);
 
     if (!product) return null;
 

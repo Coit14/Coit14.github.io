@@ -1,7 +1,7 @@
 .contact-container {
     max-width: 600px;
     margin: 2rem auto;
-    padding: 2rem;
+    padding: clamp(1rem, 5vw, 2rem);
     background-color: #ffffff;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -101,6 +101,6 @@ button[type="submit"]:disabled {
 @media (max-width: 768px) {
     .contact-container {
         margin: 1rem;
-        padding: 1rem;
+        padding: clamp(1rem, 5vw, 1.5rem);
     }
 } 

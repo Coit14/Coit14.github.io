@@ -3,7 +3,7 @@
   justify-content: center;
   align-items: center;
   min-height: 60vh;
-  padding: 2rem;
+  padding: clamp(1rem, 5vw, 2rem);
   background: #f8f9fa;
 }
 
@@ -77,7 +77,7 @@
 
 @media (max-width: 768px) {
   .checkout-success-container {
-    padding: 1rem;
+    padding: clamp(1rem, 5vw, 1.5rem);
   }
   
   .checkout-success-card {

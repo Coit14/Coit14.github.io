@@ -1,7 +1,7 @@
 .payment-form-container {
     max-width: 800px;
     margin: 0 auto;
-    padding: 20px;
+    padding: clamp(1rem, 5vw, 1.25rem);
 }
 
 .payment-form {
@@ -181,7 +181,7 @@
 
 @media (max-width: 768px) {
     .payment-form-container {
-        padding: 10px;
+        padding: clamp(0.5rem, 3vw, 1rem);
     }
 
     .form-section {

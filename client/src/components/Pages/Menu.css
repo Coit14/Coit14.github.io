@@ -2,7 +2,7 @@
     width: 95%;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 60px 20px 20px;
+    padding: clamp(2.5rem, 8vw, 3.75rem) clamp(1rem, 5vw, 1.25rem) clamp(1.25rem, 5vw, 1.25rem);
 }
 
 .menu-header {
@@ -137,7 +137,7 @@
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .menu-container {
-        padding: 40px 15px 15px;
+        padding: clamp(2.5rem, 8vw, 2.5rem) clamp(1rem, 5vw, 1rem) clamp(1rem, 5vw, 1rem);
     }
 
     .menu-header h1 {

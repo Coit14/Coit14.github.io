@@ -179,8 +179,8 @@ const EventBooking = () => {
             <div className="form-header">
                 <h2 className="animate-in animate-delay-1">Event Booking Request</h2>
                 <p className="intro-text animate-in animate-delay-2">
-                    Please fill out the form and we'll try to respond within a week! 
-                    (Please note, we do not operate in the winter and rarely schedule private events November through March due to weather.)
+                    Please fill out the form and we'll try to respond within a week. 
+                    (Note — We're closed during the winter months.)
                 </p>
             </div>
 

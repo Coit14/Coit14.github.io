@@ -1,7 +1,7 @@
 .checkout-container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 70px 20px;
+    padding: clamp(2.5rem, 8vw, 4.4rem) clamp(1rem, 5vw, 1.25rem);
     min-height: calc(100vh - 200px); /* Account for header/footer */
 }
 
@@ -280,9 +280,7 @@
 }
 
 @media (max-width: 768px) {
-    .checkout-container {
-        padding: clamp(4rem, 8vw, 5rem) clamp(0.5rem, 3vw, 1rem);
-    }
+    /* .checkout-container padding is now handled by clamp() above */
 
     .checkout-steps {
         gap: 20px;

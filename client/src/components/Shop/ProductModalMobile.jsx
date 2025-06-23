@@ -100,7 +100,7 @@ const ProductModalMobile = ({ product, onClose }) => {
         setImageIndex(0);
         const timeout = setTimeout(() => setFade(false), 250);
         return () => clearTimeout(timeout);
-    }, [selectedVariant]);
+    }, [selectedColor]);
 
     // Safety check: reset image index if it's out of bounds
     useEffect(() => {

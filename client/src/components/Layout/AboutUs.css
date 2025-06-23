@@ -1,5 +1,5 @@
 .about-page {
-    padding: 60px 20px;
+    padding: clamp(2rem, 8vw, 3.75rem) clamp(1rem, 5vw, 1.25rem);
     max-width: var(--max-width);
     margin: 0 auto;
 }

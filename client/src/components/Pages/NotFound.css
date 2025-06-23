@@ -1,0 +1,26 @@
+.not-found-container {
+    padding: clamp(3rem, 10vh, 6rem) clamp(1rem, 5vw, 2rem);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+}
+
+.not-found-container h2 {
+    font-size: clamp(2rem, 8vw, 3rem);
+    color: var(--brand-red);
+    margin-bottom: 1rem;
+}
+
+.not-found-container p {
+    font-size: clamp(1rem, 4vw, 1.2rem);
+    margin-bottom: 2rem;
+}
+
+.not-found-container a {
+    color: var(--brand-red);
+    text-decoration: underline;
+    font-weight: 600;
+} 
