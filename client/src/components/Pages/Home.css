@@ -30,7 +30,7 @@
 .home-content {
   width: 100%;
   min-height: calc(100vh - var(--header-height));
-  margin-top: var(--header-height);
+  margin-top: 0;
   display: flex;
   flex-direction: column;
 }
@@ -45,6 +45,7 @@
   align-items: center;
   justify-content: center;
   padding: clamp(2rem, 8vh, 4rem) clamp(1rem, 5vw, 2rem);
+  margin-top: var(--header-height);
 }
 
 .hero-content {
