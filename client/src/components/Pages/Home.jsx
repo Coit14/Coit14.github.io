@@ -243,8 +243,8 @@ const Home = () => {
         <div className={`feature-card ${visibleCards >= 4 ? 'animate-in animate-delay-5' : 'hidden'}`}>
           <div className="card-image-container">
             <img 
-              src="/images/placeholder-image.jpg" 
-              alt="Placeholder for Book Us for Your Event" 
+              src="/images/ft.jpg" 
+              alt="Book Us for Your Event - Coit's Food Truck" 
               className="booking-image"
               loading="lazy"
             />
