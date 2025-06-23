@@ -518,3 +518,20 @@
 .beverages.refined-beverages, .beverage-items, .beverage-prices {
     display: none !important;
 }
+
+.float-block {
+    background: #fff7f2;
+    border: 1.5px solid #e6cfc2;
+    box-shadow: 0 2px 8px rgba(129,77,73,0.04);
+}
+
+.float-block .beverage-name {
+    color: var(--brand-red);
+    font-weight: 700;
+    font-size: 1.09rem;
+}
+
+/* Remove old float-section styles if present */
+.float-section, .float-header, .float-details {
+    display: none !important;
+}

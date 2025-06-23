@@ -7,7 +7,7 @@ const Menu = () => {
         <div className="menu-container animate-in">
             <div className="menu-header animate-in animate-delay-1">
                 <h1>Coit's Truck Menu</h1>
-                <p className="menu-note">Our Classic Menu Since 1954</p>
+                <p className="menu-note">A Coit's Tradition Since 1954</p>
             </div>
             
             <section className="menu-section animate-in animate-delay-2">
@@ -56,27 +56,18 @@ const Menu = () => {
                             <li>Gallon <span className="price">$9.00</span></li>
                         </ul>
                     </div>
+                    <div className="beverage-block float-block">
+                        <div className="beverage-name">Our Original Handmade Float</div>
+                        <ul className="beverage-sizes">
+                            <li><span className="price">$6.00</span></li>
+                        </ul>
+                    </div>
                     <div className="beverage-block">
-                        <div className="beverage-name">Dr. Pepper</div>
+                        <div className="beverage-name">Dr. Pepper or Diet Coke</div>
                         <ul className="beverage-sizes">
                             <li>20 oz <span className="price">$3.00</span></li>
                             <li>32 oz <span className="price">$4.00</span></li>
                         </ul>
-                    </div>
-                    <div className="beverage-block">
-                        <div className="beverage-name">Diet Coke</div>
-                        <ul className="beverage-sizes">
-                            <li>20 oz <span className="price">$3.00</span></li>
-                            <li>32 oz <span className="price">$4.00</span></li>
-                        </ul>
-                    </div>
-                </div>
-                <div className="beverage-divider" />
-                <div className="float-section">
-                    <div className="float-header">Root Beer Float</div>
-                    <div className="float-details">
-                        <span>Our Original Handmade Float</span>
-                        <span>20 oz <span className="price">$6.00</span></span>
                     </div>
                 </div>
             </section>
