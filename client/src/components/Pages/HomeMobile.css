@@ -74,6 +74,10 @@
   object-fit: cover;
 }
 
+.mobile-booking-image {
+  object-position: center bottom;
+}
+
 .mobile-shop-image {
   position: absolute;
   top: 0;
