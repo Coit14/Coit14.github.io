@@ -113,8 +113,8 @@ const HomeMobile = () => {
         <div className={`mobile-feature-card ${visibleCards >= 3 ? 'animate-in' : 'hidden'}`}> 
           <div className="mobile-image-container">
             <img 
-              src="/images/placeholder-image.jpg" 
-              alt="Find Us on Facebook" 
+              src="/images/facebook.png" 
+              alt="Follow Coit's Food Truck on Facebook" 
               className="mobile-booking-image"
             />
           </div>
