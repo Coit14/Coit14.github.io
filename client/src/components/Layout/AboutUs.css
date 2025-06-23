@@ -296,6 +296,16 @@
         width: 100%;
         max-width: 300px;
     }
+    
+    .about-hero-image-container {
+        max-width: 100%;
+        margin-bottom: 1.5rem;
+        border-radius: 0.75rem;
+    }
+    
+    .about-hero-image {
+        border-radius: 0.75rem;
+    }
 }
 
 @media (max-width: 480px) {
@@ -319,4 +329,26 @@
     .contact-section h2 {
         font-size: clamp(1.5rem, 6vw, 1.8rem);
     }
+}
+
+.about-hero-image-container {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto 2.5rem auto;
+    border-radius: 1.25rem;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.about-hero-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 1.25rem;
 } 

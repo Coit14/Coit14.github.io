@@ -78,6 +78,11 @@
   object-position: center bottom;
 }
 
+/* Left-align the family tradition image specifically */
+.mobile-section:first-of-type .mobile-booking-image {
+  object-position: left center;
+}
+
 .mobile-shop-image {
   position: absolute;
   top: 0;

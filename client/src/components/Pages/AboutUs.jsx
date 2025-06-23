@@ -7,14 +7,15 @@ import { socialLinks } from '../../config/social';
 function AboutUs() {
   return (
     <div className="about-page">
+      {/* Image Hero Section */}
+      <div className="about-hero-image-container">
+        <img 
+          src="/images/image-28.png" 
+          alt="Coit's Root Beer Stand - Family Tradition" 
+          className="about-hero-image"
+        />
+      </div>
       <div className="about-content">
-        <section className="hero-section animate-in animate-delay-1">
-          <h1>Our Story</h1>
-          <p className="hero-subtitle">
-            From a humble root beer stand to Oklahoma's favorite food truck
-          </p>
-        </section>
-
         <section className="history-section animate-in animate-delay-2">
           <div className="history-content">
             <div className="history-block">
