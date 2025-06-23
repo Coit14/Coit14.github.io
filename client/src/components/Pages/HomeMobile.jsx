@@ -5,6 +5,7 @@ import './HomeMobile.css';
 const HomeMobile = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [imagesLoaded, setImagesLoaded] = useState(false);
+  const [visibleCards, setVisibleCards] = useState(0);
   
   // Shop images array
   const shopImages = useMemo(() => [
@@ -49,44 +50,26 @@ const HomeMobile = () => {
     return () => clearInterval(interval);
   }, [imagesLoaded, shopImages.length]);
 
+  // Progressive card reveal
+  useEffect(() => {
+    const revealCards = () => {
+      setVisibleCards(prev => Math.min(prev + 1, 5));
+    };
+    const timers = [];
+    for (let i = 0; i < 5; i++) {
+      timers.push(setTimeout(revealCards, i * 300));
+    }
+    return () => timers.forEach(timer => clearTimeout(timer));
+  }, []);
+
   return (
     <div className="mobile-home-content">
       {/* Hero Section */}
-      <section className="mobile-hero-section hero-image-top">
-        <div className="mobile-hero-content hero-overlay-top animate-in">
-          <h2>SERVING OKLAHOMA SINCE 1954</h2>
-        </div>
-      </section>
+      <section className="mobile-hero-section hero-image-top"></section>
 
-      {/* Shop Section */}
+      {/* Family Tradition Card */}
       <section className="mobile-section">
-        <div className="mobile-feature-card animate-in">
-          <div className="mobile-image-container">
-            <div className="mobile-cycling-images">
-              {shopImages.map((img, index) => (
-                <img 
-                  key={index}
-                  src={img}
-                  alt={`Coit's Merchandise ${index + 1}`}
-                  className={`mobile-shop-image ${currentImageIndex === index ? 'active' : ''}`}
-                />
-              ))}
-            </div>
-          </div>
-          <div className="mobile-content">
-            <h2>Exclusive Merchandise</h2>
-            <p>
-              Check out our shop for exclusive Coit's merchandise! From t-shirts 
-              to collectibles, show your love for Oklahoma's favorite food truck.
-            </p>
-            <Link to="/shop" className="mobile-cta-button">Visit the Shop</Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Booking Section */}
-      <section className="mobile-section">
-        <div className="mobile-feature-card animate-in">
+        <div className={`mobile-feature-card ${visibleCards >= 1 ? 'animate-in' : 'hidden'}`}> 
           <div className="mobile-image-container">
             <img 
               src="/images/placeholder-image.jpg" 
@@ -104,28 +87,29 @@ const HomeMobile = () => {
         </div>
       </section>
 
+      {/* Menu Card */}
       <section className="mobile-section">
-        <div className="mobile-feature-card animate-in">
+        <div className={`mobile-feature-card ${visibleCards >= 2 ? 'animate-in' : 'hidden'}`}> 
           <div className="mobile-image-container">
             <img 
-              src="/images/placeholder-image.jpg" 
-              alt="Placeholder for Book Us for Your Event" 
-              className="mobile-booking-image"
+              src="/images/coits_img.jpg" 
+              alt="Coit's menu board with hot dogs and drinks display" 
+              className="menu-card-image"
             />
           </div>
           <div className="mobile-content">
-            <h2>Book Us for Your Event</h2>
+            <h2>Our Classic Menu</h2>
             <p>
-              Want to make your event special? Book Coit's Food Truck for your next 
-              gathering! We cater private events, corporate functions, weddings, and more.
+              Discover our classic menu featuring the original Schwab's chili, perfectly grilled hot dogs, and our famous handmade root beer. Every bite tells a story of tradition and quality.
             </p>
-            <Link to="/book-event" className="mobile-cta-button">Book Now</Link>
+            <Link to="/menu" className="mobile-cta-button">View Menu</Link>
           </div>
         </div>
       </section>
 
+      {/* Find Us Card */}
       <section className="mobile-section">
-        <div className="mobile-feature-card animate-in">
+        <div className={`mobile-feature-card ${visibleCards >= 3 ? 'animate-in' : 'hidden'}`}> 
           <div className="mobile-image-container">
             <img 
               src="/images/placeholder-image.jpg" 
@@ -140,6 +124,51 @@ const HomeMobile = () => {
               Follow us to stay up to date and never miss your chance for a classic Coit's meal!
             </p>
             <a href="https://www.facebook.com/coitsfoodtruck/" target="_blank" rel="noopener noreferrer" className="mobile-cta-button">Follow on Facebook</a>
+          </div>
+        </div>
+      </section>
+
+      {/* Booking Section Card */}
+      <section className="mobile-section">
+        <div className={`mobile-feature-card ${visibleCards >= 4 ? 'animate-in' : 'hidden'}`}> 
+          <div className="mobile-image-container">
+            <img 
+              src="/images/placeholder-image.jpg" 
+              alt="Placeholder for Book Us for Your Event" 
+              className="mobile-booking-image"
+            />
+          </div>
+          <div className="mobile-content">
+            <h2>Book Us for Your Event</h2>
+            <p>
+              Want to make your event special? Book Coit's Food Truck for your next gathering! We cater private events, corporate functions, weddings, and more.
+            </p>
+            <Link to="/book-event" className="mobile-cta-button">Book Now</Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Shop Section Card (Merch) */}
+      <section className="mobile-section">
+        <div className={`mobile-feature-card ${visibleCards >= 5 ? 'animate-in' : 'hidden'}`}> 
+          <div className="mobile-image-container">
+            <div className="mobile-cycling-images">
+              {shopImages.map((img, index) => (
+                <img 
+                  key={index}
+                  src={img}
+                  alt={`Coit's Merchandise ${index + 1}`}
+                  className={`mobile-shop-image ${currentImageIndex === index ? 'active' : ''}`}
+                />
+              ))}
+            </div>
+          </div>
+          <div className="mobile-content">
+            <h2>Exclusive Merchandise</h2>
+            <p>
+              Check out our shop for exclusive Coit's merchandise! From t-shirts to collectibles, show your love for Oklahoma's favorite food truck.
+            </p>
+            <Link to="/shop" className="mobile-cta-button">Visit the Shop</Link>
           </div>
         </div>
       </section>

@@ -140,15 +140,11 @@ const Home = () => {
   return (
     <div className="home-content">
       {/* Hero Section */}
-      <section className="hero-section hero-image-top">
-        <div className="hero-content hero-overlay-top animate-in animate-delay-1">
-          <h2>SERVING OKLAHOMA SINCE 1954</h2>
-        </div>
-      </section>
+      <section className="hero-section hero-image-top"></section>
 
       {/* Feature Cards Grid */}
       <div className="feature-cards-container">
-        {/* About Us Card */}
+        {/* Family Tradition Card */}
         <div className={`feature-card hero-card ${visibleCards >= 1 ? 'animate-in animate-delay-2' : 'hidden'}`}>
           <div className="card-image-container">
             <img 
@@ -212,39 +208,34 @@ const Home = () => {
           </div>
         </div>
 
-        {/* Shop Section Card */}
+        {/* Find Us Card */}
         <div className={`feature-card ${visibleCards >= 3 ? 'animate-in animate-delay-4' : 'hidden'}`}>
           <div className="card-image-container">
-            <div className="cycling-images-container">
-              {shopImages.map((img, index) => (
-                <img 
-                  key={index}
-                  src={img}
-                  alt={`Coit's Merchandise ${index + 1}`}
-                  className={`shop-image ${currentImageIndex === index ? 'active' : ''}`}
-                  loading="lazy"
-                />
-              ))}
-            </div>
+            <img 
+              src="/images/placeholder-image.jpg" 
+              alt="Find Us on Facebook" 
+              className="booking-image"
+              loading="lazy"
+            />
             <div className="card-overlay">
               <div className="overlay-content">
-                <span className="overlay-text">Exclusive Merch</span>
+                <span className="overlay-text">Find Us</span>
               </div>
             </div>
           </div>
           <div className="card-content">
-            <div className="card-badge">Shop</div>
-            <h2>Exclusive Merchandise</h2>
+            <div className="card-badge">Find Us</div>
+            <h2>Where's Coit's?</h2>
             <p>
-              Check out our shop for exclusive Coit's merchandise! From t-shirts 
-              to collectibles, show your love for Oklahoma's favorite food truck.
+              Want to know where we'll be next? We post all our upcoming events and locations on Facebook. 
+              Follow us to stay up to date and never miss your chance for a classic Coit's meal!
             </p>
-            <Link to="/shop" className="cta-button">
-              <span>Visit the Shop</span>
+            <a href="https://www.facebook.com/coitsfoodtruck/" target="_blank" rel="noopener noreferrer" className="cta-button">
+              <span>Follow on Facebook</span>
               <svg className="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M5 12h14M12 5l7 7-7 7"/>
               </svg>
-            </Link>
+            </a>
           </div>
         </div>
 
@@ -279,34 +270,39 @@ const Home = () => {
           </div>
         </div>
 
-        {/* Find Us Card */}
+        {/* Shop Section Card (Merch) */}
         <div className={`feature-card ${visibleCards >= 5 ? 'animate-in animate-delay-6' : 'hidden'}`}>
           <div className="card-image-container">
-            <img 
-              src="/images/placeholder-image.jpg" 
-              alt="Find Us on Facebook" 
-              className="booking-image"
-              loading="lazy"
-            />
+            <div className="cycling-images-container">
+              {shopImages.map((img, index) => (
+                <img 
+                  key={index}
+                  src={img}
+                  alt={`Coit's Merchandise ${index + 1}`}
+                  className={`shop-image ${currentImageIndex === index ? 'active' : ''}`}
+                  loading="lazy"
+                />
+              ))}
+            </div>
             <div className="card-overlay">
               <div className="overlay-content">
-                <span className="overlay-text">Find Us</span>
+                <span className="overlay-text">Exclusive Merch</span>
               </div>
             </div>
           </div>
           <div className="card-content">
-            <div className="card-badge">Find Us</div>
-            <h2>Where's Coit's?</h2>
+            <div className="card-badge">Shop</div>
+            <h2>Exclusive Merchandise</h2>
             <p>
-              Want to know where we'll be next? We post all our upcoming events and locations on Facebook. 
-              Follow us to stay up to date and never miss your chance for a classic Coit's meal!
+              Check out our shop for exclusive Coit's merchandise! From t-shirts 
+              to collectibles, show your love for Oklahoma's favorite food truck.
             </p>
-            <a href="https://www.facebook.com/coitsfoodtruck/" target="_blank" rel="noopener noreferrer" className="cta-button">
-              <span>Follow on Facebook</span>
+            <Link to="/shop" className="cta-button">
+              <span>Visit the Shop</span>
               <svg className="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M5 12h14M12 5l7 7-7 7"/>
               </svg>
-            </a>
+            </Link>
           </div>
         </div>
       </div>
