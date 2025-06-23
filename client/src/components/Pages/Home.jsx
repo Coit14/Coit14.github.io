@@ -12,11 +12,12 @@ const Home = () => {
   
   // Shop images array
   const shopImages = useMemo(() => [
-    './images/demo/hoodie1.jpg',
-    './images/demo/hoodie2.jpg',
-    './images/demo/shirt1.jpg',
-    './images/demo/shirt2.jpg',
-    './images/demo/shirt3.jpg'
+    './images/demo/retro-trucker-hat-charcoal-black-front-6859c5cf83d76.png',
+    './images/demo/retro-trucker-hat-cranberry-front-6859c5cf8464c.png',
+    './images/demo/retro-trucker-hat-white-front-6859c5cf847b5.png',
+    './images/demo/unisex-staple-t-shirt-athletic-heather-front-and-back-685883b4807d5.jpg',
+    './images/demo/unisex-staple-t-shirt-black-heather-front-and-back-685883b47f213.jpg',
+    './images/demo/unisex-staple-t-shirt-white-front-and-back-685883b48335e.jpg'
   ], []);
 
   // Preload images
