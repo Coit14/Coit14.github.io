@@ -140,8 +140,8 @@ const Home = () => {
   return (
     <div className="home-content">
       {/* Hero Section */}
-      <section className="hero-section">
-        <div className="hero-content animate-in animate-delay-1">
+      <section className="hero-section hero-image-top">
+        <div className="hero-content hero-overlay-top animate-in animate-delay-1">
           <h2>SERVING OKLAHOMA SINCE 1954</h2>
         </div>
       </section>

@@ -153,4 +153,33 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+.hero-image-top {
+  position: relative;
+  min-height: 60vh;
+  width: 100%;
+  background: linear-gradient(rgba(0,0,0,0.12), rgba(0,0,0,0.12)),
+              url('../../../public/images/hero-image.jpg') center/cover;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: clamp(2rem, 10vw, 4rem);
+}
+
+.hero-overlay-top {
+  background: rgba(163, 52, 47, 0.45);
+  padding: clamp(0.5rem, 2vw, 1rem) clamp(1rem, 5vw, 2rem);
+  border-radius: 10px;
+  max-width: 90vw;
+  margin: 0 auto;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+
+.hero-overlay-top h2 {
+  font-size: clamp(1.2rem, 6vw, 2rem);
+  margin: 0;
+  color: #fff;
+  text-align: center;
+  text-shadow: 1px 1px 6px rgba(0,0,0,0.18);
 } 

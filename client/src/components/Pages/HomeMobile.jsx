@@ -52,8 +52,8 @@ const HomeMobile = () => {
   return (
     <div className="mobile-home-content">
       {/* Hero Section */}
-      <section className="mobile-hero-section">
-        <div className="mobile-hero-content animate-in">
+      <section className="mobile-hero-section hero-image-top">
+        <div className="mobile-hero-content hero-overlay-top animate-in">
           <h2>SERVING OKLAHOMA SINCE 1954</h2>
         </div>
       </section>
