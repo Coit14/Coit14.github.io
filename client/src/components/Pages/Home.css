@@ -36,11 +36,11 @@
 }
 
 /* Hero Section */
-.hero-section {
+.home-content .hero-section {
+  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)),
+              url('../../../public/images/hero-image2.jpg') center/cover !important;
   min-height: 60vh;
   width: 100%;
-  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)),
-              url('../../../public/images/hero-image.jpg') center/cover;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -804,7 +804,7 @@
   min-height: 80vh;
   width: 100vw;
   background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)),
-              url('../../../public/images/hero-image.jpg') center/cover;
+              url('../../../public/images/hero-image2.jpg') center/cover;
   margin: 0;
   padding: clamp(4rem, 15vh, 7.5rem) max(20px, calc((100vw - 1800px) / 2));
 }
@@ -1141,7 +1141,7 @@
   min-height: 60vh;
   width: 100%;
   background: linear-gradient(rgba(0,0,0,0.12), rgba(0,0,0,0.12)),
-              url('../../../public/images/hero-image.jpg') center/cover;
+              url('../../../public/images/hero-image2.jpg') center/cover;
   display: flex;
   align-items: flex-start;
   justify-content: center;
