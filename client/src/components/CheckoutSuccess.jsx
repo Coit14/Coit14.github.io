@@ -72,7 +72,7 @@ const CheckoutSuccess = () => {
         zip: shippingInfo.zipCode
       },
       items: cartItems.map(item => ({
-        variant_id: item.variant_id,
+        sync_variant_id: item.sync_variant_id,
         quantity: item.quantity
       })),
       shipping: {
