@@ -104,7 +104,7 @@ const HomeMobile = () => {
           <div className="mobile-content">
             <h2>Our Classic Menu</h2>
             <p>
-              Discover our classic menu featuring the original Schwab's chili, perfectly grilled hot dogs, and our famous handmade root beer.
+              Discover our classic menu featuring the original Schwab's chili, perfectly cooked hot dogs, and our famous handmade root beer.
             </p>
             <Link to="/menu" className="mobile-cta-button">View Menu</Link>
           </div>
@@ -112,7 +112,7 @@ const HomeMobile = () => {
       </section>
 
       {/* Find Us Card */}
-      <section className="mobile-section">
+      <section className="mobile-section find-us-section">
         <div className={`mobile-feature-card ${visibleCards >= 3 ? 'animate-in' : 'hidden'}`}> 
           <div className="mobile-image-container">
             <img 

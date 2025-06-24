@@ -197,4 +197,23 @@
 /* Force left-align for Family Tradition image */
 .mobile-section:first-of-type .mobile-booking-image {
   object-position: left center !important;
+}
+
+/* Fix Find Us image cut-off on mobile */
+.mobile-section.find-us-section .mobile-image-container {
+  aspect-ratio: unset;
+  height: auto;
+  min-height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f8f8f8;
+}
+
+.mobile-section.find-us-section .mobile-booking-image {
+  object-fit: contain !important;
+  width: 100%;
+  height: auto;
+  max-height: 220px;
+  background: #f8f8f8;
 } 

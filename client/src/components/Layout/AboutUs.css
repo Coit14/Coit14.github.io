@@ -125,11 +125,15 @@
     .contact-info {
         flex-direction: column;
         gap: clamp(1.5rem, 4vw, 2rem);
+        align-items: center;
+        justify-content: center;
     }
     
     .contact-item {
         min-width: auto;
         width: 100%;
         max-width: 300px;
+        text-align: center;
+        margin: 0 auto;
     }
 } 

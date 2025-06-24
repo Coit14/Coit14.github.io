@@ -195,7 +195,7 @@ const Home = () => {
             <div className="card-badge">Menu</div>
             <h2>Our Menu</h2>
             <p>
-              Discover our classic menu featuring the original Schwab's chili, perfectly grilled hot dogs, and our famous handmade root beer.
+              Discover our classic menu featuring the original Schwab's chili, perfectly cooked hot dogs, and our famous handmade root beer.
             </p>
             <Link to="/menu" className="cta-button">
               <span>View Menu</span>
