@@ -164,9 +164,8 @@ const Home = () => {
             <div className="card-badge">Our Story</div>
             <h2>Family Tradition</h2>
             <p>
-              Since 1954, Coit's has been serving Oklahoma with the original Schwab's chili, 
-              perfectly grilled hot dogs, and refreshing handmade root beer. A family tradition 
-              that continues to bring joy to every event.
+              Coit's began as a beloved restaurant in Oklahoma, serving locals the best root beer and hot dogs since 1954. 
+              Today, our food truck brings a taste of Oklahoma history to events and neighborhoods wherever we go.
             </p>
             <Link to="/about" className="cta-button">
               <span>Learn More</span>

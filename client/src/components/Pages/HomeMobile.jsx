@@ -82,7 +82,8 @@ const HomeMobile = () => {
           <div className="mobile-content">
             <h2>Family Tradition</h2>
             <p>
-              Since 1954, Coit's has been serving Oklahoma with our legendary Schwab's chili, perfectly grilled hot dogs, and refreshing handmade root beer. A family tradition that continues to bring joy to every event.
+              Coit's began as a beloved restaurant in Oklahoma, serving locals the best root beer and hot dogs since 1954. 
+              Today, our food truck brings a taste of Oklahoma history to events and neighborhoods wherever we go.
             </p>
             <Link to="/about" className="mobile-cta-button">Learn More</Link>
           </div>
@@ -144,7 +145,7 @@ const HomeMobile = () => {
           <div className="mobile-content">
             <h2>Book Us for Your Event</h2>
             <p>
-              Want to make your event special? Book Coit's Food Truck for your next gathering! We cater private events, corporate functions, weddings, and more.
+              Want to make your event special? Book Coit's Food Truck for your next gathering! We book private events, corporate functions, weddings, and more.
             </p>
             <Link to="/book-event" className="mobile-cta-button">Book Now</Link>
           </div>
