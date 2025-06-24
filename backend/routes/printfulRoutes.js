@@ -113,6 +113,9 @@ router.post('/create-order', async (req, res) => {
   try {
     const { recipient, items, shipping } = req.body;
 
+    // Log the incoming request body for debugging
+    console.log('🛠️ Incoming create-order req.body:', JSON.stringify(req.body, null, 2));
+
     // Validate required fields
     if (!recipient || !items || !Array.isArray(items)) {
       return res.status(400).json({ error: 'Invalid request format' });
@@ -122,7 +125,7 @@ router.post('/create-order', async (req, res) => {
     const orderData = {
       recipient,
       items: items.map(item => ({
-        variant_id: item.variant_id,
+        sync_variant_id: item.sync_variant_id,
         quantity: item.quantity
       })),
       shipping: shipping ? {
@@ -130,6 +133,8 @@ router.post('/create-order', async (req, res) => {
         rate: shipping.rate
       } : undefined
     };
+
+    console.log('🛠️ Forwarding orderData to Printful:', JSON.stringify(orderData, null, 2));
 
     const order = await printfulService.createOrder(orderData);
     res.json(order);
