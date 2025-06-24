@@ -164,8 +164,8 @@ const Home = () => {
             <div className="card-badge">Our Story</div>
             <h2>Family Tradition</h2>
             <p>
-              Coit's began as a beloved restaurant in Oklahoma, serving locals the best root beer and hot dogs since 1954. 
-              Today, our food truck brings a taste of Oklahoma history to events and neighborhoods wherever we go.
+              Coit's has been serving Oklahoma since 1954. Our food truck still continues as a family-owned and operated business.
+              We proudly serve our original Schwab's chili and hot dogs alongside our famous handmade root beer.
             </p>
             <Link to="/about" className="cta-button">
               <span>Learn More</span>
@@ -195,9 +195,7 @@ const Home = () => {
             <div className="card-badge">Menu</div>
             <h2>Our Menu</h2>
             <p>
-              Explore our menu featuring the original Schwab's chili, 
-              perfectly grilled hot dogs, and our famous handmade root beer. 
-              Every bite tells a story of tradition and quality.
+              Discover our classic menu featuring the original Schwab's chili, perfectly grilled hot dogs, and our famous handmade root beer.
             </p>
             <Link to="/menu" className="cta-button">
               <span>View Menu</span>
@@ -227,8 +225,7 @@ const Home = () => {
             <div className="card-badge">Find Us</div>
             <h2>Where are we?</h2>
             <p>
-              We post all our upcoming events and locations on Facebook. 
-              Follow us to stay up to date and never miss your chance for a classic Coit's meal!
+              We post all our upcoming events and locations on Facebook. Follow us to stay up to date and never miss your chance for a classic Coit's meal!
             </p>
             <a href="https://www.facebook.com/coitsfoodtruck/" target="_blank" rel="noopener noreferrer" className="cta-button">
               <span>Follow on Facebook</span>
@@ -258,7 +255,7 @@ const Home = () => {
             <div className="card-badge">Events</div>
             <h2>Book Us for Your Event</h2>
             <p>
-              Want to make your event special? Book Coit's Food Truck for your next 
+              Want to make your event special? Book Coit's Food Truck for your next
               gathering! We book private events, corporate functions, weddings, and more.
             </p>
             <Link to="/book-event" className="cta-button">
@@ -294,8 +291,7 @@ const Home = () => {
             <div className="card-badge">Shop</div>
             <h2>Exclusive Merchandise</h2>
             <p>
-              Check out our shop for exclusive Coit's merchandise! 
-              Show your love for Oklahoma's favorite food truck!
+              Check out our shop for exclusive Coit's merchandise! From t-shirts to collectibles, show your love for Oklahoma's favorite food truck.
             </p>
             <Link to="/shop" className="cta-button">
               <span>Visit the Shop</span>
