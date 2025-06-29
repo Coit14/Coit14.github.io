@@ -1178,4 +1178,16 @@
 /* Force left-align for Family Tradition image (hero card) */
 .feature-card.hero-card .card-image-container > .hero-card-image {
   object-position: left center !important;
+}
+
+/* Merch Card (Shop) - Make image container square and images fully visible */
+.feature-card:last-child .card-image-container {
+  aspect-ratio: 1 / 1;
+  min-height: 350px;
+  max-height: 450px;
+}
+
+.feature-card:last-child .shop-image {
+  object-fit: contain;
+  background: #f8f8f8; /* Optional: matches card background */
 } 
