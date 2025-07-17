@@ -37,7 +37,8 @@ const fetchShippingOptions = async (shippingInfo, cartItems) => {
                 city: shippingInfo.city,
                 country_code: shippingInfo.country,
                 state_code: shippingInfo.state,
-                zip: shippingInfo.zipCode
+                zip: shippingInfo.zipCode,
+                phone: shippingInfo.phone || undefined
             },
             items: cartItems.map(item => ({
                 variant_id: item.variant_id,
@@ -112,6 +113,7 @@ const Checkout = () => {
         firstName: '',
         lastName: '',
         email: '',
+        phone: '',
         address1: '',
         address2: '',
         city: '',

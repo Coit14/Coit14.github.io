@@ -72,6 +72,7 @@ const ShippingForm = ({
         firstName: '',
         lastName: '',
         email: '',
+        phone: '',
         address1: '',
         address2: '',
         city: '',
@@ -87,6 +88,7 @@ const ShippingForm = ({
             firstName: '',
             lastName: '',
             email: '',
+            phone: '',
             address1: '',
             address2: '',
             city: '',
@@ -110,6 +112,11 @@ const ShippingForm = ({
         // Email validation
         if (formData.email && !/\S+@\S+\.\S+/.test(formData.email)) {
             newErrors.email = 'Please enter a valid email';
+        }
+
+        // Phone validation (optional but validate format if provided)
+        if (formData.phone && !/^[\+]?[1-9][\d]{0,15}$/.test(formData.phone.replace(/[\s\-\(\)]/g, ''))) {
+            newErrors.phone = 'Please enter a valid phone number';
         }
 
         // ZIP code validation for US addresses
@@ -198,18 +205,35 @@ const ShippingForm = ({
                             {errors.lastName && <span className="error-message">{errors.lastName}</span>}
                         </div>
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="email">Email</label>
-                        <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            value={formData.email}
-                            onChange={handleChange}
-                            className={errors.email ? 'error' : ''}
-                            disabled={shippingStage === 'method'}
-                        />
-                        {errors.email && <span className="error-message">{errors.email}</span>}
+                    <div className="form-row">
+                        <div className="form-group">
+                            <label htmlFor="email">Email</label>
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                value={formData.email}
+                                onChange={handleChange}
+                                className={errors.email ? 'error' : ''}
+                                disabled={shippingStage === 'method'}
+                            />
+                            {errors.email && <span className="error-message">{errors.email}</span>}
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="phone">Phone Number (Optional)</label>
+                            <input
+                                type="tel"
+                                id="phone"
+                                name="phone"
+                                value={formData.phone}
+                                onChange={handleChange}
+                                className={errors.phone ? 'error' : ''}
+                                disabled={shippingStage === 'method'}
+                                placeholder="(555) 123-4567"
+                            />
+                            {errors.phone && <span className="error-message">{errors.phone}</span>}
+                            <small className="field-help">Required for express shipping</small>
+                        </div>
                     </div>
                 </div>
 

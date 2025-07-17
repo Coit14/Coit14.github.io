@@ -47,6 +47,7 @@ const OrderReview = ({ orderSummary, shippingInfo, printfulOrder }) => {
                         {shippingInfo.address2 && <p>{shippingInfo.address2}</p>}
                         <p>{shippingInfo.city}, {shippingInfo.state} {shippingInfo.zipCode}</p>
                         <p>{shippingInfo.email}</p>
+                        {shippingInfo.phone && <p>Phone: {shippingInfo.phone}</p>}
                     </div>
                 </div>
 

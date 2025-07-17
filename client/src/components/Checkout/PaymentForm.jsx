@@ -19,6 +19,7 @@ const PaymentForm = ({ onSubmit, orderSummary, shippingInfo, selectedShipping })
                     recipient: {
                         name: `${shippingInfo.firstName} ${shippingInfo.lastName}`,
                         email: shippingInfo.email,
+                        phone: shippingInfo.phone || undefined,
                         address1: shippingInfo.address1,
                         address2: shippingInfo.address2 || '',
                         city: shippingInfo.city,

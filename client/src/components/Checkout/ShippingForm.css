@@ -66,6 +66,14 @@
     background-color: #fff8f8;
 }
 
+.field-help {
+    color: #666;
+    font-size: 12px;
+    margin-top: 4px;
+    display: block;
+    font-style: italic;
+}
+
 .error-message {
     color: #dc3545;
     font-size: 14px;

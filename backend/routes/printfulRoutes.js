@@ -59,7 +59,9 @@ router.post('/shipping-rates', async (req, res) => {
         // Ensure proper formatting
         state_code: recipient.state_code.toUpperCase(),
         country_code: recipient.country_code.toUpperCase(),
-        zip: recipient.zip.toString()
+        zip: recipient.zip.toString(),
+        // Include phone if provided
+        ...(recipient.phone && { phone: recipient.phone })
       },
       items: items.map(item => ({
         variant_id: parseInt(item.variant_id, 10),
