@@ -41,6 +41,12 @@
     margin-bottom: clamp(3rem, 6vw, 4rem);
 }
 
+.hero-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 clamp(1rem, 5vw, 2rem);
+}
+
 .hero-image-container {
     position: relative;
     width: 100%;
@@ -572,7 +578,12 @@
     padding: clamp(2rem, 6vw, 3rem) clamp(1rem, 4vw, 1.5rem);
   }
 
-  /* Mobile hero adjustments */
+  /* Mobile hero adjustments - keep full width on mobile */
+  .hero-container {
+      max-width: none;
+      padding: 0;
+  }
+
   .hero-image-container {
       height: clamp(250px, 40vh, 350px);
       border-radius: 0;
