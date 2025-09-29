@@ -475,6 +475,7 @@
     font-size: 1.08rem;
     margin-bottom: 0.5rem;
     letter-spacing: 0.01em;
+    text-align: left;
 }
 
 .beverage-sizes {
@@ -491,6 +492,12 @@
     font-size: 0.98rem;
     color: #333;
     padding: 0.15rem 0;
+}
+
+.beverage-sizes li .price {
+    display: flex;
+    align-items: center;
+    line-height: 1;
 }
 
 @media (max-width: 900px) {
