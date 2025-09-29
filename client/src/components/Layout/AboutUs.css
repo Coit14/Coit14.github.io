@@ -30,12 +30,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(
-        135deg, 
-        rgba(218, 41, 28, 0.8) 0%, 
-        rgba(218, 41, 28, 0.6) 50%, 
-        rgba(0, 0, 0, 0.4) 100%
-    );
+    background: rgba(218, 41, 28, 0.25);
 }
 
 /* Adjust the content section */

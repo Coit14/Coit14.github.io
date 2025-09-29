@@ -2,9 +2,16 @@
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-    padding: clamp(1.5rem, 4vw, 3rem) clamp(1rem, 4vw, 2rem);
+    padding: clamp(2rem, 6vw, 3rem) clamp(1rem, 4vw, 2rem);
     background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
     min-height: 100vh;
+}
+
+/* Mobile spacing standardization */
+@media (max-width: 768px) {
+    .menu-container {
+        padding-top: clamp(2rem, 6vw, 3rem);
+    }
 }
 
 .menu-header {

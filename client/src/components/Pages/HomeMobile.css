@@ -33,10 +33,14 @@
 }
 
 .mobile-section {
-  padding: clamp(2rem, 8vw, 2.5rem) clamp(1rem, 5vw, 1.25rem);
+  padding: clamp(2rem, 6vw, 3rem) clamp(1rem, 5vw, 1.25rem);
   display: flex;
   flex-direction: column;
   gap: 30px;
+}
+
+.mobile-section:first-child {
+  padding-top: clamp(2rem, 6vw, 3rem);
 }
 
 .mobile-section:nth-child(even) {
