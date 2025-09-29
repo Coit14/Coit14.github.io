@@ -7,18 +7,6 @@ import { socialLinks } from '../../config/social';
 function AboutUs() {
   return (
     <div className="about-page">
-      {/* Modern Hero Section */}
-      <section className="about-hero animate-in">
-        <div className="hero-image-container">
-          <img 
-            src="/images/hero-image2.jpg" 
-            alt="Coit's Food Truck - A Family Tradition Since 1954" 
-            className="hero-image"
-          />
-          <div className="hero-overlay"></div>
-        </div>
-      </section>
-
       <div className="about-content">
         <section className="history-section animate-in animate-delay-1">
           <h1>About Coit's Food Truck</h1>

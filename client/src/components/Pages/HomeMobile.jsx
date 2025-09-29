@@ -27,6 +27,18 @@ const HomeMobile = () => {
 
   return (
     <div className="mobile-home-content">
+      {/* Hero Section */}
+      <section className="mobile-hero animate-in">
+        <div className="mobile-hero-image-container">
+          <img 
+            src="/images/hero-image2.jpg" 
+            alt="Coit's Food Truck - A Family Tradition Since 1954" 
+            className="mobile-hero-image"
+          />
+          <div className="mobile-hero-overlay"></div>
+        </div>
+      </section>
+
       {/* Family Tradition Card */}
       <section className="mobile-section">
         <div className="mobile-feature-card animate-in animate-delay-1"> 

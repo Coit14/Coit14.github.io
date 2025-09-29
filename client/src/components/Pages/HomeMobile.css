@@ -4,6 +4,36 @@
   font-family: var(--font-family);
 }
 
+/* Mobile Hero Section */
+.mobile-hero {
+    position: relative;
+    margin-bottom: clamp(2rem, 5vw, 3rem);
+}
+
+.mobile-hero-image-container {
+    position: relative;
+    width: 100%;
+    height: clamp(250px, 40vh, 350px);
+    overflow: hidden;
+    border-radius: 0;
+}
+
+.mobile-hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.mobile-hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(218, 41, 28, 0.25);
+}
+
 
 .mobile-hero-content {
   background: rgba(163, 52, 47, 0.85);

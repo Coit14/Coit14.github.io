@@ -68,6 +68,18 @@ const Home = () => {
 
   return (
     <div className="home-content">
+      {/* Hero Section */}
+      <section className="home-hero animate-in">
+        <div className="hero-image-container">
+          <img 
+            src="/images/hero-image2.jpg" 
+            alt="Coit's Food Truck - A Family Tradition Since 1954" 
+            className="hero-image"
+          />
+          <div className="hero-overlay"></div>
+        </div>
+      </section>
+
       {/* Feature Cards Grid */}
       <div className="feature-cards-container">
         {/* Family Tradition Card */}
