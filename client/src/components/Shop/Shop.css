@@ -20,7 +20,7 @@
 }
 
 .shop-container {
-  padding: clamp(2rem, 6vw, 3rem) clamp(20px, 5vw, 40px);
+  padding: clamp(3rem, 8vh, 5rem) clamp(20px, 5vw, 40px);
   min-height: 100vh;
   animation: fadeIn 1s ease-out;
   opacity: 0;

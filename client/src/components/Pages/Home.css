@@ -539,7 +539,7 @@
   }
   
   .feature-cards-container {
-    padding: clamp(2rem, 6vh, 3rem) clamp(1rem, 4vw, 1.5rem);
+    padding: clamp(2rem, 6vw, 3rem) clamp(1rem, 4vw, 1.5rem);
   }
   
   .trust-indicators {

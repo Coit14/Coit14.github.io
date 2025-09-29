@@ -36,7 +36,6 @@ const Menu = () => {
                     <h2>Frito Chili Pie</h2>
                     <span className="price">$5.00</span>
                 </div>
-                <p className="item-description">Chili & Cheese</p>
                 <p className="add-ons">
                     Add (No Extra Charge):
                     <span className="toppings"> Cheese • Relish • Ketchup • Jalapeño Peppers • Sour Cream</span>

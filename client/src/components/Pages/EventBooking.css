@@ -11,7 +11,7 @@
 .event-booking-container {
     max-width: 800px;
     margin: 0 auto;
-    padding: clamp(2rem, 6vw, 3rem) clamp(1rem, 5vw, 1.25rem);
+    padding: clamp(3rem, 8vh, 5rem) clamp(1rem, 5vw, 1.25rem);
 }
 
 .form-header {

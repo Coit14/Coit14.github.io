@@ -1,6 +1,7 @@
 .contact-container {
     max-width: 600px;
-    margin: 2rem auto;
+    margin: 0 auto;
+    margin-top: clamp(3rem, 8vh, 5rem);
     padding: clamp(2rem, 6vw, 3rem) clamp(1rem, 5vw, 2rem);
     background-color: #ffffff;
     border-radius: 8px;
