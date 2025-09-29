@@ -33,13 +33,15 @@ const Menu = () => {
 
             <section className="menu-section animate-in animate-delay-3">
                 <div className="menu-item-header">
-                    <h2>Frito Chili Pie</h2>
+                    <div className="header-content">
+                        <h2>Frito Chili Pie</h2>
+                        <p className="add-ons-subheading">
+                            Add (No Extra Charge):
+                            <span className="toppings"> Cheese • Relish • Ketchup • Jalapeño Peppers • Sour Cream</span>
+                        </p>
+                    </div>
                     <span className="price">$5.00</span>
                 </div>
-                <p className="add-ons">
-                    Add (No Extra Charge):
-                    <span className="toppings"> Cheese • Relish • Ketchup • Jalapeño Peppers • Sour Cream</span>
-                </p>
             </section>
 
             <section className="menu-section animate-in animate-delay-4">

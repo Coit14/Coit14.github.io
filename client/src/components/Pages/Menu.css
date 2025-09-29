@@ -103,7 +103,7 @@
     display: grid;
     grid-template-columns: 1fr auto;
     gap: clamp(1rem, 3vw, 2rem);
-    padding: clamp(1rem, 2.5vw, 1.5rem) clamp(1.25rem, 3vw, 2rem);
+    padding: clamp(0.5rem, 1.5vw, 0.75rem) clamp(1.25rem, 3vw, 2rem);
     align-items: start;
 }
 
@@ -137,8 +137,8 @@
 .menu-item-header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    padding: clamp(1rem, 2.5vw, 1.5rem) clamp(1.25rem, 3vw, 2rem);
+    align-items: flex-start;
+    padding: clamp(0.5rem, 1.5vw, 0.75rem) clamp(1.25rem, 3vw, 2rem);
 }
 
 .menu-item-header h2 {
@@ -152,10 +152,23 @@
     letter-spacing: -0.01em;
 }
 
+.header-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.add-ons-subheading {
+    margin: 0;
+    color: #555;
+    font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+    font-weight: normal;
+}
+
 .menu-item {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     padding: clamp(0.75rem, 2vw, 1rem) clamp(1.25rem, 3vw, 2rem);
     margin: 0;
 }
@@ -185,7 +198,7 @@
 .schwabs-logo-wrapper {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     padding: clamp(1rem, 2.5vw, 1.5rem);
     background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
     border-top: 1px solid #f0f0f0;
@@ -220,7 +233,7 @@
 
     .beverages {
         grid-template-columns: 1fr auto;
-        align-items: center;
+        align-items: flex-start;
     }
 }
 
@@ -301,14 +314,14 @@
 .hotdogs-content.refined-hotdogs {
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: flex-start;
     gap: clamp(1.5rem, 4vw, 3rem);
     justify-content: space-between;
 }
 
 .schwabs-logo-wrapper.refined-logo {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     padding: 0;
     background: none;
@@ -348,7 +361,7 @@
     display: grid;
     grid-template-columns: 1fr auto;
     gap: clamp(1rem, 3vw, 2rem);
-    padding: clamp(1rem, 2.5vw, 1.5rem) clamp(1.25rem, 3vw, 2rem);
+    padding: clamp(0.5rem, 1.5vw, 0.75rem) clamp(1.25rem, 3vw, 2rem);
     align-items: start;
 }
 
@@ -386,7 +399,7 @@
 .float-details {
     display: flex;
     gap: 1.5rem;
-    align-items: center;
+    align-items: flex-start;
     font-size: 1rem;
     color: #333;
 }
@@ -426,8 +439,8 @@
 .menu-item-header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    padding: clamp(1rem, 2.5vw, 1.5rem) clamp(1.25rem, 3vw, 2rem);
+    align-items: flex-start;
+    padding: clamp(0.5rem, 1.5vw, 0.75rem) clamp(1.25rem, 3vw, 2rem);
 }
 
 /* Remove old snacks and float styles if present */
@@ -439,7 +452,7 @@
     display: flex;
     flex-direction: row;
     gap: clamp(2rem, 4vw, 3.5rem);
-    padding: clamp(1rem, 2.5vw, 1.5rem) clamp(1.25rem, 3vw, 2rem);
+    padding: clamp(0.5rem, 1.5vw, 0.75rem) clamp(1.25rem, 3vw, 2rem);
     flex-wrap: wrap;
 }
 
@@ -474,7 +487,7 @@
 .beverage-sizes li {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     font-size: 0.98rem;
     color: #333;
     padding: 0.15rem 0;
@@ -505,7 +518,7 @@
 .beverage-block-header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     width: 100%;
     margin-bottom: 0.25rem;
 }
