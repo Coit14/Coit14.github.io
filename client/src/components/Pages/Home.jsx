@@ -1,14 +1,11 @@
-import React, { useState, useEffect, useRef, useMemo } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import HomeMobile from './HomeMobile';
 import './Home.css';
 //Home page for the website
 const Home = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [imagesLoaded, setImagesLoaded] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
-  const [isLoading, setIsLoading] = useState(true);
-  const [visibleCards, setVisibleCards] = useState(0);
   
   // Shop images array
   const shopImages = useMemo(() => [
@@ -20,61 +17,15 @@ const Home = () => {
     './images/demo/unisex-staple-t-shirt-white-front-and-back-685883b48335e.jpg'
   ], []);
 
-  // Preload images
-  useEffect(() => {
-    const loadImages = async () => {
-      const imagePromises = shopImages.map(src => {
-        return new Promise((resolve, reject) => {
-          const img = new Image();
-          img.src = src;
-          img.onload = resolve;
-          img.onerror = reject;
-        });
-      });
-
-      try {
-        await Promise.all(imagePromises);
-        setImagesLoaded(true);
-        // Simulate loading time for better UX
-        setTimeout(() => setIsLoading(false), 800);
-      } catch (error) {
-        console.error('Error loading images:', error);
-        setIsLoading(false);
-      }
-    };
-
-    loadImages();
-  }, [shopImages]);
-
   // Image rotation
   useEffect(() => {
-    if (!imagesLoaded) return;
-
     const interval = setInterval(() => {
       setCurrentImageIndex(prev => (prev + 1) % shopImages.length);
     }, 5000);
 
     return () => clearInterval(interval);
-  }, [imagesLoaded, shopImages.length]);
+  }, [shopImages.length]);
 
-  // Progressive card reveal
-  useEffect(() => {
-    if (isLoading) return;
-
-    const revealCards = () => {
-      const timer = setTimeout(() => {
-        setVisibleCards(prev => Math.min(prev + 1, 5));
-      }, 200);
-      return timer;
-    };
-
-    const timers = [];
-    for (let i = 0; i < 5; i++) {
-      timers.push(setTimeout(revealCards, i * 300));
-    }
-
-    return () => timers.forEach(timer => clearTimeout(timer));
-  }, [isLoading]);
 
   // Scroll animation observer
   useEffect(() => {
@@ -114,39 +65,13 @@ const Home = () => {
     return <HomeMobile />;
   }
 
-  // Loading skeleton
-  if (isLoading) {
-    return (
-      <div className="home-content">
-        <div className="skeleton-hero">
-          <div className="skeleton-hero-content"></div>
-        </div>
-        <div className="skeleton-cards">
-          {[1, 2, 3, 4].map(i => (
-            <div key={i} className="skeleton-card">
-              <div className="skeleton-image"></div>
-              <div className="skeleton-content">
-                <div className="skeleton-title"></div>
-                <div className="skeleton-text"></div>
-                <div className="skeleton-text"></div>
-                <div className="skeleton-button"></div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="home-content">
-      {/* Hero Section */}
-      <section className="hero-section hero-image-top"></section>
-
       {/* Feature Cards Grid */}
       <div className="feature-cards-container">
         {/* Family Tradition Card */}
-        <div className={`feature-card hero-card ${visibleCards >= 1 ? 'animate-in animate-delay-2' : 'hidden'}`}>
+        <div className="feature-card hero-card animate-in animate-delay-1">
           <div className="card-image-container">
             <img 
               src="/images/image-28.png" 
@@ -177,7 +102,7 @@ const Home = () => {
         </div>
 
         {/* Menu Card */}
-        <div className={`feature-card menu-card ${visibleCards >= 2 ? 'animate-in animate-delay-3' : 'hidden'}`}>
+        <div className="feature-card menu-card animate-in animate-delay-2">
           <div className="card-image-container">
             <img 
               src="/images/coits_img.jpg" 
@@ -207,7 +132,7 @@ const Home = () => {
         </div>
 
         {/* Find Us Card */}
-        <div className={`feature-card ${visibleCards >= 3 ? 'animate-in animate-delay-4' : 'hidden'}`}>
+        <div className="feature-card animate-in animate-delay-3">
           <div className="card-image-container">
             <img 
               src="/images/facebook.png" 
@@ -237,7 +162,7 @@ const Home = () => {
         </div>
 
         {/* Booking Section Card */}
-        <div className={`feature-card ${visibleCards >= 4 ? 'animate-in animate-delay-5' : 'hidden'}`}>
+        <div className="feature-card animate-in animate-delay-4">
           <div className="card-image-container">
             <img 
               src="/images/ft.jpg" 
@@ -268,7 +193,7 @@ const Home = () => {
         </div>
 
         {/* Shop Section Card (Merch) */}
-        <div className={`feature-card ${visibleCards >= 5 ? 'animate-in animate-delay-6' : 'hidden'}`}>
+        <div className="feature-card animate-in animate-delay-5">
           <div className="card-image-container">
             <div className="cycling-images-container">
               {shopImages.map((img, index) => (

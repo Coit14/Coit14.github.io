@@ -4,8 +4,6 @@ import './HomeMobile.css';
 
 const HomeMobile = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [imagesLoaded, setImagesLoaded] = useState(false);
-  const [visibleCards, setVisibleCards] = useState(0);
   
   // Shop images array
   const shopImages = useMemo(() => [
@@ -17,60 +15,21 @@ const HomeMobile = () => {
     './images/demo/unisex-staple-t-shirt-white-front-and-back-685883b48335e.jpg'
   ], []);
 
-  // Preload images
-  useEffect(() => {
-    const loadImages = async () => {
-      const imagePromises = shopImages.map(src => {
-        return new Promise((resolve, reject) => {
-          const img = new Image();
-          img.src = src;
-          img.onload = resolve;
-          img.onerror = reject;
-        });
-      });
-
-      try {
-        await Promise.all(imagePromises);
-        setImagesLoaded(true);
-      } catch (error) {
-        console.error('Error loading images:', error);
-      }
-    };
-
-    loadImages();
-  }, [shopImages]);
-
   // Image rotation
   useEffect(() => {
-    if (!imagesLoaded) return;
-
     const interval = setInterval(() => {
       setCurrentImageIndex(prev => (prev + 1) % shopImages.length);
     }, 5000);
 
     return () => clearInterval(interval);
-  }, [imagesLoaded, shopImages.length]);
+  }, [shopImages.length]);
 
-  // Progressive card reveal
-  useEffect(() => {
-    const revealCards = () => {
-      setVisibleCards(prev => Math.min(prev + 1, 5));
-    };
-    const timers = [];
-    for (let i = 0; i < 5; i++) {
-      timers.push(setTimeout(revealCards, i * 300));
-    }
-    return () => timers.forEach(timer => clearTimeout(timer));
-  }, []);
 
   return (
     <div className="mobile-home-content">
-      {/* Hero Section */}
-      <section className="mobile-hero-section hero-image-top"></section>
-
       {/* Family Tradition Card */}
       <section className="mobile-section">
-        <div className={`mobile-feature-card ${visibleCards >= 1 ? 'animate-in' : 'hidden'}`}> 
+        <div className="mobile-feature-card animate-in animate-delay-1"> 
           <div className="mobile-image-container">
             <img 
               src="/images/image-28.png" 
@@ -92,7 +51,7 @@ const HomeMobile = () => {
 
       {/* Menu Card */}
       <section className="mobile-section">
-        <div className={`mobile-feature-card ${visibleCards >= 2 ? 'animate-in' : 'hidden'}`}> 
+        <div className="mobile-feature-card animate-in animate-delay-2"> 
           <div className="mobile-image-container">
             <img 
               src="/images/coits_img.jpg" 
@@ -113,7 +72,7 @@ const HomeMobile = () => {
 
       {/* Find Us Card */}
       <section className="mobile-section find-us-section">
-        <div className={`mobile-feature-card ${visibleCards >= 3 ? 'animate-in' : 'hidden'}`}> 
+        <div className="mobile-feature-card animate-in animate-delay-3"> 
           <div className="mobile-image-container">
             <img 
               src="/images/facebook.png" 
@@ -133,7 +92,7 @@ const HomeMobile = () => {
 
       {/* Booking Section Card */}
       <section className="mobile-section">
-        <div className={`mobile-feature-card ${visibleCards >= 4 ? 'animate-in' : 'hidden'}`}> 
+        <div className="mobile-feature-card animate-in animate-delay-4"> 
           <div className="mobile-image-container">
             <img 
               src="/images/ft.jpg" 
@@ -153,7 +112,7 @@ const HomeMobile = () => {
 
       {/* Shop Section Card (Merch) */}
       <section className="mobile-section">
-        <div className={`mobile-feature-card ${visibleCards >= 5 ? 'animate-in' : 'hidden'}`}> 
+        <div className="mobile-feature-card animate-in animate-delay-5"> 
           <div className="mobile-image-container">
             <div className="mobile-cycling-images">
               {shopImages.map((img, index) => (

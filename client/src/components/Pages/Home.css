@@ -35,17 +35,6 @@
   flex-direction: column;
 }
 
-/* Hero Section */
-.home-content .hero-section {
-  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)),
-              url('../../../public/images/hero-image2.jpg') center/cover !important;
-  min-height: 60vh;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: clamp(2rem, 8vh, 4rem) clamp(1rem, 5vw, 2rem);
-}
 
 .hero-content {
   background: rgba(163, 52, 47, 0.85);
@@ -400,25 +389,6 @@
   line-height: 1.5;
 }
 
-/* Skeleton Loading States */
-.skeleton-hero {
-  min-height: 60vh;
-  background: linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: clamp(2rem, 8vh, 4rem) clamp(1rem, 5vw, 2rem);
-}
-
-.skeleton-hero-content {
-  width: 100%;
-  max-width: 600px;
-  height: 200px;
-  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-  background-size: 200% 100%;
-  animation: shimmer 1.5s infinite;
-  border-radius: 12px;
-}
 
 .skeleton-cards {
   display: grid;
@@ -1134,18 +1104,6 @@
     left: 50% !important;
     transform: translateX(-50%);
   }
-}
-
-.hero-image-top {
-  position: relative;
-  min-height: 60vh;
-  width: 100%;
-  background: linear-gradient(rgba(0,0,0,0.12), rgba(0,0,0,0.12)),
-              url('../../../public/images/hero-image2.jpg') center/cover;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  padding-top: clamp(2rem, 10vw, 4rem);
 }
 
 .hero-overlay-top {

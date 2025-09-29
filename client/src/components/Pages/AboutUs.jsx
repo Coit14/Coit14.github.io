@@ -7,9 +7,25 @@ import { socialLinks } from '../../config/social';
 function AboutUs() {
   return (
     <div className="about-page">
+      {/* Modern Hero Section */}
+      <section className="about-hero animate-in">
+        <div className="hero-image-container">
+          <img 
+            src="/images/hero-image2.jpg" 
+            alt="Coit's Food Truck - A Family Tradition Since 1954" 
+            className="hero-image"
+          />
+          <div className="hero-overlay">
+            <div className="hero-content">
+              <h1>About Coit's Food Truck</h1>
+              <p className="hero-subtitle">A Family Tradition Since 1954</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <div className="about-content">
         <section className="history-section animate-in animate-delay-1">
-          <h1>About Coit's Food Truck</h1>
           <p className="history-text animate-in animate-delay-2">
             Coit's began as a beloved restaurant in Oklahoma, serving locals the best root beer and hot dogs since 1954.
             Today, our food truck brings a taste of Oklahoma history to events and neighborhoods wherever we go. Find us on facebook!
