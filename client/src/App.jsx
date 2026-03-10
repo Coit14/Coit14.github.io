@@ -8,7 +8,9 @@ import Shop from './components/Shop/Shop';
 import Cart from './components/Cart/Cart';
 import AboutUs from './components/Pages/AboutUs';
 import EventBooking from './components/Pages/EventBooking';
+import Calendar from './components/Pages/Calendar';
 import NotFound from './components/Pages/NotFound';
+import BookingResponse from './components/Pages/BookingResponse';
 import { CartProvider } from './contexts/CartContext';
 import Checkout from './components/Checkout/Checkout';
 import CheckoutSuccess from './components/CheckoutSuccess';
@@ -34,6 +36,7 @@ function App() {
                             <Route path="/" element={<Home />} />
                             <Route path="/about" element={<AboutUs />} />
                             <Route path="/menu" element={<Menu />} />
+                            <Route path="/calendar" element={<Calendar />} />
                             {FEATURES.MERCH && (
                                 <>
                                     <Route path="/shop" element={<Shop />} />
@@ -43,6 +46,7 @@ function App() {
                                 </>
                             )}
                             <Route path="/book-event" element={<EventBooking />} />
+                            <Route path="/booking-response" element={<BookingResponse />} />
                             <Route path="*" element={<NotFound />} />
                         </Routes>
                     </main>

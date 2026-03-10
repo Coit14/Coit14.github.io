@@ -2,6 +2,7 @@ import nodemailer from 'nodemailer';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
+import { createBookingToken } from '../services/bookingTokenService.js';
 
 // Get the directory name of the current module
 const __filename = fileURLToPath(import.meta.url);
@@ -14,6 +15,12 @@ export async function handler(req, res) {
 
   try {
     const formData = req.body;
+    const bookingToken = createBookingToken(formData);
+    const publicSiteUrl = process.env.PUBLIC_SITE_URL || 'https://coit14.github.io';
+    const encodedToken = encodeURIComponent(bookingToken);
+    const acceptLink = `${publicSiteUrl}/#/booking-response?action=accept&token=${encodedToken}`;
+    const declineLink = `${publicSiteUrl}/#/booking-response?action=decline&token=${encodedToken}`;
+    const modifyLink = `${publicSiteUrl}/#/booking-response?action=modify&token=${encodedToken}`;
     
     // Minimal backend validation for required fields
     const requiredFields = [
@@ -127,6 +134,18 @@ export async function handler(req, res) {
         border-radius: 4px;
         margin: 10px 0;
       }
+      .button-secondary {
+        background-color: #3c3b6e;
+      }
+      .button-danger {
+        background-color: #9b2c2c;
+      }
+      .button-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 16px;
+      }
     `;
 
     // Format the email content for the company
@@ -169,6 +188,15 @@ export async function handler(req, res) {
         <div class="section">
           <div class="section-title">Site Details</div>
           <div class="info-row"><span class="label">Additional Info:</span> ${formData.parkingInfo || 'Not provided'}</div>
+        </div>
+        <div class="section">
+          <div class="section-title">Admin Actions</div>
+          <p>Use one of the secure action links below:</p>
+          <div class="button-group">
+            <a href="${acceptLink}" class="button">Accept</a>
+            <a href="${declineLink}" class="button button-danger">Decline</a>
+            <a href="${modifyLink}" class="button button-secondary">Modify Time/Details</a>
+          </div>
         </div>
       </div>
     </body>

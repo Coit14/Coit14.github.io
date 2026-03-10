@@ -61,6 +61,7 @@ function Header() {
             <div className="nav-section left">
               <Link to="/">HOME</Link>
               <Link to="/menu">MENU</Link>
+              <Link to="/calendar">CALENDAR</Link>
             </div>
             
             <Link to="/" className="logo-container">
@@ -111,6 +112,7 @@ function Header() {
             <div className={`mobile-menu ${isMenuOpen ? 'open' : ''}`} ref={menuRef}>
               <Link to="/" onClick={() => setIsMenuOpen(false)}>HOME</Link>
               <Link to="/menu" onClick={() => setIsMenuOpen(false)}>MENU</Link>
+              <Link to="/calendar" onClick={() => setIsMenuOpen(false)}>CALENDAR</Link>
               <Link to="/about" onClick={() => setIsMenuOpen(false)}>ABOUT US</Link>
               {FEATURES.MERCH && (
                 <>

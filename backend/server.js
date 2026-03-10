@@ -12,6 +12,8 @@ import productsRouter from './api/products.js';
 // Import route handlers - keeping these as they're actively used
 import { handler as sendEmailHandler } from './api/sendEmail.js';
 import { handler as printfulWebhookHandler } from './api/printful-webhook.js';
+import { handler as eventBookingResponseHandler } from './api/eventBookingResponse.js';
+import { handler as calendarEventsHandler } from './api/calendarEvents.js';
 // import { handler as printifyWebhookHandler } from './api/printify-webhook.js';
 
 console.log('Printful API Key:', process.env.PRINTFUL_API_KEY ? 'exists' : 'missing');
@@ -41,6 +43,8 @@ initializeCache().then(() => {
     
     // API routes - keeping these as they're actively used in the application
     app.post('/api/event-booking', sendEmailHandler);
+    app.post('/api/event-booking/respond', eventBookingResponseHandler);
+    app.get('/api/calendar/events', calendarEventsHandler);
     app.use('/api/products', productsRouter);
     app.post('/api/printful-webhook', printfulWebhookHandler);
     // app.post('/api/printify-webhook', printifyWebhookHandler);

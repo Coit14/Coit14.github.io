@@ -1,0 +1,5 @@
+.booking-response-container {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: clamp(3rem, 8vh, 5rem) clamp(1rem, 5vw, 1.25rem);
+}

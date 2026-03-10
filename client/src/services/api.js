@@ -1,4 +1,4 @@
-import BASE_URL, { API_URL } from '../config/config';
+import { API_URL } from '../config/config';
 
 // Use the centralized API URL with /api prefix
 const API_BASE_URL = `${API_URL}/api`;
@@ -177,6 +177,56 @@ export const sendEventBookingEmail = async (formData) => {
     return await response.json();
   } catch (error) {
     console.error('Error sending event booking:', error);
+    throw error;
+  }
+};
+
+/**
+ * Fetches public events from the Google Calendar integration
+ * @returns {Promise<Array>} Array of calendar events
+ */
+export const fetchCalendarEvents = async () => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/calendar/events`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching calendar events:', error);
+    throw error;
+  }
+};
+
+/**
+ * Responds to a booking request (accept/decline/modify)
+ * @param {Object} payload - action payload for booking response
+ * @returns {Promise<Object>} Response from the server
+ */
+export const respondToEventBooking = async (payload) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/event-booking/respond`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload)
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('Error responding to booking request:', error);
     throw error;
   }
 };
