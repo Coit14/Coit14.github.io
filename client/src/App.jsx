@@ -13,6 +13,7 @@ import { CartProvider } from './contexts/CartContext';
 import Checkout from './components/Checkout/Checkout';
 import CheckoutSuccess from './components/CheckoutSuccess';
 import CheckoutCancel from './components/CheckoutCancel';
+import { FEATURES } from './config/features';
 import './App.css';
 import './styles/layout.css';
 import './index.css';
@@ -27,16 +28,20 @@ function App() {
                     <div className="print-header">
                         <Header />
                     </div>
-                    <Cart />
+                    {FEATURES.MERCH && <Cart />}
                     <main className="main-content">
                         <Routes>
                             <Route path="/" element={<Home />} />
                             <Route path="/about" element={<AboutUs />} />
                             <Route path="/menu" element={<Menu />} />
-                            <Route path="/shop" element={<Shop />} />
-                            <Route path="/checkout" element={<Checkout />} />
-                            <Route path="/checkout/success" element={<CheckoutSuccess />} />
-                            <Route path="/checkout/cancel" element={<CheckoutCancel />} />
+                            {FEATURES.MERCH && (
+                                <>
+                                    <Route path="/shop" element={<Shop />} />
+                                    <Route path="/checkout" element={<Checkout />} />
+                                    <Route path="/checkout/success" element={<CheckoutSuccess />} />
+                                    <Route path="/checkout/cancel" element={<CheckoutCancel />} />
+                                </>
+                            )}
                             <Route path="/book-event" element={<EventBooking />} />
                             <Route path="*" element={<NotFound />} />
                         </Routes>

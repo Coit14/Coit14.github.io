@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
+import { FEATURES } from '../../config/features';
 import './HomeMobile.css';
 
 const HomeMobile = () => {
@@ -17,6 +18,10 @@ const HomeMobile = () => {
 
   // Image rotation
   useEffect(() => {
+    if (!FEATURES.MERCH) {
+      return undefined;
+    }
+
     const interval = setInterval(() => {
       setCurrentImageIndex(prev => (prev + 1) % shopImages.length);
     }, 5000);
@@ -122,30 +127,31 @@ const HomeMobile = () => {
         </div>
       </section>
 
-      {/* Shop Section Card (Merch) */}
-      <section className="mobile-section">
-        <div className="mobile-feature-card animate-in animate-delay-5"> 
-          <div className="mobile-image-container">
-            <div className="mobile-cycling-images">
-              {shopImages.map((img, index) => (
-                <img 
-                  key={index}
-                  src={img}
-                  alt={`Coit's Merchandise ${index + 1}`}
-                  className={`mobile-shop-image ${currentImageIndex === index ? 'active' : ''}`}
-                />
-              ))}
+      {FEATURES.MERCH && (
+        <section className="mobile-section">
+          <div className="mobile-feature-card animate-in animate-delay-5"> 
+            <div className="mobile-image-container">
+              <div className="mobile-cycling-images">
+                {shopImages.map((img, index) => (
+                  <img 
+                    key={index}
+                    src={img}
+                    alt={`Coit's Merchandise ${index + 1}`}
+                    className={`mobile-shop-image ${currentImageIndex === index ? 'active' : ''}`}
+                  />
+                ))}
+              </div>
+            </div>
+            <div className="mobile-content">
+              <h2>Exclusive Merchandise</h2>
+              <p>
+                Check out our shop for exclusive Coit's merchandise! From t-shirts to collectibles, show your love for Oklahoma's favorite food truck.
+              </p>
+              <Link to="/shop" className="mobile-cta-button">Visit the Shop</Link>
             </div>
           </div>
-          <div className="mobile-content">
-            <h2>Exclusive Merchandise</h2>
-            <p>
-              Check out our shop for exclusive Coit's merchandise! From t-shirts to collectibles, show your love for Oklahoma's favorite food truck.
-            </p>
-            <Link to="/shop" className="mobile-cta-button">Visit the Shop</Link>
-          </div>
-        </div>
-      </section>
+        </section>
+      )}
     </div>
   );
 };

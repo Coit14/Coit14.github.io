@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import HomeMobile from './HomeMobile';
+import { FEATURES } from '../../config/features';
 import './Home.css';
 //Home page for the website
 const Home = () => {
@@ -19,6 +20,10 @@ const Home = () => {
 
   // Image rotation
   useEffect(() => {
+    if (!FEATURES.MERCH) {
+      return undefined;
+    }
+
     const interval = setInterval(() => {
       setCurrentImageIndex(prev => (prev + 1) % shopImages.length);
     }, 5000);
@@ -206,40 +211,41 @@ const Home = () => {
           </div>
         </div>
 
-        {/* Shop Section Card (Merch) */}
-        <div className="feature-card animate-in animate-delay-5">
-          <div className="card-image-container">
-            <div className="cycling-images-container">
-              {shopImages.map((img, index) => (
-                <img 
-                  key={index}
-                  src={img}
-                  alt={`Coit's Merchandise ${index + 1}`}
-                  className={`shop-image ${currentImageIndex === index ? 'active' : ''}`}
-                  loading="lazy"
-                />
-              ))}
-            </div>
-            <div className="card-overlay">
-              <div className="overlay-content">
-                <span className="overlay-text">Exclusive Merch</span>
+        {FEATURES.MERCH && (
+          <div className="feature-card animate-in animate-delay-5">
+            <div className="card-image-container">
+              <div className="cycling-images-container">
+                {shopImages.map((img, index) => (
+                  <img 
+                    key={index}
+                    src={img}
+                    alt={`Coit's Merchandise ${index + 1}`}
+                    className={`shop-image ${currentImageIndex === index ? 'active' : ''}`}
+                    loading="lazy"
+                  />
+                ))}
+              </div>
+              <div className="card-overlay">
+                <div className="overlay-content">
+                  <span className="overlay-text">Exclusive Merch</span>
+                </div>
               </div>
             </div>
+            <div className="card-content">
+              <div className="card-badge">Shop</div>
+              <h2>Exclusive Merchandise</h2>
+              <p>
+                Check out our shop for exclusive Coit's merchandise! From t-shirts to collectibles, show your love for Oklahoma's favorite food truck.
+              </p>
+              <Link to="/shop" className="cta-button">
+                <span>Visit the Shop</span>
+                <svg className="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </Link>
+            </div>
           </div>
-          <div className="card-content">
-            <div className="card-badge">Shop</div>
-            <h2>Exclusive Merchandise</h2>
-            <p>
-              Check out our shop for exclusive Coit's merchandise! From t-shirts to collectibles, show your love for Oklahoma's favorite food truck.
-            </p>
-            <Link to="/shop" className="cta-button">
-              <span>Visit the Shop</span>
-              <svg className="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M5 12h14M12 5l7 7-7 7"/>
-              </svg>
-            </Link>
-          </div>
-        </div>
+        )}
       </div>
 
       {/* Trust Indicators */}

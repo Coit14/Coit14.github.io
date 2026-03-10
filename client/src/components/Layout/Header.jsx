@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart, faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { useCart } from '../../contexts/CartContext';
+import { FEATURES } from '../../config/features';
 import './Header.css';
 
 function Header() {
@@ -72,13 +73,17 @@ function Header() {
             
             <div className="nav-section right">
               <Link to="/about">ABOUT US</Link>
-              <Link to="/shop">SHOP</Link>
-              <div className="cart-icon" onClick={() => setIsCartOpen(true)}>
-                <FontAwesomeIcon icon={faShoppingCart} />
-                {cartItemCount > 0 && (
-                  <span className="cart-count">{cartItemCount}</span>
-                )}
-              </div>
+              {FEATURES.MERCH && (
+                <>
+                  <Link to="/shop">SHOP</Link>
+                  <div className="cart-icon" onClick={() => setIsCartOpen(true)}>
+                    <FontAwesomeIcon icon={faShoppingCart} />
+                    {cartItemCount > 0 && (
+                      <span className="cart-count">{cartItemCount}</span>
+                    )}
+                  </div>
+                </>
+              )}
             </div>
           </nav>
 
@@ -107,20 +112,24 @@ function Header() {
               <Link to="/" onClick={() => setIsMenuOpen(false)}>HOME</Link>
               <Link to="/menu" onClick={() => setIsMenuOpen(false)}>MENU</Link>
               <Link to="/about" onClick={() => setIsMenuOpen(false)}>ABOUT US</Link>
-              <Link to="/shop" onClick={() => setIsMenuOpen(false)}>SHOP</Link>
-              <div 
-                className="cart-icon mobile-cart" 
-                onClick={() => {
-                  setIsCartOpen(true);
-                  setIsMenuOpen(false);
-                }}
-              >
-                <FontAwesomeIcon icon={faShoppingCart} />
-                {cartItemCount > 0 && (
-                  <span className="cart-count">{cartItemCount}</span>
-                )}
-                <span className="cart-text">CART</span>
-              </div>
+              {FEATURES.MERCH && (
+                <>
+                  <Link to="/shop" onClick={() => setIsMenuOpen(false)}>SHOP</Link>
+                  <div 
+                    className="cart-icon mobile-cart" 
+                    onClick={() => {
+                      setIsCartOpen(true);
+                      setIsMenuOpen(false);
+                    }}
+                  >
+                    <FontAwesomeIcon icon={faShoppingCart} />
+                    {cartItemCount > 0 && (
+                      <span className="cart-count">{cartItemCount}</span>
+                    )}
+                    <span className="cart-text">CART</span>
+                  </div>
+                </>
+              )}
             </div>
           </div>
         </div>
