@@ -1,8 +1,30 @@
 import { google } from 'googleapis';
 
+/**
+ * Normalize private key so it works when env vars have newlines stripped or altered (e.g. on Render).
+ * Accepts: literal \n in one line, or multi-line paste, or BEGIN/END with spaces instead of newlines.
+ */
+function normalizePrivateKey(raw) {
+    if (!raw || typeof raw !== 'string') return raw;
+    let key = raw.trim();
+    // Replace literal backslash-n with real newlines (single-line paste from JSON key)
+    key = key.replace(/\\n/g, '\n');
+    // Normalize line endings (no \r)
+    key = key.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+    // If env turned newlines into spaces, fix PEM: "-----BEGIN PRIVATE KEY----- MIIE... -----END..."
+    if (key.includes('-----BEGIN') && key.includes('-----END') && !/-----BEGIN PRIVATE KEY-----\n/.test(key)) {
+        key = key
+            .replace(/\s*-----BEGIN PRIVATE KEY-----\s*/g, '-----BEGIN PRIVATE KEY-----\n')
+            .replace(/\s*-----END PRIVATE KEY-----\s*/g, '\n-----END PRIVATE KEY-----\n')
+            .replace(/\n+/g, '\n')
+            .trim();
+    }
+    return key;
+}
+
 const getCalendarConfig = () => ({
     clientEmail: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
-    privateKey: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
+    privateKey: normalizePrivateKey(process.env.GOOGLE_PRIVATE_KEY),
     calendarId: process.env.GOOGLE_CALENDAR_ID,
 });
 
