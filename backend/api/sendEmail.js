@@ -16,7 +16,7 @@ export async function handler(req, res) {
   try {
     const formData = req.body;
     const bookingToken = createBookingToken(formData);
-    const publicSiteUrl = process.env.PUBLIC_SITE_URL || 'https://coit14.github.io';
+    const publicSiteUrl = (process.env.PUBLIC_SITE_URL || 'https://Coit14.github.io/').replace(/\/$/, '');
     const encodedToken = encodeURIComponent(bookingToken);
     const acceptLink = `${publicSiteUrl}/#/booking-response?action=accept&token=${encodedToken}`;
     const declineLink = `${publicSiteUrl}/#/booking-response?action=decline&token=${encodedToken}`;
