@@ -45,14 +45,16 @@ export async function handler(req, res) {
     console.log('Attempting to send email with user:', process.env.EMAIL_USER);
 
     // Create transporter using environment variables
+    // Gmail: use SSL on 465 with an App Password
     const transporter = nodemailer.createTransport({
       host: 'smtp.gmail.com',
-      port: 587,
-      secure: false,
+      port: 465,
+      secure: true,
       auth: {
         user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS
-      }
+        pass: process.env.EMAIL_PASS,
+      },
+      connectionTimeout: 15000, // fail fast instead of hanging forever
     });
 
     // Format time to AM/PM
