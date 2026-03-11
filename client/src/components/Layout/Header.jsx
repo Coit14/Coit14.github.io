@@ -61,7 +61,6 @@ function Header() {
             <div className="nav-section left">
               <Link to="/">HOME</Link>
               <Link to="/menu">MENU</Link>
-              <Link to="/calendar">CALENDAR</Link>
             </div>
             
             <Link to="/" className="logo-container">
@@ -74,6 +73,7 @@ function Header() {
             
             <div className="nav-section right">
               <Link to="/about">ABOUT US</Link>
+              <Link to="/calendar">CALENDAR</Link>
               {FEATURES.MERCH && (
                 <>
                   <Link to="/shop">SHOP</Link>
