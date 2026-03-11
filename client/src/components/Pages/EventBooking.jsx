@@ -426,7 +426,9 @@ const EventBooking = () => {
                         maxLength={200}
                     />
                 </div>
-                <button type="submit" className="submit-button">Submit Booking Request</button>
+                <button type="submit" className="submit-button" disabled={isSubmitting}>
+                    {isSubmitting ? 'Submitting...' : 'Submit Booking Request'}
+                </button>
             </form>
         </div>
     );

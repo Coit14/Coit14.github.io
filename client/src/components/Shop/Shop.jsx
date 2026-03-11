@@ -55,7 +55,7 @@ const Shop = () => {
         if (!products || products.length === 0) {
             loadProducts();
         }
-    }, []); // Only run on mount
+    }, [products, setProducts]);
 
     const handleProductClick = (product) => {
         if (isMobile) {

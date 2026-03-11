@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import './ProductModal.css';
 import { useCart } from '../../contexts/CartContext';
 import ProductModalMobile from './ProductModalMobile';
@@ -28,10 +28,9 @@ const ProductModal = ({ product, onClose }) => {
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
-    const variants = product?.sync_variants || [];
+    const variants = useMemo(() => product?.sync_variants || [], [product]);
     const productInfo = product?.sync_product || {};
     const productName = productInfo.name;
-    const description = productInfo.description || '';
 
     // Get unique colors and sizes
     const uniqueColors = Array.from(new Set(variants.map(v => v.color)));
@@ -60,7 +59,7 @@ const ProductModal = ({ product, onClose }) => {
         } else {
             setSelectedVariant(null);
         }
-    }, [selectedColor, selectedSize, allOneSize, variants, sizeOptions.length]);
+    }, [selectedColor, selectedSize, allOneSize, variants, sizeOptions]);
 
     // Set default color/size on open
     useEffect(() => {
@@ -72,6 +71,8 @@ const ProductModal = ({ product, onClose }) => {
         } else if (sizeOptions.length > 0) {
             setSelectedSize(sizeOptions[0]);
         }
+    // Intentionally only on product change to set initial selection
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [product]);
 
     // Reset image index and animate fade on color/variant change

@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import * as printService from '../services/printfulService';
+import { FEATURES } from '../config/features';
 
 const CartContext = createContext();
 
@@ -7,29 +8,25 @@ export const CartProvider = ({ children }) => {
     const [products, setProducts] = useState([]);
     const [cartItems, setCartItems] = useState([]);
     const [isCartOpen, setIsCartOpen] = useState(false);
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
 
-    // Debug log when products change
+    // Preload products only when merch/shop is enabled
     useEffect(() => {
-        console.log('CartContext products updated:', products);
-    }, [products]);
-
-    // Preload products immediately when app starts
-    useEffect(() => {
+        if (!FEATURES.MERCH) return;
+        let cancelled = false;
         const preloadProducts = async () => {
             try {
                 setIsLoading(true);
-                console.log('Preloading products...');
                 const fetchedProducts = await printService.getPublishedProducts();
-                console.log('Preloaded products:', fetchedProducts);
-                setProducts(fetchedProducts);
+                if (!cancelled) setProducts(fetchedProducts || []);
             } catch (error) {
-                console.error('Error preloading products:', error);
+                if (!cancelled) console.error('Error preloading products:', error);
             } finally {
-                setIsLoading(false);
+                if (!cancelled) setIsLoading(false);
             }
         };
         preloadProducts();
+        return () => { cancelled = true; };
     }, []);
 
     const addToCart = (item) => {

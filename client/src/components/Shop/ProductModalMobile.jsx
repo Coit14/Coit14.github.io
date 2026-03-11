@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import './ProductModalMobile.css';
 import { useCart } from '../../contexts/CartContext';
 
@@ -18,14 +18,8 @@ const ProductModalMobile = ({ product, onClose }) => {
     const [selectedVariant, setSelectedVariant] = useState(null);
     const [imageIndex, setImageIndex] = useState(0);
     const [fade, setFade] = useState(false);
-    const prevVariantRef = useRef();
 
-    useEffect(() => {
-        prevVariantRef.current = selectedVariant;
-    });
-    const prevVariant = prevVariantRef.current;
-
-    const variants = product?.sync_variants || [];
+    const variants = useMemo(() => product?.sync_variants || [], [product]);
     const productInfo = product?.sync_product || {};
     const productName = productInfo.name;
     const description = productInfo.description || '';
@@ -80,7 +74,7 @@ const ProductModalMobile = ({ product, onClose }) => {
         } else {
             setSelectedVariant(null);
         }
-    }, [selectedColor, selectedSize, allOneSize, variants, sizeOptions.length]);
+    }, [selectedColor, selectedSize, allOneSize, variants, sizeOptions]);
 
     // Set default color/size on open
     useEffect(() => {
@@ -92,6 +86,8 @@ const ProductModalMobile = ({ product, onClose }) => {
         } else if (sizeOptions.length > 0) {
             setSelectedSize(sizeOptions[0]);
         }
+    // Intentionally only on product change to set initial selection
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [product]);
 
     // Reset image index and animate fade on color/variant change

@@ -115,7 +115,7 @@ const ShippingForm = ({
         }
 
         // Phone validation (optional but validate format if provided)
-        if (formData.phone && !/^[\+]?[1-9][\d]{0,15}$/.test(formData.phone.replace(/[\s\-\(\)]/g, ''))) {
+        if (formData.phone && !/^[+]?[1-9]\d{0,15}$/.test(formData.phone.replace(/[\s\-()]/g, ''))) {
             newErrors.phone = 'Please enter a valid phone number';
         }
 
