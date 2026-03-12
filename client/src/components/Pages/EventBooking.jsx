@@ -403,7 +403,7 @@ const EventBooking = () => {
 
                 <div className="advertising-section">
                     <div className="minimum-sales-note">
-                        <p>We often require a minimum of $800. However, if we are able to advertise to the public then the minimum may be reduced or waived.</p>
+                        <p>We often require a minimum of $800. However, if we are able to advertise to the public then the minimum may be reduced.</p>
                     </div>
 
                     <div className={`form-group ${errors.canAdvertise ? 'has-error' : ''}`}>

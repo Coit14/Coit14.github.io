@@ -59,9 +59,18 @@
 }
 
 .hotdogs-content {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    align-items: stretch;
+    display: block;
+}
+
+.hotdogs-list-wrap {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.hotdogs-list-wrap .add-ons {
+    padding: 0.75rem 1.2rem 1rem;
+    border-top: 1px solid #efebea;
 }
 
 .menu-items {
@@ -80,20 +89,6 @@
 
 .menu-items li:last-child {
     border-bottom: 0;
-}
-
-.schwabs-logo-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem;
-    border-left: 1px solid #efebea;
-    background: #fcfbfa;
-}
-
-.schwabs-logo {
-    width: clamp(94px, 12vw, 130px);
-    height: auto;
 }
 
 .add-ons {
@@ -175,10 +170,6 @@
         padding: 0.9rem 0.95rem;
     }
 
-    .hotdogs-content {
-        grid-template-columns: 1fr;
-    }
-
     .menu-items {
         padding: 0.45rem 0.95rem 0.95rem;
     }
@@ -186,13 +177,6 @@
     .menu-items li {
         padding: 0.6rem 0;
         font-size: 1rem;
-    }
-
-    .schwabs-logo-wrapper {
-        border-left: 0;
-        border-top: 1px solid #efebea;
-        padding-top: 0.85rem;
-        padding-bottom: 0.95rem;
     }
 
     .add-ons {
