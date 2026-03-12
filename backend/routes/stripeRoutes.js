@@ -11,13 +11,13 @@ router.post('/create-session', async (req, res) => {
   try {
     const { items } = req.body;
     
-    const successUrl = `${process.env.FRONTEND_URL}?session_id={CHECKOUT_SESSION_ID}/#/checkout/success`;
-    const cancelUrl = `${process.env.FRONTEND_URL}/#/checkout/cancel`;
+    const baseUrl = (process.env.PUBLIC_SITE_URL || 'https://coit14.github.io').replace(/\/$/, '');
+    const successUrl = `${baseUrl}/#/checkout/success?session_id={CHECKOUT_SESSION_ID}`;
+    const cancelUrl = `${baseUrl}/#/checkout/cancel`;
     
     console.log('🔧 Creating Stripe session with URLs:');
     console.log('🔧 Success URL:', successUrl);
     console.log('🔧 Cancel URL:', cancelUrl);
-    console.log('🔧 FRONTEND_URL:', process.env.FRONTEND_URL);
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],

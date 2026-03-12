@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import fetch from 'node-fetch';
 import { initializeCache, getCachedProducts } from './services/cacheService.js';
+import { FEATURES } from './config/features.js';
 // import printifyRoutes from './routes/printifyRoutes.js';
 import printfulRoutes from './routes/printfulRoutes.js';
 import stripeRoutes from './routes/stripeRoutes.js';
@@ -16,13 +17,16 @@ import { handler as eventBookingResponseHandler } from './api/eventBookingRespon
 import { handler as calendarEventsHandler } from './api/calendarEvents.js';
 // import { handler as printifyWebhookHandler } from './api/printify-webhook.js';
 
-console.log('Printful API Key:', process.env.PRINTFUL_API_KEY ? 'exists' : 'missing');
+if (FEATURES.MERCH) {
+    console.log('Printful API Key:', process.env.PRINTFUL_API_KEY ? 'exists' : 'missing');
+}
 
 const app = express();
 const port = process.env.PORT || 3001;
 
-// Middleware
-app.use(cors());
+// Middleware: single PUBLIC_SITE_URL used for CORS and for redirects (see sendEmail, stripeRoutes)
+const publicSiteUrl = process.env.PUBLIC_SITE_URL?.replace(/\/$/, '') || '';
+app.use(cors(publicSiteUrl ? { origin: publicSiteUrl } : {}));
 app.use(express.json());
 
 // Minimal request logging middleware
@@ -31,60 +35,62 @@ app.use((req, res, next) => {
     next();
 });
 
-// Use printify routes
-// app.use('/api/printify', printifyRoutes);
-app.use('/api/printful', printfulRoutes);
-app.use('/api/checkout', stripeRoutes);
+// Shop routes only when MERCH enabled
+if (FEATURES.MERCH) {
+    app.use('/api/printful', printfulRoutes);
+    app.use('/api/checkout', stripeRoutes);
+}
 
-// Initialize cache before setting up routes
-console.log('Initializing product cache...');
-initializeCache().then(() => {
-    console.log('Cache initialized successfully, setting up routes...');
-    
-    // API routes - keeping these as they're actively used in the application
+function setupCoreRoutes() {
     app.post('/api/event-booking', sendEmailHandler);
     app.post('/api/event-booking/respond', eventBookingResponseHandler);
     app.get('/api/calendar/events', calendarEventsHandler);
-    app.use('/api/products', productsRouter);
-    app.post('/api/printful-webhook', printfulWebhookHandler);
-    // app.post('/api/printify-webhook', printifyWebhookHandler);
 
-    // Products route for fetching all products - using cache
-    app.get('/api/products/all', async (req, res) => {
-        try {
-            const products = getCachedProducts();
-            console.log(`Serving ${products.length} products from cache via /api/products/all`);
-            res.json(products);
-        } catch (error) {
-            console.error('Error serving products from cache:', error);
-            res.status(500).json({ error: 'Failed to fetch products' });
-        }
-    });
-
-    // Schedule to run every Sunday at 3am
-    cron.schedule('0 3 * * 0', () => {
-        console.log('Running weekly Printful product sync...');
-        exec('node ./api/syncPrintfulProducts.js', (error, stdout, stderr) => {
-            if (error) {
-                console.error(`Sync error: ${error.message}`);
-                return;
+    if (FEATURES.MERCH) {
+        app.use('/api/products', productsRouter);
+        app.post('/api/printful-webhook', printfulWebhookHandler);
+        app.get('/api/products/all', async (req, res) => {
+            try {
+                const products = getCachedProducts();
+                console.log(`Serving ${products.length} products from cache via /api/products/all`);
+                res.json(products);
+            } catch (error) {
+                console.error('Error serving products from cache:', error);
+                res.status(500).json({ error: 'Failed to fetch products' });
             }
-            if (stderr) {
-                console.error(`Sync stderr: ${stderr}`);
-                return;
-            }
-            console.log(`Sync stdout: ${stdout}`);
         });
-    });
+        cron.schedule('0 3 * * 0', () => {
+            console.log('Running weekly Printful product sync...');
+            exec('node ./api/syncPrintfulProducts.js', (error, stdout, stderr) => {
+                if (error) console.error(`Sync error: ${error.message}`);
+                if (stderr) console.error(`Sync stderr: ${stderr}`);
+                if (stdout) console.log(`Sync stdout: ${stdout}`);
+            });
+        });
+    } else {
+        app.use('/api/products', (req, res, next) => res.status(200).json([]));
+        app.get('/api/products/all', (req, res) => res.json([]));
+    }
 
-    // Start server
     app.listen(port, () => {
         console.log(`Server running on port ${port}`);
     });
-}).catch(error => {
-    console.error('Failed to initialize cache:', error);
-    process.exit(1);
-});
+}
+
+if (FEATURES.MERCH) {
+    console.log('Initializing product cache...');
+    initializeCache()
+        .then(() => {
+            console.log('Cache initialized successfully, setting up routes...');
+            setupCoreRoutes();
+        })
+        .catch((error) => {
+            console.error('Failed to initialize cache:', error);
+            process.exit(1);
+        });
+} else {
+    setupCoreRoutes();
+}
 
 // Error handling middleware
 app.use((err, req, res, next) => {

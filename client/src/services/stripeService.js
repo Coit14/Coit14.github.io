@@ -1,10 +1,7 @@
 import { loadStripe } from '@stripe/stripe-js';
 import { API_URL } from '../config/config';
 
-// Log the Stripe publishable key for debugging (will be undefined in production if not set)
-console.log('REACT_APP_STRIPE_PUBLISHABLE_KEY:', process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
-
-// Fallback to a placeholder test key if not defined
+// Set REACT_APP_STRIPE_PUBLISHABLE_KEY in env (e.g. Render frontend build)
 // REMINDER: Set REACT_APP_STRIPE_PUBLISHABLE_KEY in Render dashboard (frontend build settings)
 // set in render, good for production.
 const stripeKey = process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY || '';
