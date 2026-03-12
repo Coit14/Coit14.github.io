@@ -7,6 +7,30 @@ import './Calendar.css';
 
 const localizer = momentLocalizer(moment);
 
+const SimpleToolbar = ({ label, onNavigate }) => {
+    return (
+        <div className="calendar-simple-toolbar">
+            <button
+                type="button"
+                className="calendar-nav-button"
+                onClick={() => onNavigate('PREV')}
+                aria-label="Previous month"
+            >
+                &#8592;
+            </button>
+            <h3 className="calendar-current-label">{label}</h3>
+            <button
+                type="button"
+                className="calendar-nav-button"
+                onClick={() => onNavigate('NEXT')}
+                aria-label="Next month"
+            >
+                &#8594;
+            </button>
+        </div>
+    );
+};
+
 const CalendarPage = () => {
     const [events, setEvents] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -73,6 +97,9 @@ const CalendarPage = () => {
                                     style={{ height: 600 }}
                                     popup
                                     onSelectEvent={setSelectedEvent}
+                                    views={['month']}
+                                    defaultView="month"
+                                    components={{ toolbar: SimpleToolbar }}
                                 />
                             </div>
 
