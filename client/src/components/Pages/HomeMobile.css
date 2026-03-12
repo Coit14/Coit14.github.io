@@ -1,86 +1,48 @@
 .mobile-home-content {
   width: 100%;
   overflow-x: hidden;
-  font-family: var(--font-family);
+  padding-bottom: 2.2rem;
 }
 
-/* Mobile Hero Section */
 .mobile-hero {
-    position: relative;
-    margin-bottom: clamp(2rem, 5vw, 3rem);
+  position: relative;
+  margin-bottom: 1.2rem;
 }
 
 .mobile-hero-image-container {
-    position: relative;
-    width: 100%;
-    height: clamp(250px, 40vh, 350px);
-    overflow: hidden;
-    border-radius: 0;
+  position: relative;
+  width: 100%;
+  height: clamp(250px, 42vh, 360px);
+  overflow: hidden;
+  border-radius: 0;
 }
 
 .mobile-hero-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 
 .mobile-hero-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(218, 41, 28, 0.25);
-}
-
-
-.mobile-hero-content {
-  background: rgba(163, 52, 47, 0.85);
-  padding: clamp(20px, 5vw, 40px) clamp(15px, 4vw, 30px);
-  border-radius: 12px;
-  backdrop-filter: blur(5px);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.mobile-hero-content h2,
-.mobile-hero-content p {
-  color: white;
-}
-
-.mobile-hero-content h2 {
-  font-size: clamp(2rem, 8vw, 2.5rem);
-  margin-bottom: 20px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-.mobile-hero-content p {
-  font-size: clamp(1rem, 4vw, 1.2rem);
-  line-height: 1.6;
-  margin-bottom: 25px;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.08), rgba(163, 52, 47, 0.22));
 }
 
 .mobile-section {
-  padding: clamp(2rem, 6vw, 3rem) clamp(1rem, 5vw, 1.25rem);
+  padding: 0 0.95rem;
   display: flex;
   flex-direction: column;
-  gap: 30px;
-}
-
-.mobile-section:first-child {
-  padding-top: clamp(2rem, 6vw, 3rem);
-}
-
-.mobile-section:nth-child(even) {
-  background-color: #f8f8f8;
+  gap: 0.85rem;
+  margin-bottom: 0.85rem;
 }
 
 .mobile-feature-card {
-  background-color: white;
-  border-radius: 12px;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+  background: linear-gradient(145deg, #ffffff, #faf9f8);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 15px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -89,7 +51,7 @@
 .mobile-image-container {
   width: 100%;
   height: auto;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 16 / 11;
 }
 
 .mobile-cycling-images,
@@ -110,8 +72,7 @@
 
 .mobile-shop-image {
   position: absolute;
-  top: 0;
-  left: 0;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -124,49 +85,47 @@
 }
 
 .mobile-content {
-  text-align: center;
-  padding: clamp(20px, 5vw, 30px);
+  text-align: left;
+  padding: 0.95rem;
 }
 
 .mobile-content h2 {
-  font-size: clamp(1.8rem, 7vw, 2.2rem);
+  font-size: clamp(1.35rem, 6.2vw, 1.65rem);
   color: var(--brand-red);
-  margin-bottom: 20px;
+  margin-bottom: 0.65rem;
   position: relative;
+  line-height: 1.2;
 }
 
 .mobile-content h2::after {
   content: '';
   position: absolute;
-  bottom: -10px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 60px;
-  height: 3px;
+  bottom: -7px;
+  left: 0;
+  width: 42px;
+  height: 2px;
   background-color: var(--brand-red);
 }
 
 .mobile-content p {
-  font-size: clamp(1.0rem, 4vw, 1.1rem);
+  font-size: clamp(0.98rem, 3.8vw, 1.02rem);
   line-height: 1.6;
   color: #333;
-  margin-bottom: 25px;
+  margin-bottom: 0.95rem;
 }
 
 .mobile-cta-button {
-  display: inline-block;
-  padding: 14px 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.7rem 1.02rem;
   background-color: var(--brand-red);
   color: white;
   text-decoration: none;
-  border-radius: 8px;
-  font-weight: bold;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 0.92rem;
   transition: all 0.3s ease;
-}
-
-.mobile-hero-content .mobile-cta-button {
-  background-color: white;
-  color: var(--brand-red);
 }
 
 .animate-in {
@@ -185,34 +144,14 @@
   }
 }
 
-.hero-overlay-top {
-  background: rgba(163, 52, 47, 0.45);
-  padding: clamp(0.5rem, 2vw, 1rem) clamp(1rem, 5vw, 2rem);
-  border-radius: 10px;
-  max-width: 90vw;
-  margin: 0 auto;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-}
-
-.hero-overlay-top h2 {
-  font-size: clamp(1.2rem, 6vw, 2rem);
-  margin: 0;
-  color: #fff;
-  text-align: center;
-  text-shadow: 1px 1px 6px rgba(0,0,0,0.18);
-}
-
-/* Force center-bottom for menu card image */
 .mobile-section:nth-of-type(2) .menu-card-image {
   object-position: center bottom !important;
 }
 
-/* Force left-align for Family Tradition image */
 .mobile-section:first-of-type .mobile-booking-image {
   object-position: left center !important;
 }
 
-/* Fix Find Us image cut-off on mobile */
 .mobile-section.find-us-section .mobile-image-container {
   aspect-ratio: unset;
   height: auto;
@@ -227,6 +166,6 @@
   object-fit: contain !important;
   width: 100%;
   height: auto;
-  max-height: 220px;
+  max-height: 210px;
   background: #f8f8f8;
 } 

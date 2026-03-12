@@ -1,70 +1,91 @@
 .about-page {
-    padding: clamp(2rem, 8vw, 3.75rem) clamp(1rem, 5vw, 1.25rem);
-    max-width: var(--max-width);
+    max-width: 1200px;
     margin: 0 auto;
+    padding: clamp(2.5rem, 6vw, 4.5rem) clamp(1rem, 4vw, 2rem);
 }
 
 .about-content {
     display: flex;
     flex-direction: column;
-    gap: 0px;
+    gap: clamp(1.5rem, 4vw, 2.75rem);
 }
 
 .history-section {
-    text-align: center;
-    max-width: 800px;
+    text-align: left;
+    max-width: 980px;
     margin: 0 auto;
+    background: linear-gradient(140deg, #ffffff, #faf8f7);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 18px;
+    box-shadow: 0 16px 35px rgba(0, 0, 0, 0.08);
+    padding: clamp(1.5rem, 4vw, 2.5rem);
 }
 
 .history-section h1 {
     color: var(--brand-red);
-    font-size: clamp(2rem, 5vw, 2.5rem);
-    margin-bottom: clamp(1.5rem, 4vw, 2rem);
+    font-size: clamp(2rem, 4vw, 3rem);
+    margin-bottom: clamp(1.25rem, 3vw, 1.8rem);
+    letter-spacing: -0.02em;
+    text-align: center;
 }
 
 .history-text {
-    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    font-size: clamp(1rem, 1.9vw, 1.12rem);
     line-height: 1.8;
-    color: #333;
-    margin-bottom: clamp(1.5rem, 3vw, 2rem);
+    color: #313131;
+    margin-bottom: clamp(1.2rem, 2.4vw, 1.7rem);
+    max-width: 70ch;
+}
+
+.history-text:last-child {
+    margin-bottom: 0;
 }
 
 .contact-section {
-    background: #f8f9fa;
-    padding: clamp(1rem, 3vw, 1.5rem);
-    border-radius: 0.5rem;
+    background: #fff;
+    padding: clamp(1.25rem, 3vw, 2rem);
+    border-radius: 18px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.07);
 }
 
 .contact-section h2 {
     text-align: center;
     color: var(--brand-red);
-    font-size: clamp(1.5rem, 4vw, 2rem);
-    margin-bottom: clamp(2rem, 5vw, 2.5rem);
+    font-size: clamp(1.5rem, 3.2vw, 2.15rem);
+    margin-bottom: clamp(1.4rem, 3vw, 2.1rem);
+    letter-spacing: 0.04em;
 }
 
 .contact-info {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    gap: clamp(2rem, 4vw, 2.5rem);
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(1rem, 2.2vw, 1.75rem);
 }
 
 .contact-item {
     text-align: center;
-    min-width: clamp(180px, 25vw, 200px);
+    min-width: 0;
+    background: #f8f6f5;
+    border-radius: 14px;
+    border: 1px solid #eee8e4;
+    padding: 1.1rem 1rem;
 }
 
 .contact-item h3 {
     color: #333;
-    margin-bottom: clamp(0.75rem, 2vw, 1rem);
-    font-size: clamp(0.9rem, 2vw, 1rem);
+    margin-bottom: 0.7rem;
+    font-size: clamp(0.86rem, 1.6vw, 0.95rem);
+    letter-spacing: 0.05em;
 }
 
 .contact-item a {
     color: var(--brand-red);
     text-decoration: none;
     transition: color 0.3s ease;
-    font-size: clamp(0.9rem, 2vw, 1rem);
+    font-size: clamp(0.92rem, 1.7vw, 1rem);
+    font-weight: 600;
+    word-break: break-word;
 }
 
 .contact-item a:hover {
@@ -78,8 +99,8 @@
 }
 
 .social-link {
-    width: clamp(35px, 6vw, 40px);
-    height: clamp(35px, 6vw, 40px);
+    width: clamp(35px, 6vw, 44px);
+    height: clamp(35px, 6vw, 44px);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -105,35 +126,32 @@
 }
 
 .messenger-icon {
-    font-size: clamp(2rem, 5vw, 2.5rem); /* Match the size of Follow Us icons */
-    color: #00B2FF; /* Facebook Messenger blue */
+    font-size: clamp(2rem, 5vw, 2.5rem);
+    color: #00B2FF;
 }
 
 @media (max-width: 768px) {
-    .history-section h1 {
-        font-size: clamp(1.8rem, 6vw, 2rem);
+    .about-page {
+        padding: clamp(2rem, 5vw, 3rem) clamp(0.9rem, 4vw, 1.2rem);
     }
 
-    .history-text {
-        font-size: clamp(0.95rem, 3vw, 1.1rem);
+    .history-section {
+        border-radius: 14px;
+        padding: 1.2rem 1rem 1.25rem;
     }
 
     .contact-section {
-        padding: clamp(1.5rem, 4vw, 2rem) clamp(1rem, 3vw, 1.25rem);
+        border-radius: 14px;
+        padding: 1.2rem 1rem;
     }
 
     .contact-info {
-        flex-direction: column;
-        gap: clamp(1.5rem, 4vw, 2rem);
-        align-items: center;
-        justify-content: center;
+        grid-template-columns: 1fr;
+        gap: 0.9rem;
     }
-    
+
     .contact-item {
-        min-width: auto;
+        max-width: none;
         width: 100%;
-        max-width: 300px;
-        text-align: center;
-        margin: 0 auto;
     }
 } 

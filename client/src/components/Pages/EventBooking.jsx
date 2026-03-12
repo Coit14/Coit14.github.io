@@ -191,68 +191,95 @@ const EventBooking = () => {
             )}
 
             <form onSubmit={handleSubmit} className="event-booking-form animate-in animate-delay-3">
-                <div className="form-group">
-                    <label htmlFor="fullName">Full Name <span className="required-asterisk">*</span></label>
-                    <input
-                        type="text"
-                        id="fullName"
-                        name="fullName"
-                        value={formData.fullName}
-                        onChange={handleChange}
-                        required
-                        className={errors.fullName ? 'error-input' : ''}
-                    />
-                    {errors.fullName && <div className="error-message">{errors.fullName}</div>}
+                <div className="form-grid-two">
+                    <div className="form-group">
+                        <label htmlFor="fullName">Full Name <span className="required-asterisk">*</span></label>
+                        <input
+                            type="text"
+                            id="fullName"
+                            name="fullName"
+                            value={formData.fullName}
+                            onChange={handleChange}
+                            required
+                            className={errors.fullName ? 'error-input' : ''}
+                        />
+                        {errors.fullName && <div className="error-message">{errors.fullName}</div>}
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="email">Email Address <span className="required-asterisk">*</span></label>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            value={formData.email}
+                            onChange={handleChange}
+                            required
+                            className={errors.email ? 'error-input' : ''}
+                        />
+                        {errors.email && <div className="error-message">{errors.email}</div>}
+                    </div>
                 </div>
-                <div className="form-group">
-                    <label htmlFor="email">Email Address <span className="required-asterisk">*</span></label>
-                    <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        required
-                        className={errors.email ? 'error-input' : ''}
-                    />
-                    {errors.email && <div className="error-message">{errors.email}</div>}
+
+                <div className="form-grid-two">
+                    <div className="form-group">
+                        <label htmlFor="facebookUsername">Facebook Username</label>
+                        <input
+                            type="text"
+                            id="facebookUsername"
+                            name="facebookUsername"
+                            value={formData.facebookUsername}
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="eventName">Event Name/Description <span className="required-asterisk">*</span></label>
+                        <input
+                            type="text"
+                            id="eventName"
+                            name="eventName"
+                            value={formData.eventName}
+                            onChange={handleChange}
+                            required
+                            className={errors.eventName ? 'error-input' : ''}
+                        />
+                        {errors.eventName && <div className="error-message">{errors.eventName}</div>}
+                    </div>
                 </div>
-                <div className="form-group">
-                    <label htmlFor="facebookUsername">Facebook Username</label>
-                    <input
-                        type="text"
-                        id="facebookUsername"
-                        name="facebookUsername"
-                        value={formData.facebookUsername}
-                        onChange={handleChange}
-                    />
+
+                <div className="form-grid-two">
+                    <div className="form-group">
+                        <label htmlFor="eventDate">Event Date <span className="required-asterisk">*</span></label>
+                        <input
+                            type="date"
+                            id="eventDate"
+                            name="eventDate"
+                            value={formData.eventDate}
+                            onChange={handleChange}
+                            required
+                            min={todayStr}
+                            className={errors.eventDate ? 'error-input' : ''}
+                        />
+                        {errors.eventDate && <div className="error-message">{errors.eventDate}</div>}
+                    </div>
+
+                    <div className="form-group">
+                        <label htmlFor="eventAddress">Event Address & City <span className="required-asterisk">*</span></label>
+                        <input
+                            type="text"
+                            id="eventAddress"
+                            name="eventAddress"
+                            value={formData.eventAddress}
+                            onChange={handleChange}
+                            required
+                            className={errors.eventAddress ? 'error-input' : ''}
+                        />
+                        {errors.eventAddress && <div className="error-message">{errors.eventAddress}</div>}
+                    </div>
                 </div>
-                <div className="form-group">
-                    <label htmlFor="eventName">Event Name/Description <span className="required-asterisk">*</span></label>
-                    <input
-                        type="text"
-                        id="eventName"
-                        name="eventName"
-                        value={formData.eventName}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="eventDate">Event Date <span className="required-asterisk">*</span></label>
-                    <input
-                        type="date"
-                        id="eventDate"
-                        name="eventDate"
-                        value={formData.eventDate}
-                        onChange={handleChange}
-                        required
-                        min={todayStr}
-                    />
-                </div>
+
                 <div className="form-group time-range">
                     <label>Event Time <span className="required-asterisk">*</span></label>
-                    <div className="time-inputs" style={{ flexDirection: 'column', gap: '20px' }}>
+                    <div className="time-inputs">
                         <div className="time-input">
                             <label htmlFor="eventStartTime">Start:</label>
                             <select
@@ -261,6 +288,7 @@ const EventBooking = () => {
                                 value={formData.eventStartTime}
                                 onChange={handleChange}
                                 required
+                                className={errors.eventStartTime ? 'error-input' : ''}
                             >
                                 <option value="">Select time</option>
                                 {Array.from({ length: 33 }, (_, i) => {
@@ -289,7 +317,7 @@ const EventBooking = () => {
                                 onChange={handleChange}
                                 required
                                 disabled={!formData.eventStartTime}
-                                className={!formData.eventStartTime ? 'disabled-select' : ''}
+                                className={`${!formData.eventStartTime ? 'disabled-select' : ''} ${errors.eventEndTime ? 'error-input' : ''}`.trim()}
                             >
                                 <option value="">Select end time</option>
                                 {getEndTimeOptions().map(opt => (
@@ -298,58 +326,55 @@ const EventBooking = () => {
                             </select>
                         </div>
                     </div>
+                    {errors.eventStartTime && <div className="error-message">{errors.eventStartTime}</div>}
+                    {errors.eventEndTime && <div className="error-message">{errors.eventEndTime}</div>}
                 </div>
-                <div className="form-group">
-                    <label htmlFor="eventAddress">Event Address & City <span className="required-asterisk">*</span></label>
-                    <input
-                        type="text"
-                        id="eventAddress"
-                        name="eventAddress"
-                        value={formData.eventAddress}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <div className="form-group">
-                    <label>Expected Number of Guests <span className="required-asterisk">*</span></label>
-                    <select
-                        name="eventSize"
-                        value={formData.eventSize}
-                        onChange={handleChange}
-                        required
-                    >
-                        <option value="">Select size</option>
-                        <option value="<150">Less than 150</option>
-                        <option value="150-300">150-300</option>
-                        <option value="300-500">300-500</option>
-                        <option value="500+">500+</option>
-                    </select>
-                </div>
-                <div className="form-group">
-                    <label>Is this a private event? <span className="required-asterisk">*</span></label>
-                    <div className="radio-group">
-                        <label>
-                            <input
-                                type="radio"
-                                name="isPrivateEvent"
-                                value="yes"
-                                checked={formData.isPrivateEvent === 'yes'}
-                                onChange={handleChange}
-                            /> Yes
-                        </label>
-                        <label>
-                            <input
-                                type="radio"
-                                name="isPrivateEvent"
-                                value="no"
-                                checked={formData.isPrivateEvent === 'no'}
-                                onChange={handleChange}
-                            /> No
-                        </label>
+
+                <div className="form-grid-two">
+                    <div className="form-group">
+                        <label>Expected Number of Guests <span className="required-asterisk">*</span></label>
+                        <select
+                            name="eventSize"
+                            value={formData.eventSize}
+                            onChange={handleChange}
+                            required
+                            className={errors.eventSize ? 'error-input' : ''}
+                        >
+                            <option value="">Select size</option>
+                            <option value="<150">Less than 150</option>
+                            <option value="150-300">150-300</option>
+                            <option value="300-500">300-500</option>
+                            <option value="500+">500+</option>
+                        </select>
+                        {errors.eventSize && <div className="error-message">{errors.eventSize}</div>}
+                    </div>
+                    <div className={`form-group ${errors.isPrivateEvent ? 'has-error' : ''}`}>
+                        <label>Is this a private event? <span className="required-asterisk">*</span></label>
+                        <div className="radio-group">
+                            <label>
+                                <input
+                                    type="radio"
+                                    name="isPrivateEvent"
+                                    value="yes"
+                                    checked={formData.isPrivateEvent === 'yes'}
+                                    onChange={handleChange}
+                                /> Yes
+                            </label>
+                            <label>
+                                <input
+                                    type="radio"
+                                    name="isPrivateEvent"
+                                    value="no"
+                                    checked={formData.isPrivateEvent === 'no'}
+                                    onChange={handleChange}
+                                /> No
+                            </label>
+                        </div>
+                        {errors.isPrivateEvent && <div className="error-message">{errors.isPrivateEvent}</div>}
                     </div>
                 </div>
 
-                <div className="form-group">
+                <div className={`form-group ${errors.otherFoodTrucks ? 'has-error' : ''}`}>
                     <label>Will there be other food trucks at the event? <span className="required-asterisk">*</span></label>
                     <div className="radio-group">
                         <label>
@@ -373,6 +398,7 @@ const EventBooking = () => {
                             /> No
                         </label>
                     </div>
+                    {errors.otherFoodTrucks && <div className="error-message">{errors.otherFoodTrucks}</div>}
                 </div>
 
                 <div className="advertising-section">
@@ -380,7 +406,7 @@ const EventBooking = () => {
                         <p>We often require a minimum of $800. However, if we are able to advertise to the public then the minimum may be reduced or waived.</p>
                     </div>
 
-                    <div className="form-group">
+                    <div className={`form-group ${errors.canAdvertise ? 'has-error' : ''}`}>
                         <label>Can we advertise it to the public? <span className="required-asterisk">*</span></label>
                         <div className="radio-group">
                             <label>
@@ -404,6 +430,7 @@ const EventBooking = () => {
                                 /> No
                             </label>
                         </div>
+                        {errors.canAdvertise && <div className="error-message">{errors.canAdvertise}</div>}
                     </div>
                 </div>
                 <div className="form-group">

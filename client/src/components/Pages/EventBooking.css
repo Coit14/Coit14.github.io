@@ -9,53 +9,54 @@
 }
 
 .event-booking-container {
-    max-width: 800px;
+    max-width: 1180px;
     margin: 0 auto;
-    padding: clamp(3rem, 8vh, 5rem) clamp(1rem, 5vw, 1.25rem);
+    padding: clamp(2.5rem, 6vw, 4.5rem) clamp(1rem, 4vw, 2rem);
 }
 
 .form-header {
     text-align: center;
-    margin-bottom: 40px;
+    margin: 0 auto clamp(1.5rem, 3vw, 2.2rem);
+    max-width: 760px;
 }
 
 .form-header h2 {
     color: var(--brand-red);
-    font-size: 2.5rem;
-    margin-bottom: 15px;
+    font-size: clamp(2rem, 4.2vw, 2.9rem);
+    margin-bottom: 0.8rem;
+    letter-spacing: -0.02em;
 }
 
 .intro-text {
     color: var(--brand-dark);
-    font-size: 1.1rem;
+    font-size: clamp(1rem, 1.6vw, 1.12rem);
     line-height: 1.6;
 }
 
-.form-section {
-    background: white;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    margin-bottom: 30px;
+.event-booking-form {
+    background: linear-gradient(145deg, #ffffff, #faf9f8);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 18px;
+    box-shadow: 0 18px 35px rgba(0, 0, 0, 0.08);
+    padding: clamp(1.1rem, 3vw, 2rem);
 }
 
-.form-section h3 {
-    color: var(--brand-red);
-    font-size: 1.5rem;
-    margin-bottom: 25px;
-    padding-bottom: 10px;
-    border-bottom: 2px solid var(--brand-red);
+.form-grid-two {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
 }
 
 .form-group {
-    margin-bottom: 25px;
+    margin-bottom: 1rem;
 }
 
 .form-group label {
     display: block;
     color: var(--brand-dark);
     font-weight: 600;
-    margin-bottom: 8px;
+    margin-bottom: 0.45rem;
+    font-size: 0.96rem;
 }
 
 .form-group small {
@@ -73,11 +74,12 @@
 .form-group select,
 .form-group textarea {
     width: 100%;
-    padding: 12px;
-    border: 2px solid #ddd;
-    border-radius: 6px;
+    padding: 0.75rem 0.8rem;
+    border: 1px solid #d6d0cb;
+    border-radius: 10px;
     font-size: 1rem;
     transition: all 0.3s ease;
+    background: #fff;
 }
 
 .form-group input:focus,
@@ -85,93 +87,67 @@
 .form-group textarea:focus {
     border-color: var(--brand-red);
     outline: none;
-    box-shadow: 0 0 0 3px rgba(129, 77, 73, 0.1);
+    box-shadow: 0 0 0 3px rgba(129, 77, 73, 0.12);
 }
 
 .time-range {
-    background: var(--brand-gray);
-    padding: 20px;
-    border-radius: 6px;
-    margin-top: 15px;
+    background: #f7f4f2;
+    padding: 1rem;
+    border-radius: 14px;
+    margin-top: 0.45rem;
+    border: 1px solid #e5dfdb;
 }
 
 .time-inputs {
-    display: flex;
-    gap: 30px;
-    flex-wrap: wrap;
-}
-
-/* Column layout for event time section */
-.time-range .time-inputs {
-    flex-direction: column;
-    gap: 20px;
-}
-
-/* Try to encourage dropdowns to open downward (best effort, not guaranteed) */
-.time-input select {
-    /* These properties help, but do not guarantee, downward opening */
-    position: relative;
-    z-index: 1;
-    /* Add enough margin below to encourage space */
-    margin-bottom: 24px;
-    /* Remove margin for last child */
-}
-.time-input:last-child select {
-    margin-bottom: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
 }
 
 .time-input {
-    flex: 1;
-    min-width: 200px;
+    min-width: 0;
     display: flex;
-    align-items: center;
-    gap: 15px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.35rem;
 }
 
 .time-input label {
-    min-width: 70px;
     margin-bottom: 0;
     font-weight: 600;
+    min-width: 0;
 }
 
 .time-input select {
-    flex: 1;
-    padding: 10px;
-    border: 2px solid #ddd;
-    border-radius: 6px;
+    width: 100%;
+    padding: 0.68rem 0.8rem;
+    border: 1px solid #d6d0cb;
+    border-radius: 10px;
     font-size: 1rem;
     background-color: white;
     cursor: pointer;
     appearance: none;
     background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
     background-repeat: no-repeat;
-    background-position: right 10px center;
+    background-position: right 12px center;
     background-size: 1em;
     padding-right: 40px;
-}
-
-.time-input select:focus {
-    border-color: var(--brand-red);
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(129, 77, 73, 0.1);
-}
-
-.time-input select:hover {
-    border-color: var(--brand-red);
+    margin-bottom: 0;
 }
 
 .time-input select.disabled-select:disabled {
-    background-color: #f0f0f0;
-    color: #aaa;
-    border-color: #ddd;
+    background-color: #f3f3f3;
+    color: #949494;
+    border-color: #ddd4ce;
     cursor: not-allowed;
     opacity: 1;
 }
 
 .radio-group {
     display: flex;
-    gap: 30px;
-    margin-top: 10px;
+    gap: 1.2rem;
+    margin-top: 0.5rem;
+    flex-wrap: wrap;
 }
 
 .radio-group label {
@@ -195,30 +171,34 @@
 }
 
 .minimum-sales-note {
-    margin: 10px 0;
+    margin: 0 0 1rem;
     text-align: left;
     color: var(--brand-dark);
 }
 
 .minimum-sales-note p {
     margin: 0;
+    line-height: 1.55;
 }
 
 .submit-button {
     width: 100%;
-    padding: 15px;
+    padding: 0.95rem;
     background: var(--brand-red);
     color: white;
     border: none;
-    border-radius: 6px;
+    border-radius: 12px;
     font-size: 1.1rem;
     font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.25s ease, box-shadow 0.25s ease;
+    margin-top: 0.4rem;
 }
 
 .submit-button:hover {
     background: var(--brand-hover-red);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.14);
 }
 
 .status-message {
@@ -241,10 +221,11 @@
 }
 
 .advertising-section {
-    background: var(--brand-gray);
-    padding: 20px;
-    border-radius: 6px;
-    margin: 25px 0;
+    background: #f7f4f2;
+    padding: 1rem;
+    border-radius: 14px;
+    margin: 1rem 0;
+    border: 1px solid #e5dfdb;
 }
 
 .advertising-section .form-group {
@@ -273,7 +254,7 @@
 .error-message {
     color: #dc3545;
     font-size: 0.875rem;
-    margin-top: 0.25rem;
+    margin-top: 0.35rem;
     display: block;
 }
 
@@ -288,29 +269,29 @@
 /* Ensure error messages are visible on mobile */
 @media (max-width: 768px) {
     .event-booking-container {
-        padding: clamp(2rem, 6vw, 3rem) clamp(1rem, 5vw, 1.25rem);
+        padding: clamp(2rem, 5vw, 3rem) clamp(0.9rem, 4vw, 1.1rem);
     }
 
-    .form-section {
-        padding: 20px;
+    .event-booking-form {
+        border-radius: 14px;
+        padding: 0.95rem;
     }
 
-    .time-input {
-        flex: 100%;
+    .form-grid-two {
+        grid-template-columns: 1fr;
+        gap: 0;
     }
 
-    .time-input select {
-        width: 100%;
-        max-width: none;
-    }
-    
     .time-inputs {
-        gap: 15px;
+        grid-template-columns: 1fr;
+    }
+
+    .time-range {
+        padding: 0.9rem;
     }
 
     .radio-group {
-        flex-direction: column;
-        gap: 15px;
+        gap: 0.85rem;
     }
 
     .error-message {
