@@ -74,8 +74,8 @@
     color: #2f2f2f;
     font-size: clamp(0.97rem, 1.7vw, 1.04rem);
     line-height: 1.55;
-    padding: 0.45rem 0;
-    border-bottom: 1px dashed #ece7e4;
+    padding: 0.55rem 0;
+    border-bottom: 0;
 }
 
 .menu-items li:last-child {
