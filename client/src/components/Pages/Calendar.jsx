@@ -1,7 +1,9 @@
 import React, { useEffect, useMemo, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Calendar as BigCalendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
 import { fetchCalendarEvents } from '../../services/api';
+import { socialLinks } from '../../config/social';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import './Calendar.css';
 
@@ -94,6 +96,9 @@ const CalendarPage = () => {
                     <p className="intro-text animate-in animate-delay-2">
                         See upcoming events and availability at a glance.
                     </p>
+                    <p className="calendar-facebook-note animate-in animate-delay-2">
+                        For exact times and updates, see our <a href={socialLinks.facebook} target="_blank" rel="noopener noreferrer" className="calendar-facebook-link">Facebook</a>.
+                    </p>
                 </div>
 
                 {error && <div className="status-message error">{error}</div>}
@@ -123,7 +128,7 @@ const CalendarPage = () => {
                                     <h3>{selectedEvent.title}</h3>
                                     <p>
                                         <strong>When:</strong>{' '}
-                                        {moment(selectedEvent.start).format('MMM D, YYYY h:mm A')} - {moment(selectedEvent.end).format('h:mm A')}
+                                        {moment(selectedEvent.start).format('MMM D, YYYY')}
                                     </p>
                                     {selectedEvent.location && (
                                         <p>
@@ -152,7 +157,7 @@ const CalendarPage = () => {
                                         >
                                             <h4>{event.title}</h4>
                                             <p className="upcoming-event-time">
-                                                {moment(event.start).format('ddd, MMM D')} - {moment(event.start).format('h:mm A')} to {moment(event.end).format('h:mm A')}
+                                                {moment(event.start).format('ddd, MMM D, YYYY')}
                                             </p>
                                             {event.location && <p className="upcoming-event-location">{event.location}</p>}
                                         </li>

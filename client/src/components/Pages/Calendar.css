@@ -29,6 +29,22 @@
     font-size: clamp(1rem, 1.5vw, 1.1rem);
 }
 
+.calendar-facebook-note {
+    margin: 0.6rem 0 0;
+    font-size: clamp(0.9rem, 1.4vw, 1rem);
+    color: #555;
+}
+
+.calendar-facebook-link {
+    color: var(--brand-red);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.calendar-facebook-link:hover {
+    text-decoration: underline;
+}
+
 .calendar-layout {
     display: grid;
     grid-template-columns: minmax(0, 2.1fr) minmax(290px, 1fr);

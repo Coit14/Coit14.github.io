@@ -16,6 +16,7 @@
 
 .form-header {
     text-align: center;
+    padding-top: clamp(1rem, 2.8vw, 2rem);
     margin: 0 auto clamp(1.5rem, 3vw, 2.2rem);
     max-width: 760px;
 }

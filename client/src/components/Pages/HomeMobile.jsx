@@ -100,9 +100,9 @@ const HomeMobile = () => {
           <div className="mobile-content">
             <h2>Find Us</h2>
             <p>
-              We post all our upcoming events and locations on Facebook. Follow us to stay up to date and never miss your chance for a classic Coit's meal!
+              See where we're headed! Our calendar lists upcoming events and locations so you never miss a classic Coit's meal.
             </p>
-            <a href="https://www.facebook.com/coitsfoodtruck/" target="_blank" rel="noopener noreferrer" className="mobile-cta-button">Follow on Facebook</a>
+            <Link to="/calendar" className="mobile-cta-button">View Calendar</Link>
           </div>
         </div>
       </section>

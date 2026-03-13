@@ -169,14 +169,14 @@ const Home = () => {
             <div className="card-badge">Find Us</div>
             <h2>Where are we?</h2>
             <p>
-              We post all our upcoming events and locations on Facebook. Follow us to stay up to date and never miss your chance for a classic Coit's meal!
+              See where we're headed! Our calendar lists upcoming events and locations so you never miss a classic Coit's meal.
             </p>
-            <a href="https://www.facebook.com/coitsfoodtruck/" target="_blank" rel="noopener noreferrer" className="cta-button">
-              <span>Follow on Facebook</span>
+            <Link to="/calendar" className="cta-button">
+              <span>View Calendar</span>
               <svg className="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M5 12h14M12 5l7 7-7 7"/>
               </svg>
-            </a>
+            </Link>
           </div>
         </div>
 
