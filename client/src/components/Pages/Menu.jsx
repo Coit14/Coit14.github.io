@@ -41,7 +41,7 @@ const Menu = () => {
                         </div>
                         <p className="add-ons">
                             Add-ons:
-                            <span className="toppings"> Cheese • Relish • Ketchup • Jalapeños • Sour Cream • Onions (no extra charge)</span>
+                            <span className="toppings"> Cheese • Relish • Ketchup • Mustard • Jalapeños • Sour Cream • Onions (no extra charge)</span>
                         </p>
                     </section>
                 </div>
