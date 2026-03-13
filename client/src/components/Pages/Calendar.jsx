@@ -7,23 +7,38 @@ import './Calendar.css';
 
 const localizer = momentLocalizer(moment);
 
-const SimpleToolbar = ({ label, onNavigate }) => {
+const SimpleToolbar = ({ label, date, onNavigate }) => {
+    const today = new Date();
+    const viewedYear = date.getFullYear();
+    const viewedMonth = date.getMonth();
+    const currentYear = today.getFullYear();
+    const currentMonth = today.getMonth();
+    const nextMonth = new Date(currentYear, currentMonth + 1, 1);
+
+    const isCurrentMonth = viewedYear === currentYear && viewedMonth === currentMonth;
+    const isNextMonth = viewedYear === nextMonth.getFullYear() && viewedMonth === nextMonth.getMonth();
+
+    const prevDisabled = isCurrentMonth;
+    const nextDisabled = isNextMonth;
+
     return (
         <div className="calendar-simple-toolbar">
             <button
                 type="button"
-                className="calendar-nav-button"
-                onClick={() => onNavigate('PREV')}
+                className={`calendar-nav-button ${prevDisabled ? 'calendar-nav-button--disabled' : ''}`}
+                onClick={() => !prevDisabled && onNavigate('PREV')}
                 aria-label="Previous month"
+                disabled={prevDisabled}
             >
                 &#8592;
             </button>
             <h3 className="calendar-current-label">{label}</h3>
             <button
                 type="button"
-                className="calendar-nav-button"
-                onClick={() => onNavigate('NEXT')}
+                className={`calendar-nav-button ${nextDisabled ? 'calendar-nav-button--disabled' : ''}`}
+                onClick={() => !nextDisabled && onNavigate('NEXT')}
                 aria-label="Next month"
+                disabled={nextDisabled}
             >
                 &#8594;
             </button>

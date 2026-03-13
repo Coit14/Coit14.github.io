@@ -88,6 +88,22 @@
     color: #fff;
 }
 
+.calendar-nav-button--disabled,
+.calendar-nav-button:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    background: #f0eeec;
+    color: #8a8582;
+    border-color: #e0dcd8;
+}
+
+.calendar-nav-button--disabled:hover,
+.calendar-nav-button:disabled:hover {
+    background: #f0eeec;
+    border-color: #e0dcd8;
+    color: #8a8582;
+}
+
 .calendar-current-label {
     margin: 0;
     text-align: center;
