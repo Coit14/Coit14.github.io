@@ -25,6 +25,32 @@
     margin: 0;
 }
 
+.menu-sections-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    align-items: start;
+}
+
+.menu-column {
+    min-width: 0;
+}
+
+@media (min-width: 900px) {
+    .menu-sections-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: clamp(1.25rem, 2.5vw, 1.75rem);
+    }
+
+    .menu-column--left .menu-section {
+        margin-bottom: clamp(1rem, 3vw, 1.7rem);
+    }
+
+    .menu-column--left .menu-section:last-child {
+        margin-bottom: 0;
+    }
+}
+
 .menu-section {
     margin-bottom: clamp(1rem, 3vw, 1.7rem);
     background: #fff;
