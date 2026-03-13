@@ -27,8 +27,8 @@ const Menu = () => {
                                     <li>No. 7 - Chili & Onions</li>
                                 </ul>
                                 <p className="add-ons">
-                                    Add (No Extra Charge):
-                                    <span className="toppings"> Cheese • Relish • Ketchup • Jalapeños • Sour Cream • Onions</span>
+                                    Add-ons:
+                                    <span className="toppings"> Cheese • Relish • Ketchup • Jalapeños • Sour Cream (no extra charge)</span>
                                 </p>
                             </div>
                         </div>
@@ -40,8 +40,8 @@ const Menu = () => {
                             <span className="price">$5.00</span>
                         </div>
                         <p className="add-ons">
-                            Add (No Extra Charge):
-                            <span className="toppings"> Cheese • Relish • Ketchup • Jalapeños • Sour Cream • Onions</span>
+                            Add-ons:
+                            <span className="toppings"> Cheese • Relish • Ketchup • Jalapeños • Sour Cream (no extra charge) • Onions</span>
                         </p>
                     </section>
                 </div>
@@ -69,7 +69,7 @@ const Menu = () => {
                             <ul className="menu-items menu-items--beverages">
                                 <li>Dr. Pepper or Diet Coke — 20 oz <span className="price">$3.00</span></li>
                                 <li>Dr. Pepper or Diet Coke — 32 oz <span className="price">$4.00</span></li>
-                                <li>Lays Chips <span className="price">$2.00</span></li>
+                                <li>Lays Chips <span className="price">$1.00</span></li>
                             </ul>
                         </div>
                     </section>
