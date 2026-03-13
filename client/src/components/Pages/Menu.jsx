@@ -46,30 +46,15 @@ const Menu = () => {
 
             <section className="menu-section animate-in animate-delay-4">
                 <div className="menu-item-header">
-                    <h2>Beverages</h2>
+                    <h2>Coit's Root Beer</h2>
                 </div>
-                <div className="beverages-list">
-                    <div className="beverage-block">
-                        <div className="beverage-name">Coit's Root Beer</div>
-                        <ul className="beverage-sizes">
-                            <li>20 oz <span className="price">$3.00</span></li>
-                            <li>32 oz <span className="price">$4.00</span></li>
-                            <li>Gallon <span className="price">$9.00</span></li>
-                        </ul>
-                    </div>
-                    <div className="beverage-block float-block">
-                        <div className="beverage-name">Root Beer Float</div>
-                        <ul className="beverage-sizes">
-                            <li>Our Original Handmade Float <span className="price">$6.00</span></li>
-                        </ul>
-                    </div>
-                    <div className="beverage-block">
-                        <div className="beverage-name">Dr. Pepper or Diet Coke</div>
-                        <ul className="beverage-sizes">
-                            <li>20 oz <span className="price">$3.00</span></li>
-                            <li>32 oz <span className="price">$4.00</span></li>
-                        </ul>
-                    </div>
+                <div className="beverages-content">
+                    <ul className="menu-items menu-items--beverages">
+                        <li>20 oz <span className="price">$3.00</span></li>
+                        <li>32 oz <span className="price">$4.00</span></li>
+                        <li>Root Beer Float <span className="price">$6.00</span></li>
+                        <li>Gallon <span className="price">$9.00</span></li>
+                    </ul>
                 </div>
             </section>
         </div>

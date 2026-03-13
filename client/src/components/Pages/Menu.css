@@ -104,52 +104,19 @@
     font-weight: 500;
 }
 
-.beverages-list {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 0.9rem;
-    padding: 1rem 1.2rem 1.2rem;
+.beverages-content {
+    display: block;
 }
 
-.beverage-block {
-    background: #fbf9f8;
-    border: 1px solid #ede7e3;
-    border-radius: 12px;
-    padding: 0.9rem;
+.menu-items--beverages {
+    padding: 0.45rem 1.2rem 1rem;
 }
 
-.float-block {
-    background: #fff7f2;
-}
-
-.beverage-name {
-    color: var(--brand-red);
-    font-weight: 700;
-    font-size: 1rem;
-    margin-bottom: 0.45rem;
-}
-
-.beverage-sizes {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-.beverage-sizes li {
+.menu-items--beverages li {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    gap: 0.8rem;
-    color: #333;
-    font-size: 0.95rem;
-    padding: 0.2rem 0;
-    line-height: 1.4;
-}
-
-@media (max-width: 900px) {
-    .beverages-list {
-        grid-template-columns: 1fr;
-    }
+    gap: 0.75rem;
 }
 
 @media (max-width: 767px) {
@@ -184,20 +151,7 @@
         font-size: 0.97rem;
     }
 
-    .beverages-list {
-        padding: 0.9rem 0.95rem 0.95rem;
-        gap: 0.75rem;
-    }
-
-    .beverage-block {
-        padding: 0.82rem;
-    }
-
-    .beverage-name {
-        font-size: 1.02rem;
-    }
-
-    .beverage-sizes li {
-        font-size: 0.98rem;
+    .menu-items--beverages {
+        padding: 0.45rem 0.95rem 0.95rem;
     }
 }
