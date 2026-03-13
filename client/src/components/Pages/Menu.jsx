@@ -61,6 +61,19 @@ const Menu = () => {
                             </ul>
                         </div>
                     </section>
+
+                    <section className="menu-section animate-in animate-delay-5">
+                        <div className="menu-item-header">
+                            <h2>Other</h2>
+                        </div>
+                        <div className="beverages-content">
+                            <ul className="menu-items menu-items--beverages">
+                                <li>Dr. Pepper or Diet Coke — 20 oz <span className="price">$3.00</span></li>
+                                <li>Dr. Pepper or Diet Coke — 32 oz <span className="price">$4.00</span></li>
+                                <li>Lays Chips <span className="price">$2.00</span></li>
+                            </ul>
+                        </div>
+                    </section>
                 </div>
             </div>
         </div>
