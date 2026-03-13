@@ -7,6 +7,7 @@
 
 .menu-header {
     text-align: center;
+    padding-top: clamp(1rem, 2.8vw, 2rem);
     margin-bottom: clamp(1.6rem, 4vw, 2.6rem);
 }
 
