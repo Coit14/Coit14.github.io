@@ -28,7 +28,7 @@ function AboutUs() {
           <div className="contact-info">
             <div className="contact-item">
               <h3>EMAIL</h3>
-              <a href="mailto:coitsFTE@gmail.com">coitsFTE@gmail.com</a>
+              <a href="mailto:coitsFTE@gmail.com">coitsrbstand@cox.net</a>
             </div>
             <div className="contact-item">
               <h3>FACEBOOK MESSENGER</h3>
