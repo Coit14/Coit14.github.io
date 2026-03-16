@@ -1,7 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook } from '@fortawesome/free-brands-svg-icons';
-import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import '../Layout/AboutUs.css';
 import { socialLinks } from '../../config/social';
 
@@ -29,9 +28,7 @@ function AboutUs() {
           <div className="contact-info">
             <div className="contact-item">
               <h3>EMAIL</h3>
-              <a href="mailto:coitsFTE@gmail.com" className="email-link" aria-label="Email coitsFTE@gmail.com">
-                <FontAwesomeIcon icon={faEnvelope} className="email-icon" />
-              </a>
+              <a href="mailto:coitsFTE@gmail.com">coitsFTE@gmail.com</a>
             </div>
             <div className="contact-item">
               <h3>FACEBOOK MESSENGER</h3>
