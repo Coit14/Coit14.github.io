@@ -124,7 +124,7 @@ const Home = () => {
         <div className="feature-card menu-card animate-in animate-delay-2">
           <div className="card-image-container">
             <img 
-              src="/images/our-menu.png" 
+              src="/images/coits_img.jpg" 
               alt="Coit's menu board with hot dogs and drinks display" 
               className="menu-card-image"
               loading="lazy"
@@ -154,7 +154,7 @@ const Home = () => {
         <div className="feature-card animate-in animate-delay-3">
           <div className="card-image-container">
             <img 
-              src="/images/where-are-we.png" 
+              src="/images/facebook.png" 
               alt="Follow Coit's Food Truck on Facebook" 
               className="booking-image"
               loading="lazy"
@@ -184,7 +184,7 @@ const Home = () => {
         <div className="feature-card animate-in animate-delay-4">
           <div className="card-image-container">
             <img 
-              src="/images/book-us.png" 
+              src="/images/ft.jpg" 
               alt="Coit's Food Truck - Book Us for Your Event" 
               className="booking-image"
               loading="lazy"
