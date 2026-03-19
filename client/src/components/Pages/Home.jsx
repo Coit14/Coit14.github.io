@@ -108,8 +108,8 @@ const Home = () => {
             <div className="card-badge">Our Story</div>
             <h2>Family Tradition</h2>
             <p>
-              Coit's has been serving Oklahoma since 1954. Our food truck still continues as a family-owned and operated business.
-              We proudly serve our original Schwab's chili and hot dogs alongside our famous handmade root beer.
+            Coit’s has been serving Oklahoma since 1954, when it was founded by Don and Anne Coit at their first Coit's Drive-In location at SW 25th and Western Ave. 
+            Our food truck continues to operate as a family-owned business. We proudly serve our original handmade root beer alongside our other classic favorites.
             </p>
             <Link to="/about" className="cta-button">
               <span>Learn More</span>
