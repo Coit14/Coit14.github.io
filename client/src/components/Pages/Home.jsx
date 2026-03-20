@@ -107,10 +107,18 @@ const Home = () => {
           <div className="card-content">
             <div className="card-badge">Our Story</div>
             <h2>Family Tradition</h2>
-            <p>
-            Coit’s has been serving Oklahoma since 1954, when it was founded by Don and Anne Coit at their first Coit's Drive-In location at SW 25th and Western Ave. 
-            Our food truck continues to operate as a family-owned business. We proudly serve our original handmade root beer alongside our other classic favorites.
-            </p>
+            <div className="card-body-text">
+              <p>
+                Coit&apos;s has been serving Oklahoma since 1954, when it was
+                founded by Don and Anne Coit at their first Coit&apos;s Drive-In
+                location at SW 25th and Western Ave.
+              </p>
+              <p>
+                Our food truck continues to operate as a family-owned business.
+                We proudly serve our original handmade root beer alongside our
+                other classic favorites.
+              </p>
+            </div>
             <Link to="/about" className="cta-button">
               <span>Learn More</span>
               <svg className="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

@@ -208,13 +208,28 @@
   width: 64px;
 }
 
+.card-body-text {
+  flex: 1 1 auto;
+  min-height: 0;
+  max-width: 62ch;
+}
+
 .card-content p {
   font-size: clamp(0.96rem, 1.45vw, 1.04rem);
   line-height: 1.6;
   color: #343434;
+  margin: 0 0 0.85rem;
+  max-width: none;
+}
+
+/* Single paragraph blocks (siblings before the CTA) */
+.card-content > p {
   margin-bottom: 1.1rem;
-  flex: 1;
-  max-width: 62ch;
+}
+
+/* Stacked copy inside the Family Tradition card */
+.card-body-text p:last-child {
+  margin-bottom: 1.1rem;
 }
 
 .home-content .cta-button {
