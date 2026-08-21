@@ -295,7 +295,7 @@ The Coit's Food Truck Team
     // Send email to company
     await transporter.sendMail({
       from: process.env.EMAIL_USER,
-      to: 'coitsfte@gmail.com',
+      to: 'coitsfte@gmail.com, coitsrbstand@cox.net',
       subject: `New Event Booking: ${formData.eventName}`,
       html: companyEmailHtml,
       attachments: [{
